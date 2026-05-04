@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { MessageContext } from "./messageContext";
+import { MessageContext } from "./MessageContext";
 
 export const MessageProvider = ({children}) => {
-
 
   // Dashboard
   const [adminNavMainActive, setAdminNavMainActive] = useState(false);
