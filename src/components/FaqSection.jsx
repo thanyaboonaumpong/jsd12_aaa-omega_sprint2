@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
 const FaqSection = () => {
-  // State สำหรับเก็บว่าข้อไหนกำลังถูกเปิดอยู่
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFaq = (index) => {
-    // ถ้าคลิกข้อเดิมให้ปิด ถ้าคลิกข้อใหม่ให้เปิด
     setOpenIndex(openIndex === index ? null : index);
   };
 
@@ -32,44 +30,56 @@ const FaqSection = () => {
     { q: "20. เริ่มต้นติดตั้งต้องทำอย่างไร?", a: "ส่งบิลค่าไฟล่าสุดให้เรา เพื่อให้วิศวกรประเมินความคุ้มค่าครับ" }
   ];
 
+  const renderFaqCard = (item, index) => (
+    <div 
+      key={index} 
+      className="border border-gray-100 rounded-xl overflow-hidden shadow-sm transition-all duration-300 mb-4"
+    >
+      <button
+        onClick={() => toggleFaq(index)}
+        className="w-full flex justify-between items-center p-5 text-left bg-white hover:bg-gray-50 transition-colors"
+      >
+        <span className={`font-semibold ${openIndex === index ? 'text-blue-900' : 'text-gray-700'}`}>
+          {item.q}
+        </span>
+        <span className={`transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+      
+      <div 
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="p-5 bg-gray-50 text-gray-600 border-t border-gray-100 leading-relaxed">
+          {item.a}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="max-w-4xl mx-auto px-6 py-2">
+    <section className="max-w-6xl mx-auto px-6 py-2 pb-20">
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">คำถามที่พบบ่อย (FAQ)</h2>
         <div className="w-24 h-1 bg-blue-900 mx-auto rounded-full opacity-20"></div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 items-start">
-        {faqData.map((item, index) => (
-          <div 
-            key={index} 
-            className="border border-gray-100 rounded-xl overflow-hidden shadow-sm transition-all duration-300"
-          >
-            <button
-              onClick={() => toggleFaq(index)}
-              className="w-full flex justify-between items-center p-5 text-left bg-white hover:bg-gray-50 transition-colors"
-            >
-              <span className={`font-semibold ${openIndex === index ? 'text-blue-900' : 'text-gray-700'}`}>
-                {item.q}
-              </span>
-              <span className={`transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </button>
-            
-            <div 
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-              }`}
-            >
-              <div className="p-5 bg-gray-50 text-gray-600 border-t border-gray-100 leading-relaxed">
-                {item.a}
-              </div>
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+        <div className="flex flex-col">
+          {faqData.filter((_, i) => i % 2 === 0).map((item, index) => 
+            renderFaqCard(item, faqData.indexOf(item))
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          {faqData.filter((_, i) => i % 2 !== 0).map((item, index) => 
+            renderFaqCard(item, faqData.indexOf(item))
+          )}
+        </div>
       </div>
     </section>
   );

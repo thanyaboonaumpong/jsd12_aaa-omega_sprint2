@@ -45,7 +45,7 @@ const TestimonialSection = () => {
         <div className="w-24 h-1 bg-blue-900 mx-auto rounded-full opacity-20"></div>
       </div>
 
-      <div className="testimonial-wrapper w-full mx-auto px-6 md:px-10 lg:px-20 mb-20 overflow-hidden">
+      <div className="testimonial-wrapper w-full mx-auto px-6 md:px-10 lg:px-20 mb-12 overflow-hidden">
         <div 
           ref={trackRef}
           className="testimonial-container flex gap-6 transition-transform duration-500 ease-in-out"
