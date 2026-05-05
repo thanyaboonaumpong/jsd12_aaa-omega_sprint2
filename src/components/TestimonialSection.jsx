@@ -39,7 +39,7 @@ const TestimonialSection = () => {
   }, []);
 
   return (
-    <section className="py-16 overflow-hidden">
+    <section className="py-8 overflow-hidden">
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">ความประทับใจจากลูกค้า</h2>
         <div className="w-24 h-1 bg-blue-900 mx-auto rounded-full opacity-20"></div>
