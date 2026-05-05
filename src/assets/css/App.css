@@ -228,4 +228,18 @@
 
   .pagination {@apply flex flex-wrap items-center gap-2 mt-5;}
 
+  #stat {@apply flex gap-5 overflow-auto;}
+  .card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-disable transition-all;}
+  .card-stat * {@apply whitespace-nowrap;}
+  .card-stat__title {@apply block text-sm text-content-base;}
+  .card-stat__value {@apply block text-2xl leading-6 text-content-hover mt-1;}
+  .card-stat__subtext {@apply inline-flex text-xs not-italic text-content-base leading-5;}
+
+  .product-stock__name {@apply hover:text-primary-hover;}
+  .product-stock__sku {@apply text-sm text-content-soft;}
+  .product-stock__separator {@apply text-sm text-content-base;}
+  .product-stock__meta ,
+  .product-stock__tag {@apply flex items-center gap-2;}
+  .product-stock__tag .badge {@apply text-content-soft bg-neutral-light;}
+
 }
