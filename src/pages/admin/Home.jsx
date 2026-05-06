@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+//import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import StatCard from "../../components/admin/StatCard";
+import { formatDate } from "../../utils/FormatDate";
+import { formatPrice } from "../../utils/FormatPrice";
+import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
+
+  const navigate = useNavigate();
+  const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
+  //const [statusOrder, setStatusOrder] = useState("");
 
   return (
     <>
@@ -34,91 +42,25 @@ export default function AdminHome() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>03/04/2026</td>
-                <td><a href="./dashboard-order-item.html">AAA20260027</a></td>
-                <td><a href="./dashboard-order-item.html">คุณสมชาย ใจดี</a></td>
-                <td className="text-right">28,000</td>
-                <td>
-                  <select className="button button-soft button-content" name="statusOrder">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="pending_payment" selected="selected">รอชำระเงิน</option>
-                    <option value="paid">ชำระเงินแล้ว</option>
-                    <option value="preparing">กำลังเตรียมสินค้า</option>
-                    <option value="shipping">กำลังจัดส่ง</option>
-                    <option value="delivered">จัดส่งสำเร็จ</option>
-                    <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>01/04/2026</td>
-                <td><a href="./dashboard-order-item.html">AAA20260026</a></td>
-                <td><a href="./dashboard-order-item.html">บริษัท ไทยธนเกศ จำกัด</a></td>
-                <td className="text-right">298,000</td>
-                <td>
-                  <select className="button button-soft button-content" name="statusOrder">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="pending_payment" selected="selected">รอชำระเงิน</option>
-                    <option value="paid">ชำระเงินแล้ว</option>
-                    <option value="preparing">กำลังเตรียมสินค้า</option>
-                    <option value="shipping">กำลังจัดส่ง</option>
-                    <option value="delivered">จัดส่งสำเร็จ</option>
-                    <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>30/03/2026</td>
-                <td><a href="./dashboard-order-item.html">AAA20260025</a></td>
-                <td><a href="./dashboard-order-item.html">คุณณัฐวุฒิ ตั้งเจริญ</a></td>
-                <td className="text-right">8,300</td>
-                <td>
-                  <select className="button button-outline button-success" name="statusOrder">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="pending_payment">รอชำระเงิน</option>
-                    <option value="paid" selected="selected">ชำระเงินแล้ว</option>
-                    <option value="preparing">กำลังเตรียมสินค้า</option>
-                    <option value="shipping">กำลังจัดส่ง</option>
-                    <option value="delivered">จัดส่งสำเร็จ</option>
-                    <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>27/03/2026</td>
-                <td><a href="./dashboard-order-item.html">AAA20260024</a></td>
-                <td><a href="./dashboard-order-item.html">คุณกนกรวรรณ บุญมี</a></td>
-                <td className="text-right">2,400</td>
-                <td>
-                  <select className="button button-outline button-warning" name="statusOrder">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="pending_payment">รอชำระเงิน</option>
-                    <option value="paid">ชำระเงินแล้ว</option>
-                    <option value="preparing" selected="selected">กำลังเตรียมสินค้า</option>
-                    <option value="shipping">กำลังจัดส่ง</option>
-                    <option value="delivered">จัดส่งสำเร็จ</option>
-                    <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>27/03/2026</td>
-                <td><a href="./dashboard-order-item.html">AAA20260023</a></td>
-                <td><a href="./dashboard-order-item.html">บริษัท พรีเมียร์ เอ็นเนอร์ยี่ จำกัด</a></td>
-                <td className="text-right">170,000</td>
-                <td>
-                  <select className="button button-outline button-success" name="statusOrder">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="pending_payment">รอชำระเงิน</option>
-                    <option value="paid" selected="selected">ชำระเงินแล้ว</option>
-                    <option value="preparing">กำลังเตรียมสินค้า</option>
-                    <option value="shipping">กำลังจัดส่ง</option>
-                    <option value="delivered">จัดส่งสำเร็จ</option>
-                    <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                  </select>
-                </td>
-              </tr>
+              {orders.slice(0, 5).map((order) => (
+                <tr key={order._id}>
+                  <td>{formatDate(order.createdAt)}</td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.customerName}</button></td>
+                  <td className="text-right">{formatPrice(order.totalPrice)}</td>
+                  <td>
+                    <select className="button button-soft button-content" name="statusOrder" value={order.status}>
+                      <option value="" disabled hidden>เลือกสถานะ</option>
+                      <option value="pending_payment">รอชำระเงิน</option>
+                      <option value="paid">ชำระเงินแล้ว</option>
+                      <option value="preparing">กำลังเตรียมสินค้า</option>
+                      <option value="shipping">กำลังจัดส่ง</option>
+                      <option value="delivered">จัดส่งสำเร็จ</option>
+                      <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -151,19 +93,19 @@ export default function AdminHome() {
             <tbody>
               <tr>
                 <td>04/04/2026 08:30 น.</td>
-                <td><a href="./dashboard-service-item.html">MA20260030</a></td>
-                <td><a href="./dashboard-service-item.html">บริษัท เอ็นเนอร์จีวัน จำกัด</a></td>
+                <td><a href="#service-item">MA20260030</a></td>
+                <td><a href="#service-item">บริษัท เอ็นเนอร์จีวัน จำกัด</a></td>
                 <td>02-888-2233</td>
                 <td>
                   <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ระบบแจ้งเตือนปัญหา รอการเข้าตรวจสอบ"><span className="icon-material">info_i</span></span>
                   ซ่อมบำรุง</td>
                 <td>ทีม 2</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
-                    <option value="in_progress" selected="selected">กำลังดำเนินการ</option>
+                    <option value="in_progress">กำลังดำเนินการ</option>
                     <option value="completed">ปิดงานแล้ว</option>
                     <option value="rescheduled">เลื่อนนัด</option>
                     <option value="cancelled">ยกเลิกงาน</option>
@@ -172,40 +114,40 @@ export default function AdminHome() {
               </tr>
               <tr>
                 <td>04/04/2026 11:00 น.</td>
-                <td><a href="./dashboard-service-item.html">CL20260031</a></td>
-                <td><a href="./dashboard-service-item.html">คุณศุภกฤต วงศ์สวัสดิ์</a></td>
+                <td><a href="#service-item">CL20260031</a></td>
+                <td><a href="#service-item">คุณศุภกฤต วงศ์สวัสดิ์</a></td>
                 <td>091-234-7788</td>
                 <td>
                   <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ทำความสะอาดแผงโซล่าเซลล์ประจำปี"><span className="icon-material">info_i</span></span>
                   ล้างแผง</td>
                 <td>ทีม 3</td>
                 <td>
-                  <select className="button button-outline button-warning" name="statusService">
+                  <select className="button button-outline button-warning" name="statusService" value="rescheduled">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
                     <option value="in_progress">กำลังดำเนินการ</option>
                     <option value="completed">ปิดงานแล้ว</option>
-                    <option value="rescheduled" selected="selected">เลื่อนนัด</option>
+                    <option value="rescheduled">เลื่อนนัด</option>
                     <option value="cancelled">ยกเลิกงาน</option>
                   </select>
                 </td>
               </tr>
               <tr>
                 <td>04/04/2026 08:00 น.</td>
-                <td><a href="./dashboard-service-item.html">IN20260032</a></td>
-                <td><a href="./dashboard-service-item.html">บริษัท กรีนไลฟ์ โซลูชั่น จำกัด</a></td>
+                <td><a href="#service-item">IN20260032</a></td>
+                <td><a href="#service-item">บริษัท กรีนไลฟ์ โซลูชั่น จำกัด</a></td>
                 <td>02-456-7890</td>
                 <td>
                   <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ติดตั้งใหม่ในโครงการบ้านจัดสรร"><span className="icon-material">info_i</span></span>
                   ติดตั้ง</td>
                 <td>ทีม 1</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
-                    <option value="in_progress" selected="selected">กำลังดำเนินการ</option>
+                    <option value="in_progress">กำลังดำเนินการ</option>
                     <option value="completed">ปิดงานแล้ว</option>
                     <option value="rescheduled">เลื่อนนัด</option>
                     <option value="cancelled">ยกเลิกงาน</option>
