@@ -1,295 +1,784 @@
 export const orders = [
   {
-    _id: "mock1",
-    orderId: "AAA20260027",
-    userId: "user1",
-    customerName: "คุณสมชาย ใจดี",
-    customerPhone: "0812345678",
-    customerEmail: "somchai@example.com",
-    paymentMethod: "bank_transfer",
-    shippingAddress: "กรุงเทพมหานคร บางนา",
-    items: [
-      { productId: "product20260001", name: "Solar Panel 550W Mono", sku: "SP-550W-MONO", priceAtPurchase: 6950, quantity: 3 },
-      { productId: "product20260002", name: "Hybrid Inverter 5kW", sku: "INV-5KW-HY", priceAtPurchase: 14200, quantity: 1 }
-    ],
-    totalPrice: 35050,
-    status: "open",
-    createdAt: "2026-04-03T09:15:23.120Z",
-    updatedAt: "2026-04-03T10:02:11.512Z"
-  }, {
-    _id: "mock2",
-    orderId: "AAA20260026",
-    userId: "user2",
-    customerName: "บริษัท ไทยธนเกศ จำกัด",
-    customerPhone: "021234567",
-    customerEmail: "contact@thaithanaket.co.th",
-    paymentMethod: "credit_card",
-    shippingAddress: "สมุทรปราการ เมือง",
-    items: [
-      { productId: "product20260003", name: "Solar Panel 600W Bifacial", sku: "SP-600W-BI", priceAtPurchase: 8850, quantity: 18 },
-      { productId: "product20260004", name: "On-Grid Inverter 10kW", sku: "INV-10KW-ON", priceAtPurchase: 37500, quantity: 2 }
-    ],
-    totalPrice: 299300,
-    status: "open",
-    createdAt: "2026-04-01T14:42:11.000Z",
-    updatedAt: "2026-04-01T15:10:45.222Z"
-  }, {
-    _id: "mock3",
-    orderId: "AAA20260025",
-    userId: "user3",
-    customerName: "คุณณัฐวุฒิ ตั้งเจริญ",
-    customerPhone: "0891112233",
-    customerEmail: "nattawut@gmail.com",
-    paymentMethod: "promptpay",
-    shippingAddress: "ชลบุรี ศรีราชา",
-    items: [
-      { productId: "product20260005", name: "DC Cable 6mm", sku: "DC-6MM", priceAtPurchase: 820, quantity: 10 }
-    ],
-    totalPrice: 8200,
+    _id: "660d5f3a8c9b1e2f4a7c0101",
+    orderId: "ORD20260001",
+    totalPrice: 13900,
+    paymentMethod: "qr",
     status: "paid",
-    createdAt: "2026-03-30T11:20:00.000Z",
-    updatedAt: "2026-03-30T12:00:00.000Z"
-  },  {
-    _id: "mock4",
-    orderId: "AAA20260024",
-    userId: "user4",
-    customerName: "คุณกนกรวรรณ บุญมี",
-    customerPhone: "0822223344",
-    customerEmail: "kanokwan@mail.com",
+    customer: {
+      userId: 1001,
+      firstName: "สมชาย",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0812345678",
+      phone2: "0898765432",
+      email: "somchai@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "123/45",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260002",
+        name: "Hybrid Inverter 5kW",
+        sku: "INV-5KW-HY",
+        priceAtPurchase: 13900,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-01T08:00:00.000Z",
+    updatedAt: "2026-03-01T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0102",
+    orderId: "ORD20260002",
+    totalPrice: 20850,
     paymentMethod: "bank_transfer",
-    shippingAddress: "นนทบุรี ปากเกร็ด",
-    items: [
-      { productId: "product20260006", name: "MC4 Connector", sku: "MC4-CON", priceAtPurchase: 210, quantity: 6 },
-      { productId: "product20260007", name: "Mounting Rail", sku: "MNT-RAIL", priceAtPurchase: 580, quantity: 2 }
-    ],
-    totalPrice: 2420,
-    status: "preparing",
-    createdAt: "2026-03-27T08:10:00.000Z",
-    updatedAt: "2026-03-27T09:00:00.000Z"
-  }, {
-    _id: "mock5",
-    orderId: "AAA20260023",
-    userId: "user5",
-    customerName: "บริษัท พรีเมียร์ เอ็นเนอร์ยี่ จำกัด",
-    customerPhone: "029999888",
-    customerEmail: "sales@premierenergy.co.th",
-    paymentMethod: "credit_card",
-    shippingAddress: "ระยอง เมือง",
-    items: [
-      { productId: "product20260008", name: "Solar Panel 550W Mono", sku: "SP-550W-MONO", priceAtPurchase: 8400, quantity: 20 }
-    ],
-    totalPrice: 168000,
-    status: "paid",
-    createdAt: "2026-03-27T07:00:00.000Z",
-    updatedAt: "2026-03-27T07:30:00.000Z"
-  }, {
-    _id: "mock6",
-    orderId: "AAA20260022",
-    userId: "user6",
-    customerName: "คุณอภิสิทธิ์ วัฒนกุล",
-    customerPhone: "0867776666",
-    customerEmail: "apisit@mail.com",
-    paymentMethod: "bank_transfer",
-    shippingAddress: "กรุงเทพมหานคร ลาดพร้าว",
-    items: [
-      { productId: "product20260009", name: "Hybrid Inverter 8kW", sku: "INV-8KW-HY", priceAtPurchase: 27800, quantity: 3 },
-      { productId: "product20260010", name: "Battery Lithium 5kWh", sku: "BAT-5KWH", priceAtPurchase: 54500, quantity: 1 }
-    ],
-    totalPrice: 138900,
     status: "shipping",
-    createdAt: "2026-03-26T13:45:00.000Z",
-    updatedAt: "2026-03-26T14:10:00.000Z"
-  }, {
-    _id: "mock7",
-    orderId: "AAA20260021",
-    userId: "user7",
-    customerName: "บริษัท ซันโซน เอ็นจิเนียริ่ง จำกัด",
-    customerPhone: "023456789",
-    customerEmail: "info@sunzone.co.th",
-    paymentMethod: "bank_transfer",
-    shippingAddress: "นครปฐม",
+    customer: {
+      userId: 1002,
+      firstName: "วิชัย",
+      lastName: "รุ่งเรือง",
+      company: "W Solar Co.",
+      taxId: "1234567890123",
+      phone: "0891112223",
+      phone2: null,
+      email: "wichai@example.com",
+      shippingAddress: {
+        label: "ออฟฟิศ",
+        addressLine: "88/9 อาคาร A",
+        subdistrict: "บางพลี",
+        district: "บางพลี",
+        province: "สมุทรปราการ",
+        postcode: "10540"
+      },
+      deliveryNote: "ด่วน"
+    },
     items: [
-      { productId: "product20260011", name: "Solar Panel 600W Bifacial", sku: "SP-600W-BI", priceAtPurchase: 8600, quantity: 22 }
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 6950,
+        quantity: 2
+      },
+      {
+        productId: "P20260008",
+        name: "Solar Cable 6mm",
+        sku: "ACC-CABLE-01",
+        priceAtPurchase: 6950,
+        quantity: 1
+      }
     ],
-    totalPrice: 189200,
+    internalNote: "B2B",
+    createdAt: "2026-03-02T08:00:00.000Z",
+    updatedAt: "2026-03-02T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0103",
+    orderId: "ORD20260003",
+    totalPrice: 6900,
+    paymentMethod: "cash",
+    status: "delivered",
+    customer: {
+      userId: 1003,
+      firstName: "สุพจน์",
+      lastName: "กิจเจริญ",
+      company: null,
+      taxId: null,
+      phone: "0812223344",
+      phone2: "0823334444",
+      email: "supot@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "12/1",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260015",
+        name: "Solar Panel 500W Mono",
+        sku: "SP-500W-01",
+        priceAtPurchase: 6900,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-03T08:00:00.000Z",
+    updatedAt: "2026-03-03T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0104",
+    orderId: "ORD20260004",
+    totalPrice: 39800,
+    paymentMethod: "bank_transfer",
+    status: "open",
+    customer: {
+      userId: 1005,
+      firstName: "พงษ์ศักดิ์",
+      lastName: "บุญมา",
+      company: "SP Energy",
+      taxId: "9998887776665",
+      phone: "0861234567",
+      phone2: "0819998888",
+      email: "pong@example.com",
+      shippingAddress: {
+        label: "โรงงาน",
+        addressLine: "77/8 นิคมอุตสาหกรรม",
+        subdistrict: "ปลวกแดง",
+        district: "ปลวกแดง",
+        province: "ระยอง",
+        postcode: "21140"
+      },
+      deliveryNote: "โหลดสินค้า"
+    },
+    items: [
+      {
+        productId: "P20260028",
+        name: "Hybrid Inverter 12kW Heavy Duty",
+        sku: "INV-12KW-01",
+        priceAtPurchase: 39800,
+        quantity: 1
+      }
+    ],
+    internalNote: "industrial",
+    createdAt: "2026-03-04T08:00:00.000Z",
+    updatedAt: "2026-03-04T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0105",
+    orderId: "ORD20260005",
+    totalPrice: 17400,
+    paymentMethod: "qr",
+    status: "paid",
+    customer: {
+      userId: 1001,
+      firstName: "สมชาย",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0812345678",
+      phone2: "0898765432",
+      email: "somchai@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "123/45",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260002",
+        name: "Hybrid Inverter 5kW",
+        sku: "INV-5KW-HY",
+        priceAtPurchase: 13900,
+        quantity: 1
+      },
+      {
+        productId: "P20260008",
+        name: "Solar Cable 6mm",
+        sku: "ACC-CABLE-01",
+        priceAtPurchase: 3500,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-05T08:00:00.000Z",
+    updatedAt: "2026-03-05T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0106",
+    orderId: "ORD20260006",
+    totalPrice: 11200,
+    paymentMethod: "cash",
     status: "cancelled",
-    createdAt: "2026-03-20T10:00:00.000Z",
-    updatedAt: "2026-03-20T10:30:00.000Z"
-  }, {
-    _id: "mock8",
-    orderId: "AAA20260020",
-    userId: "user8",
-    customerName: "คุณพิมพ์ชนก วัฒนกุล",
-    customerPhone: "0819990000",
-    customerEmail: "pimchanok@gmail.com",
-    paymentMethod: "promptpay",
-    shippingAddress: "เชียงใหม่",
+    customer: {
+      userId: 1006,
+      firstName: "อนันต์",
+      lastName: "วิริยะ",
+      company: null,
+      taxId: null,
+      phone: "0812347788",
+      phone2: null,
+      email: "anon@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "19/2",
+        subdistrict: "คลองสาม",
+        district: "คลองหลวง",
+        province: "ปทุมธานี",
+        postcode: "12120"
+      },
+      deliveryNote: ""
+    },
     items: [
-      { productId: "product20260012", name: "Inverter 5kW Hybrid", sku: "INV-5KW-HY", priceAtPurchase: 93000, quantity: 1 }
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 11200,
+        quantity: 1
+      }
     ],
-    totalPrice: 93000,
-    status: "delivered",
-    createdAt: "2026-03-19T09:00:00.000Z",
-    updatedAt: "2026-03-19T09:40:00.000Z"
-  }, {
-    _id: "mock9",
-    orderId: "AAA20260019",
-    userId: "user9",
-    customerName: "บริษัท อัลฟ่า โซลาร์ กรุ๊ป จำกัด",
-    customerPhone: "025555666",
-    customerEmail: "contact@alpha-solar.co.th",
-    paymentMethod: "credit_card",
-    shippingAddress: "ปทุมธานี",
-    items: [
-      { productId: "product20260013", name: "Solar Panel 600W Bifacial", sku: "SP-600W-BI", priceAtPurchase: 8000, quantity: 40 }
-    ],
-    totalPrice: 320000,
-    status: "delivered",
-    createdAt: "2026-03-16T15:00:00.000Z",
-    updatedAt: "2026-03-16T16:00:00.000Z"
-  }, {
-    _id: "mock10",
-    orderId: "AAA20260018",
-    userId: "user10",
-    customerName: "บริษัท เน็กซ์เจน เพาเวอร์ จำกัด",
-    customerPhone: "027777888",
-    customerEmail: "sales@nextgenpower.co.th",
-    paymentMethod: "credit_card",
-    shippingAddress: "ชลบุรี",
-    items: [
-      { productId: "product20260014", name: "Battery Lithium 10kWh", sku: "BAT-10KWH", priceAtPurchase: 152000, quantity: 3 }
-    ],
-    totalPrice: 456000,
-    status: "delivered",
-    createdAt: "2026-03-11T11:00:00.000Z",
-    updatedAt: "2026-03-11T12:00:00.000Z"
-  }, {
-    _id: "mock11",
-    orderId: "AAA20260017",
-    userId: "user11",
-    customerName: "คุณธีรภัทร์",
-    customerPhone: "0811111111",
-    customerEmail: "teerapat@mail.com",
-    paymentMethod: "promptpay",
-    shippingAddress: "อยุธยา",
-    items: [
-      { productId: "product20260015", name: "MC4 Connector", sku: "MC4-CON", priceAtPurchase: 200, quantity: 10 }
-    ],
-    totalPrice: 2000,
-    status: "paid",
-    createdAt: "2026-03-10T10:00:00.000Z",
-    updatedAt: "2026-03-10T10:20:00.000Z"
-  }, {
-    _id: "mock12",
-    orderId: "AAA20260016",
-    userId: "user12",
-    customerName: "บริษัท โซลาร์ไทย จำกัด",
-    customerPhone: "021111111",
-    customerEmail: "info@solarthai.co.th",
+    internalNote: "cancelled",
+    createdAt: "2026-03-06T08:00:00.000Z",
+    updatedAt: "2026-03-06T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0107",
+    orderId: "ORD20260007",
+    totalPrice: 17800,
     paymentMethod: "bank_transfer",
-    shippingAddress: "นครราชสีมา",
-    items: [
-      { productId: "product20260016", name: "Solar Panel 550W Mono", sku: "SP-550W-MONO", priceAtPurchase: 7000, quantity: 10 }
-    ],
-    totalPrice: 70000,
     status: "shipping",
+    customer: {
+      userId: 1007,
+      firstName: "สุชาติ",
+      lastName: "ทองดี",
+      company: null,
+      taxId: null,
+      phone: "0891110000",
+      phone2: null,
+      email: "suchat@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "55/9",
+        subdistrict: "บางบัวทอง",
+        district: "บางบัวทอง",
+        province: "นนทบุรี",
+        postcode: "11110"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260006",
+        name: "Lithium Battery 100Ah",
+        sku: "BAT-100AH-01",
+        priceAtPurchase: 17800,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-07T08:00:00.000Z",
+    updatedAt: "2026-03-07T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0108",
+    orderId: "ORD20260008",
+    totalPrice: 24500,
+    paymentMethod: "bank_transfer",
+    status: "open",
+    customer: {
+      userId: 1010,
+      firstName: "ชยพล",
+      lastName: "รุ่งเรือง",
+      company: "GreenTech",
+      taxId: "4445556667778",
+      phone: "0816667777",
+      phone2: null,
+      email: "chayapol@greentech.com",
+      shippingAddress: {
+        label: "สำนักงานใหญ่",
+        addressLine: "100/1 อาคาร A",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260018",
+        name: "Hybrid Inverter 10kW Industrial",
+        sku: "INV-10KW-01",
+        priceAtPurchase: 24500,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
     createdAt: "2026-03-08T08:00:00.000Z",
-    updatedAt: "2026-03-08T09:00:00.000Z"
-  }, {
-    _id: "mock13",
-    orderId: "AAA20260015",
-    userId: "user13",
-    customerName: "คุณกิตติ",
-    customerPhone: "0898888888",
-    customerEmail: "kitti@mail.com",
-    paymentMethod: "credit_card",
-    shippingAddress: "ภูเก็ต",
-    items: [
-      { productId: "product20260017", name: "Battery Lithium 5kWh", sku: "BAT-5KWH", priceAtPurchase: 54000, quantity: 1 }
-    ],
-    totalPrice: 54000,
-    status: "completed",
-    createdAt: "2026-03-06T14:00:00.000Z",
-    updatedAt: "2026-03-06T15:00:00.000Z"
-  }, {
-    _id: "mock14",
-    orderId: "AAA20260014",
-    userId: "user14",
-    customerName: "บริษัท กรีนพาวเวอร์ จำกัด",
-    customerPhone: "026666666",
-    customerEmail: "green@power.co.th",
-    paymentMethod: "bank_transfer",
-    shippingAddress: "ลำปาง",
-    items: [
-      { productId: "product20260018", name: "Solar Panel 600W", sku: "SP-600W", priceAtPurchase: 8800, quantity: 15 }
-    ],
-    totalPrice: 132000,
-    status: "completed",
-    createdAt: "2026-03-05T10:00:00.000Z",
-    updatedAt: "2026-03-05T11:00:00.000Z"
-  }, {
-    _id: "mock15",
-    orderId: "AAA20260013",
-    userId: "user15",
-    customerName: "คุณอรทัย",
-    customerPhone: "0812222222",
-    customerEmail: "ornthai@mail.com",
-    paymentMethod: "promptpay",
-    shippingAddress: "ขอนแก่น",
-    items: [
-      { productId: "product20260019", name: "Inverter 3kW", sku: "INV-3KW", priceAtPurchase: 12000, quantity: 1 }
-    ],
-    totalPrice: 12000,
+    updatedAt: "2026-03-08T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0109",
+    orderId: "ORD20260009",
+    totalPrice: 9400,
+    paymentMethod: "qr",
     status: "paid",
-    createdAt: "2026-03-04T09:00:00.000Z",
-    updatedAt: "2026-03-04T09:20:00.000Z"
-  }, {
-    _id: "mock16",
-    orderId: "AAA20260012",
-    userId: "user16",
-    customerName: "บริษัท โซลาร์อีสาน",
-    customerPhone: "043333333",
-    customerEmail: "esan@solar.co.th",
+    customer: {
+      userId: 1009,
+      firstName: "กิตติ",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0829998888",
+      phone2: null,
+      email: "kitti@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "33/1",
+        subdistrict: "ดอนเมือง",
+        district: "ดอนเมือง",
+        province: "กรุงเทพมหานคร",
+        postcode: "10210"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260015",
+        name: "Solar Panel 500W Mono",
+        sku: "SP-500W-01",
+        priceAtPurchase: 9400,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-09T08:00:00.000Z",
+    updatedAt: "2026-03-09T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0110",
+    orderId: "ORD20260010",
+    totalPrice: 31200,
     paymentMethod: "bank_transfer",
-    shippingAddress: "อุดรธานี",
-    items: [
-      { productId: "product20260020", name: "Solar Panel 550W", sku: "SP-550W", priceAtPurchase: 6900, quantity: 12 }
-    ],
-    totalPrice: 82800,
     status: "shipping",
-    createdAt: "2026-03-03T10:00:00.000Z",
-    updatedAt: "2026-03-03T10:40:00.000Z"
-  }, {
-    _id: "mock17",
-    orderId: "AAA20260011",
-    userId: "user17",
-    customerName: "คุณธนา",
-    customerPhone: "0855555555",
-    customerEmail: "thana@mail.com",
-    paymentMethod: "promptpay",
-    shippingAddress: "สุราษฎร์ธานี",
+    customer: {
+      userId: 1002,
+      firstName: "วิชัย",
+      lastName: "รุ่งเรือง",
+      company: "W Solar Co.",
+      taxId: "1234567890123",
+      phone: "0891112223",
+      phone2: null,
+      email: "wichai@example.com",
+      shippingAddress: {
+        label: "ออฟฟิศ",
+        addressLine: "88/9 อาคาร A",
+        subdistrict: "บางพลี",
+        district: "บางพลี",
+        province: "สมุทรปราการ",
+        postcode: "10540"
+      },
+      deliveryNote: ""
+    },
     items: [
-      { productId: "product20260021", name: "MC4 Connector", sku: "MC4-CON", priceAtPurchase: 210, quantity: 20 }
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 15600,
+        quantity: 2
+      }
     ],
-    totalPrice: 4200,
-    status: "completed",
-    createdAt: "2026-03-02T12:00:00.000Z",
-    updatedAt: "2026-03-02T12:30:00.000Z"
-  }, {
-    _id: "mock18",
-    orderId: "AAA20260010",
-    userId: "user18",
-    customerName: "บริษัท พลังงานสะอาด",
-    customerPhone: "022222222",
-    customerEmail: "cleanenergy@co.th",
-    paymentMethod: "credit_card",
-    shippingAddress: "เชียงราย",
+    internalNote: "repeat B2B",
+    createdAt: "2026-03-10T08:00:00.000Z",
+    updatedAt: "2026-03-10T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0111",
+    orderId: "ORD20260011",
+    totalPrice: 6950,
+    paymentMethod: "cash",
+    status: "delivered",
+    customer: {
+      userId: 1003,
+      firstName: "สุพจน์",
+      lastName: "กิจเจริญ",
+      company: null,
+      taxId: null,
+      phone: "0812223344",
+      phone2: "0823334444",
+      email: "supot@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "12/1",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
     items: [
-      { productId: "product20260022", name: "Battery 10kWh", sku: "BAT-10KWH", priceAtPurchase: 150000, quantity: 2 }
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 6950,
+        quantity: 1
+      }
     ],
-    totalPrice: 300000,
-    status: "completed",
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-03-01T09:45:00.000Z"
+    internalNote: "",
+    createdAt: "2026-03-11T08:00:00.000Z",
+    updatedAt: "2026-03-11T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0112",
+    orderId: "ORD20260012",
+    totalPrice: 27800,
+    paymentMethod: "bank_transfer",
+    status: "shipping",
+    customer: {
+      userId: 1001,
+      firstName: "สมชาย",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0812345678",
+      phone2: "0898765432",
+      email: "somchai@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "123/45",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260002",
+        name: "Hybrid Inverter 5kW",
+        sku: "INV-5KW-HY",
+        priceAtPurchase: 13900,
+        quantity: 2
+      }
+    ],
+    internalNote: "repeat order",
+    createdAt: "2026-03-12T08:00:00.000Z",
+    updatedAt: "2026-03-12T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0113",
+    orderId: "ORD20260013",
+    totalPrice: 16800,
+    paymentMethod: "qr",
+    status: "paid",
+    customer: {
+      userId: 1008,
+      firstName: "วิศรุต",
+      lastName: "เจริญพร",
+      company: "PowerTech",
+      taxId: "8887776665554",
+      phone: "0865554444",
+      phone2: "0876665555",
+      email: "visarut@powertech.com",
+      shippingAddress: {
+        label: "โรงงาน",
+        addressLine: "1/1 นิคม",
+        subdistrict: "ปลวกแดง",
+        district: "ปลวกแดง",
+        province: "ระยอง",
+        postcode: "21140"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260006",
+        name: "Lithium Battery 100Ah",
+        sku: "BAT-100AH-01",
+        priceAtPurchase: 16800,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-13T08:00:00.000Z",
+    updatedAt: "2026-03-13T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0114",
+    orderId: "ORD20260014",
+    totalPrice: 20400,
+    paymentMethod: "bank_transfer",
+    status: "open",
+    customer: {
+      userId: 1005,
+      firstName: "พงษ์ศักดิ์",
+      lastName: "บุญมา",
+      company: "SP Energy",
+      taxId: "9998887776665",
+      phone: "0861234567",
+      phone2: "0819998888",
+      email: "pong@example.com",
+      shippingAddress: {
+        label: "โรงงาน",
+        addressLine: "77/8 นิคม",
+        subdistrict: "ปลวกแดง",
+        district: "ปลวกแดง",
+        province: "ระยอง",
+        postcode: "21140"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 6800,
+        quantity: 3
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-14T08:00:00.000Z",
+    updatedAt: "2026-03-14T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0115",
+    orderId: "ORD20260015",
+    totalPrice: 9500,
+    paymentMethod: "cash",
+    status: "delivered",
+    customer: {
+      userId: 1006,
+      firstName: "อนันต์",
+      lastName: "วิริยะ",
+      company: null,
+      taxId: null,
+      phone: "0812347788",
+      phone2: null,
+      email: "anon@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "19/2",
+        subdistrict: "คลองสาม",
+        district: "คลองหลวง",
+        province: "ปทุมธานี",
+        postcode: "12120"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260015",
+        name: "Solar Panel 500W Mono",
+        sku: "SP-500W-01",
+        priceAtPurchase: 9500,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-15T08:00:00.000Z",
+    updatedAt: "2026-03-15T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0116",
+    orderId: "ORD20260016",
+    totalPrice: 31800,
+    paymentMethod: "bank_transfer",
+    status: "shipping",
+    customer: {
+      userId: 1002,
+      firstName: "วิชัย",
+      lastName: "รุ่งเรือง",
+      company: "W Solar Co.",
+      taxId: "1234567890123",
+      phone: "0891112223",
+      phone2: null,
+      email: "wichai@example.com",
+      shippingAddress: {
+        label: "ออฟฟิศ",
+        addressLine: "88/9 อาคาร A",
+        subdistrict: "บางพลี",
+        district: "บางพลี",
+        province: "สมุทรปราการ",
+        postcode: "10540"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 15900,
+        quantity: 2
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-16T08:00:00.000Z",
+    updatedAt: "2026-03-16T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0117",
+    orderId: "ORD20260017",
+    totalPrice: 14200,
+    paymentMethod: "qr",
+    status: "paid",
+    customer: {
+      userId: 1009,
+      firstName: "กิตติ",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0829998888",
+      phone2: null,
+      email: "kitti@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "33/1",
+        subdistrict: "ดอนเมือง",
+        district: "ดอนเมือง",
+        province: "กรุงเทพมหานคร",
+        postcode: "10210"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260002",
+        name: "Hybrid Inverter 5kW",
+        sku: "INV-5KW-HY",
+        priceAtPurchase: 14200,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-17T08:00:00.000Z",
+    updatedAt: "2026-03-17T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0118",
+    orderId: "ORD20260018",
+    totalPrice: 22700,
+    paymentMethod: "bank_transfer",
+    status: "open",
+    customer: {
+      userId: 1010,
+      firstName: "ชยพล",
+      lastName: "รุ่งเรือง",
+      company: "GreenTech",
+      taxId: "4445556667778",
+      phone: "0816667777",
+      phone2: null,
+      email: "chayapol@greentech.com",
+      shippingAddress: {
+        label: "สำนักงานใหญ่",
+        addressLine: "100/1 อาคาร A",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260018",
+        name: "Hybrid Inverter 10kW Industrial",
+        sku: "INV-10KW-01",
+        priceAtPurchase: 22700,
+        quantity: 1
+      }
+    ],
+    internalNote: "",
+    createdAt: "2026-03-18T08:00:00.000Z",
+    updatedAt: "2026-03-18T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0119",
+    orderId: "ORD20260019",
+    totalPrice: 18800,
+    paymentMethod: "cash",
+    status: "cancelled",
+    customer: {
+      userId: 1004,
+      firstName: "ณัฐวุฒิ",
+      lastName: "ศรีสุข",
+      company: null,
+      taxId: null,
+      phone: "0877778888",
+      phone2: null,
+      email: "nut@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "45/6",
+        subdistrict: "บางพลี",
+        district: "บางพลี",
+        province: "สมุทรปราการ",
+        postcode: "10540"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260006",
+        name: "Lithium Battery 100Ah",
+        sku: "BAT-100AH-01",
+        priceAtPurchase: 18800,
+        quantity: 1
+      }
+    ],
+    internalNote: "cancelled before shipping",
+    createdAt: "2026-03-19T08:00:00.000Z",
+    updatedAt: "2026-03-19T08:10:00.000Z"
+  },
+  {
+    _id: "660d5f3a8c9b1e2f4a7c0120",
+    orderId: "ORD20260020",
+    totalPrice: 34600,
+    paymentMethod: "bank_transfer",
+    status: "shipping",
+    customer: {
+      userId: 1001,
+      firstName: "สมชาย",
+      lastName: "ใจดี",
+      company: null,
+      taxId: null,
+      phone: "0812345678",
+      phone2: "0898765432",
+      email: "somchai@example.com",
+      shippingAddress: {
+        label: "บ้าน",
+        addressLine: "123/45",
+        subdistrict: "บางนา",
+        district: "บางนา",
+        province: "กรุงเทพมหานคร",
+        postcode: "10260"
+      },
+      deliveryNote: ""
+    },
+    items: [
+      {
+        productId: "P20260002",
+        name: "Hybrid Inverter 5kW",
+        sku: "INV-5KW-HY",
+        priceAtPurchase: 13900,
+        quantity: 1
+      },
+      {
+        productId: "P20260001",
+        name: "Solar Panel Mono 550W High Efficiency",
+        sku: "SP-550W-MONO-01",
+        priceAtPurchase: 6900,
+        quantity: 2
+      }
+    ],
+    internalNote: "bundle order",
+    createdAt: "2026-03-20T08:00:00.000Z",
+    updatedAt: "2026-03-20T08:10:00.000Z"
   }
+
 ];
