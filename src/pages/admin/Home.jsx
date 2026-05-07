@@ -1,15 +1,14 @@
-//import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StatCard from "../../components/admin/StatCard";
-import { formatDate } from "../../utils/FormatDate";
-import { formatPrice } from "../../utils/FormatPrice";
+import { FormatDate } from "../../utils/FormatDate";
+import { FormatPrice } from "../../utils/FormatPrice";
+import { DataNotFound } from "../../utils/DataNotFound";
 import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
 
   const navigate = useNavigate();
   const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
-  //const [statusOrder, setStatusOrder] = useState("");
 
   return (
     <>
@@ -44,12 +43,12 @@ export default function AdminHome() {
             <tbody>
               {orders.slice(0, 5).map((order) => (
                 <tr key={order._id}>
-                  <td>{formatDate(order.createdAt)}</td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId}</button></td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.customerName}</button></td>
-                  <td className="text-right">{formatPrice(order.totalPrice)}</td>
+                  <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.customerName || <DataNotFound />}</button></td>
+                  <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" value={order.status}>
+                    <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
                       <option value="" disabled hidden>เลือกสถานะ</option>
                       <option value="pending_payment">รอชำระเงิน</option>
                       <option value="paid">ชำระเงินแล้ว</option>
@@ -101,7 +100,7 @@ export default function AdminHome() {
                   ซ่อมบำรุง</td>
                 <td>ทีม 2</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -122,7 +121,7 @@ export default function AdminHome() {
                   ล้างแผง</td>
                 <td>ทีม 3</td>
                 <td>
-                  <select className="button button-outline button-warning" name="statusService" value="rescheduled">
+                  <select className="button button-outline button-warning" name="statusService" defaultValue="rescheduled">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -143,7 +142,7 @@ export default function AdminHome() {
                   ติดตั้ง</td>
                 <td>ทีม 1</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>

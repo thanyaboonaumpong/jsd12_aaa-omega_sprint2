@@ -1,3 +1,3 @@
-export const formatPrice = (price) => {
+export const FormatPrice = (price) => {
   return Number(price).toLocaleString("th-TH")
 }
