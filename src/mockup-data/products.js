@@ -1,7 +1,7 @@
 export const products = [
   {
     _id: "660d6a1a8c9b1e2f4a7c3001",
-    productId: "P20260001",
+    productId: "p20260001",
     sku: "SP-550W-MONO-01",
     name: "Solar Panel Mono 550W High Efficiency",
     category: "solar",
@@ -18,7 +18,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3002",
-    productId: "P20260002",
+    productId: "p20260002",
     sku: "SP-450W-MONO-01",
     name: "Solar Panel Mono 450W Standard",
     category: "solar",
@@ -35,7 +35,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3003",
-    productId: "P20260003",
+    productId: "p20260003",
     sku: "SP-600W-MONO-01",
     name: "Solar Panel Mono 600W Ultra",
     category: "solar",
@@ -52,7 +52,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3004",
-    productId: "P20260004",
+    productId: "p20260004",
     sku: "INV-3KW-01",
     name: "Hybrid Inverter 3kW Compact",
     category: "inverter",
@@ -69,7 +69,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3005",
-    productId: "P20260005",
+    productId: "p20260005",
     sku: "INV-5KW-01",
     name: "Hybrid Inverter 5kW Smart",
     category: "inverter",
@@ -86,7 +86,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3006",
-    productId: "P20260006",
+    productId: "p20260006",
     sku: "BAT-100AH-01",
     name: "Lithium Battery 100Ah",
     category: "battery",
@@ -103,7 +103,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3007",
-    productId: "P20260007",
+    productId: "p20260007",
     sku: "BAT-200AH-01",
     name: "Lithium Battery 200Ah",
     category: "battery",
@@ -120,7 +120,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3008",
-    productId: "P20260008",
+    productId: "p20260008",
     sku: "ACC-CABLE-01",
     name: "Solar Cable 6mm",
     category: "accessory",
@@ -137,7 +137,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3009",
-    productId: "P20260009",
+    productId: "p20260009",
     sku: "ACC-MOUNT-01",
     name: "Solar Mounting Kit",
     category: "accessory",
@@ -154,7 +154,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3010",
-    productId: "P20260010",
+    productId: "p20260010",
     sku: "SP-700W-01",
     name: "Solar Panel 700W Ultra Pro",
     category: "solar",
@@ -171,7 +171,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3011",
-    productId: "P20260011",
+    productId: "p20260011",
     sku: "SP-550W-02",
     name: "Solar Panel 550W Eco",
     category: "solar",
@@ -188,7 +188,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3012",
-    productId: "P20260012",
+    productId: "p20260012",
     sku: "INV-8KW-01",
     name: "Hybrid Inverter 8kW",
     category: "inverter",
@@ -205,7 +205,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3013",
-    productId: "P20260013",
+    productId: "p20260013",
     sku: "BAT-300AH-01",
     name: "Lithium Battery 300Ah",
     category: "battery",
@@ -222,7 +222,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3014",
-    productId: "P20260014",
+    productId: "p20260014",
     sku: "ACC-FUSE-01",
     name: "Solar Fuse Set",
     category: "accessory",
@@ -239,7 +239,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3015",
-    productId: "P20260015",
+    productId: "p20260015",
     sku: "SP-500W-01",
     name: "Solar Panel 500W Mono",
     category: "solar",
@@ -256,7 +256,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3016",
-    productId: "P20260016",
+    productId: "p20260016",
     sku: "SP-650W-01",
     name: "Solar Panel Mono 650W High Efficiency",
     category: "solar",
@@ -273,7 +273,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3017",
-    productId: "P20260017",
+    productId: "p20260017",
     sku: "SP-400W-01",
     name: "Solar Panel 400W Compact",
     category: "solar",
@@ -290,7 +290,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3018",
-    productId: "P20260018",
+    productId: "p20260018",
     sku: "INV-10KW-01",
     name: "Hybrid Inverter 10kW Industrial",
     category: "inverter",
@@ -307,7 +307,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3019",
-    productId: "P20260019",
+    productId: "p20260019",
     sku: "BAT-150AH-01",
     name: "Lithium Battery 150Ah",
     category: "battery",
@@ -324,7 +324,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3020",
-    productId: "P20260020",
+    productId: "p20260020",
     sku: "ACC-JUNCTION-01",
     name: "Solar Junction Box",
     category: "accessory",
@@ -341,7 +341,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3021",
-    productId: "P20260021",
+    productId: "p20260021",
     sku: "SP-700W-02",
     name: "Solar Panel 700W Pro Max",
     category: "solar",
@@ -358,7 +358,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3022",
-    productId: "P20260022",
+    productId: "p20260022",
     sku: "SP-550W-03",
     name: "Solar Panel 550W Budget",
     category: "solar",
@@ -375,7 +375,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3023",
-    productId: "P20260023",
+    productId: "p20260023",
     sku: "INV-6KW-01",
     name: "Hybrid Inverter 6kW",
     category: "inverter",
@@ -392,7 +392,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3024",
-    productId: "P20260024",
+    productId: "p20260024",
     sku: "BAT-50AH-01",
     name: "Lithium Battery 50Ah Compact",
     category: "battery",
@@ -409,7 +409,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3025",
-    productId: "P20260025",
+    productId: "p20260025",
     sku: "ACC-MCB-01",
     name: "DC Circuit Breaker",
     category: "accessory",
@@ -426,7 +426,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3026",
-    productId: "P20260026",
+    productId: "p20260026",
     sku: "SP-800W-01",
     name: "Solar Panel 800W Ultra",
     category: "solar",
@@ -443,7 +443,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3027",
-    productId: "P20260027",
+    productId: "p20260027",
     sku: "SP-300W-01",
     name: "Solar Panel 300W Mini",
     category: "solar",
@@ -460,7 +460,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3028",
-    productId: "P20260028",
+    productId: "p20260028",
     sku: "INV-12KW-01",
     name: "Hybrid Inverter 12kW Heavy Duty",
     category: "inverter",
@@ -477,7 +477,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3029",
-    productId: "P20260029",
+    productId: "p20260029",
     sku: "BAT-400AH-01",
     name: "Lithium Battery 400Ah",
     category: "battery",
@@ -494,7 +494,7 @@ export const products = [
   },
   {
     _id: "660d6a1a8c9b1e2f4a7c3030",
-    productId: "P20260030",
+    productId: "p20260030",
     sku: "ACC-COMBINER-01",
     name: "Solar Combiner Box",
     category: "accessory",

@@ -1,7 +1,7 @@
 export const orders = [
   {
     _id: "660d5f3a8c9b1e2f4a7c0101",
-    orderId: "ORD20260001",
+    orderId: "ord20260001",
     totalPrice: 13900,
     paymentMethod: "qr",
     status: "paid",
@@ -21,8 +21,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -33,13 +32,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-01T08:00:00.000Z",
     updatedAt: "2026-03-01T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0102",
-    orderId: "ORD20260002",
+    orderId: "ord20260002",
     totalPrice: 20850,
     paymentMethod: "bank_transfer",
     status: "shipping",
@@ -59,8 +59,7 @@ export const orders = [
         district: "บางพลี",
         province: "สมุทรปราการ",
         postcode: "10540"
-      },
-      deliveryNote: "ด่วน"
+      }
     },
     items: [
       {
@@ -78,13 +77,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "ด่วน",
     internalNote: "B2B",
     createdAt: "2026-03-02T08:00:00.000Z",
     updatedAt: "2026-03-02T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0103",
-    orderId: "ORD20260003",
+    orderId: "ord20260003",
     totalPrice: 6900,
     paymentMethod: "cash",
     status: "delivered",
@@ -104,8 +104,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -116,13 +115,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-03T08:00:00.000Z",
     updatedAt: "2026-03-03T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0104",
-    orderId: "ORD20260004",
+    orderId: "ord20260004",
     totalPrice: 39800,
     paymentMethod: "bank_transfer",
     status: "open",
@@ -142,8 +142,7 @@ export const orders = [
         district: "ปลวกแดง",
         province: "ระยอง",
         postcode: "21140"
-      },
-      deliveryNote: "โหลดสินค้า"
+      }
     },
     items: [
       {
@@ -154,13 +153,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "โหลดสินค้า",
     internalNote: "industrial",
     createdAt: "2026-03-04T08:00:00.000Z",
     updatedAt: "2026-03-04T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0105",
-    orderId: "ORD20260005",
+    orderId: "ord20260005",
     totalPrice: 17400,
     paymentMethod: "qr",
     status: "paid",
@@ -180,8 +180,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -199,13 +198,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-05T08:00:00.000Z",
     updatedAt: "2026-03-05T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0106",
-    orderId: "ORD20260006",
+    orderId: "ord20260006",
     totalPrice: 11200,
     paymentMethod: "cash",
     status: "cancelled",
@@ -225,8 +225,7 @@ export const orders = [
         district: "คลองหลวง",
         province: "ปทุมธานี",
         postcode: "12120"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -237,13 +236,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "cancelled",
     createdAt: "2026-03-06T08:00:00.000Z",
     updatedAt: "2026-03-06T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0107",
-    orderId: "ORD20260007",
+    orderId: "ord20260007",
     totalPrice: 17800,
     paymentMethod: "bank_transfer",
     status: "shipping",
@@ -263,8 +263,7 @@ export const orders = [
         district: "บางบัวทอง",
         province: "นนทบุรี",
         postcode: "11110"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -275,13 +274,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-07T08:00:00.000Z",
     updatedAt: "2026-03-07T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0108",
-    orderId: "ORD20260008",
+    orderId: "ord20260008",
     totalPrice: 24500,
     paymentMethod: "bank_transfer",
     status: "open",
@@ -301,8 +301,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -313,13 +312,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-08T08:00:00.000Z",
     updatedAt: "2026-03-08T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0109",
-    orderId: "ORD20260009",
+    orderId: "ord20260009",
     totalPrice: 9400,
     paymentMethod: "qr",
     status: "paid",
@@ -339,8 +339,7 @@ export const orders = [
         district: "ดอนเมือง",
         province: "กรุงเทพมหานคร",
         postcode: "10210"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -351,13 +350,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-09T08:00:00.000Z",
     updatedAt: "2026-03-09T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0110",
-    orderId: "ORD20260010",
+    orderId: "ord20260010",
     totalPrice: 31200,
     paymentMethod: "bank_transfer",
     status: "shipping",
@@ -377,8 +377,7 @@ export const orders = [
         district: "บางพลี",
         province: "สมุทรปราการ",
         postcode: "10540"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -389,13 +388,14 @@ export const orders = [
         quantity: 2
       }
     ],
+    deliveryNote: "",
     internalNote: "repeat B2B",
     createdAt: "2026-03-10T08:00:00.000Z",
     updatedAt: "2026-03-10T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0111",
-    orderId: "ORD20260011",
+    orderId: "ord20260011",
     totalPrice: 6950,
     paymentMethod: "cash",
     status: "delivered",
@@ -415,8 +415,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -427,13 +426,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-11T08:00:00.000Z",
     updatedAt: "2026-03-11T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0112",
-    orderId: "ORD20260012",
+    orderId: "ord20260012",
     totalPrice: 27800,
     paymentMethod: "bank_transfer",
     status: "shipping",
@@ -453,8 +453,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -465,13 +464,14 @@ export const orders = [
         quantity: 2
       }
     ],
+    deliveryNote: "",
     internalNote: "repeat order",
     createdAt: "2026-03-12T08:00:00.000Z",
     updatedAt: "2026-03-12T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0113",
-    orderId: "ORD20260013",
+    orderId: "ord20260013",
     totalPrice: 16800,
     paymentMethod: "qr",
     status: "paid",
@@ -491,8 +491,7 @@ export const orders = [
         district: "ปลวกแดง",
         province: "ระยอง",
         postcode: "21140"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -503,13 +502,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-13T08:00:00.000Z",
     updatedAt: "2026-03-13T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0114",
-    orderId: "ORD20260014",
+    orderId: "ord20260014",
     totalPrice: 20400,
     paymentMethod: "bank_transfer",
     status: "open",
@@ -529,8 +529,7 @@ export const orders = [
         district: "ปลวกแดง",
         province: "ระยอง",
         postcode: "21140"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -541,13 +540,14 @@ export const orders = [
         quantity: 3
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-14T08:00:00.000Z",
     updatedAt: "2026-03-14T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0115",
-    orderId: "ORD20260015",
+    orderId: "ord20260015",
     totalPrice: 9500,
     paymentMethod: "cash",
     status: "delivered",
@@ -567,8 +567,7 @@ export const orders = [
         district: "คลองหลวง",
         province: "ปทุมธานี",
         postcode: "12120"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -579,13 +578,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-15T08:00:00.000Z",
     updatedAt: "2026-03-15T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0116",
-    orderId: "ORD20260016",
+    orderId: "ord20260016",
     totalPrice: 31800,
     paymentMethod: "bank_transfer",
     status: "shipping",
@@ -605,8 +605,7 @@ export const orders = [
         district: "บางพลี",
         province: "สมุทรปราการ",
         postcode: "10540"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -617,13 +616,14 @@ export const orders = [
         quantity: 2
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-16T08:00:00.000Z",
     updatedAt: "2026-03-16T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0117",
-    orderId: "ORD20260017",
+    orderId: "ord20260017",
     totalPrice: 14200,
     paymentMethod: "qr",
     status: "paid",
@@ -643,8 +643,7 @@ export const orders = [
         district: "ดอนเมือง",
         province: "กรุงเทพมหานคร",
         postcode: "10210"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -655,13 +654,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-17T08:00:00.000Z",
     updatedAt: "2026-03-17T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0118",
-    orderId: "ORD20260018",
+    orderId: "ord20260018",
     totalPrice: 22700,
     paymentMethod: "bank_transfer",
     status: "open",
@@ -681,8 +681,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -693,13 +692,14 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "",
     createdAt: "2026-03-18T08:00:00.000Z",
     updatedAt: "2026-03-18T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0119",
-    orderId: "ORD20260019",
+    orderId: "ord20260019",
     totalPrice: 18800,
     paymentMethod: "cash",
     status: "cancelled",
@@ -719,8 +719,7 @@ export const orders = [
         district: "บางพลี",
         province: "สมุทรปราการ",
         postcode: "10540"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -731,14 +730,15 @@ export const orders = [
         quantity: 1
       }
     ],
+    deliveryNote: "",
     internalNote: "cancelled before shipping",
     createdAt: "2026-03-19T08:00:00.000Z",
     updatedAt: "2026-03-19T08:10:00.000Z"
   },
   {
     _id: "660d5f3a8c9b1e2f4a7c0120",
-    orderId: "ORD20260020",
-    totalPrice: 34600,
+    orderId: "ord20260020",
+    totalPrice: 27700,
     paymentMethod: "bank_transfer",
     status: "shipping",
     customer: {
@@ -757,8 +757,7 @@ export const orders = [
         district: "บางนา",
         province: "กรุงเทพมหานคร",
         postcode: "10260"
-      },
-      deliveryNote: ""
+      }
     },
     items: [
       {
@@ -776,6 +775,7 @@ export const orders = [
         quantity: 2
       }
     ],
+    deliveryNote: "ฉันไม่มีหมายเหตุครับ",
     internalNote: "bundle order",
     createdAt: "2026-03-20T08:00:00.000Z",
     updatedAt: "2026-03-20T08:10:00.000Z"

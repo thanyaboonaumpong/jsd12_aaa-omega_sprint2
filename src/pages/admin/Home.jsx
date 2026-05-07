@@ -41,16 +41,21 @@ export default function AdminHome() {
               </tr>
             </thead>
             <tbody>
-              {orders.slice(0, 5).map((order) => (
+              {[...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5).map((order) => (
                 <tr key={order._id}>
                   <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId || <DataNotFound />}</button></td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.customerName || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>
+                    {order.customer.company ||
+                      (order.customer.firstName || order.customer.lastName
+                        ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
+                        : <DataNotFound />)
+                    }</button></td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
                     <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
                       <option value="" disabled hidden>เลือกสถานะ</option>
-                      <option value="pending_payment">รอชำระเงิน</option>
+                      <option value="open">รอชำระเงิน</option>
                       <option value="paid">ชำระเงินแล้ว</option>
                       <option value="preparing">กำลังเตรียมสินค้า</option>
                       <option value="shipping">กำลังจัดส่ง</option>

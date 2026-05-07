@@ -16,10 +16,10 @@ export default function AdminOrderItem() {
   return (
     <>
       <section id="orderEdit" className="flex flex-row flex-wrap justify-between items-center gap-10">
-        <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {order.orderId || <DataNotFound />}</h1>
+        <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {order.orderId?.toUpperCase() || <DataNotFound />}</h1>
         <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
           <option value="" disabled hidden>เลือกสถานะ</option>
-          <option value="pending_payment">รอชำระเงิน</option>
+          <option value="open">รอชำระเงิน</option>
           <option value="paid">ชำระเงินแล้ว</option>
           <option value="preparing">กำลังเตรียมสินค้า</option>
           <option value="shipping">กำลังจัดส่ง</option>
@@ -38,23 +38,48 @@ export default function AdminOrderItem() {
             </tr>
             <tr>
               <th>ชื่อผู้สั่งชื่อ</th>
-              <td>{order.customerName || <DataNotFound />}</td>
+              <td>
+                {order.customer.firstName || order.customer.lastName
+                  ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
+                  : <DataNotFound />}
+              </td>
             </tr>
+            {order.customer.company &&
+              <tr>
+                <th>ชื่อบริษัท</th>
+                <td>{order.customer.company}</td>
+              </tr>
+            }
+            {order.customer.taxId &&
+              <tr>
+                <th>เลขประจำตัว<br className="max-2xs:hidden" />ผู้เสียภาษีอากร</th>
+                <td>{order.customer.taxId}</td>
+              </tr>
+            }
             <tr>
               <th>เบอร์ติดต่อ</th>
-              <td>{order.customerPhone || <DataNotFound />}</td>
+              <td>{order.customer.phone || <DataNotFound />}</td>
             </tr>
+            {order.customer.phone2 &&
+              <tr>
+                <th>เบอร์สำรอง</th>
+                <td>{order.customer.phone2}</td>
+              </tr>
+            }
             <tr>
               <th>อีเมล</th>
-              <td>{order.customerEmail || <DataNotFound />}</td>
+              <td>{order.customer.email || <DataNotFound />}</td>
             </tr>
             <tr>
               <th>ที่อยู่จัดส่ง</th>
-              <td>{order.shippingAddress || <DataNotFound />}</td>
+              <td>
+                {order.customer.shippingAddress.addressLine || order.customer.shippingAddress.subdistrict || order.customer.shippingAddress.district
+                  ? `${order.customer.shippingAddress.addressLine} ${order.customer.shippingAddress.subdistrict} ${order.customer.shippingAddress.district} ${order.customer.shippingAddress.province} ${order.customer.shippingAddress.postcode}`.trim()
+                  : <DataNotFound />}</td>
             </tr>
             <tr>
               <th>หมายเหตุ</th>
-              <td>{order.deliveryNote || <DataNotFound />}</td>
+              <td>{order.orderNote || <DataNotFound />}</td>
             </tr>
           </tbody>
         </table>
