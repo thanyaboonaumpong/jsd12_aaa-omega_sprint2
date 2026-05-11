@@ -9,6 +9,8 @@ export default function AdminProducts() {
 
   const navigate = useNavigate();
   const handleProductItem = (productId) => navigate(`./${productId}`);
+    
+  const latestProducts = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10)
 
   return (
     <>
@@ -20,7 +22,7 @@ export default function AdminProducts() {
       </section>
       <section id="productList" className="flex flex-row flex-wrap justify-between items-center gap-5">
         <h1>คลังสินค้า</h1>
-        <a className="button button-soft button-primary w-full xs:w-fit" href="./dashboard-product-add.html">เพิ่มสินค้าใหม่</a>
+        <Link className="button button-soft button-primary w-full xs:w-fit" to="./create">เพิ่มสินค้าใหม่</Link>
         <div className="table-container">
           <table>
             <colgroup>
@@ -42,9 +44,9 @@ export default function AdminProducts() {
               </tr>
             </thead>
             <tbody>
-              {[...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10).map((product) => (
+              {latestProducts.map((product) => (
                 <tr key={product._id}>
-                  <td><img className="size-15" src={product.image?.trim() || ImageNotFound} /></td>
+                  <td><img className="size-15 min-w-15 min-h-15" src={product.image?.trim() || ImageNotFound} /></td>
                   <td>
                     <button className="product-stock__name" onClick={() => handleProductItem(product.productId)}>{product.name || <DataNotFound />}</button>
                     <div className="product-stock__meta">
@@ -63,7 +65,7 @@ export default function AdminProducts() {
                   </td>
                   <td className={`text-right ${product.stock <= product.stockMin ? "text-warning-base" : ""}`}>{product.stock || <DataNotFound />}</td>
                   <td className="text-right">{product.price > 0 ? FormatPrice(product.price) : <DataNotFound />}</td>
-                  <td>{product.category || <DataNotFound />}</td>
+                  <td className="capitalize">{product.category || <DataNotFound />}</td>
                   <td className="text-right">{product.createdAt ? FormatDate(product.createdAt) : <DataNotFound />}</td>
                 </tr>
               ))}
