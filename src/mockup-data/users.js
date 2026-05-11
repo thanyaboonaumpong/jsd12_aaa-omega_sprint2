@@ -11,17 +11,16 @@ export const users = [
     email: "somchai@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "123/45",
-        subdistrict: "บางนา",
-        district: "บางนา",
-        province: "กรุงเทพมหานคร",
-        postcode: "10260",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "123/45",
+      subdistrict: "บางนา",
+      district: "บางนา",
+      province: "กรุงเทพมหานคร",
+      postcode: "10260",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-05T10:00:00.000Z"
   },
   {
@@ -36,17 +35,16 @@ export const users = [
     email: "wichai@example.com",
     role: "sales",
     isActive: true,
-    addresses: [
-      {
-        label: "ออฟฟิศ",
-        addressLine: "88/9 อาคาร A",
-        subdistrict: "บางพลี",
-        district: "บางพลี",
-        province: "สมุทรปราการ",
-        postcode: "10540",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "ออฟฟิศ",
+      addressLine: "88/9 อาคาร A",
+      subdistrict: "บางพลี",
+      district: "บางพลี",
+      province: "สมุทรปราการ",
+      postcode: "10540",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-05T08:10:00.000Z"
   },
   {
@@ -61,17 +59,16 @@ export const users = [
     email: "supot@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "12/1",
-        subdistrict: "บางนา",
-        district: "บางนา",
-        province: "กรุงเทพมหานคร",
-        postcode: "10260",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "12/1",
+      subdistrict: "บางนา",
+      district: "บางนา",
+      province: "กรุงเทพมหานคร",
+      postcode: "10260",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-04T04:00:00.000Z"
   },
   {
@@ -86,17 +83,16 @@ export const users = [
     email: "nut@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "45/6",
-        subdistrict: "บางพลี",
-        district: "บางพลี",
-        province: "สมุทรปราการ",
-        postcode: "10540",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "45/6",
+      subdistrict: "บางพลี",
+      district: "บางพลี",
+      province: "สมุทรปราการ",
+      postcode: "10540",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-03T01:00:00.000Z"
   },
   {
@@ -111,17 +107,16 @@ export const users = [
     email: "pong@example.com",
     role: "admin",
     isActive: true,
-    addresses: [
-      {
-        label: "โรงงาน",
-        addressLine: "77/8 นิคมอุตสาหกรรม",
-        subdistrict: "ปลวกแดง",
-        district: "ปลวกแดง",
-        province: "ระยอง",
-        postcode: "21140",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "โรงงาน",
+      addressLine: "77/8 นิคมอุตสาหกรรม",
+      subdistrict: "ปลวกแดง",
+      district: "ปลวกแดง",
+      province: "ระยอง",
+      postcode: "21140",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-02T02:00:00.000Z"
   },
   {
@@ -136,17 +131,16 @@ export const users = [
     email: "anon@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "19/2",
-        subdistrict: "คลองสาม",
-        district: "คลองหลวง",
-        province: "ปทุมธานี",
-        postcode: "12120",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "19/2",
+      subdistrict: "คลองสาม",
+      district: "คลองหลวง",
+      province: "ปทุมธานี",
+      postcode: "12120",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-04-01T08:00:00.000Z"
   },
   {
@@ -161,17 +155,16 @@ export const users = [
     email: "suchat@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "55/9",
-        subdistrict: "บางบัวทอง",
-        district: "บางบัวทอง",
-        province: "นนทบุรี",
-        postcode: "11110",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "55/9",
+      subdistrict: "บางบัวทอง",
+      district: "บางบัวทอง",
+      province: "นนทบุรี",
+      postcode: "11110",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-03-30T08:00:00.000Z"
   },
   {
@@ -186,17 +179,16 @@ export const users = [
     email: "visarut@powertech.com",
     role: "support",
     isActive: true,
-    addresses: [
-      {
-        label: "โรงงาน",
-        addressLine: "1/1 นิคมอุตสาหกรรม",
-        subdistrict: "ปลวกแดง",
-        district: "ปลวกแดง",
-        province: "ระยอง",
-        postcode: "21140",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "โรงงาน",
+      addressLine: "1/1 นิคมอุตสาหกรรม",
+      subdistrict: "ปลวกแดง",
+      district: "ปลวกแดง",
+      province: "ระยอง",
+      postcode: "21140",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-03-29T11:00:00.000Z"
   },
   {
@@ -211,17 +203,16 @@ export const users = [
     email: "kitti@example.com",
     role: "customer",
     isActive: true,
-    addresses: [
-      {
-        label: "บ้าน",
-        addressLine: "33/1",
-        subdistrict: "ดอนเมือง",
-        district: "ดอนเมือง",
-        province: "กรุงเทพมหานคร",
-        postcode: "10210",
-        isDefault: true
-      }
-    ],
+    address: {
+      label: "บ้าน",
+      addressLine: "33/1",
+      subdistrict: "ดอนเมือง",
+      district: "ดอนเมือง",
+      province: "กรุงเทพมหานคร",
+      postcode: "10210",
+      isDefault: true
+    },
+    shippingAddress: null,
     lastLoginAt: "2026-03-28T04:00:00.000Z"
   },
   {
@@ -236,26 +227,24 @@ export const users = [
     email: "chayapol@greentech.com",
     role: "sales",
     isActive: true,
-    addresses: [
-      {
-        label: "สำนักงานใหญ่",
-        addressLine: "100/1 อาคาร A",
-        subdistrict: "บางนา",
-        district: "บางนา",
-        province: "กรุงเทพมหานคร",
-        postcode: "10260",
-        isDefault: true
-      },
-      {
-        label: "บ้าน",
-        addressLine: "100/2 อาคาร A",
-        subdistrict: "บางนา",
-        district: "บางนา",
-        province: "กรุงเทพมหานคร",
-        postcode: "10260",
-        isDefault: false
-      }
-    ],
+    address: {
+      label: "สำนักงานใหญ่",
+      addressLine: "100/1 อาคาร A",
+      subdistrict: "บางนา",
+      district: "บางนา",
+      province: "กรุงเทพมหานคร",
+      postcode: "10260",
+      isDefault: true
+    },
+    shippingAddress: {
+      label: "บ้าน",
+      addressLine: "100/2 อาคาร A",
+      subdistrict: "บางนา",
+      district: "บางนา",
+      province: "กรุงเทพมหานคร",
+      postcode: "10260",
+      isDefault: false
+    },
     lastLoginAt: "2026-03-27T09:00:00.000Z"
   }
 ];

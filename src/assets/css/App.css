@@ -118,10 +118,11 @@
   .input-col {@apply flex flex-col gap-5 w-full;}
   .input-group {@apply flex flex-col justify-end gap-2 w-full;}
   .button-row {@apply flex flex-row flex-wrap-reverse justify-end items-center grow gap-5 w-full xs:w-fit;}
+  form > .button-row:last-child {@apply mt-5;}
   .button-row button {@apply grow xs:grow-0;}
   fieldset {@apply flex flex-col gap-5 w-full;}
   legend {@apply text-content-hover pb-4;}
-  label {@apply flex items-center gap-2 text-sm;}
+  label {@apply flex items-center gap-2 w-fit text-sm;}
   input, textarea, select {@apply w-full leading-5.5 placeholder:text-content-disable disabled:text-content-disable px-4 py-2 border border-neutral-disable hover:border-neutral-base disabled:border-neutral-disable rounded-lg bg-white;}
   input[type="password"] {@apply text-xl tracking-[0.2em];}       
   input[type="range"] {@apply cursor-pointer appearance-none px-0 py-4.75 border-none focus:outline-none bg-transparent;}
@@ -160,9 +161,22 @@
     display:inline-block; vertical-align:bottom; white-space:nowrap; word-wrap:normal; direction:ltr;
     font-feature-settings:"liga"; -webkit-font-smoothing:antialiased;
   }
+  /* Google Icon */
+  .icon-material.wght-700           {font-variation-settings:'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-600           {font-variation-settings:'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-500           {font-variation-settings:'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-400           {font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
   .icon-material ,
-  .icon-material.icon-outline {font-variation-settings:'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24}
-  .icon-material.icon-fill    {font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24}
+  .icon-material.icon-outline       {font-variation-settings:'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-200           {font-variation-settings:'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-100           {font-variation-settings:'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-700 {font-variation-settings:'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-600 {font-variation-settings:'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-500 {font-variation-settings:'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-400 {font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill          {font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-200 {font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-100 {font-variation-settings:'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
 
   .button           {@apply relative hover:z-10 inline-flex justify-center items-center gap-2 min-h-10 leading-10 text-white px-4 border-0 rounded-lg transition-all;}
   .button-icon      {@apply justify-center size-10 p-0;}
@@ -240,6 +254,6 @@
   .product-stock__separator {@apply text-sm text-content-base;}
   .product-stock__meta ,
   .product-stock__tag {@apply flex items-center gap-2;}
-  .product-stock__tag .badge {@apply text-content-soft bg-neutral-light;}
+  .product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}
 
 }

@@ -7,8 +7,13 @@ export const MessageProvider = ({children}) => {
   const [adminNavMainActive, setAdminNavMainActive] = useState(false);
   const handleAdminNavMainToggle = () => setAdminNavMainActive(!adminNavMainActive);
 
+  const handleOrderStatusChange = (orderId, status) => {
+    console.log(orderId);
+    console.log(status);
+  };
+
   return(
-    <MessageContext.Provider value={{adminNavMainActive, handleAdminNavMainToggle}}>
+    <MessageContext.Provider value={{adminNavMainActive, handleAdminNavMainToggle, handleOrderStatusChange}}>
       {children}
     </MessageContext.Provider>
   );

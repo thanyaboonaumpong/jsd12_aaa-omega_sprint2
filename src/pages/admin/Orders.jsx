@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -7,8 +9,12 @@ import { orders } from "../../mockup-data/orders";
 
 export default function AdminOrders() {
 
+  const {handleOrderStatusChange} = useContext(MessageContext);
+
   const navigate = useNavigate();
   const handleOrderItem = (orderId) => navigate(`./${orderId}`);
+  
+  const latestOrders = [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
 
   return (
     <>
@@ -41,7 +47,7 @@ export default function AdminOrders() {
               </tr>
             </thead>
             <tbody>
-              {[...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10).map((order) => (
+              {latestOrders.map((order) => (
                 <tr key={order._id}>
                   <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
                   <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
@@ -54,7 +60,7 @@ export default function AdminOrders() {
                   </td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
+                    <select className="button button-soft button-content" name="statusOrder" value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)}>
                       <option value="" disabled hidden>เลือกสถานะ</option>
                       <option value="open">รอชำระเงิน</option>
                       <option value="paid">ชำระเงินแล้ว</option>

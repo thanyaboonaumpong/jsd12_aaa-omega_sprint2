@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -6,6 +8,8 @@ import { DataNotFound } from "../../utils/DataNotFound";
 import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
+
+  const {handleOrderStatusChange} = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
@@ -53,7 +57,7 @@ export default function AdminHome() {
                     }</button></td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
+                    <select className="button button-soft button-content" name="statusOrder" value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)}>
                       <option value="" disabled hidden>เลือกสถานะ</option>
                       <option value="open">รอชำระเงิน</option>
                       <option value="paid">ชำระเงินแล้ว</option>
@@ -70,6 +74,7 @@ export default function AdminHome() {
         </div>
         <Link className="button button-soft button-primary" to="./orders">คำสั่งซื้อทั้งหมด</Link>
       </section>
+      {/*
       <section id="serviceList" className="flex flex-row flex-wrap justify-between items-center gap-5">
         <h2>ตารางนัดหมายวันนี้</h2>
         <div className="table-container xs:order-3">
@@ -105,7 +110,7 @@ export default function AdminHome() {
                   ซ่อมบำรุง</td>
                 <td>ทีม 2</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -126,7 +131,7 @@ export default function AdminHome() {
                   ล้างแผง</td>
                 <td>ทีม 3</td>
                 <td>
-                  <select className="button button-outline button-warning" name="statusService" defaultValue="rescheduled">
+                  <select className="button button-outline button-warning" name="statusService" value="rescheduled">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -147,7 +152,7 @@ export default function AdminHome() {
                   ติดตั้ง</td>
                 <td>ทีม 1</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -163,6 +168,7 @@ export default function AdminHome() {
         </div>
         <Link className="is-disabled button button-soft button-primary" to="#soon">นัดหมายทั้งหมด</Link>
       </section>
+      */}
     </>
   );
 

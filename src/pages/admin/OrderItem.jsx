@@ -1,4 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
 import { DataNotFound } from "../../utils/DataNotFound";
@@ -6,18 +8,35 @@ import { orders } from "../../mockup-data/orders";
 
 export default function AdminOrderItem() {
 
-  const { orderId } = useParams();
-  const order = orders.find((item) => item.orderId === orderId);
+  const {handleOrderStatusChange} = useContext(MessageContext);
 
-  if (!order) {
-    return "Order not found.";
+  const navigate = useNavigate();
+  const handleBack = () => navigate(-1);
+
+  const { orderId } = useParams();
+  const order = orderId ? orders.find((item) => item.orderId === orderId) : null;
+  const orderInitial = {
+    internalNote: order?.internalNote || "",
+  };
+  const [orderForm, setOrderForm] = useState(orderInitial);
+  const handleOrderChange = (event) => setOrderForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleOrderSubmit = (event) => {
+    event.preventDefault();
+    const payload = {...orderForm};
+    console.log(payload);
+  };
+
+  if (orderId && !order) {
+    return <h2 className="self-center text-center text-content-soft">
+              <span className="icon-material text-9xl wght-100">database_off</span><br />
+              Order not found.</h2>;
   }
 
   return (
     <>
       <section id="orderEdit" className="flex flex-row flex-wrap justify-between items-center gap-10">
         <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {order.orderId?.toUpperCase() || <DataNotFound />}</h1>
-        <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
+        <select className="button button-soft button-content" name="statusOrder" value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)}>
           <option value="" disabled hidden>เลือกสถานะ</option>
           <option value="open">รอชำระเงิน</option>
           <option value="paid">ชำระเงินแล้ว</option>
@@ -121,14 +140,14 @@ export default function AdminOrderItem() {
             </tfoot>
           </table>
         </div>
-        <form className="lg:grow self-start lg:w-1/2">
+        <form className="lg:grow self-start lg:w-1/2" onSubmit={handleOrderSubmit}>
           <div className="input-group">
-            <label htmlFor="note">โน้ตภายใน:</label>
-            <textarea id="note" className="min-h-15.5 sm:min-h-38" rows="4" defaultValue={order.internalNote || ""} placeholder="กรอกข้อความตามต้องการ?"></textarea>
+            <label htmlFor="internalNote">โน้ตภายใน:</label>
+            <textarea id="internalNote" name="internalNote" className="min-h-15.5 sm:min-h-38" rows="4" value={orderForm.internalNote} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
           </div>
           <div className="button-row">
-            <button type="reset" className="button button-soft button-content">ยกเลิก</button>
-            <button type="submit" className="button">บันทึก</button>
+            <button type="button" className="button button-soft button-content" onClick={handleBack}>ยกเลิก</button>
+            <button type="submit" className="button">บันทึกข้อมูล</button>
           </div>
         </form>
       </section>

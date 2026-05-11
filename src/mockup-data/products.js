@@ -418,8 +418,8 @@ export const products = [
     tags: ["breaker"],
     price: 600,
     salePrice: 450,
-    stock: 400,
-    stockMin: 30,
+    stock: 48,
+    stockMin: 50,
     isActive: true,
     createdAt: "2026-01-25T08:00:00.000Z",
     updatedAt: "2026-04-01T10:00:00.000Z"
@@ -486,8 +486,8 @@ export const products = [
     tags: ["battery"],
     price: 58000,
     salePrice: 55000,
-    stock: 12,
-    stockMin: 2,
+    stock: 8,
+    stockMin: 10,
     isActive: true,
     createdAt: "2026-01-29T08:00:00.000Z",
     updatedAt: "2026-04-01T10:00:00.000Z"
