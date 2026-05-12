@@ -18,6 +18,7 @@ import './assets/css/App.css';
 
 // นำเข้าหน้าฝั่ง User
 import TestimonialsPage from './pages/TestimonialsPage';
+import ProductDetailPage from './pages/ProductDetailPage'; 
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true, 
-        // ใส่ Header เฉพาะหน้า HomePage
         element: (
           <>
             <Header />
@@ -38,7 +38,6 @@ const router = createBrowserRouter([
       },
       {
         path: "testimonials",
-        // ใส่ Header เฉพาะหน้า TestimonialsPage
         element: (
           <>
             <Header />
@@ -46,9 +45,19 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      // 2. แก้จุดนี้ (บรรทัดที่ 53) ให้รองรับ Parameter :productId
+      {
+        path: "product/:productId", 
+        element: (
+          <>
+            <Header />
+            <ProductDetailPage /> {/* ใช้ชื่อ Component ให้ตรงกับที่ import มาใหม่ */}
+            <FooterSection />
+          </>
+        ),
+      },
       {
         path: "admin",
-        
         element: <AdminLayout />,
         children: [
           { index: true, element: <AdminHome /> },
