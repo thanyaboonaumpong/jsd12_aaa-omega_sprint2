@@ -10,7 +10,7 @@ export default function AdminProducts() {
   const navigate = useNavigate();
   const handleProductItem = (productId) => navigate(`./${productId}`);
     
-  const latestProducts = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10)
+  const latestProducts = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));/*.slice(0, 10)*/
 
   return (
     <>
@@ -72,6 +72,7 @@ export default function AdminProducts() {
             </tbody>
           </table>
         </div>
+        {/*
         <nav className="pagination">
           <Link className="button button-icon button-soft button-content is-disabled" to="#pagination"><span className="icon-material">keyboard_arrow_left</span></Link>
           <Link className="button button-icon button-primary" to="#pagination">1</Link>
@@ -80,6 +81,7 @@ export default function AdminProducts() {
           <Link className="button button-icon button-soft button-content" to="#pagination">4</Link>
           <Link className="button button-icon button-soft button-content" to="#pagination"><span className="icon-material">keyboard_arrow_right</span></Link>
         </nav>
+        */}
       </section>
     </>
   );

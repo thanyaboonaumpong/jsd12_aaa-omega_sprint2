@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // นำเข้า Header
@@ -8,9 +7,13 @@ import Header from "./components/HeaderSection";
 import AdminLayout from "./components/admin/Layout";
 import AdminHome from "./pages/admin/Home";
 import AdminProducts from "./pages/admin/Products";
-
+import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
+import AdminUsers from "./pages/admin/Users";
+import AdminUserDetail from "./pages/admin/UserDetail";
+import AdminUserForm from "./pages/admin/UserForm";
+import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
 import './assets/css/App.css';
 
 // นำเข้าหน้าฝั่ง User
@@ -55,15 +58,19 @@ const router = createBrowserRouter([
           </>
         ),
       },
-      {
-        path: "admin",
-
-        element: <AdminLayout />,
+      { path:"admin", element:<AdminLayout />,
         children: [
-          { index: true, element: <AdminHome /> },
-          { path: "products", element: <AdminProducts /> },
-          { path: "orders", element: <AdminOrders /> },
-          { path: "orders/:orderId", element: <AdminOrderItem /> },
+          { index:true, element:<AdminHome /> },
+          { path:"products", element:<AdminProducts /> },
+          { path:"products/create", element:<AdminProductForm /> },
+          { path:"products/:productId", element:<AdminProductForm /> },
+          { path:"orders", element:<AdminOrders />, },
+          { path:"orders/:orderId", element:<AdminOrderItem /> },
+          { path:"users", element:<AdminUsers /> },
+          { path:"users/:userId", element:<AdminUserDetail /> },
+          { path:"users/create", element:<AdminUserForm /> },
+          { path:"users/:userId/edit", element:<AdminUserForm /> },
+          { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
         ],
       },
     ],

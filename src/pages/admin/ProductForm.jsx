@@ -39,7 +39,7 @@ export default function AdminProductForm() {
     };
     console.log(payload);
   };
-  //const handleProductReset = () => setProductForm(productInitial);
+  // const handleProductReset = () => setProductForm(productInitial);
 
   if (productId && !product) {
     return <h2 className="self-center text-center text-content-soft">

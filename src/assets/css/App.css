@@ -79,11 +79,9 @@
   --color-content-darker :#101828;
 }
 
-/* Base for custom html tag */
 @layer base {
   *, :before, :after {@apply p-0 m-0 box-border border-neutral-disable outline-neutral-soft;}
   input, textarea, select, button, a {@apply focus:outline-none transition-all;}
-
   body {@apply font-kanit text-base text-content-base;}
       .h0 {@apply text-4xl  text-content-hover;}
   h1, .h1 {@apply text-2xl leading-10 text-primary-hover;}
@@ -152,7 +150,6 @@
 
 }
 
-/* Components for custom style (like: card, btn, badge) */
 @layer components {
   .icon-material ,
   summary:after {
@@ -242,6 +239,8 @@
 
   .pagination {@apply flex flex-wrap items-center gap-2 mt-5;}
 
+}
+
   #stat {@apply flex gap-5 overflow-auto;}
   .card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-disable transition-all;}
   .card-stat * {@apply whitespace-nowrap;}
@@ -255,5 +254,3 @@
   .product-stock__meta ,
   .product-stock__tag {@apply flex items-center gap-2;}
   .product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}
-
-}
