@@ -5,22 +5,29 @@
 // - แยก Footer
 // - ต้องปรับภาพและ path ให้ตรง src/assets
 
-import HeaderSectionAuth from "../components/HeaderSectionAuth";
 import HeroSection from "../components/HeroSection";
 import ProductSection from "../components/ProductSection";
 import CalculatorSection from "../components/CalculatorSection";
 import FooterSection from "../components/FooterSection";
+import HeaderSectionAuth from "../components/HeaderSectionAuth"; // [สิ่งเพิ่ม] 
+import TestimonialSection from "../components/TestimonialSection";
+import FaqSection from "../components/FaqSection";
 
-export default function HomePage() {
-  return (
-    <div className="flex min-h-screen flex-col">
-      <HeaderSectionAuth />
-      <main className="bg-white">
-        <HeroSection />
-        <ProductSection />
-        <CalculatorSection />
-      </main>
-      <FooterSection />
-    </div>
-  );
-}
+const HomePage = () => {
+    return (
+        
+        <div className="flex min-h-screen flex-col">
+            <HeaderSectionAuth />
+            <main className="bg-white">
+                <HeroSection />
+                <ProductSection />
+                <CalculatorSection />
+                <TestimonialSection />
+                <FaqSection />
+            </main>
+            <FooterSection />
+        </div>
+    );
+};
+
+export default HomePage;
