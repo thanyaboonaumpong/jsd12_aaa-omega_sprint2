@@ -114,13 +114,13 @@
   .heading-row {@apply flex flex-col xs:flex-row flex-wrap justify-between xs:items-center gap-5;}
   .input-row {@apply flex flex-col sm:flex-row gap-5 w-full;}
   .input-col {@apply flex flex-col gap-5 w-full;}
-  .input-group {@apply flex flex-col justify-end gap-2 w-full;}
+  .input-group {@apply relative flex flex-col justify-end gap-2 w-full;}
   .button-row {@apply flex flex-row flex-wrap-reverse justify-end items-center grow gap-5 w-full xs:w-fit;}
-  form > .button-row:last-child {@apply mt-5;}
   .button-row button {@apply grow xs:grow-0;}
   fieldset {@apply flex flex-col gap-5 w-full;}
-  legend {@apply text-content-hover pb-4;}
-  label {@apply flex items-center gap-2 w-fit text-sm;}
+  legend {@apply text-content-hover pb-6 xs:pb-4;}
+  label {@apply max-xs:absolute max-xs:-top-2 max-xs:left-2.5 flex items-center gap-2 w-fit text-sm max-xs:px-1.5 rounded-md max-xs:bg-white;}
+  .input-group:hover label {@apply text-primary-hover;}
   input, textarea, select {@apply w-full leading-5.5 placeholder:text-content-disable disabled:text-content-disable px-4 py-2 border border-neutral-disable hover:border-neutral-base disabled:border-neutral-disable rounded-lg bg-white;}
   input[type="password"] {@apply text-xl tracking-[0.2em];}       
   input[type="range"] {@apply cursor-pointer appearance-none px-0 py-4.75 border-none focus:outline-none bg-transparent;}
@@ -241,16 +241,16 @@
 
 }
 
-  #stat {@apply flex gap-5 overflow-auto;}
-  .card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-disable transition-all;}
-  .card-stat * {@apply whitespace-nowrap;}
-  .card-stat__title {@apply block text-sm text-content-base;}
-  .card-stat__value {@apply block text-2xl leading-6 text-content-hover mt-1;}
-  .card-stat__subtext {@apply inline-flex text-xs not-italic text-content-base leading-5;}
+#stat {@apply flex gap-5 overflow-auto;}
+.card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-disable transition-all;}
+.card-stat * {@apply whitespace-nowrap;}
+.card-stat__title {@apply block text-sm text-content-base;}
+.card-stat__value {@apply block text-2xl leading-6 text-content-hover mt-1;}
+.card-stat__subtext {@apply inline-flex text-xs not-italic text-content-base leading-5;}
 
-  .product-stock__name {@apply hover:text-primary-hover;}
-  .product-stock__sku {@apply text-sm text-content-soft;}
-  .product-stock__separator {@apply text-sm text-content-base;}
-  .product-stock__meta ,
-  .product-stock__tag {@apply flex items-center gap-2;}
-  .product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}
+.product-stock__name {@apply hover:text-primary-hover;}
+.product-stock__sku {@apply text-sm text-content-soft;}
+.product-stock__separator {@apply text-sm text-content-base;}
+.product-stock__meta ,
+.product-stock__tag {@apply flex items-center gap-2;}
+.product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}

@@ -6,6 +6,7 @@ export const MessageProvider = ({children}) => {
   // Dashboard
   const [adminNavMainActive, setAdminNavMainActive] = useState(false);
   const handleAdminNavMainToggle = () => setAdminNavMainActive(!adminNavMainActive);
+  const handleAdminNavSidebarClose = () => setTimeout(() => setAdminNavMainActive(false), 300);
 
   const handleOrderStatusChange = (orderId, status) => {
     console.log(orderId);
@@ -13,7 +14,7 @@ export const MessageProvider = ({children}) => {
   };
 
   return(
-    <MessageContext.Provider value={{adminNavMainActive, handleAdminNavMainToggle, handleOrderStatusChange}}>
+    <MessageContext.Provider value={{adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose, handleOrderStatusChange}}>
       {children}
     </MessageContext.Provider>
   );

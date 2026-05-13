@@ -10,6 +10,7 @@ export default function AdminProductForm() {
 
   const { productId } = useParams();
   const product = productId ? products.find((item) => item.productId === productId) : null;
+
   const productInitial = {
     name: product?.name || "",
     sku: product?.sku || "",
@@ -39,7 +40,7 @@ export default function AdminProductForm() {
     };
     console.log(payload);
   };
-  // const handleProductReset = () => setProductForm(productInitial);
+  //const handleProductReset = () => setProductForm(productInitial);
 
   if (productId && !product) {
     return <h2 className="self-center text-center text-content-soft">

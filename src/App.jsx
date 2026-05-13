@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/HeaderSection";
 
 // นำเข้า CSS และหน้าฝั่ง Admin
-import AdminLayout from "./components/admin/Layout";
+import AdminLayout from "./components/admin/AdminLayout";
 import AdminHome from "./pages/admin/Home";
 import AdminProducts from "./pages/admin/Products";
 import AdminProductForm from "./pages/admin/ProductForm";
@@ -16,6 +16,11 @@ import AdminUserDetail from "./pages/admin/UserDetail";
 import AdminUserForm from "./pages/admin/UserForm";
 import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
 */
+import AuthLayout from "./components/auth/AuthLayout";
+import AuthLogin from "./pages/auth/Login";
+import AuthRegister from "./pages/auth/Register";
+import AuthForgotPassword from "./pages/auth/ForgotPassword";
+
 import './assets/css/App.css';
 
 // นำเข้าหน้าฝั่ง User
@@ -74,7 +79,14 @@ const router = createBrowserRouter([
           { path:"users/create", element:<AdminUserForm /> },
           { path:"users/:userId/edit", element:<AdminUserForm /> },
           { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
-          */
+           */
+        ],
+      },
+      { path:"auth", element:<AuthLayout />,
+        children: [
+          { path:"login", element:<AuthLogin />, },
+          { path:"register", element:<AuthRegister />, },
+          { path:"forgot-password", element:<AuthForgotPassword />, },
         ],
       },
     ],
