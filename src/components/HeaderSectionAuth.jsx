@@ -1,79 +1,58 @@
-import { useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.jpg";
+import { createPortal } from "react-dom";
 import AuthContext from "../contexts/authContext/AuthContext";
 
 function HeaderSectionAuth() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activePage, setActivePage] = useState("หน้าแรก");
   const { user } = useContext(AuthContext);
+  const [portalNode, setPortalNode] = useState(null);
 
-  const navItems = ["หน้าแรก", "สินค้า", "บริการ", "ผลงาน", "ติดต่อเรา"];
+  useEffect(() => {
+    // หา container ที่เก็บปุ่มไอคอนคนและตะกร้าใน HeaderSection
+    const headerIconsContainer = document.querySelector("header nav .flex.items-center.space-x-4");
+    
+    if (headerIconsContainer) {
+      // สร้าง span เพื่อเป็นจุดยึด (Portal) ให้ข้อความเข้าสู่ระบบ
+      const node = document.createElement("span");
+      node.className = "flex items-center -ml-2"; // ใช้ -ml-2 เพื่อให้ชิดกับไอคอนคน
+      
+      // หาปุ่มไอคอนคน (ปุ่มแรกใน container)
+      const personButton = headerIconsContainer.querySelector("button");
+      
+      if (personButton) {
+        // แทรกข้อความต่อท้ายปุ่มไอคอนคน
+        personButton.after(node);
+      } else {
+        headerIconsContainer.prepend(node);
+      }
+      
+      setPortalNode(node);
 
-  return (
-    <header className="bg-neutral-light">
-      <nav className="container mx-auto flex items-center justify-between px-8 py-4">
-        <a href="#">
-          <img src={logo} alt="logo" className="h-10 w-10 md:h-16 md:w-16" />
-        </a>
+      // คืนค่า node กลับเมื่อ Component ถูกทำลาย
+      return () => {
+        if (node.parentNode) {
+          node.parentNode.removeChild(node);
+        }
+      };
+    }
+  }, []);
 
-        <ul className="hidden space-x-8 text-lg font-medium text-content-hover md:flex">
-          {navItems.map((item) => (
-            <li
-              key={item}
-              className={activePage === item ? "border-b-2 border-accent-hover pb-1" : ""}
-            >
-              <a href="#" onClick={() => setActivePage(item)}>
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="relative flex items-center space-x-4">
-          <div className="hidden items-center md:flex">
-            <Link
-              to={user ? "/profile" : "/login"}
-              className="flex items-center gap-2 text-sm font-medium text-content-hover transition-colors hover:text-primary-base"
-            >
-              <span className="material-symbols-outlined text-[28px]">person</span>
-              <span>{user?.fullName || "เข้าสู่ระบบ"}</span>
-            </Link>
-          </div>
-
-          <Link to={user ? "/profile" : "/login"} className="md:hidden" aria-label="ไปหน้าเข้าสู่ระบบ">
-            <span className="material-symbols-outlined text-[28px]">person</span>
-          </Link>
-
-          <button className="relative">
-            <span className="material-symbols-outlined text-[28px]">shopping_cart</span>
-            <span className="absolute -right-2 -top-1 rounded-full bg-accent-dark px-1.5 text-xs text-accent-lighter">
-              2
-            </span>
-          </button>
-
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <span className="material-symbols-outlined text-[28px]">menu</span>
-          </button>
-        </div>
-      </nav>
-
-      <div className={`${isMenuOpen ? "block" : "hidden"} px-8 pb-4`}>
-        <ul className="flex flex-col space-y-4 text-lg font-medium text-content-hover">
-          {navItems.map((item) => (
-            <li
-              key={item}
-              className={activePage === item ? "border-b-2 border-accent-hover pb-1" : ""}
-            >
-              <a href="#" onClick={() => setActivePage(item)}>
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </header>
+  const loginContent = (
+    <Link
+      to={user ? "/profile" : "/login"}
+      className="text-sm font-medium text-content-hover transition-colors hover:text-primary-base"
+    >
+      {user?.fullName || "เข้าสู่ระบบ"}
+    </Link>
   );
+
+  // ถ้ายึด DOM ได้แล้ว ให้เรนเดอร์ผ่าน Portal ไปโผล่ใน HeaderSection เลย
+  if (portalNode) {
+    return createPortal(loginContent, portalNode);
+  }
+
+  // ถ้ายังหาไม่เจอ ให้คืนค่า null จะได้ไม่ไปโผล่ในบรรทัดอื่นให้เกะกะ
+  return null;
 }
 
 export default HeaderSectionAuth;

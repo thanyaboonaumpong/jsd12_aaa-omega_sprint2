@@ -9,24 +9,23 @@ import HeroSection from "../components/HeroSection";
 import ProductSection from "../components/ProductSection";
 import CalculatorSection from "../components/CalculatorSection";
 import FooterSection from "../components/FooterSection";
+import HeaderSection from "../components/HeaderSection";
 import HeaderSectionAuth from "../components/HeaderSectionAuth";
 import TestimonialSection from "../components/TestimonialSection";
 import FaqSection from "../components/FaqSection";
 
 const HomePage = () => {
     return (
-        
-        <div className="flex min-h-screen flex-col">
+        <>
+            <HeaderSection />
             <HeaderSectionAuth />
-            <main className="bg-white">
-                <HeroSection />
-                <ProductSection />
-                <CalculatorSection />
-                <TestimonialSection />
-                <FaqSection />
-            </main>
+            <HeroSection />
+            <ProductSection />
+            <CalculatorSection />
+            <TestimonialSection />
+            <FaqSection />
             <FooterSection />
-        </div>
+        </>
     );
 };
 
