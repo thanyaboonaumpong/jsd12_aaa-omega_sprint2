@@ -4,4 +4,6 @@ export const DataNotFound = () => {
   );
 };
 
+export const TextNotFound = "ไม่พบข้อมูล";
+
 export const ImageNotFound = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";

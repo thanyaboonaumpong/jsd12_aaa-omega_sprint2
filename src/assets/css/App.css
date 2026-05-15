@@ -82,7 +82,7 @@
 @layer base {
   *, :before, :after {@apply p-0 m-0 box-border border-neutral-disable outline-neutral-soft;}
   input, textarea, select, button, a {@apply focus:outline-none transition-all;}
-  body {@apply font-kanit text-base text-content-base;}
+  body {@apply font-kanit font-normal text-base text-content-base;}
       .h0 {@apply text-4xl  text-content-hover;}
   h1, .h1 {@apply text-2xl leading-10 text-primary-hover;}
   h2, .h2 {@apply text-xl   text-content-hover;}

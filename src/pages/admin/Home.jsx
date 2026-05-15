@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
+import { DataNotFound } from "../../components/common/DataNotFound";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
-import { DataNotFound } from "../../utils/DataNotFound";
 import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
 
-  const {handleOrderStatusChange} = useContext(MessageContext);
+  const { handleOrderStatusChange } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
