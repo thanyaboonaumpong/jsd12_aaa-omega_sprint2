@@ -36,13 +36,13 @@ export default function AuthLogin() {
             <input type="password" id="password" name="password" placeholder="••••••••" />
           </div>
           <div className="button-row">
-            <button type="submit" className="button w-full">เข้าสู้ระบบ</button>
+            <button type="submit" className="button w-full">เข้าสู่ระบบ</button>
           </div>
         </form>
         <hr />
-        <div className="flex justify-between items-center">
-          <Link className="hover:text-content-hover" to="/auth/forgot-password">ลืมรหัสผ่าน?</Link>
-          <Link className="text-primary-base hover:text-primary-hover" to="/auth/register">สร้างบัญชีใหม่</Link>
+        <div className="flex flex-wrap flex-col-reverse 2xs:flex-row 2xs:justify-between items-center gap-5">
+          <Link className="button button-soft button-content max-2xs:w-full 2xs:min-h-fit 2xs:leading-6 2xs:p-0 2xs:bg-transparent" to="/auth/forgot-password">ลืมรหัสผ่าน?</Link>
+          <Link className="button button-outline button-primary max-2xs:w-full 2xs:min-h-fit 2xs:leading-6 2xs:p-0 2xs:border-0" to="/auth/register">ยังไม่มีบัญชี?</Link>
         </div>
       </section>
     </>

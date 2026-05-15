@@ -93,6 +93,7 @@
   hr {@apply w-full border-neutral-disable;}
   button, [role=button] {@apply cursor-pointer;}
   img {@apply rounded-lg bg-neutral-light hover:bg-neutral-disable transition-all;}
+
   table {@apply w-full;}
   table tr {@apply border-t border-neutral-light;}
   table tbody tr {@apply hover:bg-neutral-lighter transition-all;}
@@ -102,7 +103,7 @@
   table th {@apply whitespace-nowrap font-normal text-left text-content-hover;}
   table :is(th, td):first-child {@apply pl-0;}
   table :is(th, td):last-child  {@apply pr-0;}
-  table a {@apply hover:text-primary-hover;}
+  table :is(a, button) {@apply hover:text-primary-hover;}
   .table-container {@apply w-full overflow-auto;}
   .table-container table :is(th, td) {@apply h-14.25 whitespace-nowrap align-middle;}
   .table-responsive tr {@apply border-none hover:bg-transparent;}
@@ -118,9 +119,9 @@
   .button-row {@apply flex flex-row flex-wrap-reverse justify-end items-center grow gap-5 w-full xs:w-fit;}
   .button-row button {@apply grow xs:grow-0;}
   fieldset {@apply flex flex-col gap-5 w-full;}
-  legend {@apply text-content-hover pb-6 xs:pb-4;}
-  label {@apply max-xs:absolute max-xs:-top-2 max-xs:left-2.5 flex items-center gap-2 w-fit text-sm max-xs:px-1.5 rounded-md max-xs:bg-white;}
-  .input-group:hover label {@apply text-primary-hover;}
+  legend {@apply text-content-hover pb-6 sm:pb-4;}
+  label {@apply flex items-center gap-2 w-fit text-sm;}
+  .input-group label {@apply max-sm:absolute max-sm:-top-2 max-sm:left-2.5 hover:text-primary-hover max-sm:px-1.5 max-sm:rounded-md max-sm:bg-white;}
   input, textarea, select {@apply w-full leading-5.5 placeholder:text-content-disable disabled:text-content-disable px-4 py-2 border border-neutral-disable hover:border-neutral-base disabled:border-neutral-disable rounded-lg bg-white;}
   input[type="password"] {@apply text-xl tracking-[0.2em];}       
   input[type="range"] {@apply cursor-pointer appearance-none px-0 py-4.75 border-none focus:outline-none bg-transparent;}
@@ -147,7 +148,6 @@
   details summary::marker {@apply hidden;}
   details summary:after {@apply content-['add'] size-6;}
   details[open] summary:after {@apply content-['close'];}
-
 }
 
 @layer components {
@@ -221,13 +221,13 @@
   .button-outline.button-content , .badge-outline.badge-content {@apply text-content-base  border-content-disable hover:border-content-hover;}
   .button-ghost , .badge-ghost {@apply bg-transparent hover:bg-white;}
   .button-ghost , .badge-ghost ,
-  .button-ghost.button-primary , .badge-ghost.badge-primary {@apply text-primary-hover;}
-  .button-ghost.button-accent  , .badge-ghost.badge-accent  {@apply text-accent-hover ;}
-  .button-ghost.button-error   , .badge-ghost.badge-error   {@apply text-error-hover  ;}
-  .button-ghost.button-warning , .badge-ghost.badge-warning {@apply text-warning-hover;}
-  .button-ghost.button-success , .badge-ghost.badge-success {@apply text-success-hover;}
-  .button-ghost.button-neutral , .badge-ghost.badge-neutral {@apply text-neutral-hover;}
-  .button-ghost.button-content , .badge-ghost.badge-content {@apply text-content-hover;}
+  .button-ghost.button-primary , .badge-ghost.badge-primary {@apply text-primary-base;}
+  .button-ghost.button-accent  , .badge-ghost.badge-accent  {@apply text-accent-base ;}
+  .button-ghost.button-error   , .badge-ghost.badge-error   {@apply text-error-base  ;}
+  .button-ghost.button-warning , .badge-ghost.badge-warning {@apply text-warning-base;}
+  .button-ghost.button-success , .badge-ghost.badge-success {@apply text-success-base;}
+  .button-ghost.button-neutral , .badge-ghost.badge-neutral {@apply text-neutral-base;}
+  .button-ghost.button-content , .badge-ghost.badge-content {@apply text-content-base;}
   .button-group:has(.button) {@apply flex;}
   .button-group > .button:not(:first-child,:last-child) ,
   .button-group :not(:first-child,:last-child) .button {@apply rounded-none;}
@@ -238,7 +238,6 @@
   .button-group > .button:is(.button-outline):not(:first-child) {@apply -ml-px;}
 
   .pagination {@apply flex flex-wrap items-center gap-2 mt-5;}
-
 }
 
 #stat {@apply flex gap-5 overflow-auto;}

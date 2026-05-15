@@ -25,7 +25,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260002",
+        productId: "p20260002",
         name: "Hybrid Inverter 5kW",
         sku: "INV-5KW-HY",
         priceAtPurchase: 13900,
@@ -33,7 +33,7 @@ export const orders = [
       }
     ],
     deliveryNote: "",
-    internalNote: "",
+    internalNote: "ลองเขียนโน้ตสำหรับอ่าน/ดูกันภายในเท่านั้นครับ",
     createdAt: "2026-03-01T08:00:00.000Z",
     updatedAt: "2026-03-01T08:10:00.000Z"
   },
@@ -63,14 +63,14 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 6950,
         quantity: 2
       },
       {
-        productId: "P20260008",
+        productId: "p20260008",
         name: "Solar Cable 6mm",
         sku: "ACC-CABLE-01",
         priceAtPurchase: 6950,
@@ -108,7 +108,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260015",
+        productId: "p20260015",
         name: "Solar Panel 500W Mono",
         sku: "SP-500W-01",
         priceAtPurchase: 6900,
@@ -146,7 +146,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260028",
+        productId: "p20260028",
         name: "Hybrid Inverter 12kW Heavy Duty",
         sku: "INV-12KW-01",
         priceAtPurchase: 39800,
@@ -184,14 +184,14 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260002",
+        productId: "p20260002",
         name: "Hybrid Inverter 5kW",
         sku: "INV-5KW-HY",
         priceAtPurchase: 13900,
         quantity: 1
       },
       {
-        productId: "P20260008",
+        productId: "p20260008",
         name: "Solar Cable 6mm",
         sku: "ACC-CABLE-01",
         priceAtPurchase: 3500,
@@ -229,7 +229,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 11200,
@@ -267,7 +267,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260006",
+        productId: "p20260006",
         name: "Lithium Battery 100Ah",
         sku: "BAT-100AH-01",
         priceAtPurchase: 17800,
@@ -305,7 +305,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260018",
+        productId: "p20260018",
         name: "Hybrid Inverter 10kW Industrial",
         sku: "INV-10KW-01",
         priceAtPurchase: 24500,
@@ -343,7 +343,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260015",
+        productId: "p20260015",
         name: "Solar Panel 500W Mono",
         sku: "SP-500W-01",
         priceAtPurchase: 9400,
@@ -381,7 +381,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 15600,
@@ -419,7 +419,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 6950,
@@ -457,7 +457,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260002",
+        productId: "p20260002",
         name: "Hybrid Inverter 5kW",
         sku: "INV-5KW-HY",
         priceAtPurchase: 13900,
@@ -495,7 +495,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260006",
+        productId: "p20260006",
         name: "Lithium Battery 100Ah",
         sku: "BAT-100AH-01",
         priceAtPurchase: 16800,
@@ -533,7 +533,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 6800,
@@ -571,7 +571,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260015",
+        productId: "p20260015",
         name: "Solar Panel 500W Mono",
         sku: "SP-500W-01",
         priceAtPurchase: 9500,
@@ -609,7 +609,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 15900,
@@ -647,7 +647,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260002",
+        productId: "p20260002",
         name: "Hybrid Inverter 5kW",
         sku: "INV-5KW-HY",
         priceAtPurchase: 14200,
@@ -685,7 +685,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260018",
+        productId: "p20260018",
         name: "Hybrid Inverter 10kW Industrial",
         sku: "INV-10KW-01",
         priceAtPurchase: 22700,
@@ -723,7 +723,7 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260006",
+        productId: "p20260006",
         name: "Lithium Battery 100Ah",
         sku: "BAT-100AH-01",
         priceAtPurchase: 18800,
@@ -761,14 +761,14 @@ export const orders = [
     },
     items: [
       {
-        productId: "P20260002",
+        productId: "p20260002",
         name: "Hybrid Inverter 5kW",
         sku: "INV-5KW-HY",
         priceAtPurchase: 13900,
         quantity: 1
       },
       {
-        productId: "P20260001",
+        productId: "p20260001",
         name: "Solar Panel Mono 550W High Efficiency",
         sku: "SP-550W-MONO-01",
         priceAtPurchase: 6900,

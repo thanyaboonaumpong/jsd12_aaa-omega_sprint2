@@ -13,7 +13,7 @@ export const users = [
     isActive: true,
     address: {
       label: "บ้าน",
-      addressLine: "123/45",
+      addressLine: "123",
       subdistrict: "บางนา",
       district: "บางนา",
       province: "กรุงเทพมหานคร",
@@ -21,6 +21,14 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: {
+      label: "บ้าน",
+      addressLine: "123/45",
+      subdistrict: "บางนา",
+      district: "บางนา",
+      province: "กรุงเทพมหานคร",
+      postcode: "10260"
+    },
     lastLoginAt: "2026-04-05T10:00:00.000Z"
   },
   {
@@ -45,6 +53,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-04-05T08:10:00.000Z"
   },
   {
@@ -69,6 +78,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-04-04T04:00:00.000Z"
   },
   {
@@ -93,6 +103,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-04-03T01:00:00.000Z"
   },
   {
@@ -117,6 +128,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-04-02T02:00:00.000Z"
   },
   {
@@ -141,6 +153,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-04-01T08:00:00.000Z"
   },
   {
@@ -165,6 +178,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-03-30T08:00:00.000Z"
   },
   {
@@ -189,6 +203,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-03-29T11:00:00.000Z"
   },
   {
@@ -213,6 +228,7 @@ export const users = [
       isDefault: true
     },
     shippingAddress: null,
+    serviceAddress: null,
     lastLoginAt: "2026-03-28T04:00:00.000Z"
   },
   {
@@ -245,6 +261,7 @@ export const users = [
       postcode: "10260",
       isDefault: false
     },
+    serviceAddress: null,
     lastLoginAt: "2026-03-27T09:00:00.000Z"
   }
 ];
