@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import AllProductsPage from './pages/AllProductsPage';
+
 // นำเข้า Header
 import Header from "./components/HeaderSection"; 
 import HeroSection from "./components/HeroSection";
@@ -36,6 +38,16 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      {
+  path: "allproducts", // แนะนำให้ใช้ "products" (เติม s) ให้ตรงกับที่เขียนใน HeaderSection.jsx
+  element: (
+    <>
+      <Header />
+      <AllProductsPage /> {/* ไม่ต้องใส่ FilterSection ตรงนี้ เพราะมันอยู่ใน AllProductsPage แล้ว */}
+      <FooterSection />   {/* แนะนำให้ใส่ Footer ไว้ท้ายหน้าด้วยครับ */}
+    </>
+  ),
+},
       {
         path: "testimonials",
         element: (

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // นำเข้า useNavigate
 
 const allProducts = [
   { id: 1, name: "Solar Panel Mono 450W", price: 4200 },
@@ -14,13 +15,19 @@ const allProducts = [
 const tabs = ["อินเวอร์เตอร์", "แผงโซล่าร์เซลล์", "แบตเตอรี่", "อุปกรณ์เสริม", "โซล่าร์เซลล์เต็มระบบ"];
 
 function ProductHighlight() {
-  const [randomProducts, setRandomProducts] = useState([]);
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+  
+  
+  // 1. ประกาศใช้งาน useNavigate
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
-    setRandomProducts(shuffled.slice(0, 8));
-  }, []);
+  const [randomProducts] = useState(() => {
+  return [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 8);
+});
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  // 2. สร้างฟังก์ชันสำหรับการเปลี่ยนหน้า
+  const handleViewAll = () => {
+    navigate("//allproducts");
+  };
 
   return (
     <section id="product" className="py-12 md:py-20 px-4 max-w-7xl mx-auto">
@@ -58,27 +65,29 @@ function ProductHighlight() {
                 <span className="text-gray-400 text-xs">รูปภาพสินค้า</span>
               </div>
               
-              <div className="p-4 text-center flex-grow">
+              <div className="p-4 text-left grow">
                 <h3 className="font-semibold text-lg text-gray-700 truncate">
                   {product.name}
                 </h3>
                 <p className="text-blue-400 font-bold mt-2">
                   ฿{product.price.toLocaleString()}
                 </p>
-                <button className="flex items-center justify-center badge mt-4 w-full text-white py-2 rounded-lg transition-colors text-sm font-medium">
-  ดูรายละเอียด
-</button>
               </div>
             </div>
           ))}
         </div>
 
       </div>
+
       <div className="flex justify-center mt-10 md:mt-12">
-                    <button className="border-2 border-primary-disable text-primary-soft px-6 md:px-8 py-2 md:py-3 rounded-xl text-sm md:text-base font-medium hover:bg-primary-disable hover:text-content-lighter transition-all">
-                        ดูสินค้าทั้งหมด
-                    </button>
-                </div>
+        {/* 3. ใส่ onClick ให้กับปุ่ม */}
+        <button 
+          onClick={handleViewAll}
+          className="border-2 border-primary-disable text-primary-soft px-6 md:px-8 py-2 md:py-3 rounded-xl text-sm md:text-base font-medium hover:bg-primary-disable hover:text-content-lighter transition-all"
+        >
+          ดูสินค้าทั้งหมด
+        </button>
+      </div>
     </section>
   );
 }

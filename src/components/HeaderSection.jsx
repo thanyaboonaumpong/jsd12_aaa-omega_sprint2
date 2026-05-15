@@ -9,7 +9,7 @@ function Header() {
     // ปรับเป็น Object เพื่อให้ระบุ path ของแต่ละเมนูได้ชัดเจน
     const navItems = [
         { name: "หน้าแรก", path: "/" },
-        { name: "สินค้า", path: "/products" },
+        { name: "สินค้า", path: "/allproducts" },
         { name: "บริการ", path: "/services" },
         { name: "ผลงาน", path: "/testimonials" }, // path ต้องตรงกับใน App.jsx
         { name: "ติดต่อเรา", path: "/contact" },
