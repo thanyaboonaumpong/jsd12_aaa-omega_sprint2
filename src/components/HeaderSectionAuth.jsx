@@ -31,13 +31,13 @@ function HeaderSectionAuth() {
         </ul>
 
         <div className="relative flex items-center space-x-4">
-          <div className="hidden items-center gap-2 md:flex">
-            <span className="material-symbols-outlined text-[28px]">person</span>
+          <div className="hidden items-center md:flex">
             <Link
               to={user ? "/profile" : "/login"}
-              className="text-sm font-medium text-content-hover transition-colors hover:text-primary-base"
+              className="flex items-center gap-2 text-sm font-medium text-content-hover transition-colors hover:text-primary-base"
             >
-              {user?.fullName || "เข้าสู่ระบบ"}
+              <span className="material-symbols-outlined text-[28px]">person</span>
+              <span>{user?.fullName || "เข้าสู่ระบบ"}</span>
             </Link>
           </div>
 

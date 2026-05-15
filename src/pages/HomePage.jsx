@@ -9,7 +9,7 @@ import HeroSection from "../components/HeroSection";
 import ProductSection from "../components/ProductSection";
 import CalculatorSection from "../components/CalculatorSection";
 import FooterSection from "../components/FooterSection";
-import HeaderSectionAuth from "../components/HeaderSectionAuth"; // [สิ่งเพิ่ม] 
+import HeaderSectionAuth from "../components/HeaderSectionAuth";
 import TestimonialSection from "../components/TestimonialSection";
 import FaqSection from "../components/FaqSection";
 
