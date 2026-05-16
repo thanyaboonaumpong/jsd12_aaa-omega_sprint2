@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import { DataNotFound } from "../../components/common/DataNotFound";
+import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
 import { StatusOrder } from "../../components/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -17,7 +17,7 @@ export default function AdminOrderItem() {
   const order = orderId ? orders.find((item) => item.orderId === orderId) : null;
 
   const orderInitial = {
-    internalNote: order?.internalNote || "",
+    internalNote: order?.internalNote || ""
   };
   const [orderForm, setOrderForm] = useState(orderInitial);
   const handleOrderChange = (event) => setOrderForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -133,7 +133,7 @@ export default function AdminOrderItem() {
               <form className="lg:grow self-start lg:w-1/2" onSubmit={handleOrderSubmit}>
                 <div className="input-group">
                   <label htmlFor="internalNote">โน้ตภายใน:</label>
-                  <textarea id="internalNote" name="internalNote" className="min-h-15.5 sm:min-h-38" rows="4" value={orderForm.internalNote} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
+                  <textarea id="internalNote" name="internalNote" rows="5" value={orderForm.internalNote} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
                 </div>
                 <div className="button-row">
                   <button type="button" className="button button-soft button-content" onClick={handleBack}>ยกเลิก</button>
@@ -142,9 +142,7 @@ export default function AdminOrderItem() {
               </form>
             </section>
           </>
-        : <h2 className="self-center text-center text-content-soft">
-              <span className="icon-material text-9xl wght-100">database_off</span><br />
-              Order not found.</h2>
+        : <PageNotFound text="ไม่พบหน้าคำสั่งซื้อ" />
       }
     </>
   );

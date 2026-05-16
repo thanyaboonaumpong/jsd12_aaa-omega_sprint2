@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import { ImageNotFound } from "../../components/common/DataNotFound";
+import { PageNotFound, ImageNotFound } from "../../components/common/NotFound";
 
 export default function AdminProductForm() {
 
@@ -23,7 +23,7 @@ export default function AdminProductForm() {
     stock: product?.stock || "",
     stockMin: product?.stockMin || "",
     image: product?.image || null,
-    description: product?.description || "",
+    description: product?.description || ""
   };
   const [productForm, setProductForm] = useState(productInitial);
   const handleProductChange = (event) => {
@@ -98,18 +98,16 @@ export default function AdminProductForm() {
                     <input type="number" id="stockMin" name="stockMin" value={productForm.stockMin} onChange={handleProductChange} placeholder="ระบุจำนวนขั้นต่ำเพื่อแจ้งเตือน" min="0" />
                   </div>
                 </div>
-                <div className="input-row">
-                  <div className="input-row xs:flex-row">
-                    <img className="size-17 min-w-17 min-h-17" src={
-                      productForm.image instanceof File
-                        ? URL.createObjectURL(productForm.image)
-                        : productForm.image?.trim() || ImageNotFound
-                    } />
-                    <div className="input-group">
-                      <label htmlFor="image">รูปภาพสินค้า
-                        <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="รองรับไฟล์ JPG, PNG, WEBP (ไม่เกิน 5MB)"><span className="icon-material">info_i</span></span></label>
-                      <input type="file" id="image" className="max-w-57.5" name="image" onChange={handleProductChange} accept="image/jpeg, image/png, image/webp" />
-                    </div>
+                <div className="input-row xs:flex-row">
+                  <img className="object-cover size-17 min-w-17 min-h-17" src={
+                    productForm.image instanceof File
+                      ? URL.createObjectURL(productForm.image)
+                      : productForm.image?.trim() || ImageNotFound
+                  } />
+                  <div className="input-group">
+                    <label className="label-normal" htmlFor="image">รูปภาพสินค้า
+                      <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="รองรับไฟล์ JPG, PNG, WEBP (ไม่เกิน 5MB)"><span className="icon-material">info_i</span></span></label>
+                    <input type="file" id="image" className="max-w-57.5" name="image" onChange={handleProductChange} accept="image/jpeg, image/png, image/webp" />
                   </div>
                 </div>
                 <div className="input-group">
@@ -123,9 +121,7 @@ export default function AdminProductForm() {
               </form>
             </section>
           </>
-        : <h2 className="self-center text-center text-content-soft">
-              <span className="icon-material text-9xl wght-100">database_off</span><br />
-              Product not found.</h2>
+        : <PageNotFound text="ไม่พบหน้าสินค้า" />
       }
     </>
   );

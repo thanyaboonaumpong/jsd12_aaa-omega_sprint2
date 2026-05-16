@@ -15,12 +15,16 @@ export const MessageProvider = ({children}) => {
   const handleAdminNavSidebarClose = () => setTimeout(() => setAdminNavMainActive(false), 300);
 
   const handleOrderStatusChange = (orderId, status) => {
-    console.log(orderId);
-    console.log(status);
+    console.log(orderId, "-", status);
   };
   const handleServiceStatusChange = (serviceId, status) => {
-    console.log(serviceId);
-    console.log(status);
+    console.log(serviceId, "-", status);
+  };
+  const handleServiceTypeChange = (serviceId, serviceType) => {
+    console.log(serviceId, "-", serviceType);
+  };
+  const handleServiceTeamChange = (serviceId, team) => {
+    console.log(serviceId, "-", team);
   };
 
   return(
@@ -28,7 +32,7 @@ export const MessageProvider = ({children}) => {
       isDev,
       products, orders, services, users,
       adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose,
-      handleOrderStatusChange, handleServiceStatusChange
+      handleOrderStatusChange, handleServiceStatusChange, handleServiceTypeChange, handleServiceTeamChange
     }}>
       {children}
     </MessageContext.Provider>
