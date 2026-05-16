@@ -28,6 +28,9 @@ import './assets/css/App.css';
 // นำเข้าหน้าฝั่ง User
 import HomePage from './pages/HomePage';
 import TestimonialsPage from './pages/TestimonialsPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import UserProfilePage from './pages/UserProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +69,18 @@ const router = createBrowserRouter([
             <TestimonialsPage />
           </>
         ),
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "profile",
+        element: <UserProfilePage />,
       },
       { path:"admin", element:<AdminLayout />,
         children: [
