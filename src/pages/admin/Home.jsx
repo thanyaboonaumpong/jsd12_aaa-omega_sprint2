@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
-import { DataNotFound } from "../../components/common/DataNotFound";
+import { DataNotFound } from "../../components/common/NotFound";
+import { StatusOrder } from "../../components/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
 import { orders } from "../../mockup-data/orders";
@@ -57,15 +58,7 @@ export default function AdminHome() {
                     }</button></td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)}>
-                      <option value="" disabled hidden>เลือกสถานะ</option>
-                      <option value="open">รอชำระเงิน</option>
-                      <option value="paid">ชำระเงินแล้ว</option>
-                      <option value="preparing">กำลังเตรียมสินค้า</option>
-                      <option value="shipping">กำลังจัดส่ง</option>
-                      <option value="delivered">จัดส่งสำเร็จ</option>
-                      <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                    </select>
+                    <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)} />
                   </td>
                 </tr>
               ))}

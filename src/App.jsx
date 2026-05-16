@@ -77,13 +77,14 @@ const router = createBrowserRouter([
           { path:"orders/:orderId", element:<AdminOrderItem /> },
           /*
           { path:"services", element:<AdminServices />, },
+          { path:"services/create", element:<AdminServiceForm /> },
           { path:"services/:serviceId", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
           { path:"users/:userId", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },
           { path:"users/:userId/edit", element:<AdminUserForm /> },
           { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
-           */
+          */
         ],
       },
       { path:"auth", element:<AuthLayout />,

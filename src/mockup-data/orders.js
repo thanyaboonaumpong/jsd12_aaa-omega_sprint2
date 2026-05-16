@@ -32,7 +32,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "ลองเขียนโน้ตสำหรับอ่าน/ดูกันภายในเท่านั้นครับ",
     createdAt: "2026-03-01T08:00:00.000Z",
     updatedAt: "2026-03-01T08:10:00.000Z"
@@ -77,7 +77,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "ด่วน",
+    orderNote: "ด่วน",
     internalNote: "B2B",
     createdAt: "2026-03-02T08:00:00.000Z",
     updatedAt: "2026-03-02T08:10:00.000Z"
@@ -115,7 +115,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-03T08:00:00.000Z",
     updatedAt: "2026-03-03T08:10:00.000Z"
@@ -153,7 +153,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "โหลดสินค้า",
+    orderNote: "โหลดสินค้า",
     internalNote: "industrial",
     createdAt: "2026-03-04T08:00:00.000Z",
     updatedAt: "2026-03-04T08:10:00.000Z"
@@ -198,7 +198,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-05T08:00:00.000Z",
     updatedAt: "2026-03-05T08:10:00.000Z"
@@ -236,7 +236,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "cancelled",
     createdAt: "2026-03-06T08:00:00.000Z",
     updatedAt: "2026-03-06T08:10:00.000Z"
@@ -274,7 +274,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-07T08:00:00.000Z",
     updatedAt: "2026-03-07T08:10:00.000Z"
@@ -312,7 +312,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-08T08:00:00.000Z",
     updatedAt: "2026-03-08T08:10:00.000Z"
@@ -350,7 +350,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-09T08:00:00.000Z",
     updatedAt: "2026-03-09T08:10:00.000Z"
@@ -388,7 +388,7 @@ export const orders = [
         quantity: 2
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "repeat B2B",
     createdAt: "2026-03-10T08:00:00.000Z",
     updatedAt: "2026-03-10T08:10:00.000Z"
@@ -426,7 +426,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-11T08:00:00.000Z",
     updatedAt: "2026-03-11T08:10:00.000Z"
@@ -464,7 +464,7 @@ export const orders = [
         quantity: 2
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "repeat order",
     createdAt: "2026-03-12T08:00:00.000Z",
     updatedAt: "2026-03-12T08:10:00.000Z"
@@ -502,7 +502,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-13T08:00:00.000Z",
     updatedAt: "2026-03-13T08:10:00.000Z"
@@ -540,7 +540,7 @@ export const orders = [
         quantity: 3
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-14T08:00:00.000Z",
     updatedAt: "2026-03-14T08:10:00.000Z"
@@ -578,7 +578,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-15T08:00:00.000Z",
     updatedAt: "2026-03-15T08:10:00.000Z"
@@ -616,7 +616,7 @@ export const orders = [
         quantity: 2
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-16T08:00:00.000Z",
     updatedAt: "2026-03-16T08:10:00.000Z"
@@ -654,7 +654,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-17T08:00:00.000Z",
     updatedAt: "2026-03-17T08:10:00.000Z"
@@ -692,7 +692,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "",
     createdAt: "2026-03-18T08:00:00.000Z",
     updatedAt: "2026-03-18T08:10:00.000Z"
@@ -730,7 +730,7 @@ export const orders = [
         quantity: 1
       }
     ],
-    deliveryNote: "",
+    orderNote: "",
     internalNote: "cancelled before shipping",
     createdAt: "2026-03-19T08:00:00.000Z",
     updatedAt: "2026-03-19T08:10:00.000Z"
@@ -775,7 +775,7 @@ export const orders = [
         quantity: 2
       }
     ],
-    deliveryNote: "ฉันไม่มีหมายเหตุครับ",
+    orderNote: "ฉันไม่มีหมายเหตุครับ",
     internalNote: "bundle order",
     createdAt: "2026-03-20T08:00:00.000Z",
     updatedAt: "2026-03-20T08:10:00.000Z"

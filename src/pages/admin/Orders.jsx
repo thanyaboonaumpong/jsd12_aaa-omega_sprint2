@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { /*Link,*/ useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
-import { DataNotFound } from "../../components/common/DataNotFound";
+import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
 import { StatusOrder } from "../../components/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -69,20 +69,9 @@ export default function AdminOrders() {
                   </tbody>
                 </table>
               </div>
-              {/*
-              <nav className="pagination">
-                <Link className="button button-icon button-soft button-content is-disabled" to="#pagination"><span className="icon-material">keyboard_arrow_left</span></Link>
-                <Link className="button button-icon button-primary" to="#pagination">1</Link>
-                <Link className="button button-icon button-soft button-content" to="#pagination">2</Link>
-                <Link className="button button-icon button-soft button-content" to="#pagination">3</Link>
-                <Link className="button button-icon button-soft button-content" to="#pagination"><span className="icon-material">keyboard_arrow_right</span></Link>
-              </nav>
-              */}
             </section>
           </>
-        : <h2 className="self-center text-center text-content-soft">
-            <span className="icon-material text-9xl wght-100">database_off</span><br />
-            Orders not found.</h2>
+        : <PageNotFound text="ไม่พบหน้าคำสั่งซื้อ" />
       }
     </>
   );

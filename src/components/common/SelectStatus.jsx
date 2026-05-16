@@ -1,6 +1,6 @@
-import { TextNotFound } from "./DataNotFound";
+import { TextNotFound } from "./NotFound";
 
-export const StatusOrder = ({ value = "", onChange = null }) => {
+export const StatusOrder = ({ id, value, onChange }) => {
 
   const status = {
     "": { text:"ไม่พบข้อมูล", color:"button-soft button-content" },
@@ -14,7 +14,7 @@ export const StatusOrder = ({ value = "", onChange = null }) => {
 
   return (
     onChange
-      ? <select className={`button ${status[value]?.color || ""}`} name="statusOrder" value={value} onChange={onChange}>
+      ? <select id={id} className={`button ${status[value]?.color || ""}`} name="status" value={value} onChange={onChange}>
           <option value="" disabled hidden>เลือกสถานะ</option>
           {Object.entries(status).map(([key, item]) => key 
             ? <option key={key} value={key}>{item.text}</option>
@@ -26,7 +26,7 @@ export const StatusOrder = ({ value = "", onChange = null }) => {
 
 };
 
-export const StatusService = ({ value = "", onChange = null }) => {
+export const StatusService = ({ id, value, onChange }) => {
 
   const status = {
     "": { text:"ไม่พบข้อมูล", color:"button-soft button-content" },
@@ -40,7 +40,7 @@ export const StatusService = ({ value = "", onChange = null }) => {
 
   return (
     onChange
-      ? <select className={`button ${status[value]?.color || ""}`} name="statusService" value={value} onChange={onChange}>
+      ? <select id={id} className={`button ${status[value]?.color || ""}`} name="status" value={value} onChange={onChange}>
           <option value="" disabled hidden>เลือกสถานะ</option>
           {Object.entries(status).map(([key, item]) => key 
             ? <option key={key} value={key}>{item.text}</option>
@@ -48,6 +48,52 @@ export const StatusService = ({ value = "", onChange = null }) => {
           )}
         </select>
       : <span className={`cursor-default button ${status[value]?.color || ""}`}>{status[value]?.text || TextNotFound}</span>
+  );
+
+};
+
+export const ServiceType = ({ id, value, onChange }) => {
+
+  const type = {
+    "": "ไม่พบข้อมูล",
+    install: "ติดตั้ง",
+    clean: "ล้างแผง",
+    maintenance: "ซ่อมบำรุง",
+  };
+
+  return (
+    onChange
+      ? <select id={id} name="serviceType" value={value} onChange={onChange}>
+          <option value="" disabled hidden>เลือกประเภท</option>
+          {Object.entries(type).map(([key, item]) => key 
+            ? <option key={key} value={key}>{item}</option>
+            : null
+          )}
+        </select>
+      : type[value] || TextNotFound
+  );
+
+};
+
+export const ServiceTeam = ({ id, value, onChange }) => {
+
+  const team = {
+    "": "ไม่พบข้อมูล",
+    team1: "ทีม 1",
+    team2: "ทีม 2",
+    team3: "ทีม 3",
+  };
+
+  return (
+    onChange
+      ? <select id={id} name="team" value={value} onChange={onChange}>
+          <option value="" disabled hidden>เลือกทีม</option>
+          {Object.entries(team).map(([key, item]) => key 
+            ? <option key={key} value={key}>{item}</option>
+            : null
+          )}
+        </select>
+      : team[value] || TextNotFound
   );
 
 };
