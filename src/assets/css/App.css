@@ -79,12 +79,10 @@
   --color-content-darker :#101828;
 }
 
-/* Base for custom html tag */
 @layer base {
   *, :before, :after {@apply p-0 m-0 box-border border-neutral-disable outline-neutral-soft;}
   input, textarea, select, button, a {@apply focus:outline-none transition-all;}
-
-  body {@apply font-kanit text-base text-content-base;}
+  body {@apply font-kanit font-normal text-base text-content-base;}
       .h0 {@apply text-4xl  text-content-hover;}
   h1, .h1 {@apply text-2xl leading-10 text-primary-hover;}
   h2, .h2 {@apply text-xl   text-content-hover;}
@@ -95,6 +93,7 @@
   hr {@apply w-full border-neutral-disable;}
   button, [role=button] {@apply cursor-pointer;}
   img {@apply rounded-lg bg-neutral-light hover:bg-neutral-disable transition-all;}
+
   table {@apply w-full;}
   table tr {@apply border-t border-neutral-light;}
   table tbody tr {@apply hover:bg-neutral-lighter transition-all;}
@@ -104,7 +103,7 @@
   table th {@apply whitespace-nowrap font-normal text-left text-content-hover;}
   table :is(th, td):first-child {@apply pl-0;}
   table :is(th, td):last-child  {@apply pr-0;}
-  table a {@apply hover:text-primary-hover;}
+  table :is(a, button) {@apply hover:text-primary-hover;}
   .table-container {@apply w-full overflow-auto;}
   .table-container table :is(th, td) {@apply h-14.25 whitespace-nowrap align-middle;}
   .table-responsive tr {@apply border-none hover:bg-transparent;}
@@ -116,12 +115,14 @@
   .heading-row {@apply flex flex-col xs:flex-row flex-wrap justify-between xs:items-center gap-5;}
   .input-row {@apply flex flex-col sm:flex-row gap-5 w-full;}
   .input-col {@apply flex flex-col gap-5 w-full;}
-  .input-group {@apply flex flex-col justify-end gap-2 w-full;}
+  .input-group {@apply relative flex flex-col gap-2 w-full;}
   .button-row {@apply flex flex-row flex-wrap-reverse justify-end items-center grow gap-5 w-full xs:w-fit;}
   .button-row button {@apply grow xs:grow-0;}
   fieldset {@apply flex flex-col gap-5 w-full;}
-  legend {@apply text-content-hover pb-4;}
-  label {@apply flex items-center gap-2 text-sm;}
+  legend {@apply text-content-hover pb-6 sm:pb-4;}
+  label {@apply flex items-center gap-2 w-fit text-sm hover:text-primary-hover;}
+  .input-group:has(:is(input, textarea, select):hover) label {@apply text-primary-hover;}
+  .input-group label:not(.label-normal) {@apply max-sm:absolute max-sm:-translate-y-1/2 max-sm:left-2.75 max-sm:px-1.5 max-sm:rounded-md max-sm:bg-white;}
   input, textarea, select {@apply w-full leading-5.5 placeholder:text-content-disable disabled:text-content-disable px-4 py-2 border border-neutral-disable hover:border-neutral-base disabled:border-neutral-disable rounded-lg bg-white;}
   input[type="password"] {@apply text-xl tracking-[0.2em];}       
   input[type="range"] {@apply cursor-pointer appearance-none px-0 py-4.75 border-none focus:outline-none bg-transparent;}
@@ -132,7 +133,7 @@
   input[type="range"]:focus::-webkit-slider-thumb {@apply outline-2 outline-neutral-base outline-offset-4;}
   input[type="range"]:focus::-moz-range-thumb {@apply outline-2 outline-neutral-base outline-offset-4;}
   input[type="time"] {@apply h-10;}
-  textarea {@apply field-sizing-content min-h-50 max-h-[80dvh];}
+  textarea {@apply field-sizing-content min-h-30 max-h-[80dvh];}
   select {@apply cursor-pointer w-auto px-3! py-1.5;}
   select option {@apply text-content-base bg-white;}
   select option[disabled] {@apply text-content-disable bg-white;}
@@ -148,10 +149,8 @@
   details summary::marker {@apply hidden;}
   details summary:after {@apply content-['add'] size-6;}
   details[open] summary:after {@apply content-['close'];}
-
 }
 
-/* Components for custom style (like: card, btn, badge) */
 @layer components {
   .icon-material ,
   summary:after {
@@ -160,9 +159,22 @@
     display:inline-block; vertical-align:bottom; white-space:nowrap; word-wrap:normal; direction:ltr;
     font-feature-settings:"liga"; -webkit-font-smoothing:antialiased;
   }
+  /* Google Icon */
+  .icon-material.wght-700           {font-variation-settings:'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-600           {font-variation-settings:'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-500           {font-variation-settings:'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-400           {font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
   .icon-material ,
-  .icon-material.icon-outline {font-variation-settings:'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24}
-  .icon-material.icon-fill    {font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24}
+  .icon-material.icon-outline       {font-variation-settings:'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-200           {font-variation-settings:'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.wght-100           {font-variation-settings:'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-700 {font-variation-settings:'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-600 {font-variation-settings:'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-500 {font-variation-settings:'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-400 {font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill          {font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-200 {font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+  .icon-material.icon-fill.wght-100 {font-variation-settings:'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
 
   .button           {@apply relative hover:z-10 inline-flex justify-center items-center gap-2 min-h-10 leading-10 text-white px-4 border-0 rounded-lg transition-all;}
   .button-icon      {@apply justify-center size-10 p-0;}
@@ -171,8 +183,8 @@
   a.is-disabled ,
   .button.is-disabled ,
   .button[aria-disabled="true"] {@apply opacity-40 cursor-not-allowed pointer-events-none;}
-  .badge                {@apply inline-flex items-center gap-1 min-h-5 text-xs whitespace-nowrap leading-5 text-white px-2 rounded-sm transition-all;}
-  .badge:not(a)         {@apply cursor-default;}
+  .badge                {@apply inline-flex items-center align-bottom gap-1 w-fit min-h-5 text-xs whitespace-nowrap leading-5 text-white px-2 rounded-sm transition-all;}
+  /*.badge:not(a)       {@apply cursor-default;}*/
   .badge-icon           {@apply justify-center size-5 p-0;}
   .badge-pill           {@apply rounded-full;}
   .badge .icon-material {@apply text-sm -mx-0.5;}
@@ -199,7 +211,7 @@
   .button-outline {@apply leading-9.5;}
   .badge-outline  {@apply leading-4.5;}
   .badge-sm.badge-outline  {@apply leading-3.5;}
-  .button-outline , .badge-outline {@apply border bg-transparent hover:bg-transparent;}
+  .button-outline , .badge-outline {@apply border bg-white hover:bg-white;}
   .button-outline , .badge-outline ,
   .button-outline.button-primary , .badge-outline.badge-primary {@apply text-primary-base  border-primary-disable hover:border-primary-hover;}
   .button-outline.button-accent  , .badge-outline.badge-accent  {@apply text-accent-hover  border-accent-base     hover:border-accent-hover ;}
@@ -210,13 +222,13 @@
   .button-outline.button-content , .badge-outline.badge-content {@apply text-content-base  border-content-disable hover:border-content-hover;}
   .button-ghost , .badge-ghost {@apply bg-transparent hover:bg-white;}
   .button-ghost , .badge-ghost ,
-  .button-ghost.button-primary , .badge-ghost.badge-primary {@apply text-primary-hover;}
-  .button-ghost.button-accent  , .badge-ghost.badge-accent  {@apply text-accent-hover ;}
-  .button-ghost.button-error   , .badge-ghost.badge-error   {@apply text-error-hover  ;}
-  .button-ghost.button-warning , .badge-ghost.badge-warning {@apply text-warning-hover;}
-  .button-ghost.button-success , .badge-ghost.badge-success {@apply text-success-hover;}
-  .button-ghost.button-neutral , .badge-ghost.badge-neutral {@apply text-neutral-hover;}
-  .button-ghost.button-content , .badge-ghost.badge-content {@apply text-content-hover;}
+  .button-ghost.button-primary , .badge-ghost.badge-primary {@apply text-primary-base;}
+  .button-ghost.button-accent  , .badge-ghost.badge-accent  {@apply text-accent-base ;}
+  .button-ghost.button-error   , .badge-ghost.badge-error   {@apply text-error-base  ;}
+  .button-ghost.button-warning , .badge-ghost.badge-warning {@apply text-warning-base;}
+  .button-ghost.button-success , .badge-ghost.badge-success {@apply text-success-base;}
+  .button-ghost.button-neutral , .badge-ghost.badge-neutral {@apply text-neutral-base;}
+  .button-ghost.button-content , .badge-ghost.badge-content {@apply text-content-base;}
   .button-group:has(.button) {@apply flex;}
   .button-group > .button:not(:first-child,:last-child) ,
   .button-group :not(:first-child,:last-child) .button {@apply rounded-none;}
@@ -227,6 +239,22 @@
   .button-group > .button:is(.button-outline):not(:first-child) {@apply -ml-px;}
 
   .pagination {@apply flex flex-wrap items-center gap-2 mt-5;}
+}
+
+#stat {@apply flex gap-5 overflow-auto;}
+.card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-light hover:bg-primary-lighter/40 transition-all;}
+.card-stat * {@apply whitespace-nowrap;}
+.card-stat__title {@apply block text-sm text-content-base;}
+.card-stat__value {@apply block text-2xl leading-6 text-content-hover mt-1;}
+.card-stat:hover .card-stat__value {@apply text-primary-hover;}
+.card-stat__subtext {@apply inline-flex text-xs not-italic text-content-base leading-5;}
+
+.product-stock__name {@apply hover:text-primary-hover;}
+.product-stock__sku {@apply text-sm text-content-soft;}
+.product-stock__separator {@apply text-sm text-content-base;}
+.product-stock__meta ,
+.product-stock__tag {@apply flex items-center gap-2;}
+.product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}
 
   #stat {@apply flex gap-5 overflow-auto;}
   .card-stat {@apply min-w-37 text-right px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-disable transition-all;}
@@ -258,3 +286,6 @@
     @apply bg-neutral-soft;
   }
 }
+.card-search-result {@apply flex flex-col min-w-37 text-sm text-content-base/80 text-left px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-light hover:bg-primary-lighter/40 transition-all;}
+.card-search-result > span:first-child {@apply text-content-base;}
+.card-search-result:hover > span:first-child {@apply text-primary-hover;}

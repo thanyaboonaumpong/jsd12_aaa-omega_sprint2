@@ -1,26 +1,39 @@
-import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import AllProductsPage from './pages/AllProductsPage';
 
 // นำเข้า Header
-import Header from "./components/HeaderSection"; 
-import HeroSection from "./components/HeroSection";
-import ProductHighlight from "./components/ProductHighlight";  
-import CalculatorSection from "./components/CalculatorSection"; 
-import FooterSection from "./components/FooterSection";     
+import Header from "./components/HeaderSection";
+
 // นำเข้า CSS และหน้าฝั่ง Admin
-import AdminLayout from "./components/admin/Layout";
+import AdminLayout from "./components/admin/AdminLayout";
 import AdminHome from "./pages/admin/Home";
 import AdminProducts from "./pages/admin/Products";
-
+import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
+/*
+import AdminServices from "./pages/admin/Services";
+import AdminServiceForm from "./pages/admin/ServiceForm";
+import AdminUsers from "./pages/admin/Users";
+import AdminUserDetail from "./pages/admin/UserDetail";
+import AdminUserForm from "./pages/admin/UserForm";
+import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
+*/
+import AuthLayout from "./components/auth/AuthLayout";
+import AuthLogin from "./pages/auth/Login";
+import AuthRegister from "./pages/auth/Register";
+import AuthForgotPassword from "./pages/auth/ForgotPassword";
+
 import './assets/css/App.css';
 
 // นำเข้าหน้าฝั่ง User
+import HomePage from './pages/HomePage';
 import TestimonialsPage from './pages/TestimonialsPage';
 import ProductDetailPage from './pages/ProductDetailPage'; 
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import UserProfilePage from './pages/UserProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +50,28 @@ const router = createBrowserRouter([
             <FooterSection />
           </>
         ),
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "home",
+        element: <HomePage />,
+      },
+      {
+        path: "products",        // สินค้า
+        element: <div>Products Page (Coming Soon)</div>,
+      },
+      {
+        path: "services",        // บริการ
+        element: <div>Services Page (Coming Soon)</div>,
+      },
+      {
+        path: "portfolio",       // ผลงาน 
+        element: <div>Portfolio Page (Coming Soon)</div>,
+      },
+      {
+        path: "contact",         // ติดต่อเรา 
+        element: <div>Contact Page (Coming Soon)</div>,
       },
       {
   path: "allproducts", // แนะนำให้ใช้ "products" (เติม s) ให้ตรงกับที่เขียนใน HeaderSection.jsx
@@ -71,11 +106,42 @@ const router = createBrowserRouter([
       {
         path: "admin",
         element: <AdminLayout />,
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "profile",
+        element: <UserProfilePage />,
+      },
+      { path:"admin", element:<AdminLayout />,
         children: [
-          { index: true, element: <AdminHome /> },
-          { path: "products", element: <AdminProducts /> },
-          { path: "orders", element: <AdminOrders /> },
-          { path: "orders/:orderId", element: <AdminOrderItem /> },
+          { index:true, element:<AdminHome /> },
+          { path:"products", element:<AdminProducts /> },
+          { path:"products/create", element:<AdminProductForm /> },
+          { path:"products/:productId", element:<AdminProductForm /> },
+          { path:"orders", element:<AdminOrders />, },
+          { path:"orders/:orderId", element:<AdminOrderItem /> },
+          /*
+          { path:"services", element:<AdminServices />, },
+          { path:"services/create", element:<AdminServiceForm /> },
+          { path:"services/:serviceId", element:<AdminServiceForm />, },
+          { path:"users", element:<AdminUsers /> },
+          { path:"users/:userId", element:<AdminUserDetail /> },
+          { path:"users/create", element:<AdminUserForm /> },
+          { path:"users/:userId/edit", element:<AdminUserForm /> },
+          { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
+          */
+        ],
+      },
+      { path:"auth", element:<AuthLayout />,
+        children: [
+          { path:"login", element:<AuthLogin />, },
+          { path:"register", element:<AuthRegister />, },
+          { path:"forgot-password", element:<AuthForgotPassword />, },
         ],
       },
     ],

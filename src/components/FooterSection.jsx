@@ -1,7 +1,14 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
 import lineIcon from "../assets/images/LINE_Brand_icon.png";
 
-const navLinks = ["หน้าแรก", "สินค้า", "บริการ", "ผลงาน", "ติดต่อเรา"];
+const navLinks = [
+    { label: "หน้าแรก", path: "/" },
+    { label: "สินค้า", path: "/products" },
+    { label: "บริการ", path: "/services" },
+    { label: "ผลงาน", path: "/portfolio" },
+    { label: "ติดต่อเรา", path: "/contact" },
+];
 
 const legalLinks = [
     "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
@@ -25,8 +32,10 @@ function FooterSection() {
                     <div className="flex items-center justify-center">
                         <ul className="flex flex-wrap lg:flex-nowrap justify-center gap-x-4 gap-y-3 lg:gap-x-8 xl:gap-x-12 text-[14px] font-medium opacity-90">
                             {navLinks.map((link) => (
-                                <li key={link}>
-                                    <a href="#" className="hover:text-primary-hover transition-all">{link}</a>
+                                <li key={link.label}>
+                                    <Link to={link.path} className="hover:text-primary-hover transition-all">
+                                        {link.label}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

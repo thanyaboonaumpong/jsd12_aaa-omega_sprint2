@@ -1,31 +1,6 @@
-import { useState } from "react";
-
-const initialProfile = {
-  fullName: "คุณธีรภัทร เจริญวงศ์",
-  phone: "02-888-9988",
-  email: "teerapat.j@gmail.aaa",
-  address: "89 ซอยเพชรเกษม",
-  subDistrict: "แขวงหนองค้างพลู",
-  district: "เขตหนองแขม",
-  province: "กรุงเทพ",
-  postalCode: "10110",
-  shippingAddress: "89 ซอยเพชรเกษม แขวงหนองค้างพลู เขตหนองแขม กรุงเทพ 10110",
-};
-
-const initialForm = {
-  fullName: initialProfile.fullName,
-  phone: "089-555-1122",
-  phoneBackup: "",
-  email: initialProfile.email,
-  address: initialProfile.address,
-  subDistrict: initialProfile.subDistrict,
-  district: initialProfile.district,
-  province: initialProfile.province,
-  postalCode: initialProfile.postalCode,
-  shippingAddress: "",
-  shippingSubDistrict: "",
-  shippingDistrict: "",
-};
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../contexts/authContext/AuthContext";
 
 const orders = [
   { date: "09/03/2026", id: "AAA20260015", total: "990", status: "จัดส่งสำเร็จ" },
@@ -34,9 +9,39 @@ const orders = [
 ];
 
 export default function UserProfilePage() {
-  const [profile] = useState(initialProfile);
-  const [formData, setFormData] = useState(initialForm);
+  const { user, logout, updateProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    phoneBackup: "",
+    email: "",
+    address: "",
+    subDistrict: "",
+    district: "",
+    province: "",
+    postalCode: "",
+    shippingAddress: "",
+    shippingSubDistrict: "",
+    shippingDistrict: "",
+  });
   const [savedMessage, setSavedMessage] = useState("");
+
+  useEffect(() => {
+    if (!user) return;
+    setFormData((prev) => ({
+      ...prev,
+      fullName: user.fullName || "",
+      phone: user.phone || "",
+      email: user.email || "",
+      address: user.address || "",
+      subDistrict: user.subDistrict || "",
+      district: user.district || "",
+      province: user.province || "",
+      postalCode: user.postalCode || "",
+    }));
+  }, [user]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -45,37 +50,70 @@ export default function UserProfilePage() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    updateProfile(formData);
     setSavedMessage("บันทึกข้อมูลเรียบร้อยแล้ว");
-    console.log("Saved profile form:", formData);
+    setTimeout(() => setSavedMessage(""), 3000);
   }
 
   function handleCancel() {
-    setFormData(initialForm);
+    setFormData((prev) => ({
+      ...prev,
+      fullName: user?.fullName || "",
+      phone: user?.phone || "",
+      email: user?.email || "",
+      address: user?.address || "",
+      subDistrict: user?.subDistrict || "",
+      district: user?.district || "",
+      province: user?.province || "",
+      postalCode: user?.postalCode || "",
+    }));
     setSavedMessage("ยกเลิกการแก้ไขเรียบร้อยแล้ว");
+    setTimeout(() => setSavedMessage(""), 3000);
+  }
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
+
+  function handleGoHome() {
+    navigate("/");
   }
 
   return (
     <main className="max-w-[1000px] mx-auto p-5 font-['Kanit'] bg-neutral-50 text-content-dark">
       <section className="mb-10 pb-10 border-b border-neutral-soft">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
           <h2 className="text-2xl font-semibold text-primary-base">รายละเอียดบัญชี</h2>
-          <a href="#form" className="button button-primary">
-            <span className="icon-material">edit</span> แก้ไขข้อมูลผู้ใช้
-          </a>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
+            <a href="#form" className="button button-primary">
+              <span className="icon-material">edit</span> แก้ไขข้อมูลผู้ใช้
+            </a>
+            <div className="flex flex-col gap-2">
+              <button type="button" onClick={handleGoHome} className="button button-soft button-primary">
+                เข้าสู่หน้าหลัก
+              </button>
+              <button type="button" onClick={handleLogout} className="button button-soft button-content">
+                ออกจากระบบ
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-[180px_1fr] gap-y-4 text-lg">
+        <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-y-4 text-lg">
           <div className="font-medium text-content-dark">ชื่อผู้สั่งชื่อ</div>
-          <div className="text-content-soft">{profile.fullName}</div>
+          <div className="text-content-soft">{user?.fullName}</div>
 
           <div className="font-medium text-content-dark">เบอร์ติดต่อ</div>
-          <div className="text-content-soft">{profile.phone}</div>
+          <div className="text-content-soft">{user?.phone}</div>
 
           <div className="font-medium text-content-dark">อีเมล</div>
-          <div className="text-content-soft">{profile.email}</div>
+          <div className="text-content-soft">{user?.email}</div>
 
           <div className="font-medium text-content-dark">ที่อยู่จัดส่ง</div>
-          <div className="text-content-soft">{profile.shippingAddress}</div>
+          <div className="text-content-soft">
+            {user?.address && `${user.address} ${user.subDistrict} ${user.district} ${user.province} ${user.postalCode}`}
+          </div>
         </div>
 
         <h2 className="text-2xl font-semibold text-primary-base mt-10 mb-6">รายการคำสั่งซื้อ</h2>
@@ -106,7 +144,7 @@ export default function UserProfilePage() {
       </section>
 
       <section id="form" className="mt-10">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
           <h2 className="text-2xl font-semibold text-primary-base">แก้ไขข้อมูลบัญชี</h2>
           <div className="flex gap-2">
             <button type="button" onClick={handleCancel} className="button button-soft button-content">

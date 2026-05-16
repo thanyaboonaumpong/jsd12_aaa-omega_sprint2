@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/StatCard";
+import { DataNotFound } from "../../components/common/NotFound";
+import { StatusOrder } from "../../components/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
-import { DataNotFound } from "../../utils/DataNotFound";
 import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
+
+  const { handleOrderStatusChange } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
@@ -41,22 +46,19 @@ export default function AdminHome() {
               </tr>
             </thead>
             <tbody>
-              {orders.slice(0, 5).map((order) => (
+              {[...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5).map((order) => (
                 <tr key={order._id}>
                   <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId || <DataNotFound />}</button></td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.customerName || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderId)}>
+                    {order.customer.company ||
+                      (order.customer.firstName || order.customer.lastName
+                        ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
+                        : <DataNotFound />)
+                    }</button></td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" defaultValue={order.status || ""}>
-                      <option value="" disabled hidden>เลือกสถานะ</option>
-                      <option value="pending_payment">รอชำระเงิน</option>
-                      <option value="paid">ชำระเงินแล้ว</option>
-                      <option value="preparing">กำลังเตรียมสินค้า</option>
-                      <option value="shipping">กำลังจัดส่ง</option>
-                      <option value="delivered">จัดส่งสำเร็จ</option>
-                      <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                    </select>
+                    <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)} />
                   </td>
                 </tr>
               ))}
@@ -65,6 +67,7 @@ export default function AdminHome() {
         </div>
         <Link className="button button-soft button-primary" to="./orders">คำสั่งซื้อทั้งหมด</Link>
       </section>
+      {/*
       <section id="serviceList" className="flex flex-row flex-wrap justify-between items-center gap-5">
         <h2>ตารางนัดหมายวันนี้</h2>
         <div className="table-container xs:order-3">
@@ -100,7 +103,7 @@ export default function AdminHome() {
                   ซ่อมบำรุง</td>
                 <td>ทีม 2</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -121,7 +124,7 @@ export default function AdminHome() {
                   ล้างแผง</td>
                 <td>ทีม 3</td>
                 <td>
-                  <select className="button button-outline button-warning" name="statusService" defaultValue="rescheduled">
+                  <select className="button button-outline button-warning" name="statusService" value="rescheduled">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -142,7 +145,7 @@ export default function AdminHome() {
                   ติดตั้ง</td>
                 <td>ทีม 1</td>
                 <td>
-                  <select className="button button-outline button-accent" name="statusService" defaultValue="in_progress">
+                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
                     <option value="" disabled hidden>เลือกสถานะ</option>
                     <option value="request_received">รับคำขอ</option>
                     <option value="scheduled">นัดหมายแล้ว</option>
@@ -158,6 +161,7 @@ export default function AdminHome() {
         </div>
         <Link className="is-disabled button button-soft button-primary" to="#soon">นัดหมายทั้งหมด</Link>
       </section>
+      */}
     </>
   );
 
