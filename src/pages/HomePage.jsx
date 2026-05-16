@@ -6,7 +6,7 @@
 // - ต้องปรับภาพและ path ให้ตรง src/assets
 
 import HeroSection from "../components/HeroSection";
-import ProductSection from "../components/ProductSection.jsx";
+import ProductSection from "../components/ProductSection";
 import CalculatorSection from "../components/CalculatorSection";
 import FooterSection from "../components/FooterSection";
 import HeaderSection from "../components/HeaderSection";
