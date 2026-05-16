@@ -11,6 +11,8 @@ import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
 /*
+import AdminServices from "./pages/admin/Services";
+import AdminServiceForm from "./pages/admin/ServiceForm";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserDetail from "./pages/admin/UserDetail";
 import AdminUserForm from "./pages/admin/UserForm";
@@ -89,6 +91,8 @@ const router = createBrowserRouter([
           { path:"orders", element:<AdminOrders />, },
           { path:"orders/:orderId", element:<AdminOrderItem /> },
           /*
+          { path:"services", element:<AdminServices />, },
+          { path:"services/:serviceId", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
           { path:"users/:userId", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },

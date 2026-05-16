@@ -17,7 +17,9 @@ export default function AdminSidebar() {
           <li><Link className="button button-ghost button-content justify-start w-full hover:text-primary-hover" to="./" onClick={handleAdminNavSidebarClose}><span className="icon-material">home</span> แดชบอร์ด</Link></li>
           <li><Link className="button button-ghost button-content justify-start w-full hover:text-primary-hover" to="./products" onClick={handleAdminNavSidebarClose}><span className="icon-material">storefront</span> สินค้า</Link></li>
           <li><Link className="button button-ghost button-content justify-start w-full hover:text-primary-hover" to="./orders" onClick={handleAdminNavSidebarClose}><span className="icon-material">shopping_cart</span> คำสั่งซื้อ</Link></li>
-          <li><Link className="is-disabled button button-ghost button-content justify-start w-full hover:text-primary-hover" to="#soon"><span className="icon-material">build</span> บริการซ่อมบำรุง</Link></li>
+          <li><Link className="is-disabled button button-ghost button-content justify-start w-full hover:text-primary-hover" to="#soon"><span className="icon-material">build</span> บริการซ่อมบำรุง
+            <span className="badge badge-content absolute top-1/2 right-1.5 -translate-y-1/2 justify-center size-5.5 text-[10px] leading-2.25 tracking-[0.2em] text-right p-0 pl-px bg-content-soft">SO<br />ON</span></Link></li>
+          {/*<li><Link className="button button-ghost button-content justify-start w-full hover:text-primary-hover" to="./services"><span className="icon-material">build</span> บริการซ่อมบำรุง</Link></li>*/}
           <li><Link className="button button-ghost button-content justify-start w-full hover:text-primary-hover" to="./users" onClick={handleAdminNavSidebarClose}><span className="icon-material">person_outline</span> รายชื่อบัญชี</Link></li>
         </ul>
         <ul id="navFooter" className="flex flex-col gap-2 p-2 border-t">
