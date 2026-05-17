@@ -256,6 +256,21 @@
 .product-stock__tag {@apply flex items-center gap-2;}
 .product-stock__tag .badge {@apply capitalize text-content-soft bg-neutral-light;}
 
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-disable rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-soft;
+  }
+}
+
 .card-search-result {@apply flex flex-col min-w-37 text-sm text-content-base/80 text-left px-4 py-3 rounded-lg border border-neutral-disable hover:border-primary-light hover:bg-primary-lighter/40 transition-all;}
 .card-search-result > span:first-child {@apply text-content-base;}
 .card-search-result:hover > span:first-child {@apply text-primary-hover;}

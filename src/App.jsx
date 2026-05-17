@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // นำเข้า Header
 import Header from "./components/HeaderSection";
+import HeaderSectionAuth from "./components/HeaderSectionAuth";
 
 // นำเข้า CSS และหน้าฝั่ง Admin
 import AdminLayout from "./components/admin/AdminLayout";
@@ -31,6 +32,9 @@ import TestimonialsPage from './pages/TestimonialsPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfilePage from './pages/UserProfilePage';
+import AllProductsPage from './pages/AllProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import FooterSection from './components/FooterSection';
 
 const router = createBrowserRouter([
   {
@@ -45,8 +49,26 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "products",        // สินค้า
-        element: <div>Products Page (Coming Soon)</div>,
+        path: "allproducts",        // สินค้า
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <AllProductsPage />
+            <FooterSection />
+          </>
+        ),
+      },
+      {
+        path: "product/:productId",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <ProductDetailPage />
+            <FooterSection />
+          </>
+        ),
       },
       {
         path: "services",        // บริการ
@@ -66,6 +88,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Header />
+            <HeaderSectionAuth />
             <TestimonialsPage />
           </>
         ),

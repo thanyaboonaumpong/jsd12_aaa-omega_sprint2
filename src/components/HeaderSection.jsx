@@ -1,24 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // ต้อง import Link มาใช้
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activePage, setActivePage] = useState("หน้าแรก");
+    const location = useLocation();
 
     // ปรับเป็น Object เพื่อให้ระบุ path ของแต่ละเมนูได้ชัดเจน
     const navItems = [
         { name: "หน้าแรก", path: "/" },
-        { name: "สินค้า", path: "/products" },
+        { name: "สินค้า", path: "/allproducts" },
         { name: "บริการ", path: "/services" },
         { name: "ผลงาน", path: "/testimonials" }, // path ต้องตรงกับใน App.jsx
         { name: "ติดต่อเรา", path: "/contact" },
     ];
 
+    const isActive = (path) => {
+        if (path === "/") {
+            return location.pathname === "/" || location.pathname === "/home";
+        }
+        return location.pathname.startsWith(path);
+    };
+
     return (
         <header className="bg-neutral-light">
             <nav className="flex items-center justify-between px-8 py-4 container mx-auto">
-                <Link to="/" onClick={() => setActivePage("หน้าแรก")}>
+                <Link to="/">
                     <img src={logo} alt="logo" className="h-10 w-10 md:h-16 md:w-16" />
                 </Link>
 
@@ -27,10 +34,10 @@ function Header() {
                     {navItems.map((item) => (
                         <li
                             key={item.name}
-                            className={activePage === item.name ? "border-b-2 border-accent-hover pb-1" : ""}
+                            className={isActive(item.path) ? "border-b-2 border-accent-hover pb-1" : ""}
                         >
                             {/* ใช้ Link แทน a เพื่อไม่ให้หน้าขาว */}
-                            <Link to={item.path} onClick={() => setActivePage(item.name)}>
+                            <Link to={item.path}>
                                 {item.name}
                             </Link>
                         </li>
@@ -59,14 +66,11 @@ function Header() {
                     {navItems.map((item) => (
                         <li
                             key={item.name}
-                            className={activePage === item.name ? "border-l-4 border-accent-hover pl-2" : ""}
+                            className={isActive(item.path) ? "border-l-4 border-accent-hover pl-2" : ""}
                         >
                             <Link 
                                 to={item.path} 
-                                onClick={() => {
-                                    setActivePage(item.name);
-                                    setIsMenuOpen(false);
-                                }}
+                                onClick={() => setIsMenuOpen(false)}
                             >
                                 {item.name}
                             </Link>
