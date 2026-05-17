@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-kanit:"Kanit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-kanit:"Kanit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --breakpoint-2xs:20rem; /* 320px */
   --breakpoint-xs:29.875rem; /* 478px */
 
