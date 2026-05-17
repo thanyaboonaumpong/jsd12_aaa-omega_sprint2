@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import bannerImage from "../../assets/images/banner-forgot-password.jpg";
 
 export default function AuthForgotPassword() {
 
@@ -20,7 +21,7 @@ export default function AuthForgotPassword() {
   return (
     <>
       <section className="flex-1">
-        <img className="w-full max-sm:aspect-video sm:h-115 object-cover" src="/src/assets/images/banner-forgot-password.jpg" />
+        <img className="w-full max-sm:aspect-video sm:h-115 object-cover" src={bannerImage} />
       </section>
       <section id="login" className="flex flex-1 flex-col flex-wrap justify-center gap-5">
         <div className="heading">

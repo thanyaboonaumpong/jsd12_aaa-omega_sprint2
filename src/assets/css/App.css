@@ -104,6 +104,7 @@
   table :is(th, td):first-child {@apply pl-0;}
   table :is(th, td):last-child  {@apply pr-0;}
   table :is(a, button) {@apply hover:text-primary-hover;}
+  table td:last-child span.button {@apply w-full;}
   .table-container {@apply w-full overflow-auto;}
   .table-container table :is(th, td) {@apply h-14.25 whitespace-nowrap align-middle;}
   .table-responsive tr {@apply border-none hover:bg-transparent;}
@@ -183,7 +184,7 @@
   a.is-disabled ,
   .button.is-disabled ,
   .button[aria-disabled="true"] {@apply opacity-40 cursor-not-allowed pointer-events-none;}
-  .badge                {@apply inline-flex items-center align-bottom gap-1 w-fit min-h-5 text-xs whitespace-nowrap leading-5 text-white px-2 rounded-sm transition-all;}
+  .badge                {@apply inline-flex items-center align-middle gap-1 w-fit min-h-5 text-xs whitespace-nowrap leading-5 text-white px-2 rounded-sm transition-all;}
   /*.badge:not(a)       {@apply cursor-default;}*/
   .badge-icon           {@apply justify-center size-5 p-0;}
   .badge-pill           {@apply rounded-full;}
