@@ -16,16 +16,26 @@ export default function AdminSidebar() {
           <li className="md:hidden"><button className="nav-toggle button button-icon button-ghost button-content" onClick={handleAdminNavMainToggle}><span className="icon-material">close</span></button></li>
         </ul>
         <ul id="navMain" className="flex flex-col flex-1 gap-2 p-2 border-t">
-          <li><NavLink className={navSidebarClass} end to="/admin" onClick={handleAdminNavSidebarClose}><span className="icon-material">home</span> แดชบอร์ด</NavLink></li>
-          <li><NavLink className={navSidebarClass} to="/admin/products" onClick={handleAdminNavSidebarClose}><span className="icon-material">storefront</span> สินค้า</NavLink></li>
-          <li><NavLink className={navSidebarClass} to="/admin/orders" onClick={handleAdminNavSidebarClose}><span className="icon-material">shopping_cart</span> คำสั่งซื้อ</NavLink></li>
+          <li><NavLink className={navSidebarClass} end to="/admin" onClick={handleAdminNavSidebarClose}>
+            {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>home</span> แดชบอร์ด</>)}
+          </NavLink></li>
+          <li><NavLink className={navSidebarClass} to="/admin/products" onClick={handleAdminNavSidebarClose}>
+            {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>storefront</span> สินค้า</>)}
+          </NavLink></li>
+          <li><NavLink className={navSidebarClass} to="/admin/orders" onClick={handleAdminNavSidebarClose}>
+            {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>shopping_cart</span> คำสั่งซื้อ</>)}
+          </NavLink></li>
           {isDev
-            ? <li><NavLink className={navSidebarClass} to="/admin/services" onClick={handleAdminNavSidebarClose}><span className="icon-material">build</span> บริการซ่อมบำรุง</NavLink></li>
+            ? <li><NavLink className={navSidebarClass} to="/admin/services" onClick={handleAdminNavSidebarClose}>
+                {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>build</span> บริการซ่อมบำรุง</>)}
+              </NavLink></li>
             : <li><NavLink className="is-disabled button button-ghost button-content justify-start w-full hover:text-primary-hover" to="#soon"><span className="icon-material">build</span> บริการซ่อมบำรุง
             <span className="badge badge-content absolute top-1/2 right-1.5 -translate-y-1/2 justify-center size-5.5 text-[10px] leading-2.25 tracking-[0.2em] text-right p-0 pl-px bg-primary-soft">SO<br />ON</span></NavLink></li>
           }
           {isDev
-            ? <li><NavLink className={navSidebarClass} to="/admin/users" onClick={handleAdminNavSidebarClose}><span className="icon-material">person_outline</span> รายชื่อบัญชี</NavLink></li>
+            ? <li><NavLink className={navSidebarClass} to="/admin/users" onClick={handleAdminNavSidebarClose}>
+                {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>person_outline</span> รายชื่อบัญชี</>)}
+              </NavLink></li>
             : <li><NavLink className="is-disabled button button-ghost button-content justify-start w-full hover:text-primary-hover" to="#soon"><span className="icon-material">person_outline</span> รายชื่อบัญชี
             <span className="badge badge-content absolute top-1/2 right-1.5 -translate-y-1/2 justify-center size-5.5 text-[10px] leading-2.25 tracking-[0.2em] text-right p-0 pl-px bg-primary-soft">SO<br />ON</span></NavLink></li>
           }
