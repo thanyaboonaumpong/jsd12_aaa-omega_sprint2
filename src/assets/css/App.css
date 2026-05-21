@@ -91,8 +91,9 @@
   h6, .h6 {@apply text-xs   text-content-hover;}
   hr {@apply w-full border-neutral-disable;}
   button, [role=button] {@apply cursor-pointer;}
-  img {@apply rounded-lg bg-neutral-light hover:bg-neutral-disable transition-all;}
-
+  img {@apply rounded-lg transition-all;}
+  img:is([src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="]) {
+    @apply bg-neutral-light hover:bg-neutral-disable;}
   table {@apply w-full;}
   table tr {@apply border-t border-neutral-light;}
   table tbody tr {@apply hover:bg-neutral-lighter transition-all;}
