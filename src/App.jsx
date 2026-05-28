@@ -35,6 +35,7 @@ import UserProfilePage from './pages/UserProfilePage';
 import AllProductsPage from './pages/AllProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import FooterSection from './components/FooterSection';
+import CartPage from './pages/CartPage';
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <UserProfilePage />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
       },
       { path:"admin", element:<AdminLayout />,
         children: [

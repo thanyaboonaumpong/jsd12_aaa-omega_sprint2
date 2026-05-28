@@ -1,27 +1,78 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react'; 
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { allProducts } from '../components/Products';
+import AuthContext from '../contexts/authContext/AuthContext';
+import { addToCart } from '../utils/api';
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useContext(AuthContext);
   const product = allProducts.find((item) => item.id === productId);
-  
-  // สร้าง State สำหรับจำนวนสินค้า
+
   const [quantity, setQuantity] = useState(1);
+  const [cartLoading, setCartLoading] = useState(false);
+  const [cartMessage, setCartMessage] = useState(null);
 
   if (!product) {
     return <div className="text-center p-20 text-2xl font-kanit">ขออภัย ไม่พบสินค้าครับ</div>;
   }
 
-  // ฟังก์ชันเพิ่ม-ลดจำนวน
   const handleIncrease = () => setQuantity(q => q + 1);
   const handleDecrease = () => setQuantity(q => q > 1 ? q - 1 : 1);
+
+  const handleAddToCart = async () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    try {
+      setCartLoading(true);
+      setCartMessage(null);
+      await addToCart({
+        userId: user.id,
+        productId: product.id,
+        name: product.title,
+        price: product.priceCurrent,
+        image: product.images?.[0] || '',
+        quantity,
+      });
+      setCartMessage({ type: 'success', text: 'เพิ่มสินค้าลงตะกร้าแล้ว' });
+    } catch {
+      setCartMessage({ type: 'error', text: 'ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่' });
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  const handleBuyNow = async () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    try {
+      setCartLoading(true);
+      await addToCart({
+        userId: user.id,
+        productId: product.id,
+        name: product.title,
+        price: product.priceCurrent,
+        image: product.images?.[0] || '',
+        quantity,
+      });
+      navigate('/cart');
+    } catch {
+      setCartMessage({ type: 'error', text: 'ไม่สามารถดำเนินการได้ กรุณาลองใหม่' });
+    } finally {
+      setCartLoading(false);
+    }
+  };
 
   return (
     <div className="font-kanit bg-[#f8f9fa] min-h-screen py-10">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 bg-white p-8 rounded-3xl shadow-sm">
-          
+
           {/* ฝั่งซ้าย: รูปภาพ (Main & Thumbnails) */}
           <div className="lg:col-span-6 flex gap-4">
             <div className="hidden md:flex flex-col gap-3">
@@ -42,7 +93,7 @@ const ProductDetailPage = () => {
             <h1 className="text-3xl font-bold text-gray-900 mt-4 leading-tight">
               {product.title}
             </h1>
-            
+
             <div className="flex items-baseline gap-4 mt-6">
               <span className="text-4xl font-extrabold text-[#5c6ac4]">
                 ฿{product.priceCurrent?.toLocaleString()}
@@ -70,12 +121,26 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
+            {cartMessage && (
+              <div className={`mt-3 p-3 rounded-xl text-sm ${cartMessage.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                {cartMessage.text}
+              </div>
+            )}
+
             {/* ปุ่มแอ็คชั่น (Add to Cart & Buy Now) */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              <button className="py-4 px-6 border-2 border-[#5c6ac4] text-[#5c6ac4] rounded-2xl font-bold hover:bg-indigo-50 transition-all flex items-center justify-center gap-2">
-                <i className="fa-solid fa-cart-shopping"></i> ใส่ในรถเข็น
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <button
+                onClick={handleAddToCart}
+                disabled={cartLoading}
+                className="py-4 px-6 border-2 border-[#5c6ac4] text-[#5c6ac4] rounded-2xl font-bold hover:bg-indigo-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                ใส่ในรถเข็น
               </button>
-              <button className="py-4 px-6 bg-[#5c6ac4] text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+              <button
+                onClick={handleBuyNow}
+                disabled={cartLoading}
+                className="py-4 px-6 bg-[#5c6ac4] text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all disabled:opacity-50"
+              >
                 ซื้อเลย
               </button>
             </div>
