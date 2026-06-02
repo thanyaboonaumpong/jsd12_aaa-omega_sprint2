@@ -11,9 +11,9 @@ export const allProducts = [
     ratingCount: 12,
     warranty: "10 Years Thai Center Warranty",
     images: [
-      "https://placehold.co/600x600?text=Huawei+Inverter+1",
-      "https://placehold.co/600x600?text=Huawei+Inverter+2",
-      "https://placehold.co/600x600?text=Huawei+Inverter+3"
+      "http://localhost:5173/public/001huawei5kw.jpg",
+      "http://localhost:5173/public/002huawei5kw.jpg",
+      "http://localhost:5173/public/003huawei5kw.jpg"
     ],
     // รายละเอียดแบบเล่าเรื่อง
     description: "อินเวอร์เตอร์ประสิทธิภาพสูงจาก Huawei ออกแบบมาเพื่อระบบโซล่าร์เซลล์ภาคครัวเรือนโดยเฉพาะ มาพร้อมเทคโนโลยี AI-Powered AFCI ที่ช่วยป้องกันการเกิดประกายไฟ (Arc Fault) ซึ่งเป็นสาเหตุหลักของไฟไหม้ ตัวเครื่องทำงานเงียบเนื่องจากไม่มีพัดลม (Natural Convection) และรองรับการเชื่อมต่อกับ Battery ระบบกักเก็บพลังงานของ Huawei ในอนาคต",
@@ -57,8 +57,9 @@ export const allProducts = [
     ratingCount: 45,
     warranty: "12 Years Product / 25 Years Linear Power Warranty",
     images: [
-      "https://placehold.co/600x600?text=Jinko+550W+1",
-      "https://placehold.co/600x600?text=Jinko+550W+2"
+      "http://localhost:5173/public/001jinko550w.jpg",
+      "http://localhost:5173/public/002jinko550w.jpg",
+      "http://localhost:5173/public/003jinko550w.jpg"
     ],
     description: "แผงโซล่าร์เซลล์ระดับ Tier 1 จาก Jinko Solar รุ่น Tiger Pro 550W ใช้เทคโนโลยี Multi Busbar (MBB) ล่าสุด เพื่อลดการสูญเสียพลังงานภายในเซลล์และเพิ่มความทนทานต่อการเกิด Micro-crack เหมาะสำหรับการติดตั้งบนหลังคาบ้านและโรงงานอุตสาหกรรม",
     technicalSpecs: [
@@ -94,7 +95,11 @@ export const allProducts = [
     rating: 5,
     ratingCount: 8,
     warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Huawei+10kW+3Phase"],
+    images: [
+      "http://localhost:5173/public/001huawei10kw.jpg",
+      "http://localhost:5173/public/002huawei10kw.jpg",
+      "http://localhost:5173/public/003huawei10kw.jpg"
+    ],
     description: "อินเวอร์เตอร์ระบบ 3 เฟสที่ออกแบบมาเพื่อบ้านขนาดใหญ่หรืออาคารสำนักงาน รองรับการทำงานร่วมกับ Battery (ESS) ของ Huawei ได้ทันทีโดยไม่ต้องซื้ออุปกรณ์เพิ่ม (Battery Ready) มาพร้อมระบบระบายความร้อนประสิทธิภาพสูงและความปลอดภัยระดับสูงสุด",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "SUN2000-10KTL-M1" },
@@ -138,7 +143,11 @@ export const allProducts = [
     rating: 4.9,
     ratingCount: 15,
     warranty: "10 Years Warranty (Thai Center)",
-    images: ["https://placehold.co/600x600?text=Sungrow+5kW+1Phase"],
+    images: ["http://localhost:5173/public/001sungrow5kw.jpg",
+      "http://localhost:5173/public/002sungrow5kw.jpg",
+      "http://localhost:5173/public/003sungrow5kw.jpg"
+    ],
+
     description: "Sungrow รุ่นใหม่ล่าสุดซีรีส์ RS ออกแบบมาให้สวยงามเหมือนเครื่องใช้ไฟฟ้าในบ้าน หน้าจอ LED สว่างชัดเจน ติดตั้งง่ายด้วยระบบ Plug & Play และมีระบบความปลอดภัยที่ผ่านการรับรองจากทั้ง กฟน. และ กฟภ.",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "SG5.0RS" },
@@ -182,7 +191,10 @@ export const allProducts = [
     rating: 4.8,
     ratingCount: 22,
     warranty: "5-10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Growatt+MIN+5000TL-X"],
+    images: ["http://localhost:5173/public/001growatt5kw.jpg",
+      "http://localhost:5173/public/002growatt5kw.jpg",
+      "http://localhost:5173/public/003growatt5kw.jpg"
+    ],
     description: "อินเวอร์เตอร์ที่คุ้มค่าที่สุดในแง่ของราคาต่อประสิทธิภาพ รุ่น TL-X มีดีไซน์ทันสมัยด้วยหน้าจอสัมผัส OLED ทนทานต่อสภาพอากาศได้ดีเยี่ยม และเป็นที่นิยมอย่างมากในกลุ่มช่างติดตั้งโซล่าร์เซลล์ในไทย",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "MIN 5000TL-X" },
@@ -226,7 +238,10 @@ export const allProducts = [
     rating: 5,
     ratingCount: 18,
     warranty: "25 Years Product / 30 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=Trina+Vertex+S+Plus"],
+    images: ["http://localhost:5173/public/001trinavertex450w.jpg",
+      "http://localhost:5173/public/002trinavertex450w.jpg",
+      "http://localhost:5173/public/003trinavertex450w.jpg"
+    ],
     description: "แผงโซล่าร์เซลล์ระดับพรีเมียมจาก Trina Solar รุ่น Vertex S+ ใช้เทคโนโลยี N-type i-TOPCon ล่าสุด พร้อมโครงสร้างกระจก 2 ด้าน (Dual Glass) แข็งแรงทนทานเป็นพิเศษ ป้องกันการกัดกร่อนจากไอเกลือและแอมโมเนียได้ดีเยี่ยม เหมาะสำหรับบ้านพักอาศัยที่ต้องการประสิทธิภาพสูงสุดในพื้นที่จำกัด",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "NEG9R.28 (Vertex S+)" },
@@ -270,7 +285,10 @@ export const allProducts = [
     rating: 4.9,
     ratingCount: 25,
     warranty: "15 Years Product / 25 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=LONGi+Hi-MO+6"],
+    images: ["http://localhost:5173/public/001longi585w.jpg",
+      "http://localhost:5173/public/002longi585w.jpg",
+      "http://localhost:5173/public/003longi585w.jpg"
+    ],
     description: "LONGi Hi-MO 6 คือนวัตกรรมใหม่ที่ใช้เทคโนโลยี HPBC (Hybrid Passivated Back Contact) ซึ่งไม่มีเส้น Grid ด้านหน้าแผง ทำให้รับแสงได้เต็มที่ 100% และดูสวยงามแบบ Minimalist ให้ประสิทธิภาพการแปลงพลังงานสูงกว่าแผงทั่วไปอย่างชัดเจน และมีความเสถียรในการผลิตไฟระยะยาว",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "LR5-72HTH-585M" },
@@ -314,7 +332,10 @@ export const allProducts = [
     rating: 4.8,
     ratingCount: 14,
     warranty: "12 Years Product / 25 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=Canadian+Solar+HiKu7"],
+    images: ["http://localhost:5173/public/001cndsl660w.jpg",
+      "http://localhost:5173/public/002cndsl660w.jpg",
+      "http://localhost:5173/public/003cndsl660w.jpg"
+    ],
     description: "แผงโซล่าร์เซลล์กำลังสูงขนาดใหญ่พิเศษ HiKu7 จาก Canadian Solar ออกแบบมาเพื่อโครงการที่ต้องการกำลังไฟมหาศาลต่อแผง ใช้เทคโนโลยี Dual Cell และ Multi-busbar เพื่อลดการสูญเสียพลังงานภายในและลดจุดร้อน (Hot spots) บนแผง ให้ความคุ้มค่าสูงสุดในเชิงวิศวกรรม",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "CS7N-660MS" },
@@ -358,7 +379,10 @@ export const allProducts = [
     rating: 5,
     ratingCount: 6,
     warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Huawei+LUNA2000+10kWh"],
+    images: ["http://localhost:5173/public/001huawei-luna2000-10kwh.jpg",
+      "http://localhost:5173/public/002huawei-luna2000-10kwh.jpg",
+      "http://localhost:5173/public/003huawei-luna2000-10kwh.jpg"
+    ],
     description: "แบตเตอรี่อัจฉริยะจาก Huawei รุ่น LUNA2000 ออกแบบมาให้มีความสวยงามเหมือนเฟอร์นิเจอร์ในบ้าน มีระบบจัดการพลังงานในระดับโมดูล (Module-level optimization) ช่วยให้สามารถดึงพลังงานมาใช้ได้เต็มที่ 100% (100% Depth of Discharge) และมีความปลอดภัยสูงสุดด้วยเซลล์ LiFePO4",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "LUNA2000-10-S0 (Power Module + 2 Battery Modules)" },
@@ -398,7 +422,10 @@ export const allProducts = [
     rating: 4.9,
     ratingCount: 10,
     warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=BYD+Battery-Box+HVS"],
+    images: ["http://localhost:5173/public/001byd-batt-box10-2.jpg",
+      "http://localhost:5173/public/002byd-batt-box10-2.jpg",
+      "http://localhost:5173/public/003byd-batt-box10-2.jpg"
+    ],
     description: "BYD คือผู้นำด้านแบตเตอรี่ระดับโลก รุ่น Battery-Box Premium HVS เป็นแบตเตอรี่แรงดันสูงที่เน้นประสิทธิภาพการจ่ายไฟที่รุนแรงและรวดเร็ว เหมาะสำหรับบ้านที่ต้องการสำรองไฟแบบ Off-grid หรือใช้ร่วมกับ Inverter ยี่ห้อดังอย่าง Fronius, Sungrow หรือ SMA",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "Battery-Box Premium HVS 10.2" },
@@ -437,7 +464,10 @@ export const allProducts = [
     rating: 4.8,
     ratingCount: 34,
     warranty: "5-10 Years (Upon Registration)",
-    images: ["https://placehold.co/600x600?text=Pylontech+US5000"],
+    images: ["http://localhost:5173/public/001pylontech-us5000.jpg",
+      "http://localhost:5173/public/002pylontech-us5000.jpg",
+      "http://localhost:5173/public/003pylontech-us5000.jpg"
+    ],
     description: "แบตเตอรี่ Low Voltage ยอดนิยมอันดับ 1 สำหรับระบบ Hybrid งบประหยัด Pylontech US5000 มาพร้อมความจุที่เพิ่มขึ้นเป็น 4.8kWh ต่อโมดูล ในขนาดที่กะทัดรัดแบบ Rack-mount ติดตั้งในตู้ Cabinet ได้สวยงาม ทนทาน และมีระบบ BMS ที่ฉลาดมาก",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "US5000" },
@@ -477,7 +507,7 @@ export const allProducts = [
     rating: 5,
     ratingCount: 42,
     warranty: "30 Years Service Life",
-    images: ["https://placehold.co/600x600?text=LINK+PV1-F+4mm"],
+    images: ["http://localhost:5173/public/001link-pv1f-4mm.jpg"],
     description: "สายไฟสำหรับระบบโซล่าร์เซลล์โดยเฉพาะจากแบรนด์ LINK มาตรฐาน EN50618 ตัวนำทำจากทองแดงเคลือบดีบุก (Tinned Copper) เพื่อป้องกันการกัดกร่อนและเกิดสนิมเขียว ทนต่อรังสี UV และโอโซนได้อย่างดีเยี่ยม เหมาะสำหรับการติดตั้งภายนอกอาคารยาวนานกว่า 25 ปี",
     technicalSpecs: [
       { label: "รุ่น (Model)", value: "CB-0504B (Black) / CB-0504R (Red)" },
@@ -513,7 +543,9 @@ export const allProducts = [
     rating: 4.9,
     ratingCount: 12,
     warranty: "1 Year Component Warranty",
-    images: ["https://placehold.co/600x600?text=Combiner+Box+5kW"],
+    images: ["http://localhost:5173/public/001acdc-combiner-box5k.jpg",
+      "http://localhost:5173/public/002acdc-combiner-box5k.jpg"
+    ],
     description: "ตู้ Combiner Box สำเร็จรูปที่รวบรวมอุปกรณ์ป้องกันทั้งฝั่ง DC จากแผงโซล่าร์ และฝั่ง AC จาก Inverter ไว้ในตู้เดียว ช่วยป้องกันระบบจากฟ้าผ่า ไฟกระชาก และไฟฟ้าลัดวงจร ติดตั้งง่ายพร้อมใช้งานสำหรับระบบ On-grid ขนาด 5kW 1 เฟส",
     technicalSpecs: [
       { label: "ตู้โหลดเซ็นเตอร์ (Enclosure)", value: "Plastic IP65 (กันน้ำกันฝุ่น)" },
@@ -546,7 +578,10 @@ export const allProducts = [
     rating: 4.7,
     ratingCount: 20,
     warranty: "10 Years Material Warranty",
-    images: ["https://placehold.co/600x600?text=Solar+Mounting+Kit"],
+    images: ["http://localhost:5173/public/001mounting4panel.jpg",
+      "http://localhost:5173/public/002mounting4panel.jpg",
+      "http://localhost:5173/public/003mounting4panel.jpg"
+    ],
     description: "ชุดรางและอุปกรณ์ยึดแผงโซล่าร์เซลล์มาตรฐานสากล ผลิตจากอลูมิเนียมอัลลอยด์ 6005-T5 น้ำหนักเบาแต่แข็งแรงสูง ไม่เป็นสนิมตลอดอายุการใช้งาน ออกแบบมาเพื่อยึดแผงโซล่าร์ 4 แผงบนหลังคาเมทัลชีท (Metal Sheet)",
     technicalSpecs: [
       { label: "วัสดุหลัก (Material)", value: "Anodized Aluminum Alloy 6005-T5" },

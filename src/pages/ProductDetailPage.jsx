@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { allProducts } from '../components/Products';
 
 const ProductDetailPage = () => {
@@ -9,7 +9,25 @@ const ProductDetailPage = () => {
   // สร้าง State สำหรับจำนวนสินค้า
   const [quantity, setQuantity] = useState(1);
 
-  if (!product) {
+  
+
+// เลื่อนหน้าจอไปด้านบนทุกครั้งเมื่อเข้าหน้ารายละเอียดสินค้า หรือเปลี่ยนสินค้า
+useEffect(() => {
+  // เช็คก่อนว่าอยู่บน Browser หรือยัง และมีฟังก์ชัน scrollTo ให้ใช้ไหม
+  if (typeof window !== 'undefined' && window.scrollTo) {
+    
+    // ใช้รูปแบบ Object เพื่อรองรับ behavior: 'auto'
+    // หาก Browser เก่ามากจนไม่รองรับ Object มันจะเพิกเฉย behavior แล้วเลื่อนไป (0,0) ให้เองอัตโนมัติ
+    window.scrollTo({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'auto' // หรือ 'smooth' ถ้าอยากให้หน้าจอค่อยๆ เลื่อนนุ่มๆ
+    });
+    
+  }
+}, [productId]); // ทำงานใหม่ทุกครั้งที่ productId เปลี่ยนแปลง
+
+if (!product) {
     return <div className="text-center p-20 text-2xl font-kanit">ขออภัย ไม่พบสินค้าครับ</div>;
   }
 
