@@ -36,6 +36,8 @@ import AllProductsPage from './pages/AllProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import FooterSection from './components/FooterSection';
 import CartPage from './pages/CartPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
 
 const router = createBrowserRouter([
   {
@@ -73,15 +75,15 @@ const router = createBrowserRouter([
       },
       {
         path: "services",        // บริการ
-        element: <div>Services Page (Coming Soon)</div>,
+        element: <ServicesPage />,
       },
       {
         path: "portfolio",       // ผลงาน 
         element: <div>Portfolio Page (Coming Soon)</div>,
       },
       {
-        path: "contact",         // ติดต่อเรา 
-        element: <div>Contact Page (Coming Soon)</div>,
+        path: "contact",         // ติดต่อเรา
+        element: <ContactPage />,
       },
       {
         path: "testimonials",

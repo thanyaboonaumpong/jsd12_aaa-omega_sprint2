@@ -21,6 +21,7 @@ function HeaderSectionAuth() {
         headerIconsContainer.prepend(node);
       }
       
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPortalNode(node);
 
       return () => {
