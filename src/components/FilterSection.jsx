@@ -1,4 +1,3 @@
-import React from 'react';
 
 const FilterSection = ({ title, items, selectedItems, onChange }) => (
   <div className="mb-8">

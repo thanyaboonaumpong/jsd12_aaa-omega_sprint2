@@ -6,7 +6,7 @@
 // - ต้องปรับภาพและ path ให้ตรง src/assets
 
 import HeroSection from "../components/HeroSection";
-import ProductSection from "../components/ProductSection";
+import ProductHighlight from "../components/ProductHighlight";
 import CalculatorSection from "../components/CalculatorSection";
 import FooterSection from "../components/FooterSection";
 import HeaderSection from "../components/HeaderSection";
@@ -20,7 +20,7 @@ const HomePage = () => {
             <HeaderSection />
             <HeaderSectionAuth />
             <HeroSection />
-            <ProductSection />
+            <ProductHighlight />
             <CalculatorSection />
             <TestimonialSection />
             <FaqSection />

@@ -30,6 +30,7 @@ export default function UserProfilePage() {
 
   useEffect(() => {
     if (!user) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData((prev) => ({
       ...prev,
       fullName: user.fullName || "",

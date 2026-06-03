@@ -1,10 +1,16 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
+import { useCart } from "../contexts/CartContext";
+import AuthContext from "../contexts/authContext/AuthContext";
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
+    const { cartItems } = useCart();
+    const { user } = useContext(AuthContext);
+    const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
     // ปรับเป็น Object เพื่อให้ระบุ path ของแต่ละเมนูได้ชัดเจน
     const navItems = [
@@ -45,14 +51,22 @@ function Header() {
                 </ul>
 
                 <div className="flex items-center space-x-4">
-                    <button>
+                    <button 
+                        onClick={() => navigate(user ? '/profile' : '/login')}
+                        className="flex items-center gap-2 text-content-hover hover:text-primary-base transition-colors"
+                    >
                         <span className="material-symbols-outlined text-[28px]">person</span>
-                    </button>
-                    <button className="relative">
-                        <span className="material-symbols-outlined text-[28px]">shopping_cart</span>
-                        <span className="absolute -top-1 -right-2 bg-accent-dark text-accent-lighter text-xs rounded-full px-1.5">
-                            2
+                        <span className="text-sm font-medium">
+                            {user?.fullName || "เข้าสู่ระบบ"}
                         </span>
+                    </button>
+                    <button onClick={() => navigate('/checkout')} className="relative">
+                        <span className="material-symbols-outlined text-[28px]">shopping_cart</span>
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-2 bg-accent-dark text-accent-lighter text-xs rounded-full px-1.5">
+                                {cartCount}
+                            </span>
+                        )}
                     </button>
                     <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <span className="material-symbols-outlined text-[28px]">menu</span>

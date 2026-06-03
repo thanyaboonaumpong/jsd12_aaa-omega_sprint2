@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
     const savedUser = localStorage.getItem("authUser");
     if (savedUser) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setUser(JSON.parse(savedUser));
       } catch (e) {
         console.error("Failed to parse saved user:", e);
@@ -75,7 +76,8 @@ const AuthProvider = ({ children }) => {
     }
 
     // Remove password from stored user
-    const { password: _, ...userWithoutPassword } = foundUser;
+    // eslint-disable-next-line no-unused-vars
+    const { password: _pw, ...userWithoutPassword } = foundUser;
     setUser(userWithoutPassword);
     localStorage.setItem("authUser", JSON.stringify(userWithoutPassword));
     return true;
@@ -109,7 +111,8 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem(`user_${userData.email}`, JSON.stringify(newUser));
 
     // Auto-login after registration
-    const { password: _, ...userWithoutPassword } = newUser;
+    // eslint-disable-next-line no-unused-vars
+    const { password: _pw2, ...userWithoutPassword } = newUser;
     setUser(userWithoutPassword);
     localStorage.setItem("authUser", JSON.stringify(userWithoutPassword));
     return true;

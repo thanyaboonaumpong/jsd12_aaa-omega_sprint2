@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../contexts/authContext/AuthContext';
 import CartItem from '../components/CartItem';
@@ -15,15 +15,7 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
-    loadCart();
-  }, [isAuthenticated]);
-
-  const loadCart = async () => {
+  const loadCart = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -36,7 +28,16 @@ export default function CartPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadCart();
+  }, [isAuthenticated, loadCart, navigate]);
 
   const handleQuantityChange = async (productId, quantity) => {
     try {
