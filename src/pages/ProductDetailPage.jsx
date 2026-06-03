@@ -17,11 +17,15 @@ const ProductDetailPage = () => {
   useEffect(() => {
     fetch(`https://jsd12-aaa-omega.onrender.com/api/v1/products/${productId}`)
       .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
+      .then((resData) => {
+        // 🛠 จุดสำคัญ: แกะข้อมูลสินค้าออกจากฟิลด์ resData.data ตามที่แกะในหน้ารวม
+        const actualProduct = resData?.data || resData;
+        
+        setProduct(actualProduct);
+        
         // ตั้งค่ารูปภาพเริ่มต้นให้เป็นรูปหลักของสินค้า
-        if (data && data.image?.url) {
-          setActiveImage(data.image.url);
+        if (actualProduct && actualProduct.image?.url) {
+          setActiveImage(actualProduct.image.url);
         }
         setLoading(false);
       })
@@ -88,13 +92,20 @@ const ProductDetailPage = () => {
               </div>
             )}
             
-            {/* แสดงผลรูปภาพหลักตัวที่ถูกคลิกเลือก */}
-            <div className="flex-1">
-              <img 
-                src={activeImage || product.image?.url} 
-                alt={product.name} 
-                className="w-full h-auto rounded-2xl border object-cover max-h-125" 
-              />
+            {/* แสดงผลรูปภาพหลักตัวที่ถูกคลิกเลือก (พร้อมดักกรณีไม่มีรูปไม่ให้เว็บพัง) */}
+            <div className="flex-1 aspect-square bg-gray-50 rounded-2xl border overflow-hidden flex items-center justify-center">
+              {activeImage || product.image?.url ? (
+                <img 
+                  src={activeImage || product.image?.url} 
+                  alt={product.name || "Product Image"} 
+                  className="w-full h-full object-cover" 
+                />
+              ) : (
+                <div className="text-gray-400 flex flex-col items-center gap-2">
+                  <span className="material-symbols-outlined text-5xl">image_not_supported</span>
+                  <span className="text-sm font-semibold uppercase">Image not found</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -107,24 +118,23 @@ const ProductDetailPage = () => {
             )}
             
             <h1 className="text-3xl font-bold text-gray-900 mt-4 leading-tight">
-              {product.name}
+              {product.name || "สินค้าโซล่าร์เซลล์"}
             </h1>
             
             <div className="flex items-baseline gap-4 mt-6">
-              {/* เปลี่ยนชื่อตัวแปรเป็น .price และ .salePrice ตาม Schema ใหม่ */}
               <span className="text-4xl font-extrabold text-[#5c6ac4]">
-                ฿{product.price?.toLocaleString()}
+                ฿{product.price ? product.price.toLocaleString() : "ติดต่อเจ้าหน้าที่"}
               </span>
-              {product.salePrice && (
+              {product.salePrice && product.price && product.salePrice > product.price && (
                 <span className="text-gray-400 line-through">
-                  ฿{product.salePrice?.toLocaleString()}
+                  ฿{product.salePrice.toLocaleString()}
                 </span>
               )}
             </div>
 
             {/* รายละเอียดคำอธิบายสินค้าแบบเรื่องเล่า */}
             <div className="mt-4 text-gray-600 leading-relaxed text-sm">
-              {product.description}
+              {product.description || "ไม่มีข้อมูลคำอธิบายสำหรับสินค้านี้"}
             </div>
 
             {/* ส่วนเลือกจำนวน (Quantity Selector) */}
@@ -159,7 +169,7 @@ const ProductDetailPage = () => {
 
         {/* ส่วนล่าง: Specs & Features ดึงจาก DB ของเพื่อน */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* รายละเอียดสเปกตาราง เปลี่ยนเป็น .specs ตาม Schema */}
+          {/* รายละเอียดสเปกตาราง */}
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-50">
             <h3 className="text-xl font-bold mb-6 border-b pb-4">รายละเอียดทางเทคนิค</h3>
             <div className="space-y-3">
@@ -176,7 +186,7 @@ const ProductDetailPage = () => {
             </div>
           </div>
 
-          {/* จุดเด่นสินค้า แสดงผลจาก Array ของฟิลด์ features */}
+          {/* จุดเด่นสินค้า */}
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-50">
             <h3 className="text-xl font-bold mb-6 border-b pb-4">จุดเด่นสินค้า</h3>
             <ul className="space-y-4">
