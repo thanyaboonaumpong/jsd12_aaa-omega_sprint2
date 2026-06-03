@@ -12,8 +12,8 @@ import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
 import AdminServices from "./pages/admin/Services";
-import AdminServiceForm from "./pages/admin/ServiceForm";
 /*
+import AdminServiceForm from "./pages/admin/ServiceForm";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserDetail from "./pages/admin/UserDetail";
 import AdminUserForm from "./pages/admin/UserForm";
@@ -129,18 +129,18 @@ const router = createBrowserRouter([
           { index:true, element:<AdminHome /> },
           { path:"products", element:<AdminProducts /> },
           { path:"products/create", element:<AdminProductForm /> },
-          { path:"products/:productNumber", element:<AdminProductForm /> },
+          { path:"products/:productId", element:<AdminProductForm /> },
           { path:"orders", element:<AdminOrders />, },
-          { path:"orders/:orderNumber", element:<AdminOrderItem /> },
+          { path:"orders/:orderId", element:<AdminOrderItem /> },
           { path:"services", element:<AdminServices />, },
-          { path:"services/create", element:<AdminServiceForm /> },
-          { path:"services/:serviceNumber", element:<AdminServiceForm />, },
           /*
+          { path:"services/create", element:<AdminServiceForm /> },
+          { path:"services/:serviceId", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
-          { path:"users/:userNumber", element:<AdminUserDetail /> },
+          { path:"users/:userId", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },
-          { path:"users/:userNumber/edit", element:<AdminUserForm /> },
-          { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
+          { path:"users/:userId/edit", element:<AdminUserForm /> },
+          { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
           */
         ],
       },
@@ -157,4 +157,4 @@ const router = createBrowserRouter([
 
 export default function App() {
   return <RouterProvider router={router} />;
-}
+};

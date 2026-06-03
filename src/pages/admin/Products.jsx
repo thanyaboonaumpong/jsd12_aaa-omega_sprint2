@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
 import { PageNotFound, DataNotFound, ImageNotFound } from "../../components/common/NotFound";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";

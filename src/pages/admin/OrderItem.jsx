@@ -1,149 +1,183 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
-import { StatusOrder } from "../../components/common/SelectStatus";
+import { fetchOrderByNumber } from "../../api/admin/order";
+import Toast from "../../components/admin/common/Toast";
+import { PageNotFound, DataNotFound, PageLoading } from "../../components/common/NotFound";
+import { StatusOrder } from "../../components/admin/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
 
 export default function AdminOrderItem() {
 
-  const { orders, handleOrderStatusChange } = useContext(MessageContext);
+  const { handleOrderStatusChange, handleOrderSubmit, handleOrderDelete, toast } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleBack = () => navigate(-1);
 
-  const { orderId } = useParams();
-  const order = orderId ? orders.find((item) => item.orderId === orderId) : null;
+  const { orderNumber } = useParams(null);
 
-  const orderInitial = {
-    internalNote: order?.internalNote || ""
+  const [orderForm, setOrderForm] = useState(null);
+  const handleOrderChange = (event) => {
+    setOrderForm((prev) => ({ ...prev, [event.target.name]: event.target.value }))
   };
-  const [orderForm, setOrderForm] = useState(orderInitial);
-  const handleOrderChange = (event) => setOrderForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  const handleOrderSubmit = (event) => {
+  const handleOrderItemStatusChange = async (event) => {
+    const status = event.target.value;
+    setOrderForm((prev) => ({ ...prev, status }));
+    const updated = await handleOrderStatusChange( orderForm._id, status );
+    if (updated) setOrderForm(updated);
+  };
+  const handleOrderItemSubmit = async (event) => {
     event.preventDefault();
-    const payload = {...orderForm};
-    console.log(payload);
+    const updated = await handleOrderSubmit( orderForm._id, orderForm.internalNote );
+    if (updated) setOrderForm(updated);
   };
-  //const handleOrderReset = () => setOrderForm(orderInitial);
+  const handleOrderItemDelete = async () => {
+    const confirmed = window.confirm("ต้องการลบคำสั่งซื้อนี้หรือไม่?");
+    if (!confirmed) return;
+    const success = await handleOrderDelete(orderForm._id);
+    if (success) {
+      navigate("/admin/orders");
+    }
+  };
+
+  useEffect(() => {
+    const getOrder = async () => {
+      const data = await fetchOrderByNumber(orderNumber);
+      if (!data) {
+        setOrderForm(false);
+        return;
+      } else {
+        setOrderForm(data);
+      }
+    };
+    getOrder();
+  }, [orderNumber]);
+
+  if (orderForm === false) return <PageNotFound text="ไม่พบหน้าคำสั่งซื้อ" />;
+  if (orderNumber && orderForm === null) return <PageLoading />;
 
   return (
     <>
-      {!orderId || order
-        ? <>
-            <section id="orderEdit" className="flex flex-row flex-wrap justify-between items-center gap-10">
-              <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {order.orderId?.toUpperCase() || <DataNotFound />}</h1>
-              <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)} />
-              <table className="table-responsive">
-                <colgroup>
-                  <col className="w-px" />
-                  <col className="w-auto" />
-                </colgroup>
-                <tbody>
-                  <tr>
-                    <th>วันที่สั่งซื้อ</th>
-                    <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                  </tr>
-                  <tr>
-                    <th>ชื่อผู้สั่งชื่อ</th>
-                    <td>
-                      {order.customer.firstName || order.customer.lastName
-                        ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
-                        : <DataNotFound />}
-                    </td>
-                  </tr>
-                  {order.customer.company &&
-                    <tr>
-                      <th>ชื่อบริษัท</th>
-                      <td>{order.customer.company}</td>
-                    </tr>
-                  }
-                  {order.customer.taxId &&
-                    <tr>
-                      <th>เลขประจำตัว<br className="max-2xs:hidden" />ผู้เสียภาษีอากร</th>
-                      <td>{order.customer.taxId}</td>
-                    </tr>
-                  }
-                  <tr>
-                    <th>เบอร์ติดต่อ</th>
-                    <td>{order.customer.phone || <DataNotFound />}</td>
-                  </tr>
-                  {order.customer.phone2 &&
-                    <tr>
-                      <th>เบอร์สำรอง</th>
-                      <td>{order.customer.phone2}</td>
-                    </tr>
-                  }
-                  <tr>
-                    <th>อีเมล</th>
-                    <td>{order.customer.email || <DataNotFound />}</td>
-                  </tr>
-                  <tr>
-                    <th>ที่อยู่จัดส่ง</th>
-                    <td>
-                      {order.customer.shippingAddress.addressLine || order.customer.shippingAddress.subdistrict || order.customer.shippingAddress.district
-                        ? `${order.customer.shippingAddress.addressLine} ${order.customer.shippingAddress.subdistrict} ${order.customer.shippingAddress.district} ${order.customer.shippingAddress.province} ${order.customer.shippingAddress.postcode}`.trim()
-                        : <DataNotFound />}</td>
-                  </tr>
-                  <tr>
-                    <th>หมายเหตุ:</th>
-                    <td>{order.orderNote || <DataNotFound />}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="table-container">
-                <table>
-                  <colgroup>
-                    <col className="w-auto" />
-                    <col className="w-px" />
-                    <col className="w-px" />
-                    <col className="w-px" />
-                    <col className="w-px" />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th scope="col">รายการ</th>
-                      <th scope="col">รหัสสินค้า</th>
-                      <th scope="col" className="text-right">จำนวน</th>
-                      <th scope="col" className="text-right">ราคา/หน่วย</th>
-                      <th scope="col" className="text-right">ราคารวม</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order.items.map((item) => (
-                      <tr key={item.productId}>
-                        <td>{item.name || <DataNotFound />}</td>
-                        <td>{item.sku || <DataNotFound />}</td>
-                        <td className="text-right">{item.quantity > 0 ? item.quantity : <DataNotFound />}</td>
-                        <td className="text-right">{item.priceAtPurchase >= 0 ? FormatPrice(item.priceAtPurchase) : <DataNotFound />}</td>
-                        <td className="text-right">{item.priceAtPurchase >= 0 && item.quantity > 0 ? FormatPrice(item.priceAtPurchase * item.quantity) : <DataNotFound />}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  <tfoot>
-                    <tr className="border-t-neutral-disable">
-                      <td></td>
-                      <th colSpan="3">ยอดรวมสุทธิ</th>
-                      <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
-                    </tr>
-                  </tfoot>
-                </table>
+      <section id="orderEdit" className="flex flex-row flex-wrap justify-between items-center gap-10">
+        <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {orderForm.orderNumber?.toUpperCase() || <DataNotFound />}</h1>
+        <StatusOrder value={orderForm.status || ""} onChange={handleOrderItemStatusChange} />
+        <table className="table-responsive">
+          <colgroup>
+            <col className="w-px" />
+            <col className="w-auto" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>วันที่สั่งซื้อ</th>
+              <td>{orderForm.createdAt ? FormatDate(orderForm.createdAt) : <DataNotFound />}</td>
+            </tr>
+            <tr>
+              <th>ชื่อผู้สั่งชื่อ</th>
+              <td>
+                {orderForm.customer?.firstName || orderForm.customer?.lastName
+                  ? `คุณ${orderForm.customer.firstName} ${orderForm.customer.lastName}`.trim()
+                  : <DataNotFound />}
+              </td>
+            </tr>
+            {orderForm.customer?.company &&
+              <tr>
+                <th>ชื่อบริษัท</th>
+                <td>{orderForm.customer.company}</td>
+              </tr>
+            }
+            {orderForm.customer?.taxId &&
+              <tr>
+                <th>เลขประจำตัว<br className="max-2xs:hidden" />ผู้เสียภาษีอากร</th>
+                <td>{orderForm.customer.taxId}</td>
+              </tr>
+            }
+            <tr>
+              <th>เบอร์ติดต่อ</th>
+              <td>{orderForm.customer?.phone || <DataNotFound />}</td>
+            </tr>
+            {orderForm.customer?.phone2 &&
+              <tr>
+                <th>เบอร์สำรอง</th>
+                <td>{orderForm.customer.phone2}</td>
+              </tr>
+            }
+            <tr>
+              <th>อีเมล</th>
+              <td>{orderForm.customer?.email || <DataNotFound />}</td>
+            </tr>
+            <tr>
+              <th>ที่อยู่จัดส่ง</th>
+              <td>
+                {orderForm.customer?.shippingAddress.addressLine || orderForm.customer?.shippingAddress.subdistrict || orderForm.customer?.shippingAddress.district
+                  ? `${orderForm.customer?.shippingAddress.addressLine} ${orderForm.customer?.shippingAddress.subdistrict} ${orderForm.customer?.shippingAddress.district} ${orderForm.customer?.shippingAddress.province} ${orderForm.customer?.shippingAddress.postcode}`.trim()
+                  : <DataNotFound />}</td>
+            </tr>
+            <tr>
+              <th>หมายเหตุ:</th>
+              <td>{orderForm.orderNote || <DataNotFound />}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="table-container">
+          <table>
+            <colgroup>
+              <col className="w-auto" />
+              <col className="w-px" />
+              <col className="w-px" />
+              <col className="w-px" />
+              <col className="w-px" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">รายการ</th>
+                <th scope="col">รหัสสินค้า</th>
+                <th scope="col" className="text-right">จำนวน</th>
+                <th scope="col" className="text-right">ราคา/หน่วย</th>
+                <th scope="col" className="text-right">ราคารวม</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderForm.items?.map((item) => (
+                <tr key={item.productNumber}>
+                  <td>{item.name || <DataNotFound />}</td>
+                  <td>{item.sku || <DataNotFound />}</td>
+                  <td className="text-right">{item.quantity > 0 ? item.quantity : <DataNotFound />}</td>
+                  <td className="text-right">{item.priceAtPurchase >= 0 ? FormatPrice(item.priceAtPurchase) : <DataNotFound />}</td>
+                  <td className="text-right">{item.priceAtPurchase >= 0 && item.quantity > 0 ? FormatPrice(item.priceAtPurchase * item.quantity) : <DataNotFound />}</td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr className="border-t-neutral-disable">
+                <td></td>
+                <th colSpan="3">ยอดรวมสุทธิ</th>
+                <td className="text-right">{orderForm.totalPrice > 0 ? FormatPrice(orderForm.totalPrice) : <DataNotFound />}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <form className="lg:grow self-start lg:w-1/2" onSubmit={handleOrderItemSubmit}>
+          <div className="input-group">
+            <label htmlFor="internalNote">โน้ตภายใน:</label>
+            <textarea id="internalNote" name="internalNote" rows="5" value={orderForm.internalNote || ""} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
+          </div>
+          <div className="button-row max-xs:flex-col xs:justify-between">
+            <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">
+              <button type="submit" className="button w-full xs:w-fit">บันทึกข้อมูล</button>
+              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}>ยกเลิก</button>
+            </div>
+            {orderNumber &&
+              <div className="input-group xs:w-fit">
+                <hr className="xs:hidden my-5" />
+                <button type="button" className="button button-soft button-error w-full xs:w-fit" onClick={handleOrderItemDelete}>ลบคำสั่งซื้อนี้</button>
               </div>
-              <form className="lg:grow self-start lg:w-1/2" onSubmit={handleOrderSubmit}>
-                <div className="input-group">
-                  <label htmlFor="internalNote">โน้ตภายใน:</label>
-                  <textarea id="internalNote" name="internalNote" rows="5" value={orderForm.internalNote} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
-                </div>
-                <div className="button-row">
-                  <button type="button" className="button button-soft button-content" onClick={handleBack}>ยกเลิก</button>
-                  <button type="submit" className="button">บันทึกข้อมูล</button>
-                </div>
-              </form>
-            </section>
-          </>
-        : <PageNotFound text="ไม่พบหน้าคำสั่งซื้อ" />
-      }
+            }
+          </div>
+        </form>
+        <Toast {...toast} />
+      </section>
     </>
   );
 

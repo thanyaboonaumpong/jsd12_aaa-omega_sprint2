@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { MessageContext } from "../../contexts/messageContext/MessageContext";
 
-import { fetchProductByNumber, createProduct, updateProduct } from "../../api/admin/product";
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
+import { fetchProductByNumber, createProduct, updateProduct, deleteProduct } from "../../api/admin/product";
 import { PageNotFound, ImageNotFound, PageLoading } from "../../components/common/NotFound";
 
 const productInitial = {
@@ -36,11 +36,7 @@ export default function AdminProductForm() {
   const { productNumber } = useParams();
 
   const [productForm, setProductForm] = useState(productNumber ? null : productInitial);
-  const handleProductChange = (event) => {
-    const { name, value, files } = event.target;
-    setProductForm((prev) => ({ ...prev, [name]: files?.length ? files[0] : value }));
-    console.log(productForm);
-  };
+  const handleProductChange = (event) => setProductForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   const handleProductImageChange = (event) => setProductForm((prev) => ({ ...prev, image: { ...prev.image, [event.target.name]: event.target.value} }));
   const handleProductSubmit = async (event) => {
     event.preventDefault();
@@ -53,7 +49,6 @@ export default function AdminProductForm() {
       stock: Number(productForm.stock) || 0,
       stockMin: Number(productForm.stockMin) || 0,
     };
-    //console.log(payload);
     try {
       let result;
       if (productNumber) {
@@ -71,6 +66,22 @@ export default function AdminProductForm() {
           : "เพิ่มสินค้าเรียบร้อยแล้ว"
       );
       setProducts(prev => prev.map(item => item._id === result._id ? result : item));
+      navigate("/admin/products");
+    } catch (error) {
+      console.error(error);
+      alert("เกิดข้อผิดพลาด!");
+    }
+  };
+  const handleProductDelete = async () => {
+    try {
+      if (!productForm?._id) return;
+      const result = await deleteProduct(productForm._id);
+      if (!result) {
+        alert("ลบสินค้าไม่สำเร็จ");
+        return;
+      }
+      alert("ลบสินค้าเรียบร้อยแล้ว");
+      setProducts(prev => prev.filter(item => item._id !== productForm._id));
       navigate("/admin/products");
     } catch (error) {
       console.error(error);
@@ -179,9 +190,17 @@ export default function AdminProductForm() {
             <label htmlFor="description">รายละเอียด</label>
             <textarea id="description" name="description" rows="5" value={productForm.description} onChange={handleProductChange} placeholder="ระบุคุณสมบัติ จุดเด่น การใช้งาน และการรับประกัน" maxLength="2000"></textarea>
           </div>
-          <div className="button-row">
-            <button type="button" className="button button-soft button-content" onClick={handleBack}>ยกเลิก</button>
-            <button type="submit" className="button">{productNumber ? "บันทึกข้อมูล" : "เพิ่มสินค้า"}</button>
+          <div className="button-row max-xs:flex-col xs:justify-between">
+            <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">
+              <button type="submit" className="button w-full xs:w-fit">{productNumber ? "บันทึกข้อมูล" : "เพิ่มสินค้า"}</button>
+              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}>ยกเลิก</button>
+            </div>
+            {productNumber &&
+              <div className="input-group xs:w-fit">
+                <hr className="xs:hidden my-5" />
+                <button type="button" className="button button-soft button-error w-full xs:w-fit" onClick={handleProductDelete}>ลบสินค้านี้</button>
+              </div>
+            }
           </div>
         </form>
       </section>

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import { PageNotFound, DataNotFound, ImageNotFound } from "../../components/common/NotFound";
-import { StatusService, ServiceType, ServiceTeam } from "../../components/common/SelectStatus";
+import { StatusService, ServiceType, ServiceTeam } from "../../components/admin/common/SelectStatus";
 import { FormatDateTime } from "../../utils/FormatDate";
 
 export default function AdminServiceForm() {

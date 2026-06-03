@@ -1,40 +1,115 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
 import { MessageContext } from "./MessageContext";
 import { fetchProducts } from "../../api/admin/product";
-
-//import { products } from "../../mockup-data/products";
-import { orders } from "../../mockup-data/orders";
-import { services } from "../../mockup-data/services";
-import { users } from "../../mockup-data/users";
+import { fetchOrders, updateOrderStatus, updateOrderInternalNote, deleteOrder } from "../../api/admin/order";
 
 export const MessageProvider = ({children}) => {
 
   const isDev = import.meta.env.VITE_IS_DEV === "true" || false;
   const itemPerPage = Number(import.meta.env.VITE_ITEM_PER_PAGE) || 10;
 
-  // Dashboard
+  // Dashboard - Nav Main
   const [adminNavMainActive, setAdminNavMainActive] = useState(false);
   const handleAdminNavMainToggle = () => setAdminNavMainActive(!adminNavMainActive);
   const handleAdminNavSidebarClose = () => setTimeout(() => setAdminNavMainActive(false), 300);
 
-  const [products, setProducts] = useState([]);
+  const [toast, setToast] = useState({ show: false, message: "" });
+  const toastTimer = useRef(null);
+  const showToast = (message) => {
+    if (toastTimer.current) {
+      clearTimeout(toastTimer.current);
+    };
+    setToast({ show: true, message });
+    toastTimer.current = setTimeout(() => {
+      setToast({ show: false, message: "" });
+      toastTimer.current = null;
+    }, 3000);
+  };
+  useEffect(() => {
+    return () => {
+      if (toastTimer.current) {
+        clearTimeout(toastTimer.current);
+      };
+    };
+  }, []);
 
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     const getProducts = async () => setProducts(await fetchProducts() || []);
     getProducts();
-  }, [])
+  }, []);
 
-  const handleOrderStatusChange = (orderId, status) => console.log("orderId", !!orderId, "- status", !!status);
-  const handleServiceStatusChange = (serviceId, status) => console.log("serviceId", !!serviceId, "- status", !!status);
-  const handleServiceTypeChange = (serviceId, serviceType) => console.log("serviceId", !!serviceId, "- serviceType", !!serviceType);
-  const handleServiceTeamChange = (serviceId, team) => console.log("serviceId", !!serviceId, "- team", !!team);
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    const getOrders = async () => setOrders(await fetchOrders() || []);
+    getOrders();
+  }, []);
+
+  const handleOrderStatusChange = async (id, status) => {
+    try {
+      showToast("กำลังบันทึกสถานะคำสั่งซื้อ...");
+      const updated = await updateOrderStatus(id, { status });
+      if (updated) {
+        setOrders((prev) => prev.map((item) => item._id === id ? { ...item, status: updated.status } : item ));
+        showToast("บันทึกสถานะคำสั่งซื้อสำเร็จ");
+      } else {
+        showToast("บันทึกสถานะคำสั่งซื้อไม่สำเร็จ");
+      };
+      return updated;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
+  const handleOrderSubmit = async (id, internalNote) => {
+    try {
+      showToast("กำลังบันทึกโน้ตคำสั่งซื้อ...");
+      const updated = await updateOrderInternalNote(id, { internalNote });
+      if (updated) {
+        setOrders((prev) => prev.map((item) => item._id === id ? { ...item, internalNote: updated.internalNote } : item ));
+        showToast("บันทึกโน้ตคำสั่งซื้อสำเร็จ");
+      } else {
+        showToast("บันทึกโน้ตคำสั่งซื้อไม่สำเร็จ");
+      };
+      return updated;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
+  const handleOrderDelete = async (id) => {
+    try {
+      showToast("กำลังลบคำสั่งซื้อ...");
+      const deleted = await deleteOrder(id);
+      if (deleted) {
+        setOrders((prev) => prev.filter((item) => item._id !== id));
+        showToast("ลบคำสั่งซื้อสำเร็จ");
+      } else {
+        showToast("ลบคำสั่งซื้อไม่สำเร็จ");
+      }
+      return deleted;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
+
+  //const handleServiceStatusChange = (serviceId, status) => {};
+  //const handleServiceTypeChange = (serviceId, serviceType) => {};
+  //const handleServiceTeamChange = (serviceId, team) => {};
 
   return(
     <MessageContext.Provider value={{
       isDev, itemPerPage,
-      products, setProducts, orders, services, users,
       adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose,
-      handleOrderStatusChange, handleServiceStatusChange, handleServiceTypeChange, handleServiceTeamChange
+      toast, 
+      products, setProducts,
+      orders, setOrders, handleOrderStatusChange, handleOrderSubmit, handleOrderDelete,
+      /*handleServiceStatusChange, handleServiceTypeChange, handleServiceTeamChange*/
     }}>
       {children}
     </MessageContext.Provider>

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
 import { DataNotFound } from "../../components/common/NotFound";
-import { StatusOrder, StatusService, ServiceType, ServiceTeam } from "../../components/common/SelectStatus";
+import { StatusOrder, StatusService, ServiceType, ServiceTeam } from "../../components/admin/common/SelectStatus";
 import { FormatDate, FormatDateTime } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
 
@@ -29,7 +29,7 @@ export default function AdminHome() {
         <StatCard title="สินค้าใกล้หมด" value="12" subtext="รายการ" />
       </section>
       <section id="orderList" className="flex flex-row flex-wrap justify-between items-center gap-5">
-        <h2>คำสั่งซื้อล่าสุด</h2>
+        <h2 className="h1">คำสั่งซื้อล่าสุด</h2>
         <div className="table-container xs:order-3">
           <table>
             <colgroup>
@@ -68,12 +68,12 @@ export default function AdminHome() {
             </tbody>
           </table>
         </div>
-        <Link className="button button-soft button-primary" to="./orders">คำสั่งซื้อทั้งหมด</Link>
+        <Link className="button button-soft button-content w-full xs:w-fit" to="./orders">คำสั่งซื้อทั้งหมด</Link>
       </section>
+      <hr className="xs:hidden" />
       <section id="serviceList" className="flex flex-row flex-wrap justify-between items-center gap-5">
         <h1>ตารางนัดหมาย</h1>
-        <Link className="button button-soft button-primary w-full xs:w-fit" to="./create">เพิ่มนัดหมายใหม่</Link>
-        <div className="table-container">
+        <div className="table-container xs:order-3">
           <table>
             <colgroup>
               <col className="w-px" />
@@ -125,6 +125,7 @@ export default function AdminHome() {
             </tbody>
           </table>
         </div>
+        <Link className="button button-soft button-content w-full xs:w-fit" to="./services">นัดหมายทั้งหมด</Link>
       </section>
     </>
   );
