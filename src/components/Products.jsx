@@ -1,24 +1,13 @@
 export const allProducts = [
   {
-    id: "huawei-5kw-on-grid-inverter",
-    title: "Huawei 5kW 1 Phase On-Grid String Inverter (SUN2000-5K-LC0)",
+    productNumber: 35,
+    name: "Huawei 5kW 1 Phase On-Grid String Inverter (SUN2000-5K-LC0)",
+    sku: "hw-inv-5kw-1p",
     brand: "Huawei",
     category: "Inverter",
-    priceCurrent: 28550,
-    priceOriginal: 33940,
-    stock: 15,
-    rating: 5,
-    ratingCount: 12,
-    warranty: "10 Years Thai Center Warranty",
-    images: [
-      "http://localhost:5173/public/001huawei5kw.jpg",
-      "http://localhost:5173/public/002huawei5kw.jpg",
-      "http://localhost:5173/public/003huawei5kw.jpg"
-    ],
-    // รายละเอียดแบบเล่าเรื่อง
+    warranty: 10,
     description: "อินเวอร์เตอร์ประสิทธิภาพสูงจาก Huawei ออกแบบมาเพื่อระบบโซล่าร์เซลล์ภาคครัวเรือนโดยเฉพาะ มาพร้อมเทคโนโลยี AI-Powered AFCI ที่ช่วยป้องกันการเกิดประกายไฟ (Arc Fault) ซึ่งเป็นสาเหตุหลักของไฟไหม้ ตัวเครื่องทำงานเงียบเนื่องจากไม่มีพัดลม (Natural Convection) และรองรับการเชื่อมต่อกับ Battery ระบบกักเก็บพลังงานของ Huawei ในอนาคต",
-    // รายละเอียดสเปกแบบเจาะลึก (Array เพื่อเอาไป Map ลง Table)
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN2000-5K-LC0" },
       { label: "กำลังไฟฟ้าสูงสุด (Max. Output Power)", value: "5,000 W" },
       { label: "ประสิทธิภาพสูงสุด (Max. Efficiency)", value: "98.4%" },
@@ -35,7 +24,6 @@ export const allProducts = [
       { label: "ฟังก์ชันความปลอดภัย", value: "AI-Powered AFCI (ป้องกันไฟไหม้)" },
       { label: "มาตรฐานรองรับ", value: "MEA / PEA ผ่านการรับรอง" }
     ],
-    // จุดเด่นแบบ Bullet points (เอาไปใส่ในส่วน Highlights)
     features: [
       "เทคโนโลยี AI-Powered ช่วยวิเคราะห์และตัดวงจรเมื่อเกิด Arc ได้แม่นยำภายใน 0.5 วินาที",
       "รองรับ Optimizer เพื่อเพิ่มประสิทธิภาพการผลิตไฟรายแผง (กรณีมีเงาบัง)",
@@ -43,26 +31,31 @@ export const allProducts = [
       "Built-in ระบบกันไฟย้อน (Zero Export) เมื่อใช้งานคู่กับ Smart Power Sensor",
       "ดูข้อมูลผ่านแอป FusionSolar ได้แบบ Real-time ทุกที่ทั่วโลก",
       "ทนทานต่อสภาพอากาศเมืองไทยด้วยวัสดุกันการกัดกร่อนคุณภาพสูง"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001huawei5kw.jpg",
+      cloudinaryId: "solar_products/001huawei5kw"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002huawei5kw.jpg", cloudinaryId: "solar_products/002huawei5kw" },
+      { url: "http://localhost:5173/public/003huawei5kw.jpg", cloudinaryId: "solar_products/003huawei5kw" }
+    ],
+    tags: ["huawei", "inverter", "5kw", "ongrid"],
+    price: 28550,
+    salePrice: 33940,
+    stock: 15,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "jinko-tiger-pro-550w",
-    title: "Jinko Solar Tiger Pro 72HC 550W Mono-Crystalline Module",
+    productNumber: 36,
+    name: "Jinko Solar Tiger Pro 72HC 550W Mono-Crystalline Module",
+    sku: "jk-pan-550w",
     brand: "Jinko Solar",
     category: "Solar Panel",
-    priceCurrent: 4200,
-    priceOriginal: 4800,
-    stock: 50,
-    rating: 4.8,
-    ratingCount: 45,
-    warranty: "12 Years Product / 25 Years Linear Power Warranty",
-    images: [
-      "http://localhost:5173/public/001jinko550w.jpg",
-      "http://localhost:5173/public/002jinko550w.jpg",
-      "http://localhost:5173/public/003jinko550w.jpg"
-    ],
+    warranty: 12,
     description: "แผงโซล่าร์เซลล์ระดับ Tier 1 จาก Jinko Solar รุ่น Tiger Pro 550W ใช้เทคโนโลยี Multi Busbar (MBB) ล่าสุด เพื่อลดการสูญเสียพลังงานภายในเซลล์และเพิ่มความทนทานต่อการเกิด Micro-crack เหมาะสำหรับการติดตั้งบนหลังคาบ้านและโรงงานอุตสาหกรรม",
-    technicalSpecs: [
+    specs: [
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "550 Wp" },
       { label: "ประเภทเซลล์ (Cell Type)", value: "P-type Mono-crystalline" },
       { label: "จำนวนเซลล์ (Number of Cells)", value: "144 (6x24) Half-cut" },
@@ -82,26 +75,31 @@ export const allProducts = [
       "ลดการสูญเสียพลังงานจากการเชื่อมต่อเซลล์ (MBB Technology)",
       "ผ่านการทดสอบความทนทานต่อละอองเกลือและแอมโมเนีย (Salt Mist/Ammonia Resistance)",
       "การรับประกันประสิทธิภาพการผลิตไฟไม่ต่ำกว่า 84.8% เมื่อครบ 25 ปี"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001jinko550w.jpg",
+      cloudinaryId: "solar_products/001jinko550w"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002jinko550w.jpg", cloudinaryId: "solar_products/002jinko550w" },
+      { url: "http://localhost:5173/public/003jinko550w.jpg", cloudinaryId: "solar_products/003jinko550w" }
+    ],
+    tags: ["jinko", "panel", "550w", "mono"],
+    price: 4200,
+    salePrice: 4800,
+    stock: 50,
+    stockMin: 5,
+    isActive: true
   },
-{
-    id: "huawei-10kw-3-phase-inverter",
-    title: "Huawei 10kW 3 Phase On-Grid Inverter (SUN2000-10KTL-M1)",
+  {
+    productNumber: 37,
+    name: "Huawei 10kW 3 Phase On-Grid Inverter (SUN2000-10KTL-M1)",
+    sku: "hw-inv-10kw-3p",
     brand: "Huawei",
     category: "Inverter",
-    priceCurrent: 48500,
-    priceOriginal: 55000,
-    stock: 8,
-    rating: 5,
-    ratingCount: 8,
-    warranty: "10 Years Warranty",
-    images: [
-      "http://localhost:5173/public/001huawei10kw.jpg",
-      "http://localhost:5173/public/002huawei10kw.jpg",
-      "http://localhost:5173/public/003huawei10kw.jpg"
-    ],
+    warranty: 10,
     description: "อินเวอร์เตอร์ระบบ 3 เฟสที่ออกแบบมาเพื่อบ้านขนาดใหญ่หรืออาคารสำนักงาน รองรับการทำงานร่วมกับ Battery (ESS) ของ Huawei ได้ทันทีโดยไม่ต้องซื้ออุปกรณ์เพิ่ม (Battery Ready) มาพร้อมระบบระบายความร้อนประสิทธิภาพสูงและความปลอดภัยระดับสูงสุด",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN2000-10KTL-M1" },
       { label: "แรงดันไฟฟ้าสูงสุด (Max. Input Voltage)", value: "1,100 V" },
       { label: "กระแสไฟฟ้าเข้าสูงสุด (Max. Input Current)", value: "11 A / 11 A" },
@@ -130,26 +128,31 @@ export const allProducts = [
       "High Efficiency: ประสิทธิภาพการแปลงไฟสูงสุดถึง 98.6%",
       "Smart Monitoring: ดูข้อมูลละเอียดรายแผง (เมื่อใช้ร่วมกับ Optimizer)",
       "Compact Design: ตัวเครื่องบางและเบากว่าอินเวอร์เตอร์ 3 เฟสทั่วไปในตลาด"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001huawei10kw.jpg",
+      cloudinaryId: "solar_products/001huawei10kw"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002huawei10kw.jpg", cloudinaryId: "solar_products/002huawei10kw" },
+      { url: "http://localhost:5173/public/003huawei10kw.jpg", cloudinaryId: "solar_products/003huawei10kw" }
+    ],
+    tags: ["huawei", "inverter", "10kw", "3phase"],
+    price: 48500,
+    salePrice: 55000,
+    stock: 8,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "sungrow-5kw-1-phase-inverter",
-    title: "Sungrow 5kW 1 Phase On-Grid Inverter (SG5.0RS)",
+    productNumber: 38,
+    name: "Sungrow 5kW 1 Phase On-Grid Inverter (SG5.0RS)",
+    sku: "sg-inv-5kw-1p",
     brand: "Sungrow",
     category: "Inverter",
-    priceCurrent: 24900,
-    priceOriginal: 29500,
-    stock: 12,
-    rating: 4.9,
-    ratingCount: 15,
-    warranty: "10 Years Warranty (Thai Center)",
-    images: ["http://localhost:5173/public/001sungrow5kw.jpg",
-      "http://localhost:5173/public/002sungrow5kw.jpg",
-      "http://localhost:5173/public/003sungrow5kw.jpg"
-    ],
-
+    warranty: 10,
     description: "Sungrow รุ่นใหม่ล่าสุดซีรีส์ RS ออกแบบมาให้สวยงามเหมือนเครื่องใช้ไฟฟ้าในบ้าน หน้าจอ LED สว่างชัดเจน ติดตั้งง่ายด้วยระบบ Plug & Play และมีระบบความปลอดภัยที่ผ่านการรับรองจากทั้ง กฟน. และ กฟภ.",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SG5.0RS" },
       { label: "กำลังไฟฟ้าขาเข้าสูงสุด", value: "7,500 W (DC Oversizing 1.5 เท่า)" },
       { label: "แรงดันไฟฟ้าขาเข้าสูงสุด", value: "600 V" },
@@ -178,25 +181,31 @@ export const allProducts = [
       "Real-time Data: อัปเดตข้อมูลการผลิตไฟทุกๆ 10 วินาทีผ่านแอป",
       "Noise Level: เงียบสนิท (< 25 dB) ติดตั้งใกล้ห้องนอนได้",
       "Global Brand: แบรนด์อินเวอร์เตอร์ที่มียอดขายอันดับต้นๆ ของโลก"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001sungrow5kw.jpg",
+      cloudinaryId: "solar_products/001sungrow5kw"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002sungrow5kw.jpg", cloudinaryId: "solar_products/002sungrow5kw" },
+      { url: "http://localhost:5173/public/003sungrow5kw.jpg", cloudinaryId: "solar_products/003sungrow5kw" }
+    ],
+    tags: ["sungrow", "inverter", "5kw", "rs"],
+    price: 24900,
+    salePrice: 29500,
+    stock: 12,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "growatt-5kw-1-phase-inverter",
-    title: "Growatt 5kW 1 Phase On-Grid Inverter (MIN 5000TL-X)",
+    productNumber: 39,
+    name: "Growatt 5kW 1 Phase On-Grid Inverter (MIN 5000TL-X)",
+    sku: "gw-inv-5kw-1p",
     brand: "Growatt",
     category: "Inverter",
-    priceCurrent: 21500,
-    priceOriginal: 26000,
-    stock: 20,
-    rating: 4.8,
-    ratingCount: 22,
-    warranty: "5-10 Years Warranty",
-    images: ["http://localhost:5173/public/001growatt5kw.jpg",
-      "http://localhost:5173/public/002growatt5kw.jpg",
-      "http://localhost:5173/public/003growatt5kw.jpg"
-    ],
+    warranty: 5,
     description: "อินเวอร์เตอร์ที่คุ้มค่าที่สุดในแง่ของราคาต่อประสิทธิภาพ รุ่น TL-X มีดีไซน์ทันสมัยด้วยหน้าจอสัมผัส OLED ทนทานต่อสภาพอากาศได้ดีเยี่ยม และเป็นที่นิยมอย่างมากในกลุ่มช่างติดตั้งโซล่าร์เซลล์ในไทย",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "MIN 5000TL-X" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "7,000 W" },
       { label: "แรงดัน DC สูงสุด", value: "550 V" },
@@ -225,25 +234,31 @@ export const allProducts = [
       "Dual MPPT: ช่วยให้ติดตั้งแผงบนหลังคาที่มี 2 ทิศทางได้อย่างอิสระ",
       "Design: ออกแบบมาให้ระบายความร้อนได้ดีเยี่ยมแม้ติดตั้งกลางแจ้ง",
       "Value for Money: ได้สเปกสูงในราคามิตรภาพ เหมาะกับงบประมาณเริ่มต้น"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001growatt5kw.jpg",
+      cloudinaryId: "solar_products/001growatt5kw"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002growatt5kw.jpg", cloudinaryId: "solar_products/002growatt5kw" },
+      { url: "http://localhost:5173/public/003growatt5kw.jpg", cloudinaryId: "solar_products/003growatt5kw" }
+    ],
+    tags: ["growatt", "inverter", "5kw", "min"],
+    price: 21500,
+    salePrice: 26000,
+    stock: 20,
+    stockMin: 3,
+    isActive: true
   },
   {
-    id: "trina-vertex-s-plus-450w",
-    title: "Trina Solar Vertex S+ 450W Dual Glass N-type i-TOPCon (NEG9R.28)",
+    productNumber: 40,
+    name: "Trina Solar Vertex S+ 450W Dual Glass N-type i-TOPCon (NEG9R.28)",
+    sku: "tn-pan-450w",
     brand: "Trina Solar",
     category: "Solar Panel",
-    priceCurrent: 4500,
-    priceOriginal: 5200,
-    stock: 40,
-    rating: 5,
-    ratingCount: 18,
-    warranty: "25 Years Product / 30 Years Power Warranty",
-    images: ["http://localhost:5173/public/001trinavertex450w.jpg",
-      "http://localhost:5173/public/002trinavertex450w.jpg",
-      "http://localhost:5173/public/003trinavertex450w.jpg"
-    ],
+    warranty: 25,
     description: "แผงโซล่าร์เซลล์ระดับพรีเมียมจาก Trina Solar รุ่น Vertex S+ ใช้เทคโนโลยี N-type i-TOPCon ล่าสุด พร้อมโครงสร้างกระจก 2 ด้าน (Dual Glass) แข็งแรงทนทานเป็นพิเศษ ป้องกันการกัดกร่อนจากไอเกลือและแอมโมเนียได้ดีเยี่ยม เหมาะสำหรับบ้านพักอาศัยที่ต้องการประสิทธิภาพสูงสุดในพื้นที่จำกัด",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "NEG9R.28 (Vertex S+)" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "450 W" },
       { label: "แรงดันไฟฟ้าที่ Pmax (Vmp)", value: "44.6 V" },
@@ -272,25 +287,31 @@ export const allProducts = [
       "High Efficiency: ให้พลังงานสูงแม้ในสภาวะแสงน้อยหรืออุณหภูมิสูง",
       "Compact Size: ออกแบบมาให้ติดตั้งบนหลังคาบ้านได้ง่ายและสวยงาม",
       "Better Warranty: รับประกันการผลิตไฟยาวนานถึง 30 ปี"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001trinavertex450w.jpg",
+      cloudinaryId: "solar_products/001trinavertex450w"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002trinavertex450w.jpg", cloudinaryId: "solar_products/002trinavertex450w" },
+      { url: "http://localhost:5173/public/003trinavertex450w.jpg", cloudinaryId: "solar_products/003trinavertex450w" }
+    ],
+    tags: ["trina", "panel", "450w", "dualglass"],
+    price: 4500,
+    salePrice: 5200,
+    stock: 40,
+    stockMin: 4,
+    isActive: true
   },
   {
-    id: "longi-himo6-585w",
-    title: "LONGi Hi-MO 6 Explorer 585W HPBC Technology (LR5-72HTH)",
+    productNumber: 41,
+    name: "LONGi Hi-MO 6 Explorer 585W HPBC Technology (LR5-72HTH)",
+    sku: "lg-pan-585w",
     brand: "LONGi Solar",
     category: "Solar Panel",
-    priceCurrent: 4800,
-    priceOriginal: 5500,
-    stock: 60,
-    rating: 4.9,
-    ratingCount: 25,
-    warranty: "15 Years Product / 25 Years Power Warranty",
-    images: ["http://localhost:5173/public/001longi585w.jpg",
-      "http://localhost:5173/public/002longi585w.jpg",
-      "http://localhost:5173/public/003longi585w.jpg"
-    ],
+    warranty: 15,
     description: "LONGi Hi-MO 6 คือนวัตกรรมใหม่ที่ใช้เทคโนโลยี HPBC (Hybrid Passivated Back Contact) ซึ่งไม่มีเส้น Grid ด้านหน้าแผง ทำให้รับแสงได้เต็มที่ 100% และดูสวยงามแบบ Minimalist ให้ประสิทธิภาพการแปลงพลังงานสูงกว่าแผงทั่วไปอย่างชัดเจน และมีความเสถียรในการผลิตไฟระยะยาว",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "LR5-72HTH-585M" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "585 W" },
       { label: "แรงดันไฟฟ้าที่ Pmax (Vmp)", value: "44.06 V" },
@@ -319,25 +340,31 @@ export const allProducts = [
       "Anti-Dust Build-up: ออกแบบเฟรมลดการสะสมของฝุ่นบริเวณขอบแผง",
       "Higher Power Output: ผลิตไฟฟ้าได้มากกว่าแผง PERC ทั่วไปประมาณ 6-10%",
       "Global Tier 1: ผลิตจากผู้เชี่ยวชาญด้านแผงโซล่าร์เซลล์อันดับ 1 ของโลก"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001longi585w.jpg",
+      cloudinaryId: "solar_products/001longi585w"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002longi585w.jpg", cloudinaryId: "solar_products/002longi585w" },
+      { url: "http://localhost:5173/public/003longi585w.jpg", cloudinaryId: "solar_products/003longi585w" }
+    ],
+    tags: ["longi", "panel", "585w", "himo6"],
+    price: 4800,
+    salePrice: 5500,
+    stock: 60,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "canadian-solar-hiku7-660w",
-    title: "Canadian Solar HiKu7 Mono PERC 660W (CS7N-660MS)",
+    productNumber: 42,
+    name: "Canadian Solar HiKu7 Mono PERC 660W (CS7N-660MS)",
+    sku: "cs-pan-660w",
     brand: "Canadian Solar",
     category: "Solar Panel",
-    priceCurrent: 5200,
-    priceOriginal: 6100,
-    stock: 30,
-    rating: 4.8,
-    ratingCount: 14,
-    warranty: "12 Years Product / 25 Years Power Warranty",
-    images: ["http://localhost:5173/public/001cndsl660w.jpg",
-      "http://localhost:5173/public/002cndsl660w.jpg",
-      "http://localhost:5173/public/003cndsl660w.jpg"
-    ],
+    warranty: 12,
     description: "แผงโซล่าร์เซลล์กำลังสูงขนาดใหญ่พิเศษ HiKu7 จาก Canadian Solar ออกแบบมาเพื่อโครงการที่ต้องการกำลังไฟมหาศาลต่อแผง ใช้เทคโนโลยี Dual Cell และ Multi-busbar เพื่อลดการสูญเสียพลังงานภายในและลดจุดร้อน (Hot spots) บนแผง ให้ความคุ้มค่าสูงสุดในเชิงวิศวกรรม",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "CS7N-660MS" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "660 W" },
       { label: "แรงดันไฟฟ้าที่ Pmax (Vmp)", value: "38.3 V" },
@@ -366,25 +393,31 @@ export const allProducts = [
       "Multi-busbar (MBB): ช่วยกระจายกระแสไฟฟ้าได้ดีขึ้น ลดความร้อนสะสม",
       "Low NMOT: ทำงานได้ที่อุณหภูมิแผงต่ำกว่าปกติ ช่วยยืดอายุเซลล์",
       "Optimized Design: ออกแบบมาเพื่อโครงการโซล่าร์ฟาร์มและโรงงานอุตสาหกรรม"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001cndsl660w.jpg",
+      cloudinaryId: "solar_products/001cndsl660w"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002cndsl660w.jpg", cloudinaryId: "solar_products/002cndsl660w" },
+      { url: "http://localhost:5173/public/003cndsl660w.jpg", cloudinaryId: "solar_products/003cndsl660w" }
+    ],
+    tags: ["canadian", "panel", "660w", "hiku7"],
+    price: 5200,
+    salePrice: 6100,
+    stock: 30,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "huawei-luna2000-10-s0-battery",
-    title: "Huawei LUNA2000-10-S0 Smart String Energy Storage (10kWh)",
+    productNumber: 43,
+    name: "Huawei LUNA2000-10-S0 Smart String Energy Storage (10kWh)",
+    sku: "hw-bat-10kwh",
     brand: "Huawei",
     category: "Battery",
-    priceCurrent: 185000,
-    priceOriginal: 215000,
-    stock: 5,
-    rating: 5,
-    ratingCount: 6,
-    warranty: "10 Years Warranty",
-    images: ["http://localhost:5173/public/001huawei-luna2000-10kwh.jpg",
-      "http://localhost:5173/public/002huawei-luna2000-10kwh.jpg",
-      "http://localhost:5173/public/003huawei-luna2000-10kwh.jpg"
-    ],
+    warranty: 10,
     description: "แบตเตอรี่อัจฉริยะจาก Huawei รุ่น LUNA2000 ออกแบบมาให้มีความสวยงามเหมือนเฟอร์นิเจอร์ในบ้าน มีระบบจัดการพลังงานในระดับโมดูล (Module-level optimization) ช่วยให้สามารถดึงพลังงานมาใช้ได้เต็มที่ 100% (100% Depth of Discharge) และมีความปลอดภัยสูงสุดด้วยเซลล์ LiFePO4",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "LUNA2000-10-S0 (Power Module + 2 Battery Modules)" },
       { label: "พลังงานที่ใช้งานได้ (Usable Energy)", value: "10 kWh" },
       { label: "กำลังขับสูงสุด (Max. Output Power)", value: "5 kW" },
@@ -409,27 +442,33 @@ export const allProducts = [
       "Easy Installation: ติดตั้งง่ายด้วยระบบ Plug & Play ไม่ต้องเดินสายซับซ้อนระหว่างโมดูล",
       "High Safety: มาพร้อมระบบดับเพลิงในตัว (Built-in Fire Suppression Bag) เพิ่มความอุ่นใจ",
       "FusionSolar App: ตรวจสอบสถานะแบตเตอรี่แบบละเอียดผ่านแอปพลิเคชันได้ตลอดเวลา"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001huawei-luna2000-10kwh.jpg",
+      cloudinaryId: "solar_products/001huawei-luna2000-10kwh"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002huawei-luna2000-10kwh.jpg", cloudinaryId: "solar_products/002huawei-luna2000-10kwh" },
+      { url: "http://localhost:5173/public/003huawei-luna2000-10kwh.jpg", cloudinaryId: "solar_products/003huawei-luna2000-10kwh" }
+    ],
+    tags: ["huawei", "battery", "10kwh", "luna"],
+    price: 185000,
+    salePrice: 215000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "byd-battery-box-hvs-10-2",
-    title: "BYD Battery-Box Premium HVS 10.2 (High Voltage Battery)",
+    productNumber: 44,
+    name: "BYD Battery-Box Premium HVS 10.2 (High Voltage Battery)",
+    sku: "byd-bat-10.2",
     brand: "BYD",
     category: "Battery",
-    priceCurrent: 168000,
-    priceOriginal: 189000,
-    stock: 3,
-    rating: 4.9,
-    ratingCount: 10,
-    warranty: "10 Years Warranty",
-    images: ["http://localhost:5173/public/001byd-batt-box10-2.jpg",
-      "http://localhost:5173/public/002byd-batt-box10-2.jpg",
-      "http://localhost:5173/public/003byd-batt-box10-2.jpg"
-    ],
+    warranty: 10,
     description: "BYD คือผู้นำด้านแบตเตอรี่ระดับโลก รุ่น Battery-Box Premium HVS เป็นแบตเตอรี่แรงดันสูงที่เน้นประสิทธิภาพการจ่ายไฟที่รุนแรงและรวดเร็ว เหมาะสำหรับบ้านที่ต้องการสำรองไฟแบบ Off-grid หรือใช้ร่วมกับ Inverter ยี่ห้อดังอย่าง Fronius, Sungrow หรือ SMA",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "Battery-Box Premium HVS 10.2" },
-      { label: "จำนวนโมดูล", value: "4 HVS Modules ขนานกันในแนวตั้ง" },
+      { label: "จำนวนโมดูล", value: "4 HVS Modules ขนานกัน in แนวตั้ง" },
       { label: "ความจุพลังงาน (Usable Energy)", value: "10.24 kWh" },
       { label: "กระแสขาออกสูงสุด (Max Output Current)", value: "25 A" },
       { label: "กระแสขาออกพีค (Peak Output Current)", value: "50 A (3 วินาที)" },
@@ -451,25 +490,31 @@ export const allProducts = [
       "Patented Plug Design: ออกแบบการเชื่อมต่อแบบไร้สายระหว่างโมดูล ลดความเสี่ยงจากการเดินสายผิด",
       "Multi-Brand Compatible: รองรับอินเวอร์เตอร์ Hybrid ชั้นนำได้หลากหลายยี่ห้อ",
       "Premium Quality: ผ่านมาตรฐานความปลอดภัยเยอรมัน VDE 2510-50"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001byd-batt-box10-2.jpg",
+      cloudinaryId: "solar_products/001byd-batt-box10-2"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002byd-batt-box10-2.jpg", cloudinaryId: "solar_products/002byd-batt-box10-2" },
+      { url: "http://localhost:5173/public/003byd-batt-box10-2.jpg", cloudinaryId: "solar_products/003byd-batt-box10-2" }
+    ],
+    tags: ["byd", "battery", "10.2kwh", "hvs"],
+    price: 168000,
+    salePrice: 189000,
+    stock: 3,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "pylontech-us5000-48v-battery",
-    title: "Pylontech US5000 4.8kWh 48V Low Voltage LFP Battery",
+    productNumber: 45,
+    name: "Pylontech US5000 4.8kWh 48V Low Voltage LFP Battery",
+    sku: "pl-bat-4.8",
     brand: "Pylontech",
     category: "Battery",
-    priceCurrent: 49500,
-    priceOriginal: 58000,
-    stock: 25,
-    rating: 4.8,
-    ratingCount: 34,
-    warranty: "5-10 Years (Upon Registration)",
-    images: ["http://localhost:5173/public/001pylontech-us5000.jpg",
-      "http://localhost:5173/public/002pylontech-us5000.jpg",
-      "http://localhost:5173/public/003pylontech-us5000.jpg"
-    ],
+    warranty: 5,
     description: "แบตเตอรี่ Low Voltage ยอดนิยมอันดับ 1 สำหรับระบบ Hybrid งบประหยัด Pylontech US5000 มาพร้อมความจุที่เพิ่มขึ้นเป็น 4.8kWh ต่อโมดูล ในขนาดที่กะทัดรัดแบบ Rack-mount ติดตั้งในตู้ Cabinet ได้สวยงาม ทนทาน และมีระบบ BMS ที่ฉลาดมาก",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "US5000" },
       { label: "ความจุเสนอแนะ (Nominal Capacity)", value: "4.8 kWh (100 Ah)" },
       { label: "ความจุที่ใช้งานได้ (Usable Capacity)", value: "4.56 kWh (95% DoD)" },
@@ -494,22 +539,31 @@ export const allProducts = [
       "Intelligent BMS: ระบบป้องกันอัจฉริยะ ตรวจสอบแรงดันและอุณหภูมิรายเซลล์",
       "Long Life Span: อายุการใช้งานยาวนานกว่า 10 ปี (ขึ้นอยู่กับการใช้งาน)",
       "Wide Compatibility: ใช้งานได้กับ Inverter 48V เกือบทุกยี่ห้อ เช่น Growatt, Deye, Victron"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001pylontech-us5000.jpg",
+      cloudinaryId: "solar_products/001pylontech-us5000"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002pylontech-us5000.jpg", cloudinaryId: "solar_products/002pylontech-us5000" },
+      { url: "http://localhost:5173/public/003pylontech-us5000.jpg", cloudinaryId: "solar_products/003pylontech-us5000" }
+    ],
+    tags: ["pylontech", "battery", "4.8kwh", "lowvoltage"],
+    price: 49500,
+    salePrice: 58000,
+    stock: 25,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "link-solar-cable-pv1f-4mm-100m",
-    title: "LINK Solar Cable PV1-F 4mm² (100 Meters Roll) - Black/Red",
+    productNumber: 46,
+    name: "LINK Solar Cable PV1-F 4mm² (100 Meters Roll) - Black/Red",
+    sku: "lk-cab-4mm",
     brand: "LINK",
     category: "Accessories",
-    priceCurrent: 3200,
-    priceOriginal: 3800,
-    stock: 100,
-    rating: 5,
-    ratingCount: 42,
-    warranty: "30 Years Service Life",
-    images: ["http://localhost:5173/public/001link-pv1f-4mm.jpg"],
+    warranty: 30,
     description: "สายไฟสำหรับระบบโซล่าร์เซลล์โดยเฉพาะจากแบรนด์ LINK มาตรฐาน EN50618 ตัวนำทำจากทองแดงเคลือบดีบุก (Tinned Copper) เพื่อป้องกันการกัดกร่อนและเกิดสนิมเขียว ทนต่อรังสี UV และโอโซนได้อย่างดีเยี่ยม เหมาะสำหรับการติดตั้งภายนอกอาคารยาวนานกว่า 25 ปี",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "CB-0504B (Black) / CB-0504R (Red)" },
       { label: "ขนาดพื้นที่หน้าตัด", value: "4.0 mm²" },
       { label: "วัสดุตัวนำ", value: "Tinned Fine Copper Strands (Class 5)" },
@@ -530,24 +584,28 @@ export const allProducts = [
       "High Voltage Support: รองรับระบบ DC แรงดันสูงถึง 1500V",
       "Easy Stripping: ปอกสายง่าย ทำงานสะดวกประหยัดเวลาช่าง",
       "Standard Certified: ผ่านการรับรองมาตรฐานสากล TUV และ AD8"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001link-pv1f-4mm.jpg",
+      cloudinaryId: "solar_products/001link-pv1f-4mm"
+    },
+    gallery: [],
+    tags: ["link", "cable", "4mm", "solar"],
+    price: 3200,
+    salePrice: 3800,
+    stock: 100,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "combiner-box-ac-dc-5kw-1p",
-    title: "ชุดตู้ควมคุมป้องกันระบบโซล่าร์เซลล์ AC/DC Combiner Box (สำหรับ 5kW 1 Phase)",
+    productNumber: 47,
+    name: "ชุดตู้ควมคุมป้องกันระบบโซล่าร์เซลล์ AC/DC Combiner Box (สำหรับ 5kW 1 Phase)",
+    sku: "gen-box-5kw",
     brand: "Generic High Quality",
     category: "Accessories",
-    priceCurrent: 5500,
-    priceOriginal: 6900,
-    stock: 15,
-    rating: 4.9,
-    ratingCount: 12,
-    warranty: "1 Year Component Warranty",
-    images: ["http://localhost:5173/public/001acdc-combiner-box5k.jpg",
-      "http://localhost:5173/public/002acdc-combiner-box5k.jpg"
-    ],
+    warranty: 1,
     description: "ตู้ Combiner Box สำเร็จรูปที่รวบรวมอุปกรณ์ป้องกันทั้งฝั่ง DC จากแผงโซล่าร์ และฝั่ง AC จาก Inverter ไว้ในตู้เดียว ช่วยป้องกันระบบจากฟ้าผ่า ไฟกระชาก และไฟฟ้าลัดวงจร ติดตั้งง่ายพร้อมใช้งานสำหรับระบบ On-grid ขนาด 5kW 1 เฟส",
-    technicalSpecs: [
+    specs: [
       { label: "ตู้โหลดเซ็นเตอร์ (Enclosure)", value: "Plastic IP65 (กันน้ำกันฝุ่น)" },
       { label: "DC Breaker", value: "2 Pole 550V/600V 16A-20A (Suntree/ZJBENY)" },
       { label: "DC Surge Protection", value: "SPD DC 600V 20-40kA" },
@@ -565,25 +623,30 @@ export const allProducts = [
       "IP65 Rated: ตู้กันน้ำกันฝุ่น สามารถติดตั้งในร่มหรือกึ่งภายนอกได้",
       "High-Quality Components: ใช้เบรกเกอร์และ SPD แบรนด์มาตรฐานงานโซล่าร์",
       "Professional Look: ช่วยให้งานติดตั้งดูเป็นระเบียบและเป็นมืออาชีพ"
-    ]
+    ],
+    image: {
+      url: "http://localhost:5173/public/001acdc-combiner-box5k.jpg",
+      cloudinaryId: "solar_products/001acdc-combiner-box5k"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002acdc-combiner-box5k.jpg", cloudinaryId: "solar_products/002acdc-combiner-box5k" }
+    ],
+    tags: ["combiner", "box", "acdc", "5kw"],
+    price: 5500,
+    salePrice: 6900,
+    stock: 15,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "solar-mounting-kit-metal-roof",
-    title: "ชุดอุปกรณ์ยึดแผงโซล่าร์เซลล์สำหรับหลังคาเมทัลชีท (Mounting Kit for 4 Panels)",
+    productNumber: 48,
+    name: "ชุดอุปกรณ์ยึดแผงโซล่าร์เซลล์สำหรับหลังคาเมทัลชีท (Mounting Kit for 4 Panels)",
+    sku: "std-mnt-4p",
     brand: "Standard Aluminum",
     category: "Accessories",
-    priceCurrent: 2800,
-    priceOriginal: 3500,
-    stock: 50,
-    rating: 4.7,
-    ratingCount: 20,
-    warranty: "10 Years Material Warranty",
-    images: ["http://localhost:5173/public/001mounting4panel.jpg",
-      "http://localhost:5173/public/002mounting4panel.jpg",
-      "http://localhost:5173/public/003mounting4panel.jpg"
-    ],
+    warranty: 10,
     description: "ชุดรางและอุปกรณ์ยึดแผงโซล่าร์เซลล์มาตรฐานสากล ผลิตจากอลูมิเนียมอัลลอยด์ 6005-T5 น้ำหนักเบาแต่แข็งแรงสูง ไม่เป็นสนิมตลอดอายุการใช้งาน ออกแบบมาเพื่อยึดแผงโซล่าร์ 4 แผงบนหลังคาเมทัลชีท (Metal Sheet)",
-    technicalSpecs: [
+    specs: [
       { label: "วัสดุหลัก (Material)", value: "Anodized Aluminum Alloy 6005-T5" },
       { label: "วัสดุยึด (Fasteners)", value: "Stainless Steel SUS304" },
       { label: "ความยาวราง (Rail)", value: "2100 mm x 4 เส้น (ตัดต่อได้)" },
@@ -600,23 +663,32 @@ export const allProducts = [
       "Easy Assembly: ออกแบบให้ประกอบง่ายด้วยรางสไลด์และน็อตตัวเมียแบบล็อค",
       "Lightweight: น้ำหนักเบา ลดภาระโครงสร้างหลังคา",
       "Universal Clamp: ตัวยึดแผงสามารถปรับใช้กับแผงที่มีความหนาต่างกันได้",
-      "High Strength: ทนทานต่อแรงลมพายุตามมาตรฐานวิศวกรรม"
-    ]
+      "High Strength: ทนทานต่อแรงลมพายุได้ตามมาตรฐานวิศวกรรม"
+    ],
+    image: {
+      url: "http://localhost:5173/public/001mounting4panel.jpg",
+      cloudinaryId: "solar_products/001mounting4panel"
+    },
+    gallery: [
+      { url: "http://localhost:5173/public/002mounting4panel.jpg", cloudinaryId: "solar_products/002mounting4panel" },
+      { url: "http://localhost:5173/public/003mounting4panel.jpg", cloudinaryId: "solar_products/003mounting4panel" }
+    ],
+    tags: ["mounting", "kit", "metalsheet", "aluminum"],
+    price: 2800,
+    salePrice: 3500,
+    stock: 50,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "huawei-3kw-1-phase-inverter",
-    title: "Huawei 3kW 1 Phase On-Grid Inverter (SUN2000-3KTL-L1)",
+    productNumber: 49,
+    name: "Huawei 3kW 1 Phase On-Grid Inverter (SUN2000-3KTL-L1)",
+    sku: "hw-inv-3kw-1p",
     brand: "Huawei",
     category: "Inverter",
-    priceCurrent: 18500,
-    priceOriginal: 22000,
-    stock: 10,
-    rating: 5,
-    ratingCount: 5,
-    warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Huawei+3kW+1Phase"],
+    warranty: 10,
     description: "อินเวอร์เตอร์ขนาดเริ่มต้นที่สมบูรณ์แบบสำหรับบ้านขนาดเล็ก หรือบ้านที่ต้องการติดแผงโซล่าร์เพียงไม่กี่แผ่น รุ่น L1 รองรับการทำงานร่วมกับ Battery Ready และมีระบบป้องกัน AFCI ด้วย AI เหมือนรุ่นใหญ่ ประสิทธิภาพสูงและระบายความร้อนได้ดีเยี่ยมแม้ในพื้นที่จำกัด",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN2000-3KTL-L1" },
       { label: "กำลังขับสูงสุด (Rated Output Power)", value: "3,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด (Max. PV Power)", value: "4,500 Wp" },
@@ -641,22 +713,28 @@ export const allProducts = [
       "Zero Export: ตั้งค่ากันไฟย้อนเข้าสายส่งได้ง่ายดาย",
       "Silent Operation: ไร้เสียงรบกวนด้วยระบบระบายความร้อนแบบธรรมชาติ",
       "Standard Certified: ผ่านการรับรอง MEA และ PEA ของประเทศไทย"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Huawei+3kW+1Phase",
+      cloudinaryId: "solar_products/huawei_3kw_1p"
+    },
+    gallery: [],
+    tags: ["huawei", "inverter", "3kw", "l1"],
+    price: 18500,
+    salePrice: 22000,
+    stock: 10,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "sungrow-10kw-3-phase-inverter",
-    title: "Sungrow 10kW 3 Phase On-Grid Inverter (SG10RT)",
+    productNumber: 50,
+    name: "Sungrow 10kW 3 Phase On-Grid Inverter (SG10RT)",
+    sku: "sg-inv-10kw-3p",
     brand: "Sungrow",
     category: "Inverter",
-    priceCurrent: 39500,
-    priceOriginal: 46000,
-    stock: 5,
-    rating: 4.9,
-    ratingCount: 12,
-    warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Sungrow+10kW+3Phase"],
+    warranty: 10,
     description: "อินเวอร์เตอร์ระบบ 3 เฟสประสิทธิภาพสูงจาก Sungrow รุ่น SG10RT ออกแบบมาเพื่อรับมือกับแผงโซล่าร์วัตต์สูงในปัจจุบัน มีช่วงแรงดันทำงานที่กว้างมาก ทำให้เริ่มผลิตไฟฟ้าได้ตั้งแต่ช่วงเช้ามืด พร้อมระบบป้องกันความปลอดภัยแบบครบวงจรในตัว",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SG10RT" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "10,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "15,000 Wp" },
@@ -681,22 +759,28 @@ export const allProducts = [
       "Global Safety: มีระบบป้องกันไฟกระชาก (Surge Protection) ทั้งฝั่ง AC และ DC ในตัว",
       "Quiet Operation: ออกแบบมาให้ระบายความร้อนได้ดีโดยไม่จำเป็นต้องใช้พัดลมภายนอก",
       "Reliability: แบรนด์ที่ธนาคารระดับโลกให้การยอมรับ (Bankable Brand)"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Sungrow+10kW+3Phase",
+      cloudinaryId: "solar_products/sungrow_10kw_3p"
+    },
+    gallery: [],
+    tags: ["sungrow", "inverter", "10kw", "3phase"],
+    price: 39500,
+    salePrice: 46000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "growatt-3kw-1-phase-inverter",
-    title: "Growatt 3kW 1 Phase On-Grid Inverter (MIN 3000TL-X)",
+    productNumber: 51,
+    name: "Growatt 3kW 1 Phase On-Grid Inverter (MIN 3000TL-X)",
+    sku: "gw-inv-3kw-1p",
     brand: "Growatt",
     category: "Inverter",
-    priceCurrent: 14900,
-    priceOriginal: 18500,
-    stock: 15,
-    rating: 4.8,
-    ratingCount: 10,
-    warranty: "5-10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Growatt+3kW+1Phase"],
+    warranty: 5,
     description: "Inverter ขนาดเล็กที่คุ้มค่าที่สุด รุ่น MIN 3000TL-X มาพร้อมหน้าจอ OLED และปุ่มสัมผัสที่ทันสมัย ใช้งานง่าย มีน้ำหนักเบาเป็นพิเศษเพียง 8.1 กก. ติดตั้งง่ายโดยคนเดียว เหมาะมากสำหรับบ้านพักอาศัยที่เริ่มต้นใช้พลังงานสะอาด",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "MIN 3000TL-X" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "3,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "4,200 Wp" },
@@ -721,22 +805,28 @@ export const allProducts = [
       "High Efficiency: แปลงพลังงานได้คุ้มค่าทุกวัตต์ด้วยเทคโนโลยีไร้หม้อแปลง",
       "Smart Monitoring: ติดตามการผลิตไฟฟ้าผ่านแอป ShinePhone ได้ทั่วโลก",
       "Reliable Support: เป็นรุ่นที่ช่างไทยนิยมใช้มากที่สุด อะไหล่และการบริการหาง่าย"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Growatt+3kW+1Phase",
+      cloudinaryId: "solar_products/growatt_3kw_1p"
+    },
+    gallery: [],
+    tags: ["growatt", "inverter", "3kw", "min"],
+    price: 14900,
+    salePrice: 18500,
+    stock: 15,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "growatt-10kw-3-phase-inverter",
-    title: "Growatt 10kW 3 Phase On-Grid Inverter (MOD 10KTL3-X)",
+    productNumber: 52,
+    name: "Growatt 10kW 3 Phase On-Grid Inverter (MOD 10KTL3-X)",
+    sku: "gw-inv-10kw-3p",
     brand: "Growatt",
     category: "Inverter",
-    priceCurrent: 36500,
-    priceOriginal: 42000,
-    stock: 6,
-    rating: 4.8,
-    ratingCount: 15,
-    warranty: "10 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Growatt+MOD+10KTL3-X"],
+    warranty: 10,
     description: "อินเวอร์เตอร์ 3 เฟสประสิทธิภาพสูงจาก Growatt ซีรีส์ MOD ออกแบบมาให้มีความทันสมัยและขนาดกะทัดรัดขึ้นกว่ารุ่นก่อนๆ มาพร้อมหน้าจอ OLED และระบบสัมผัส มีประสิทธิภาพการแปลงไฟสูงถึง 98.6% และรองรับการทำงานร่วมกับระบบกันไฟย้อน (Zero Export) ได้อย่างแม่นยำ",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "MOD 10KTL3-X" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "10,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "15,000 Wp" },
@@ -761,22 +851,28 @@ export const allProducts = [
       "Efficiency: อัตราการสูญเสียพลังงานต่ำมาก แปลงไฟได้เต็มเม็ดเต็มหน่วย",
       "Zero Export Ready: รองรับการต่อ Smart Meter เพื่อทำระบบกันไฟย้อน",
       "Quiet Operation: ออกแบบมาให้ทำงานเงียบ ไร้เสียงรบกวนจากพัดลม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Growatt+MOD+10KTL3-X",
+      cloudinaryId: "solar_products/growatt_mod_10kw"
+    },
+    gallery: [],
+    tags: ["growatt", "inverter", "10kw", "mod"],
+    price: 36500,
+    salePrice: 42000,
+    stock: 6,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "deye-3-6kw-hybrid-inverter",
-    title: "Deye 3.6kW Hybrid Inverter Single Phase (SUN-3.6K-SG04LP1-EU)",
+    productNumber: 53,
+    name: "Deye 3.6kW Hybrid Inverter Single Phase (SUN-3.6K-SG04LP1-EU)",
+    sku: "dy-hyb-3.6kw",
     brand: "Deye",
     category: "Inverter",
-    priceCurrent: 32000,
-    priceOriginal: 38000,
-    stock: 8,
-    rating: 4.9,
-    ratingCount: 14,
-    warranty: "5 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Deye+3.6kW+Hybrid"],
+    warranty: 5,
     description: "อินเวอร์เตอร์ Hybrid ขนาดเริ่มต้นที่ทรงพลังที่สุดจาก Deye รองรับการทำงานได้ทั้ง On-grid, Off-grid และเป็น UPS ในตัว มีความพิเศษที่สามารถขนานเครื่องได้ และรองรับการทำงานร่วมกับแบตเตอรี่แรงดันต่ำ (48V) ได้หลากหลายยี่ห้อ รวมถึงมีฟังก์ชันจัดการพลังงานที่ยืดหยุ่นมาก",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN-3.6K-SG04LP1-EU" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "3,600 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "4,680 Wp" },
@@ -798,22 +894,28 @@ export const allProducts = [
       "Battery Compatibility: ใช้งานได้กับแบตเตอรี่ลิเธียม 48V เกือบทุกแบรนด์ในท้องตลาด",
       "Smart Load Function: มีพอร์ตพิเศษสำหรับบริหารจัดการโหลดอัจฉริยะ",
       "Remote Monitoring: ดูข้อมูลและปรับค่าต่างๆ ผ่านแอป Solarman ได้อย่างละเอียด"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+3.6kW+Hybrid",
+      cloudinaryId: "solar_products/deye_3.6kw"
+    },
+    gallery: [],
+    tags: ["deye", "hybrid", "3.6kw", "lowvoltage"],
+    price: 32000,
+    salePrice: 38000,
+    stock: 8,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "deye-5kw-hybrid-inverter",
-    title: "Deye 5kW Hybrid Inverter Single Phase (SUN-5K-SG04LP1-EU)",
+    productNumber: 54,
+    name: "Deye 5kW Hybrid Inverter Single Phase (SUN-5K-SG04LP1-EU)",
+    sku: "dy-hyb-5kw",
     brand: "Deye",
     category: "Inverter",
-    priceCurrent: 42500,
-    priceOriginal: 49000,
-    stock: 12,
-    rating: 5,
-    ratingCount: 38,
-    warranty: "5 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Deye+5kW+Hybrid"],
+    warranty: 5,
     description: "อินเวอร์เตอร์ Hybrid รุ่นยอดนิยมที่สุดในประเทศไทย SUN-5K ของ Deye คือมาตรฐานใหม่ของระบบโซล่าร์เซลล์ที่ต้องการความเสถียร สามารถจ่ายไฟแบบ Backup ได้เต็มกำลัง 5,000W และรองรับการทำงานแบบไม่ใช้แบตเตอรี่ (ในโหมด On-grid) หรือจะใช้ร่วมกับแบตเตอรี่เพื่อเป็นระบบ Peak Shaving ก็ได้",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN-5K-SG04LP1-EU" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "5,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "6,500 Wp" },
@@ -835,22 +937,28 @@ export const allProducts = [
       "Safe & Reliable: มีระบบป้องกันการไหลย้อนและระบบป้องกันฟ้าผ่าในตัว",
       "Flexible: รองรับทั้งการต่อแผงแบบ String ปกติ และการทำ AC Couple กับ Inverter เดิม",
       "Reliable Design: โครงสร้างแข็งแรงทนทาน ออกแบบมาให้ใช้งานหนักได้ต่อเนื่อง"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+5kW+Hybrid",
+      cloudinaryId: "solar_products/deye_5kw"
+    },
+    gallery: [],
+    tags: ["deye", "hybrid", "5kw", "bestseller"],
+    price: 42500,
+    salePrice: 49000,
+    stock: 12,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "deye-10kw-hybrid-inverter-3-phase",
-    title: "Deye 10kW Hybrid Inverter 3 Phase (SUN-10K-SG04LP3-EU)",
+    productNumber: 55,
+    name: "Deye 10kW Hybrid Inverter 3 Phase (SUN-10K-SG04LP3-EU)",
+    sku: "dy-hyb-10kw-3p",
     brand: "Deye",
     category: "Inverter",
-    priceCurrent: 82000,
-    priceOriginal: 95000,
-    stock: 4,
-    rating: 4.9,
-    ratingCount: 9,
-    warranty: "5 Years Warranty",
-    images: ["https://placehold.co/600x600?text=Deye+10kW+3Phase+Hybrid"],
+    warranty: 5,
     description: "ที่สุดของ Hybrid Inverter สำหรับระบบ 3 เฟส SUN-10K คือคำตอบสำหรับบ้านขนาดใหญ่หรือโรงงานที่ต้องการระบบสำรองไฟที่สมบูรณ์แบบ สามารถจ่ายไฟ 3 เฟสแบบ Unbalanced ได้ (เฟสไหนใช้เยอะจ่ายเยอะ) และรองรับการทำงานร่วมกับแบตเตอรี่แรงดันต่ำ (48V) ซึ่งช่วยประหยัดค่าแบตเตอรี่ได้มากกว่าระบบ High Voltage",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "SUN-10K-SG04LP3-EU" },
       { label: "กำลังขับสูงสุด (AC Output)", value: "10,000 W" },
       { label: "กำลังไฟฟ้า DC สูงสุด", value: "13,000 Wp" },
@@ -866,28 +974,34 @@ export const allProducts = [
       { label: "ระบบระบายความร้อน", value: "Smart Cooling (Fan)" }
     ],
     features: [
-      "Three Phase Unbalanced Output: จ่ายไฟแต่ละเฟสไม่เท่ากันได้ตามการใช้งานจริง",
+      "Three Phase Unbalanced Output: จ่ายไฟแต่ละเฟสไม่เท่ากันได้ตามการใช้งานจริงของบ้าน 3 เฟส",
       "100% Backup Output: สามารถจ่ายไฟสำรองได้เต็มกำลัง 10kW เมื่อไฟดับ",
       "Low Voltage Battery: ใช้แบตเตอรี่ 48V ได้ ซึ่งปลอดภัยและหาซื้อง่ายในราคาประหยัด",
       "DC Couple & AC Couple: รองรับการต่อแผงเพิ่มหรือขยายระบบเดิมได้อย่างอิสระ",
       "Heavy Duty: ออกแบบมาเพื่อรับโหลดหนักๆ อย่างแอร์หรือมอเตอร์ขนาดใหญ่ได้ดี",
       "Comprehensive Monitoring: มอนิเตอร์ผ่านระบบ Cloud ได้ฟรีตลอดอายุการใช้งาน"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+10kW+3Phase+Hybrid",
+      cloudinaryId: "solar_products/deye_10kw_3p"
+    },
+    gallery: [],
+    tags: ["deye", "hybrid", "10kw", "3phase"],
+    price: 82000,
+    salePrice: 95000,
+    stock: 4,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "jinko-tiger-neo-580w-bifacial",
-    title: "Jinko Tiger Neo N-Type 580W Bi-facial Dual Glass (72HL4-BDV)",
+    productNumber: 56,
+    name: "Jinko Tiger Neo N-Type 580W Bi-facial Dual Glass (72HL4-BDV)",
+    sku: "jk-pan-580w-bi",
     brand: "Jinko Solar",
     category: "Solar Panel",
-    priceCurrent: 5200,
-    priceOriginal: 5900,
-    stock: 45,
-    rating: 5,
-    ratingCount: 22,
-    warranty: "12 Years Product / 30 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=Jinko+Tiger+Neo+Bifacial"],
+    warranty: 12,
     description: "ที่สุดของเทคโนโลยีแผงโซล่าร์จาก Jinko รุ่น Tiger Neo N-type Bi-facial ที่ใช้เทคโนโลยี TOPCon ล่าสุด สามารถผลิตไฟได้จากทั้งสองด้านของแผง โดยมีค่า Bi-facial Factor สูงถึง 80% ตัวแผงเป็นกระจกสองด้าน (Dual Glass) ทนทานต่อการเกิดรอยร้าว (Micro-crack) และลดปัญหาการเสื่อมสภาพแบบ PID ได้อย่างสมบูรณ์แบบ",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "JKM580N-72HL4-BDV" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "580 W (เฉพาะด้านหน้า)" },
       { label: "กำลังไฟฟ้ารวม (เมื่อรวม Bi-facial Gain 10%)", value: "638 W" },
@@ -915,22 +1029,28 @@ export const allProducts = [
       "LID/LeTID Free: ปราศจากการเสื่อมสภาพจากแสงอาทิตย์ ช่วยให้ผลิตไฟได้เต็มประสิทธิภาพตลอดอายุการใช้งาน",
       "Dual Glass Durability: ทนทานต่อสภาพอากาศกัดกร่อน ไอเกลือ และแอมโมเนียได้ดีเยี่ยม",
       "Optimized Performance: ออกแบบมาเพื่อประสิทธิภาพสูงสุดในพื้นที่ที่มีอุณหภูมิสูงและแสงน้อย"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Jinko+Tiger+Neo+Bifacial",
+      cloudinaryId: "solar_products/jinko_580w_bifacial"
+    },
+    gallery: [],
+    tags: ["jinko", "panel", "580w", "bifacial"],
+    price: 5200,
+    salePrice: 5900,
+    stock: 45,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "longi-himo7-580w-bifacial",
-    title: "LONGi Hi-MO 7 Bi-facial Dual Glass 580W (LR5-72HGD)",
+    productNumber: 57,
+    name: "LONGi Hi-MO 7 Bi-facial Dual Glass 580W (LR5-72HGD)",
+    sku: "lg-pan-580w-bi",
     brand: "LONGi Solar",
     category: "Solar Panel",
-    priceCurrent: 5100,
-    priceOriginal: 5800,
-    stock: 50,
-    rating: 4.9,
-    ratingCount: 18,
-    warranty: "12 Years Product / 30 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=LONGi+Hi-MO+7+Bifacial"],
+    warranty: 12,
     description: "LONGi Hi-MO 7 เป็นเจเนอเรชันใหม่ที่ใช้เทคโนโลยี HPDC (High-Performance and Hybrid Passivated Dual-Junction Cell) ซึ่งออกแบบมาเพื่อโครงการระดับ Utility และบ้านพักอาศัยระดับพรีเมียม ให้ค่าการผลิตไฟที่เสถียรและทนทานต่อแรงกดทับของลมได้ดีกว่ารุ่นก่อนหน้า พร้อมดีไซน์กระจกสองด้านที่ช่วยระบายความร้อนได้ดีขึ้น",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "LR5-72HGD-580M" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "580 W" },
       { label: "กำลังไฟฟ้าสูงสุด (รวม Bi-facial Gain 15%)", value: "667 W" },
@@ -957,22 +1077,28 @@ export const allProducts = [
       "Low Degradation: อัตราการเสื่อมสภาพรายปีต่ำเพียง 0.4% ตั้งแต่ปีที่ 2 ถึงปีที่ 30",
       "Optimized Weight: แม้จะเป็นกระจกสองด้านแต่น้ำหนักถูกออกแบบมาให้สมดุลสำหรับการติดตั้งบนหลังคา",
       "Sustainability: ออกแบบมาเพื่อลดต้นทุน LCOE และเพิ่มผลตอบแทนจากการลงทุนให้เร็วขึ้น"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=LONGi+Hi-MO+7+Bifacial",
+      cloudinaryId: "solar_products/longi_580w_bifacial"
+    },
+    gallery: [],
+    tags: ["longi", "panel", "580w", "bifacial"],
+    price: 5100,
+    salePrice: 5800,
+    stock: 50,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "canadian-solar-bihiku7-660w-bifacial",
-    title: "Canadian Solar BiHiKu7 Mono PERC 660W Bi-facial (CS7N-660MB-AG)",
+    productNumber: 58,
+    name: "Canadian Solar BiHiKu7 Mono PERC 660W Bi-facial (CS7N-660MB-AG)",
+    sku: "cs-pan-660w-bi",
     brand: "Canadian Solar",
     category: "Solar Panel",
-    priceCurrent: 5800,
-    priceOriginal: 6800,
-    stock: 25,
-    rating: 4.8,
-    ratingCount: 15,
-    warranty: "12 Years Product / 30 Years Power Warranty",
-    images: ["https://placehold.co/600x600?text=Canadian+Solar+BiHiKu7"],
+    warranty: 12,
     description: "Canadian Solar BiHiKu7 รุ่น 660W เป็นแผงสองหน้าขนาดจัมโบ้ที่ออกแบบมาเพื่อลดต้นทุนด้านโครงสร้างยึดแผงและสายไฟ โดยการใช้แผงจำนวนน้อยลงแต่ได้กำลังวัตต์ที่มหาศาล ใช้เทคโนโลยี Dual Cell และ Multi-busbar เพื่อความเสถียรสูงสุดในการจ่ายกระแสไฟ และมีความแข็งแรงของกระจกนิรภัยทั้งด้านหน้าและด้านหลัง",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "CS7N-660MB-AG" },
       { label: "กำลังไฟฟ้าสูงสุด (Pmax)", value: "660 W" },
       { label: "กำลังไฟฟ้าสูงสุด (รวม Bi-facial Gain 10%)", value: "726 W (มหาศาล)" },
@@ -999,22 +1125,28 @@ export const allProducts = [
       "Better Shading Tolerance: เทคโนโลยี Dual Cell ช่วยให้ผลิตไฟได้ต่อเนื่องแม้ส่วนใดส่วนหนึ่งถูกเงาบัง",
       "Enhanced Snow/Wind Load: ทนต่อแรงลมพายุและน้ำหนักได้ดีเยี่ยมตามมาตรฐานสากล",
       "Leading Warranty: การันตีประสิทธิภาพการทำงานยาวนานถึง 30 ปีเต็ม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Canadian+Solar+BiHiKu7",
+      cloudinaryId: "solar_products/canadian_660w_bifacial"
+    },
+    gallery: [],
+    tags: ["canadian", "panel", "660w", "bifacial"],
+    price: 5800,
+    salePrice: 6800,
+    stock: 25,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "link-solar-cable-pv1f-6mm-100m",
-    title: "LINK Solar Cable PV1-F 6mm² (100 Meters Roll) - Black/Red",
+    productNumber: 59,
+    name: "LINK Solar Cable PV1-F 6mm² (100 Meters Roll) - Black/Red",
+    sku: "lk-cab-6mm",
     brand: "LINK",
     category: "Accessories",
-    priceCurrent: 4500,
-    priceOriginal: 5200,
-    stock: 80,
-    rating: 5,
-    ratingCount: 15,
-    warranty: "30 Years Service Life",
-    images: ["https://placehold.co/600x600?text=LINK+PV1-F+6mm"],
+    warranty: 30,
     description: "สายไฟโซล่าร์เซลล์ขนาด 6mm² สำหรับระบบที่ต้องการรองรับกระแสสูงหรือการเดินสายที่มีระยะทางไกลเป็นพิเศษ เพื่อลดการสูญเสียแรงดัน (Voltage Drop) ในเส้นสาย มาตรฐาน EN50618 ทนความร้อนและรังสี UV สูงสุดตามมาตรฐานเยอรมัน",
-    technicalSpecs: [
+    specs: [
       { label: "รุ่น (Model)", value: "CB-0506B (Black) / CB-0506R (Red)" },
       { label: "ขนาดพื้นที่หน้าตัด", value: "6.0 mm²" },
       { label: "วัสดุตัวนำ", value: "Tinned Fine Copper Strands (Class 5)" },
@@ -1032,22 +1164,28 @@ export const allProducts = [
       "Excellent Weather Resistance: ทนต่อแดด ฝน และการกัดกร่อนจากสารเคมีในอากาศ",
       "Long Durability: อายุการใช้งานยาวนาน 25-30 ปี เท่ากับอายุแผงโซล่าร์",
       "Superior Protection: ฉนวน 2 ชั้น (Double Insulation) ป้องกันไฟฟ้าลัดวงจรได้ดีเยี่ยม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=LINK+PV1-F+6mm",
+      cloudinaryId: "solar_products/link_6mm_cable"
+    },
+    gallery: [],
+    tags: ["link", "cable", "6mm", "solar"],
+    price: 4500,
+    salePrice: 5200,
+    stock: 80,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "thai-yazaki-thwf-10mm-green",
-    title: "THAI YAZAKI THW-f 10mm² (Ground Cable) - Green/Yellow",
+    productNumber: 60,
+    name: "THAI YAZAKI THW-f 10mm² (Ground Cable) - Green/Yellow",
+    sku: "yz-cab-thwf-10mm",
     brand: "Thai Yazaki",
     category: "Accessories",
-    priceCurrent: 3800,
-    priceOriginal: 4500,
-    stock: 50,
-    rating: 5,
-    ratingCount: 28,
-    warranty: "ตามมาตรฐานอุตสาหกรรม",
-    images: ["https://placehold.co/600x600?text=Yazaki+THW-f+10mm"],
+    warranty: 1, // บังคับใส่เป็นตัวเลขตาม Schema (สมมติตามมาตรฐานระบบ 1 ปี)
     description: "สายไฟฟ้ากราวด์คุณภาพสูงสุดจาก Thai Yazaki สำหรับงานระบบโซล่าร์เซลล์ที่ต้องการความปลอดภัยระดับสากล ตัวนำทองแดงแท้ฝอย (Flexible) อ่อนตัวดัดโค้งง่าย เหมาะสำหรับการเดินสายกราวด์จากแผงโซล่าร์และตู้คอนโทรลลงสู่หลักดิน",
-    technicalSpecs: [
+    specs: [
       { label: "ประเภทสายไฟ", value: "THW-f (Flexible Conductor)" },
       { label: "ขนาดพื้นที่หน้าตัด", value: "10 mm²" },
       { label: "วัสดุตัวนำ", value: "Pure Annealed Copper (ทองแดงบริสุทธิ์)" },
@@ -1064,22 +1202,28 @@ export const allProducts = [
       "Full Square mm: ทองแดงเต็มหน้าตัด นำกระแสผิดปกติลงดินได้รวดเร็ว",
       "Flame Retardant: ฉนวน PVC คุณภาพสูง ไม่ลามไฟ",
       "Safety First: หัวใจสำคัญของระบบโซล่าร์ในการป้องกันไฟดูดและฟ้าผ่า"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Yazaki+THW-f+10mm",
+      cloudinaryId: "solar_products/yazaki_thwf_10mm"
+    },
+    gallery: [],
+    tags: ["yazaki", "cable", "ground", "10mm"],
+    price: 3800,
+    salePrice: 4500,
+    stock: 50,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "thai-yazaki-nyy-3x6mm-cable",
-    title: "THAI YAZAKI NYY 3x6mm² AC Power Cable",
+    productNumber: 61,
+    name: "THAI YAZAKI NYY 3x6mm² AC Power Cable",
+    sku: "yz-cab-nyy-6mm",
     brand: "Thai Yazaki",
     category: "Accessories",
-    priceCurrent: 8500,
-    priceOriginal: 9800,
-    stock: 20,
-    rating: 4.9,
-    ratingCount: 10,
-    warranty: "ตามมาตรฐานอุตสาหกรรม",
-    images: ["https://placehold.co/600x600?text=Yazaki+NYY+3x6mm"],
+    warranty: 1, 
     description: "สายไฟฟ้า NYY 3 แกน ขนาด 6mm² สำหรับงานส่งกำลังไฟฟ้าฝั่ง AC จาก Inverter ไปยังตู้เมนไฟฟ้า (MDB) ฉนวนและเปลือกหนาพิเศษ 2 ชั้น ทนทานต่อแรงกระแทกและสามารถฝังดินได้โดยตรง (Direct Burial) เหมาะสำหรับงานติดตั้งโซล่าร์เซลล์ที่ต้องการความคงทนถาวร",
-    technicalSpecs: [
+    specs: [
       { label: "ประเภทสายไฟ", value: "NYY (3 Cores)" },
       { label: "ขนาดพื้นที่หน้าตัด", value: "3 x 6 mm²" },
       { label: "วัสดุตัวนำ", value: "Solid or Stranded Copper" },
@@ -1094,22 +1238,28 @@ export const allProducts = [
       "Double Insulation: ฉนวน 2 ชั้น ป้องกันความชื้นและการกัดกร่อนได้ดีเยี่ยม",
       "Heavy Duty: เหมาะสำหรับงานภายนอกอาคารที่ต้องทนแดดทนฝน",
       "Complete Power Path: ใช้เดินไฟ AC จาก Inverter 5kW เข้าสู่ระบบไฟบ้านได้อย่างปลอดภัย"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Yazaki+NYY+3x6mm",
+      cloudinaryId: "solar_products/yazaki_nyy_6mm"
+    },
+    gallery: [],
+    tags: ["yazaki", "cable", "nyy", "acpower"],
+    price: 8500,
+    salePrice: 9800,
+    stock: 20,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "mc4-connector-pair-staubli-style",
-    title: "ข้อต่อสายไฟโซล่าร์เซลล์ MC4 Connector (ตัวผู้-ตัวเมีย) มาตรฐาน IP68",
+    productNumber: 62,
+    name: "ข้อต่อสายไฟโซล่าร์เซลล์ MC4 Connector (ตัวผู้-ตัวเมีย) มาตรฐาน IP68",
+    sku: "std-con-mc4",
     brand: "Standard Professional",
     category: "Accessories",
-    priceCurrent: 35,
-    priceOriginal: 55,
-    stock: 500,
-    rating: 5,
-    ratingCount: 120,
-    warranty: "1 Year Warranty",
-    images: ["https://placehold.co/600x600?text=MC4+Connector+Pair"],
+    warranty: 1,
     description: "หัวต่อ MC4 คุณภาพสูงสำหรับเข้าหัวสายไฟ PV1-F ขนาด 4mm² และ 6mm² ออกแบบมาให้ล็อคแน่นสนิท กันน้ำกันฝุ่น 100% ตัวนำทำจากทองแดงเคลือบดีบุกนำไฟฟ้าได้ดีเยี่ยมและไม่เป็นสนิม ทนทานต่อสภาพอากาศและการใช้งานหนักภายนอกอาคาร",
-    technicalSpecs: [
+    specs: [
       { label: "แรงดันไฟฟ้าที่รองรับ", value: "1000V DC / 1500V DC" },
       { label: "กระแสไฟฟ้าที่รองรับ", value: "30 A" },
       { label: "ขนาดสายไฟที่รองรับ", value: "2.5mm² / 4mm² / 6mm²" },
@@ -1128,22 +1278,28 @@ export const allProducts = [
       "Secure Locking: ระบบล็อคแน่นหนา ป้องกันการหลุดออกของสายไฟโดยไม่ตั้งใจ",
       "Low Power Loss: หน้าสัมผัสทองแดงเคลือบดีบุกช่วยลดความต้านทานและแรงดันตก",
       "Global Standard: สามารถใช้งานร่วมกับหัว MC4 ที่ติดมากับแผงโซล่าร์เซลล์ได้ทุกแบรนด์"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=MC4+Connector+Pair",
+      cloudinaryId: "solar_products/mc4_connector"
+    },
+    gallery: [],
+    tags: ["connector", "mc4", "waterproof", "ip68"],
+    price: 35,
+    salePrice: 55,
+    stock: 500,
+    stockMin: 50,
+    isActive: true
   },
   {
-    id: "solar-mid-clamp-35mm-40mm",
-    title: "ตัวยึดกลางแผงโซล่าร์เซลล์ Mid Clamp (อลูมิเนียมอัลลอยด์) พร้อมน็อตสแตนเลส",
+    productNumber: 63,
+    name: "ตัวยึดกลางแผงโซล่าร์เซลล์ Mid Clamp (อลูมิเนียมอัลลอยด์) พร้อมน็อตสแตนเลส",
+    sku: "std-clp-mid",
     brand: "Standard Mounting",
     category: "Accessories",
-    priceCurrent: 25,
-    priceOriginal: 35,
-    stock: 300,
-    rating: 4.9,
-    ratingCount: 85,
-    warranty: "10 Years Material Warranty",
-    images: ["https://placehold.co/600x600?text=Solar+Mid+Clamp"],
+    warranty: 10,
     description: "อุปกรณ์ยึดระหว่างแผงโซล่าร์เซลล์ (Mid Clamp) ผลิตจากอลูมิเนียมฉีดขึ้นรูปชุบ Anodized แข็งแรงทนทาน ไม่เป็นสนิม มาพร้อมสกรูหัวจมหกเหลี่ยมสแตนเลส 304 และน็อตล็อคราง (T-Nut) ครบชุดพร้อมติดตั้ง",
-    technicalSpecs: [
+    specs: [
       { label: "วัสดุ (Material)", value: "Aluminum Alloy 6005-T5" },
       { label: "วัสดุน็อตและสกรู", value: "Stainless Steel SUS304 (ไม่เป็นสนิม)" },
       { label: "ความหนาแผงที่รองรับ", value: "35 mm / 40 mm (ใช้ร่วมกันได้)" },
@@ -1160,22 +1316,28 @@ export const allProducts = [
       "Grounding Teeth: มีรอยหยักช่วยเจาะชั้น Anodized ของแผงเพื่อทำระบบกราวด์ในตัว",
       "High Strength: ทนแรงลมพายุได้ตามมาตรฐานวิศวกรรมการติดตั้งบนหลังคา",
       "Easy Adjustment: ปรับเลื่อนระยะได้ง่ายตามตำแหน่งของแผง"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Solar+Mid+Clamp",
+      cloudinaryId: "solar_products/mid_clamp"
+    },
+    gallery: [],
+    tags: ["mounting", "midclamp", "aluminum", "solar"],
+    price: 25,
+    salePrice: 35,
+    stock: 300,
+    stockMin: 20,
+    isActive: true
   },
   {
-    id: "solar-end-clamp-35mm-40mm",
-    title: "ตัวยึดขอบแผงโซล่าร์เซลล์ End Clamp (อลูมิเนียมอัลลอยด์) พร้อมน็อตสแตนเลส",
+    productNumber: 64,
+    name: "ตัวยึดขอบแผงโซล่าร์เซลล์ End Clamp (อลูมิเนียมอัลลอยด์) พร้อมน็อตสแตนเลส",
+    sku: "std-clp-end",
     brand: "Standard Mounting",
     category: "Accessories",
-    priceCurrent: 25,
-    priceOriginal: 35,
-    stock: 200,
-    rating: 4.9,
-    ratingCount: 70,
-    warranty: "10 Years Material Warranty",
-    images: ["https://placehold.co/600x600?text=Solar+End+Clamp"],
+    warranty: 10,
     description: "อุปกรณ์ยึดปิดจบขอบแผงโซล่าร์เซลล์ (End Clamp) สำหรับยึดแผงตัวสุดท้ายที่อยู่ริมราง ผลิตจากอลูมิเนียมเกรด 6005-T5 ทนต่อการกัดกร่อนสูง ดีไซน์สวยงาม แข็งแรง ช่วยให้แผงโซล่าร์ถูกยึดติดกับโครงสร้างหลังคาได้อย่างมั่นคง",
-    technicalSpecs: [
+    specs: [
       { label: "วัสดุ (Material)", value: "Aluminum Alloy 6005-T5" },
       { label: "วัสดุน็อตและสกรู", value: "Stainless Steel SUS304" },
       { label: "ความหนาแผงที่รองรับ", value: "35 mm หรือ 40 mm (โปรดเลือกระบุตามความหนาแผง)" },
@@ -1192,22 +1354,28 @@ export const allProducts = [
       "Sleek Appearance: ช่วยให้งานติดตั้งดูเป็นระเบียบและสวยงามแบบมืออาชีพ",
       "Time Saving: ออกแบบมาให้ขันน็อตเพียงตัวเดียวก็ล็อคแผงได้แน่นสนิท",
       "Durable Construction: ผ่านการทดสอบความแข็งแรงตามมาตรฐานสากล"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Solar+End+Clamp",
+      cloudinaryId: "solar_products/end_clamp"
+    },
+    gallery: [],
+    tags: ["mounting", "endclamp", "aluminum", "solar"],
+    price: 25,
+    salePrice: 35,
+    stock: 200,
+    stockMin: 20,
+    isActive: true
   },
   {
-    id: "mc4-crimping-tool-professional",
-    title: "คีมย้ำหัว MC4 รุ่นมืออาชีพ (Solar Crimping Tool) สำหรับสายไฟ 2.5/4/6mm²",
+    productNumber: 65,
+    name: "คีมย้ำหัว MC4 รุ่นมืออาชีพ (Solar Crimping Tool) สำหรับสายไฟ 2.5/4/6mm²",
+    sku: "std-tol-crimper",
     brand: "Standard Tools",
     category: "Accessories",
-    priceCurrent: 850,
-    priceOriginal: 1250,
-    stock: 30,
-    rating: 4.9,
-    ratingCount: 45,
-    warranty: "6 Months Warranty",
-    images: ["https://placehold.co/600x600?text=MC4+Crimping+Tool"],
+    warranty: 1, // ปรับจาก 6 เดือน เป็น 1 ปีตามข้อกำหนด Number ใน Schema
     description: "เครื่องมือที่ช่างโซล่าร์เซลล์ต้องมี! คีมย้ำหางปลา MC4 ระบบ Ratchet (ผ่อนแรง) ช่วยให้การเข้าหัวสายไฟแน่นหนาและได้มาตรฐานสากล ลดความเสี่ยงจากการเกิดความร้อนสะสมบริเวณหน้าสัมผัส ตัวคีมผลิตจากเหล็กกล้าความแข็งแรงสูง ด้ามจับถนัดมือไม่ลื่น",
-    technicalSpecs: [
+    specs: [
       { label: "ช่วงการย้ำ (Crimping Range)", value: "2.5 / 4.0 / 6.0 mm²" },
       { label: "มาตรฐานสายไฟ (AWG)", value: "14-10 AWG" },
       { label: "ระบบการทำงาน", value: "Ratcheting Mechanism (ล็อคและผ่อนแรงอัตโนมัติ)" },
@@ -1225,22 +1393,28 @@ export const allProducts = [
       "Interchangeable Die: สามารถเปลี่ยนหัวย้ำได้ในอนาคต (ถ้ามีหัวสำรองตรงรุ่น)",
       "Ergonomic Handle: ด้ามจับโค้งมนรับกับอุ้งมือ ช่วยให้การส่งแรงย้ำทำได้อย่างเต็มที่",
       "Professional Grade: เหมาะสำหรับทั้งงานติดตั้งบ้านพักอาศัยและโครงการใหญ่"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=MC4+Crimping+Tool",
+      cloudinaryId: "solar_products/crimping_tool"
+    },
+    gallery: [],
+    tags: ["tools", "crimper", "mc4", "solar"],
+    price: 850,
+    salePrice: 1250,
+    stock: 30,
+    stockMin: 2,
+    isActive: true
   },
   {
-    id: "dc-breaker-2p-550v-32a-suntree",
-    title: "เซอร์กิตเบรกเกอร์ DC 2P 550V 32A สำหรับระบบโซล่าร์เซลล์ (Suntree Style)",
+    productNumber: 66,
+    name: "เซอร์กิตเบรกเกอร์ DC 2P 550V 32A สำหรับระบบโซล่าร์เซลล์ (Suntree Style)",
+    sku: "st-brk-dc-32a",
     brand: "Suntree / High Quality",
     category: "Accessories",
-    priceCurrent: 450,
-    priceOriginal: 590,
-    stock: 100,
-    rating: 5,
-    ratingCount: 65,
-    warranty: "1 Year Warranty",
-    images: ["https://placehold.co/600x600?text=DC+Breaker+2P+550V"],
+    warranty: 1,
     description: "เบรกเกอร์กระแสตรง (DC Circuit Breaker) คุณภาพสูง ออกแบบมาเพื่อตัดวงจรฝั่งแผงโซล่าร์เซลล์โดยเฉพาะ รองรับแรงดันสูงถึง 550V-600V มีความเร็วในการตัดวงจรสูง ช่วยปกป้อง Inverter และระบบของคุณจากการเกิดไฟฟ้าลัดวงจรหรือกระแสเกิน",
-    technicalSpecs: [
+    specs: [
       { label: "จำนวนโพล (Poles)", value: "2P" },
       { label: "แรงดันไฟฟ้าเสนอแนะ (Ue)", value: "DC 550V / 600V" },
       { label: "พิกัดกระแส (In)", value: "32 A (เลือกขนาดอื่นได้ 16A/20A/25A)" },
@@ -1260,22 +1434,28 @@ export const allProducts = [
       "Secure Terminals: ช่องเข้าสายออกแบบมาให้ขันน็อตได้แน่นหนา รองรับสายไฟขนาดใหญ่",
       "DIN Rail Mount: ติดตั้งง่ายในตู้ Consumer Unit หรือตู้ Combine Box มาตรฐานทั่วไป",
       "Solar Dedicated: ไม่ควรใช้เบรกเกอร์ AC มาแทน เพราะโครงสร้างการดับอาร์คต่างกันสิ้นเชิง"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=DC+Breaker+2P+550V",
+      cloudinaryId: "solar_products/dc_breaker"
+    },
+    gallery: [],
+    tags: ["protection", "breaker", "dc", "suntree"],
+    price: 450,
+    salePrice: 590,
+    stock: 100,
+    stockMin: 10,
+    isActive: true
   },
   {
-    id: "dc-spd-surge-protection-600v-40ka",
-    title: "อุปกรณ์ป้องกันไฟกระชาก DC Surge Protection Device (SPD) 600V 20-40kA",
+    productNumber: 67,
+    name: "อุปกรณ์ป้องกันไฟกระชาก DC Surge Protection Device (SPD) 600V 20-40kA",
+    sku: "st-spd-dc-600v",
     brand: "Suntree / High Quality",
     category: "Accessories",
-    priceCurrent: 490,
-    priceOriginal: 650,
-    stock: 80,
-    rating: 4.9,
-    ratingCount: 52,
-    warranty: "1 Year Warranty",
-    images: ["https://placehold.co/600x600?text=DC+SPD+600V"],
+    warranty: 1,
     description: "อุปกรณ์ป้องกันความเสียหายจากแรงดันไฟกระชากชั่วขณะ เช่น ฟ้าผ่าใกล้เคียง หรือความผิดปกติในระบบไฟฟ้า SPD จะทำหน้าที่ระบายแรงดันส่วนเกินลงดินอย่างรวดเร็ว เพื่อไม่ให้แรงดันสูงวิ่งเข้าไปทำลายอุปกรณ์อิเล็กทรอนิกส์ใน Inverter",
-    technicalSpecs: [
+    specs: [
       { label: "แรงดันใช้งานสูงสุด (Uc)", value: "DC 600 V" },
       { label: "พิกัดกระแสคายประจุ (In)", value: "20 kA" },
       { label: "กระแสคายประจุสูงสุด (Imax)", value: "40 kA" },
@@ -1294,22 +1474,28 @@ export const allProducts = [
       "Fast Acting: ตอบสนองต่อไฟกระชากในระดับนาโนวินาที ป้องกันอุปกรณ์ราคาแพงได้ทันท่วงที",
       "Safety Material: ผลิตจากวัสดุไม่ลามไฟ แข็งแรง ทนความร้อนได้สูง",
       "Standard Compliance: ผ่านการรับรองมาตรฐานสากล IEC 61643-11"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=DC+SPD+600V",
+      cloudinaryId: "solar_products/dc_spd"
+    },
+    gallery: [],
+    tags: ["protection", "spd", "dc", "surge"],
+    price: 490,
+    salePrice: 650,
+    stock: 80,
+    stockMin: 5,
+    isActive: true
   },
   {
-    id: "dc-fuse-10x38-15a-with-holder",
-    title: "ฟิวส์ DC พร้อมฐานฟิวส์ (Fuse Holder + Fuse Link) 10x38mm 1000V 15A",
+    productNumber: 68,
+    name: "ฟิวส์ DC พร้อมฐานฟิวส์ (Fuse Holder + Fuse Link) 10x38mm 1000V 15A",
+    sku: "std-fus-dc-15a",
     brand: "Standard Protection",
     category: "Accessories",
-    priceCurrent: 120,
-    priceOriginal: 180,
-    stock: 200,
-    rating: 5,
-    ratingCount: 90,
-    warranty: "ตามมาตรฐานการใช้งาน",
-    images: ["https://placehold.co/600x600?text=DC+Fuse+and+Holder"],
+    warranty: 1,
     description: "ชุดฟิวส์ป้องกัน String สำหรับระบบโซล่าร์เซลล์ ทำหน้าที่ตัดวงจรเมื่อเกิดกระแสไฟฟ้าไหลเกินในสาย PV ช่วยป้องกันสายไฟละลายและแผงเสียหาย มาพร้อมฐานฟิวส์แบบรางปีกนกที่เปิดเปลี่ยนไส้ฟิวส์ได้ง่าย",
-    technicalSpecs: [
+    specs: [
       { label: "ขนาดไส้ฟิวส์ (Fuse Link Size)", value: "10 x 38 mm" },
       { label: "แรงดันไฟฟ้าพิกัด", value: "DC 1,000 V" },
       { label: "กระแสพิกัด (In)", value: "15 A (เลือกขนาดได้ตั้งแต่ 10A-32A)" },
@@ -1327,22 +1513,28 @@ export const allProducts = [
       "Dedicated gPV: ไส้ฟิวส์แบบหน่วงเวลาเฉพาะทาง สำหรับรองรับไฟกระชากจากแผงในตอนเช้า",
       "High Insulation: ฐานฟิวส์มีความเป็นฉนวนสูง ป้องกันไฟรั่วและไฟฟ้าลัดวงจร",
       "Essential Safety: เป็นอุปกรณ์บังคับที่ต้องมีตามมาตรฐานการติดตั้งโซล่าร์เซลล์"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=DC+Fuse+and+Holder",
+      cloudinaryId: "solar_products/dc_fuse"
+    },
+    gallery: [],
+    tags: ["protection", "fuse", "dc", "solar"],
+    price: 120,
+    salePrice: 180,
+    stock: 200,
+    stockMin: 20,
+    isActive: true
   },
   {
-    id: "set-solar-3kw-huawei-premium",
-    title: "ชุดเซตโซล่าร์เซลล์ 3.3kW Huawei Smart Set (Hybrid Ready)",
+    productNumber: 69,
+    name: "ชุดเซตโซล่าร์เซลล์ 3.3kW Huawei Smart Set (Hybrid Ready)",
+    sku: "set-hw-3.3kw",
     brand: "Huawei",
     category: "Solar Set",
-    priceCurrent: 75900,
-    priceOriginal: 89000,
-    stock: 5,
-    rating: 5,
-    ratingCount: 10,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Huawei+3kW+Full+Set"],
+    warranty: 10,
     description: "ชุดโซล่าร์เซลล์ระดับพรีเมียมที่ฉลาดที่สุดในตลาดปัจจุบัน หัวใจหลักคือ Inverter Huawei ที่รองรับการอัปเกรดเป็นระบบ Hybrid ได้ทันทีในอนาคต (ต้องใช้ร่วมกับแบตเตอรี่ Huawei LUNA2000 เท่านั้นตามมาตรฐานระบบ) ในเซตประกอบด้วยอุปกรณ์มาตรฐานครบชุดสำหรับติดตั้งบ้านพักอาศัย พร้อมแผง Jinko 550W จำนวน 6 แผง ผลิตไฟได้เฉลี่ย 12-15 หน่วยต่อวัน",
-    technicalSpecs: [
+    specs: [
       { label: "1. Inverter", value: "Huawei SUN2000-3KTL-L1 (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Jinko Tiger Pro 550W (6 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW (1 ชุด)" },
@@ -1357,26 +1549,32 @@ export const allProducts = [
     features: [
       "Battery Ready: รองรับการต่อแบตเตอรี่ Huawei LUNA2000 ได้ทันทีโดยไม่ต้องเปลี่ยน Inverter",
       "AI-Powered Safety: ระบบตัดวงจรเมื่อเกิดประกายไฟ (AFCI) ป้องกันอัคคีภัยระดับสูงสุด",
-      "High Power Gain: ใช้แผง 550W จำนวน 6 แผง ($3300W$) ให้กำลังผลิตสูงแม้แดดน้อย",
+      "High Power Gain: ใช้แผง 550W จำนวน 6 แผง (3300W) ให้กำลังผลิตสูงแม้แดดน้อย",
       "Full Protection: ปกป้องระบบด้วยอุปกรณ์กันฟ้าผ่าและเบรกเกอร์มาตรฐานสากล",
       "Smart Monitoring: ดูการผลิตไฟและการใช้ไฟในบ้านผ่านแอป FusionSolar ได้แบบ Real-time",
       "Complete Set: อุปกรณ์ติดตั้งครบครัน ไม่ต้องหาซื้อจุกจิกเพิ่ม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Huawei+3kW+Full+Set",
+      cloudinaryId: "solar_products/set_hw_3kw"
+    },
+    gallery: [],
+    tags: ["set", "huawei", "3.3kw", "fullset"],
+    price: 75900,
+    salePrice: 89000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-3kw-sungrow-efficiency",
-    title: "ชุดเซตโซล่าร์เซลล์ 3.5kW Sungrow High-Efficiency Set",
+    productNumber: 70,
+    name: "ชุดเซตโซล่าร์เซลล์ 3.5kW Sungrow High-Efficiency Set",
+    sku: "set-sg-3.5kw",
     brand: "Sungrow",
     category: "Solar Set",
-    priceCurrent: 69900,
-    priceOriginal: 82000,
-    stock: 5,
-    rating: 4.9,
-    ratingCount: 8,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Sungrow+3kW+Full+Set"],
-    description: "เซตที่เน้นความคุ้มค่าและประสิทธิภาพการผลิตไฟสูงสุดด้วย Inverter Sungrow รุ่นใหม่ล่าสุด ที่เริ่มทำงานได้เร็วที่สุดตั้งแต่เช้าตรู่ มาพร้อมแผง LONGi Hi-MO 6 ขนาด 585W จำนวน 6 แผง ($3510W$) ซึ่งเป็นแผงที่เทคโนโลยีล้ำที่สุดในตอนนี้ เหมาะสำหรับบ้านที่ต้องการคืนทุนไว",
-    technicalSpecs: [
+    warranty: 10,
+    description: "เซตที่เน้นความคุ้มค่าและประสิทธิภาพการผลิตไฟสูงสุดด้วย Inverter Sungrow รุ่นใหม่ล่าสุด ที่เริ่มทำงานได้เร็วที่สุดตั้งแต่เช้าตรู่ มาพร้อมแผง LONGi Hi-MO 6 ขนาด 585W จำนวน 6 แผง (3510W) ซึ่งเป็นแผงที่เทคโนโลยีล้ำที่สุดในตอนนี้ เหมาะสำหรับบ้านที่ต้องการคืนทุนไว",
+    specs: [
       { label: "1. Inverter", value: "Sungrow SG3.0RS (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "LONGi Hi-MO 6 Explorer 585W (6 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW (1 ชุด)" },
@@ -1395,22 +1593,28 @@ export const allProducts = [
       "iSolarCloud: ระบบมอนิเตอร์ที่ละเอียดและเสถียรที่สุดแบรนด์หนึ่งของโลก",
       "Full Compliance: ผ่านการรับรองมาตรฐานจาก กฟน. และ กฟภ. ครบถ้วน",
       "Best Value: ราคามิตรภาพเมื่อเทียบกับสเปกที่ได้รับ"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Sungrow+3kW+Full+Set",
+      cloudinaryId: "solar_products/set_sg_3.5kw"
+    },
+    gallery: [],
+    tags: ["set", "sungrow", "3.5kw", "fullset"],
+    price: 69900,
+    salePrice: 82000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-3kw-growatt-value",
-    title: "ชุดเซตโซล่าร์เซลล์ 3.1kW Growatt Economic Set",
+    productNumber: 71,
+    name: "ชุดเซตโซล่าร์เซลล์ 3.1kW Growatt Economic Set",
+    sku: "set-gw-3.1kw",
     brand: "Growatt",
     category: "Solar Set",
-    priceCurrent: 59900,
-    priceOriginal: 72000,
-    stock: 10,
-    rating: 4.8,
-    ratingCount: 15,
-    warranty: "Inverter 5-10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Growatt+3kW+Full+Set"],
-    description: "ชุดประหยัดที่ช่างติดตั้งเลือกใช้มากที่สุด หัวใจหลักคือ Growatt MIN 3000TL-X ที่ทนทานและใช้งานง่าย จับคู่กับแผง Trina Vertex S+ 450W จำนวน 7 แผง ($3150W$) ซึ่งเป็นแผงกระจกสองด้าน (Dual Glass) ทนทานพิเศษ เหมาะสำหรับผู้ที่เริ่มต้นเข้าสู่ระบบโซล่าร์เซลล์ด้วยงบประมาณที่คุ้มค่า",
-    technicalSpecs: [
+    warranty: 5,
+    description: "ชุดประหยัดที่ช่างติดตั้งเลือกใช้มากที่สุด หัวใจหลักคือ Growatt MIN 3000TL-X ที่ทนทานและใช้งานง่าย จับคู่กับแผง Trina Vertex S+ 450W จำนวน 7 แผง (3150W) ซึ่งเป็นแผงกระจกสองด้าน (Dual Glass) ทนทานพิเศษ เหมาะสำหรับผู้ที่เริ่มต้นเข้าสู่ระบบโซล่าร์เซลล์ด้วยงบประมาณที่คุ้มค่า",
+    specs: [
       { label: "1. Inverter", value: "Growatt MIN 3000TL-X (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Trina Vertex S+ 450W Dual Glass (7 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW (1 ชุด)" },
@@ -1429,22 +1633,28 @@ export const allProducts = [
       "ShinePhone App: แอปมอนิเตอร์ภาษาไทย ใช้งานง่าย ไม่ซับซ้อน",
       "Trusted Quality: แบรนด์ยอดนิยมอันดับ 1 สำหรับบ้านพักอาศัยในหลายประเทศ",
       "Standard Safety: มีระบบป้องกันไฟย้อนและระบบความปลอดภัยครบตามมาตรฐาน"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Growatt+3kW+Full+Set",
+      cloudinaryId: "solar_products/set_gw_3.1kw"
+    },
+    gallery: [],
+    tags: ["set", "growatt", "3.1kw", "economic"],
+    price: 59900,
+    salePrice: 72000,
+    stock: 10,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-5kw-huawei-smart-premium",
-    title: "ชุดเซตโซล่าร์เซลล์ 5.5kW Huawei Premium Hybrid-Ready Set",
+    productNumber: 72,
+    name: "ชุดเซตโซล่าร์เซลล์ 5.5kW Huawei Premium Hybrid-Ready Set",
+    sku: "set-hw-5.5kw",
     brand: "Huawei",
     category: "Solar Set",
-    priceCurrent: 105000,
-    priceOriginal: 125000,
-    stock: 5,
-    rating: 5,
-    ratingCount: 15,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Huawei+5kW+Full+Set"],
-    description: "ชุดโซล่าร์เซลล์ 5kW เกรดพรีเมียมที่รองรับการอัปเกรดเป็น Hybrid ได้สมบูรณ์แบบที่สุดในอนาคต (ต้องใช้คู่กับ LUNA2000 เท่านั้น) ในเซตมาพร้อมแผง Jinko 550W จำนวน 10 แผง ($5500W$) ซึ่งเป็นจุดที่คุ้มค่าที่สุดของ Inverter รุ่นนี้ ผลิตไฟฟ้าได้เฉลี่ย 22-25 หน่วยต่อวัน ช่วยลดค่าไฟได้เดือนละ 3,000 - 4,000 บาท",
-    technicalSpecs: [
+    warranty: 10,
+    description: "ชุดโซล่าร์เซลล์ 5kW เกรดพรีเมียมที่รองรับการอัปเกรดเป็น Hybrid ได้สมบูรณ์แบบที่สุดในอนาคต (ต้องใช้คู่กับ LUNA2000 เท่านั้น) ในเซตมาพร้อมแผง Jinko 550W จำนวน 10 แผง (5500W) ซึ่งเป็นจุดที่คุ้มค่าที่สุดของ Inverter รุ่นนี้ ผลิตไฟฟ้าได้เฉลี่ย 22-25 หน่วยต่อวัน ช่วยลดค่าไฟได้เดือนละ 3,000 - 4,000 บาท",
+    specs: [
       { label: "1. Inverter", value: "Huawei SUN2000-5KTL-L1 (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Jinko Tiger Pro 550W (10 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW 1P (1 ชุด)" },
@@ -1463,22 +1673,28 @@ export const allProducts = [
       "IP65 Protection: ตัวเครื่องกันน้ำกันฝุ่นติดตั้งภายนอกอาคารได้ ทนทานต่ออากาศร้อนเมืองไทย",
       "Natural Cooling: ไร้เสียงพัดลมรบกวน ทำงานเงียบสนิทตลอดวัน",
       "Value Added: ชุดติดตั้งครบเซตพร้อมของแถมแท่งกราวด์มาตรฐานไฟฟ้า"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Huawei+5kW+Full+Set",
+      cloudinaryId: "solar_products/set_hw_5.5kw"
+    },
+    gallery: [],
+    tags: ["set", "huawei", "5.5kw", "premium"],
+    price: 105000,
+    salePrice: 125000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-5-8kw-sungrow-performance",
-    title: "ชุดเซตโซล่าร์เซลล์ 5.8kW Sungrow High-Performance Set",
+    productNumber: 73,
+    name: "ชุดเซตโซล่าร์เซลล์ 5.8kW Sungrow High-Performance Set",
+    sku: "set-sg-5.8kw",
     brand: "Sungrow",
     category: "Solar Set",
-    priceCurrent: 98000,
-    priceOriginal: 115000,
-    stock: 5,
-    rating: 4.9,
-    ratingCount: 12,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Sungrow+5kW+Full+Set"],
-    description: "เซตที่เน้นกำลังผลิตสูงสุดด้วยการใช้แผง LONGi Hi-MO 6 Explorer 585W จำนวน 10 แผง ($5850W$) จับคู่กับ Inverter Sungrow รุ่นใหม่ที่มีช่วงการทำงานกว้างที่สุด เริ่มผลิตไฟได้ตั้งแต่เช้ามืดและหยุดผลิตช้ากว่าแบรนด์อื่น เหมาะสำหรับบ้านที่ต้องการใช้ไฟฟ้าจากโซล่าร์เซลล์ยาวนานที่สุดในแต่ละวัน",
-    technicalSpecs: [
+    warranty: 10,
+    description: "เซตที่เน้นกำลังผลิตสูงสุดด้วยการใช้แผง LONGi Hi-MO 6 Explorer 585W จำนวน 10 แผง (5850W) จับคู่กับ Inverter Sungrow รุ่นใหม่ที่มีช่วงการทำงานกว้างที่สุด เริ่มผลิตไฟได้ตั้งแต่เช้ามืดและหยุดผลิตช้ากว่าแบรนด์อื่น เหมาะสำหรับบ้านที่ต้องการใช้ไฟฟ้าจากโซล่าร์เซลล์ยาวนานที่สุดในแต่ละวัน",
+    specs: [
       { label: "1. Inverter", value: "Sungrow SG5.0RS (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "LONGi Hi-MO 6 Explorer 585W (10 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW 1P (1 ชุด)" },
@@ -1497,28 +1713,34 @@ export const allProducts = [
       "Modern Aesthetics: งานดีไซน์เครื่องที่เข้ากับบ้านสไตล์โมเดิร์นได้อย่างลงตัว",
       "Safety Assurance: มีระบบป้องกันไฟย้อนและ Surge Protection ในตัวครบชุด",
       "Easy Maintenance: ตรวจสอบและแก้ไขปัญหาเบื้องต้นได้ผ่านแอปพลิเคชัน"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Sungrow+5kW+Full+Set",
+      cloudinaryId: "solar_products/set_sg_5.8kw"
+    },
+    gallery: [],
+    tags: ["set", "sungrow", "5.8kw", "performance"],
+    price: 98000,
+    salePrice: 115000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-5-4kw-growatt-economic-plus",
-    title: "ชุดเซตโซล่าร์เซลล์ 5.4kW Growatt Economic Plus Set",
+    productNumber: 74,
+    name: "ชุดเซตโซล่าร์เซลล์ 5.4kW Growatt Economic Plus Set",
+    sku: "set-gw-5.4kw",
     brand: "Growatt",
     category: "Solar Set",
-    priceCurrent: 85000,
-    priceOriginal: 99000,
-    stock: 8,
-    rating: 4.8,
-    ratingCount: 20,
-    warranty: "Inverter 5-10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Growatt+5kW+Full+Set"],
-    description: "ชุดเซตที่คุ้มค่าที่สุดสำหรับระบบ 5kW เน้นการใช้งานที่ทนทานและราคาที่เข้าถึงง่ายที่สุด ใช้ Inverter Growatt รุ่นยอดนิยมคู่กับแผง Trina Vertex S+ 450W จำนวน 12 แผง ($5400W$) ซึ่งเป็นแผงกระจกสองด้านทนทานพิเศษ เหมาะมากสำหรับการติดตั้งในพื้นที่ที่ต้องการความทนทานต่อสภาพอากาศสูง",
-    technicalSpecs: [
+    warranty: 5,
+    description: "ชุดเซตที่คุ้มค่าที่สุดสำหรับระบบ 5kW เน้นการใช้งานที่ทนทานและราคาที่เข้าถึงง่ายที่สุด ใช้ Inverter Growatt รุ่นยอดนิยมคู่กับแผง Trina Vertex S+ 450W จำนวน 12 แผง (5400W) ซึ่งเป็นแผงกระจกสองด้านทนทานพิเศษ เหมาะมากสำหรับการติดตั้งในพื้นที่ที่ต้องการความทนทานต่อสภาพอากาศสูง",
+    specs: [
       { label: "1. Inverter", value: "Growatt MIN 5000TL-X (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Trina Vertex S+ 450W Dual Glass (12 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 5kW 1P (1 ชุด)" },
       { label: "4. Solar Cable", value: "LINK PV1-F 4mm² (แดง 100ม. / ดำ 100ม.)" },
       { label: "5. MC4 Connector", value: "MC4 IP68 Professional (7 คู่)" },
-      { label: "6. Mounting (Rail)", value: "รางอลูมิเนียม 2.1m (12 เส้น) + ตัวต่อราง (10 ชิ้น)" },
+      { label: "6. Mounting (Rail)", value: "รางอลีมิเนียม 2.1m (12 เส้น) + ตัวต่อราง (10 ชิ้น)" },
       { label: "7. Mounting (Clamps)", value: "Mid Clamp (22 ตัว) + End Clamp (4 ตัว)" },
       { label: "8. Mounting (L-Feet)", value: "L-Feet สำหรับหลังคาเมทัลชีท (24 ชุด)" },
       { label: "9. Smart Meter", value: "Growatt Eastron SDM230-Modbus (1 ชุด)" },
@@ -1531,22 +1753,28 @@ export const allProducts = [
       "Flexible Design: รองรับการจัดวางแผงได้หลายทิศทางด้วยระบบ Dual MPPT",
       "Solid Support: แบรนด์ยอดนิยมที่มีการรับประกันและบริการหลังการขายกว้างขวาง",
       "Full Accessories: จัดอุปกรณ์ติดตั้งมาตรฐานให้ครบ ไม่ต้องจ่ายเพิ่ม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Growatt+5kW+Full+Set",
+      cloudinaryId: "solar_products/set_gw_5.4kw"
+    },
+    gallery: [],
+    tags: ["set", "growatt", "5.4kw", "economicplus"],
+    price: 85000,
+    salePrice: 99000,
+    stock: 8,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-10kw-huawei-enterprise-smart",
-    title: "ชุดเซตโซล่าร์เซลล์ 11kW Huawei Enterprise Smart Set (3 Phase)",
+    productNumber: 75,
+    name: "ชุดเซตโซล่าร์เซลล์ 11kW Huawei Enterprise Smart Set (3 Phase)",
+    sku: "set-hw-11kw-3p",
     brand: "Huawei",
     category: "Solar Set",
-    priceCurrent: 185000,
-    priceOriginal: 215000,
-    stock: 3,
-    rating: 5,
-    ratingCount: 12,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Huawei+10kW+3Phase+Set"],
-    description: "ชุดโซล่าร์เซลล์ 10kW 3 เฟส ระดับไฮเอนด์ที่ได้รับความนิยมสูงสุดในโครงการบ้านจัดสรรชั้นนำ หัวใจหลักคือ Huawei SUN2000-10KTL-M1 ที่รองรับการต่อแบตเตอรี่ LUNA2000 ได้ทันที (Smart String ESS) ในเซตประกอบด้วยแผง Jinko 550W จำนวน 20 แผง ($11,000W$) ให้กำลังผลิตไฟมหาศาลเฉลี่ย 45-50 หน่วยต่อวัน ลดค่าไฟได้สูงสุด 6,000 - 8,000 บาท/เดือน",
-    technicalSpecs: [
+    warranty: 10,
+    description: "ชุดโซล่าร์เซลล์ 10kW 3 เฟส ระดับไฮเอนด์ที่ได้รับความนิยมสูงสุดในโครงการบ้านจัดสรรชั้นนำ หัวใจหลักคือ Huawei SUN2000-10KTL-M1 ที่รองรับการต่อแบตเตอรี่ LUNA2000 ได้ทันที (Smart String ESS) ในเซตประกอบด้วยแผง Jinko 550W จำนวน 20 แผง (11,000W) ให้กำลังผลิตไฟมหาศาลเฉลี่ย 45-50 หน่วยต่อวัน ลดค่าไฟได้สูงสุด 6,000 - 8,000 บาท/เดือน",
+    specs: [
       { label: "1. Inverter", value: "Huawei SUN2000-10KTL-M1 (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Jinko Tiger Pro 550W (20 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 10kW 3P (1 ชุด)" },
@@ -1565,22 +1793,28 @@ export const allProducts = [
       "Smart I-V Curve Diagnosis: ระบบตรวจเช็คสุขภาพแผงโซล่าร์ผ่านแอปได้โดยตรง",
       "Advanced Safety: มีระบบ AFCI ป้องกันประกายไฟ และ Surge Protection ครบถ้วน",
       "Future Proof: พร้อมอัปเกรดเป็นระบบ Smart Home Energy Management ได้เต็มรูปแบบ"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Huawei+10kW+3Phase+Set",
+      cloudinaryId: "solar_products/set_hw_11kw"
+    },
+    gallery: [],
+    tags: ["set", "huawei", "11kw", "3phase"],
+    price: 185000,
+    salePrice: 215000,
+    stock: 3,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-11-7kw-sungrow-power-max",
-    title: "ชุดเซตโซล่าร์เซลล์ 11.7kW Sungrow Power Max Set (3 Phase)",
+    productNumber: 76,
+    name: "ชุดเซตโซล่าร์เซลล์ 11.7kW Sungrow Power Max Set (3 Phase)",
+    sku: "set-sg-11.7kw-3p",
     brand: "Sungrow",
     category: "Solar Set",
-    priceCurrent: 172000,
-    priceOriginal: 198000,
-    stock: 3,
-    rating: 4.9,
-    ratingCount: 9,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Sungrow+10kW+3Phase+Set"],
-    description: "ชุดเซต 10kW ที่เน้นความแรงของกำลังผลิตด้วยแผง LONGi Hi-MO 6 Explorer 585W จำนวน 20 แผง ($11,700W$) ซึ่งเป็นแผงระดับท็อปที่ให้ค่าวัตต์สูงต่อพื้นที่ เหมาะสำหรับบ้านที่มีพื้นที่หลังคาจำกัดแต่อยากได้ไฟเยอะ ตัว Inverter Sungrow SG10RT มีชื่อเสียงเรื่องความทนทานและมอนิเตอร์ที่ละเอียดมาก",
-    technicalSpecs: [
+    warranty: 10,
+    description: "ชุดเซต 10kW ที่เน้นความแรงของกำลังผลิตด้วยแผง LONGi Hi-MO 6 Explorer 585W จำนวน 20 แผง (11,700W) ซึ่งเป็นแผงระดับท็อปที่ให้ค่าวัตต์สูงต่อพื้นที่ เหมาะสำหรับบ้านที่มีพื้นที่หลังคาจำกัดแต่อยากได้ไฟเยอะ ตัว Inverter Sungrow SG10RT มีชื่อเสียงเรื่องความทนทานและมอนิเตอร์ที่ละเอียดมาก",
+    specs: [
       { label: "1. Inverter", value: "Sungrow SG10RT (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "LONGi Hi-MO 6 Explorer 585W (20 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 10kW 3P (1 ชุด)" },
@@ -1599,22 +1833,28 @@ export const allProducts = [
       "Global Trusted: แบรนด์ที่ธนาคารยอมรับสูงสุด (Most Bankable) ในกลุ่มโครงการอุตสาหกรรม",
       "Precision Metering: มาพร้อม Smart Meter 3 เฟสที่แม่นยำสูงสำหรับการทำระบบกันไฟย้อน",
       "iSolarCloud: แอปพลิเคชันระดับโลกที่ช่วยให้คุณวิเคราะห์การใช้พลังงานได้ทุกมิติ"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Sungrow+10kW+3Phase+Set",
+      cloudinaryId: "solar_products/set_sg_11.7kw"
+    },
+    gallery: [],
+    tags: ["set", "sungrow", "11.7kw", "powermax"],
+    price: 172000,
+    salePrice: 198000,
+    stock: 3,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-10-8kw-growatt-commercial-choice",
-    title: "ชุดเซตโซล่าร์เซลล์ 10.8kW Growatt Commercial Choice Set (3 Phase)",
+    productNumber: 77,
+    name: "ชุดเซตโซล่าร์เซลล์ 10.8kW Growatt Commercial Choice Set (3 Phase)",
+    sku: "set-gw-10.8kw-3p",
     brand: "Growatt",
     category: "Solar Set",
-    priceCurrent: 155000,
-    priceOriginal: 179000,
-    stock: 5,
-    rating: 4.8,
-    ratingCount: 18,
-    warranty: "Inverter 10Y / Panel 25Y / Installation Parts 10Y",
-    images: ["https://placehold.co/600x600?text=Growatt+10kW+3Phase+Set"],
-    description: "ชุดเซต 10kW 3 เฟสที่คุ้มค่าที่สุดในแง่ของการลงทุน (Low LCOE) ใช้ Inverter Growatt MOD 10KTL3-X ดีไซน์ล้ำสมัย จับคู่กับแผง Trina Vertex S+ 450W จำนวน 24 แผง ($10,800W$) ซึ่งเป็นแผงกระจกสองด้านทนทานพิเศษ เหมาะมากสำหรับอาคารพาณิชย์หรือโรงงานขนาดเล็กที่ต้องการลดต้นทุนค่าไฟในระยะยาว",
-    technicalSpecs: [
+    warranty: 10,
+    description: "ชุดเซต 10kW 3 เฟสที่คุ้มค่าที่สุดในแง่ของการลงทุน (Low LCOE) ใช้ Inverter Growatt MOD 10KTL3-X ดีไซน์ล้ำสมัย จับคู่กับแผง Trina Vertex S+ 450W จำนวน 24 แผง (10,800W) ซึ่งเป็นแผงกระจกสองด้านทนทานพิเศษ เหมาะมากสำหรับอาคารพาณิชย์หรือโรงงานขนาดเล็กที่ต้องการลดต้นทุนค่าไฟในระยะยาว",
+    specs: [
       { label: "1. Inverter", value: "Growatt MOD 10KTL3-X (1 ชิ้น)" },
       { label: "2. Solar Panel", value: "Trina Vertex S+ 450W Dual Glass (24 แผง)" },
       { label: "3. Combine Box", value: "ชุดตู้คอนโทรล AC/DC Protection 10kW 3P (1 ชุด)" },
@@ -1633,22 +1873,28 @@ export const allProducts = [
       "IP66 Protection: มาตรฐานการป้องกันสูงสุด ติดตั้งภายนอกอาคารได้ไม่ต้องกังวล",
       "Comprehensive Monitoring: ดูผ่านแอป ShinePhone ได้ทั้ง iOS และ Android",
       "Reliable Protection: จัดเต็มชุดอุปกรณ์ป้องกันฟ้าผ่าและเบรกเกอร์เกรดอุตสาหกรรม"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Growatt+10kW+3Phase+Set",
+      cloudinaryId: "solar_products/set_gw_10.8kw"
+    },
+    gallery: [],
+    tags: ["set", "growatt", "10.8kw", "commercial"],
+    price: 155000,
+    salePrice: 179000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-hybrid-deye-3-6kw-smart-backup",
-    title: "ชุดเซต Hybrid Deye 3.6kW Smart Backup (Single Phase) + Battery 4.8kWh",
+    productNumber: 78,
+    name: "ชุดเซต Hybrid Deye 3.6kW Smart Backup (Single Phase) + Battery 4.8kWh",
+    sku: "set-dy-hyb-3.6kw",
     brand: "Deye",
     category: "Solar Set",
-    priceCurrent: 115000,
-    priceOriginal: 135000,
-    stock: 3,
-    rating: 5,
-    ratingCount: 12,
-    warranty: "Inverter 5Y / Battery 5-10Y / Panel 25Y",
-    images: ["https://placehold.co/600x600?text=Deye+3.6kW+Hybrid+Set"],
-    description: "ชุดเริ่มต้นสำหรับบ้านที่ต้องการความมั่นคงทางพลังงาน ด้วยระบบ Hybrid จาก Deye ขนาด 3.6kW ที่สามารถจ่ายไฟสำรองได้ทันทีภายใน 4 มิลลิวินาทีเมื่อไฟดับ ในเซตมาพร้อมแบตเตอรี่ Pylontech US5000 ความจุ 4.8kWh และแผง Jinko 550W จำนวน 8 แผ ($4,400W$) รองรับการใช้งานตู้เย็น ไฟส่องสว่าง และพัดลมได้ทั้งคืนแม้ไม่มีไฟหลวง",
-    technicalSpecs: [
+    warranty: 5,
+    description: "ชุดเริ่มต้นสำหรับบ้านที่ต้องการความมั่นคงทางพลังงาน ด้วยระบบ Hybrid จาก Deye ขนาด 3.6kW ที่สามารถจ่ายไฟสำรองได้ทันทีภายใน 4 มิลลิวินาทีเมื่อไฟดับ ในเซตมาพร้อมแบตเตอรี่ Pylontech US5000 ความจุ 4.8kWh และแผง Jinko 550W จำนวน 8 แผง (4,400W) รองรับการใช้งานตู้เย็น ไฟส่องสว่าง และพัดลมได้ทั้งคืนแม้ไม่มีไฟหลวง",
+    specs: [
       { label: "1. Inverter", value: "Deye SUN-3.6K-SG04LP1-EU (1 ชิ้น)" },
       { label: "2. Battery", value: "Pylontech US5000 4.8kWh 48V (1 ชุด)" },
       { label: "3. Solar Panel", value: "Jinko Tiger Pro 550W (8 แผง)" },
@@ -1668,22 +1914,28 @@ export const allProducts = [
       "Zero Export: ระบบกันไฟย้อนแม่นยำ 100% ไม่ต้องกังวลเรื่องมิเตอร์หมุนย้อน",
       "Interactive Display: หน้าจอสัมผัสสีสันสวยงาม ปรับค่าทุกอย่างได้ละเอียดจากหน้าเครื่อง",
       "Safety First: มาพร้อมอุปกรณ์ป้องกันไฟกระชากและฟ้าผ่าทั้งฝั่ง AC และ DC"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+3.6kW+Hybrid+Set",
+      cloudinaryId: "solar_products/set_deye_3.6kw"
+    },
+    gallery: [],
+    tags: ["set", "deye", "hybrid", "backup"],
+    price: 115000,
+    salePrice: 135000,
+    stock: 3,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-hybrid-deye-5kw-best-seller",
-    title: "ชุดเซต Hybrid Deye 5kW Best Seller (Single Phase) + Battery 10kWh",
+    productNumber: 79,
+    name: "ชุดเซต Hybrid Deye 5kW Best Seller (Single Phase) + Battery 10kWh",
+    sku: "set-dy-hyb-5kw",
     brand: "Deye",
     category: "Solar Set",
-    priceCurrent: 189000,
-    priceOriginal: 219000,
-    stock: 5,
-    rating: 5,
-    ratingCount: 45,
-    warranty: "Inverter 5Y / Battery 5-10Y / Panel 25Y",
-    images: ["https://placehold.co/600x600?text=Deye+5kW+Hybrid+Set"],
-    description: "เซตยอดนิยมอันดับ 1 สำหรับบ้านเดี่ยวที่ต้องการ 'ตัดขาดจากค่าไฟ' และมีไฟใช้ตลอด 24 ชั่วโมง ใช้ Inverter Deye 5kW ยอดฮิต จับคู่กับแบตเตอรี่ LiFePO4 ความจุจุใจ 10.24kWh และแผง LONGi Hi-MO 6 ขนาด 585W จำนวน 11 แผง ($6,435W$) ระบบนี้สามารถรันแอร์ได้ฟรีในช่วงกลางวัน และสำรองไฟไว้ใช้เปิดแอร์หรือตู้เย็นได้ต่อเนื่องในช่วงกลางคืน",
-    technicalSpecs: [
+    warranty: 5,
+    description: "เซตยอดนิยมอันดับ 1 สำหรับบ้านเดี่ยวที่ต้องการ 'ตัดขาดจากค่าไฟ' และมีไฟใช้ตลอด 24 ชั่วโมง ใช้ Inverter Deye 5kW ยอดฮิต จับคู่กับแบตเตอรี่ LiFePO4 ความจุจุใจ 10.24kWh และแผง LONGi Hi-MO 6 ขนาด 585W จำนวน 11 แผง (6,435W) ระบบนี้สามารถรันแอร์ได้ฟรีในช่วงกลางวัน และสำรองไฟไว้ใช้เปิดแอร์หรือตู้เย็นได้ต่อเนื่องในช่วงกลางคืน",
+    specs: [
       { label: "1. Inverter", value: "Deye SUN-5K-SG04LP1-EU (1 ชิ้น)" },
       { label: "2. Battery", value: "Deye/Pylontech LiFePO4 5.12kWh (2 ชุด รวม 10.24kWh)" },
       { label: "3. Solar Panel", value: "LONGi Hi-MO 6 Explorer 585W (11 แผง)" },
@@ -1703,22 +1955,28 @@ export const allProducts = [
       "Parallel Capability: รองรับการขนานเครื่องเพิ่มเป็น 10kW หรือ 15kW ได้ในอนาคต",
       "Tough & Reliable: ตัวเครื่องทนทาน ระบายความร้อนได้ดีเยี่ยมแม้ติดตั้งในสภาวะอากาศร้อน",
       "Complete Solution: จัดอุปกรณ์ติดตั้งเกรดพรีเมียมให้ครบเซต พร้อมระบบกราวด์มาตรฐาน"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+5kW+Hybrid+Set",
+      cloudinaryId: "solar_products/set_deye_5kw"
+    },
+    gallery: [],
+    tags: ["set", "deye", "hybrid", "bestseller"],
+    price: 189000,
+    salePrice: 219000,
+    stock: 5,
+    stockMin: 1,
+    isActive: true
   },
   {
-    id: "set-solar-hybrid-deye-10kw-3-phase-ultimate",
-    title: "ชุดเซต Hybrid Deye 10kW Ultimate Backup (3 Phase) + Battery 20kWh",
+    productNumber: 80,
+    name: "ชุดเซต Hybrid Deye 10kW Ultimate Backup (3 Phase) + Battery 20kWh",
+    sku: "set-dy-hyb-10kw-3p",
     brand: "Deye",
     category: "Solar Set",
-    priceCurrent: 365000,
-    priceOriginal: 415000,
-    stock: 2,
-    rating: 5,
-    ratingCount: 8,
-    warranty: "Inverter 5Y / Battery 5-10Y / Panel 25Y",
-    images: ["https://placehold.co/600x600?text=Deye+10kW+Hybrid+Set"],
-    description: "ที่สุดของระบบพลังงานแสงอาทิตย์สำหรับบ้านขนาดใหญ่หรือธุรกิจขนาดเล็ก ชุด Hybrid 10kW 3 เฟสจาก Deye มาพร้อมความสามารถในการจ่ายไฟสำรองแบบ 3 เฟสสมบูรณ์แบบ (Unbalanced Output) ในเซตจัดเต็มแผง Trina 580W Bi-facial จำนวน 22 แผง ($12,760W$) และแบตเตอรี่จุใจ 20.48kWh พร้อมรับมือกับทุกวิกฤตไฟฟ้าและช่วยลดค่าไฟได้มหาศาล",
-    technicalSpecs: [
+    warranty: 5,
+    description: "ที่สุดของระบบพลังงานแสงอาทิตย์สำหรับบ้านขนาดใหญ่หรือธุรกิจขนาดเล็ก ชุด Hybrid 10kW 3 เฟสจาก Deye มาพร้อมความสามารถในการจ่ายไฟสำรองแบบ 3 เฟสสมบูรณ์แบบ (Unbalanced Output) ในเซตจัดเต็มแผง Trina 580W Bi-facial จำนวน 22 แผง (12,760W) และแบตเตอรี่จุใจ 20.48kWh พร้อมรับมือกับทุกวิกฤตไฟฟ้าและช่วยลดค่าไฟได้มหาศาล",
+    specs: [
       { label: "1. Inverter", value: "Deye SUN-10K-SG04LP3-EU 3-Phase (1 ชิ้น)" },
       { label: "2. Battery", value: "LiFePO4 48V 5.12kWh Module (4 ชุด รวม 20.48kWh)" },
       { label: "3. Solar Panel", value: "Trina Vertex S+ 580W Bi-facial Dual Glass (22 แผง)" },
@@ -1738,7 +1996,18 @@ export const allProducts = [
       "Generator Support: มีพอร์ตสำหรับต่อ Generator ภายนอกเพื่อสำรองไฟในกรณีฉุกเฉินขั้นสุด",
       "Advanced Monitoring: ดูข้อมูลละเอียดแยกรายเฟสและสถานะแบตเตอรี่ผ่านแอป Solarman",
       "Industrial Grade: อุปกรณ์ป้องกันทุกชิ้นใช้เกรดสูงที่สุดเพื่อรองรับกำลังไฟมหาศาล"
-    ]
+    ],
+    image: {
+      url: "https://placehold.co/600x600?text=Deye+10kW+Hybrid+Set",
+      cloudinaryId: "solar_products/set_deye_10kw"
+    },
+    gallery: [],
+    tags: ["set", "deye", "hybrid", "ultimate"],
+    price: 365000,
+    salePrice: 415000,
+    stock: 2,
+    stockMin: 1,
+    isActive: true
   }
 ];
 
