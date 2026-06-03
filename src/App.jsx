@@ -11,8 +11,8 @@ import AdminProducts from "./pages/admin/Products";
 import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
-/*
 import AdminServices from "./pages/admin/Services";
+/*
 import AdminServiceForm from "./pages/admin/ServiceForm";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserDetail from "./pages/admin/UserDetail";
@@ -35,6 +35,10 @@ import UserProfilePage from './pages/UserProfilePage';
 import AllProductsPage from './pages/AllProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import FooterSection from './components/FooterSection';
+import CartPage from './pages/CartPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
   {
@@ -72,15 +76,15 @@ const router = createBrowserRouter([
       },
       {
         path: "services",        // บริการ
-        element: <div>Services Page (Coming Soon)</div>,
+        element: <ServicesPage />,
       },
       {
         path: "portfolio",       // ผลงาน 
         element: <div>Portfolio Page (Coming Soon)</div>,
       },
       {
-        path: "contact",         // ติดต่อเรา 
-        element: <div>Contact Page (Coming Soon)</div>,
+        path: "contact",         // ติดต่อเรา
+        element: <ContactPage />,
       },
       {
         path: "testimonials",
@@ -105,6 +109,21 @@ const router = createBrowserRouter([
         path: "profile",
         element: <UserProfilePage />,
       },
+      {
+        path: "cart",
+        element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <CheckoutPage />
+            <FooterSection />
+          </>
+        ),
+      },
       { path:"admin", element:<AdminLayout />,
         children: [
           { index:true, element:<AdminHome /> },
@@ -113,8 +132,8 @@ const router = createBrowserRouter([
           { path:"products/:productId", element:<AdminProductForm /> },
           { path:"orders", element:<AdminOrders />, },
           { path:"orders/:orderId", element:<AdminOrderItem /> },
-          /*
           { path:"services", element:<AdminServices />, },
+          /*
           { path:"services/create", element:<AdminServiceForm /> },
           { path:"services/:serviceId", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },

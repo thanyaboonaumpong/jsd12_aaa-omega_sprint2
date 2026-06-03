@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -70,13 +70,13 @@ const FaqSection = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
         <div className="flex flex-col">
-          {faqData.filter((_, i) => i % 2 === 0).map((item, index) => 
+          {faqData.filter((_, i) => i % 2 === 0).map((item) =>
             renderFaqCard(item, faqData.indexOf(item))
           )}
         </div>
 
         <div className="flex flex-col">
-          {faqData.filter((_, i) => i % 2 !== 0).map((item, index) => 
+          {faqData.filter((_, i) => i % 2 !== 0).map((item) =>
             renderFaqCard(item, faqData.indexOf(item))
           )}
         </div>
