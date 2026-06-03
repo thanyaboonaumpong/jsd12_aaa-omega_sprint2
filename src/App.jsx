@@ -36,6 +36,9 @@ import AllProductsPage from './pages/AllProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import FooterSection from './components/FooterSection';
 import CartPage from './pages/CartPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
   {
@@ -73,15 +76,15 @@ const router = createBrowserRouter([
       },
       {
         path: "services",        // บริการ
-        element: <div>Services Page (Coming Soon)</div>,
+        element: <ServicesPage />,
       },
       {
         path: "portfolio",       // ผลงาน 
         element: <div>Portfolio Page (Coming Soon)</div>,
       },
       {
-        path: "contact",         // ติดต่อเรา 
-        element: <div>Contact Page (Coming Soon)</div>,
+        path: "contact",         // ติดต่อเรา
+        element: <ContactPage />,
       },
       {
         path: "testimonials",
@@ -110,6 +113,17 @@ const router = createBrowserRouter([
         path: "cart",
         element: <CartPage />,
       },
+      {
+        path: "checkout",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <CheckoutPage />
+            <FooterSection />
+          </>
+        ),
+      },
       { path:"admin", element:<AdminLayout />,
         children: [
           { index:true, element:<AdminHome /> },
@@ -127,7 +141,7 @@ const router = createBrowserRouter([
           { path:"users/create", element:<AdminUserForm /> },
           { path:"users/:userNumber/edit", element:<AdminUserForm /> },
           { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
-           */
+          */
         ],
       },
       { path:"auth", element:<AuthLayout />,
