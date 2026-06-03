@@ -250,6 +250,7 @@
 .card-stat:hover .card-stat__value {@apply text-primary-hover;}
 .card-stat__subtext {@apply inline-flex text-xs not-italic text-content-base leading-5;}
 
+.product-stock__image {@apply block;}
 .product-stock__name {@apply hover:text-primary-hover;}
 .product-stock__sku {@apply text-sm text-content-soft;}
 .product-stock__separator {@apply text-sm text-content-base;}
