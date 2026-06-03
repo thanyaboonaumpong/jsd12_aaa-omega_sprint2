@@ -1,15 +1,13 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
 import { useCart } from "../contexts/CartContext";
-import AuthContext from "../contexts/authContext/AuthContext";
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const { cartItems } = useCart();
-    const { user } = useContext(AuthContext);
     const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
     // ปรับเป็น Object เพื่อให้ระบุ path ของแต่ละเมนูได้ชัดเจน
@@ -51,14 +49,8 @@ function Header() {
                 </ul>
 
                 <div className="flex items-center space-x-4">
-                    <button 
-                        onClick={() => navigate(user ? '/profile' : '/login')}
-                        className="flex items-center gap-2 text-content-hover hover:text-primary-base transition-colors"
-                    >
+                    <button>
                         <span className="material-symbols-outlined text-[28px]">person</span>
-                        <span className="text-sm font-medium">
-                            {user?.fullName || "เข้าสู่ระบบ"}
-                        </span>
                     </button>
                     <button onClick={() => navigate('/checkout')} className="relative">
                         <span className="material-symbols-outlined text-[28px]">shopping_cart</span>

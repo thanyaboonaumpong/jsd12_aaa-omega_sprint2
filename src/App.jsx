@@ -38,6 +38,7 @@ import FooterSection from './components/FooterSection';
 import CartPage from './pages/CartPage';
 import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
   {
@@ -111,6 +112,17 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <CheckoutPage />
+            <FooterSection />
+          </>
+        ),
       },
       { path:"admin", element:<AdminLayout />,
         children: [
