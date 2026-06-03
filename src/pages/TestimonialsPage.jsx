@@ -1,4 +1,3 @@
-import React from 'react';
 import FooterSection from '../components/FooterSection';
 import WorkSection from '../components/WorkSection';
 import TestimonialSection from '../components/TestimonialSection';
