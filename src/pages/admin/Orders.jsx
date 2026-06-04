@@ -1,24 +1,26 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
+import Toast from "../../components/admin/common/Toast";
 import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
-import { StatusOrder } from "../../components/common/SelectStatus";
+import { StatusOrder } from "../../components/admin/common/SelectStatus";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
 
 export default function AdminOrders() {
 
-  const { orders, handleOrderStatusChange } = useContext(MessageContext);
+  const { orders, handleOrderStatusChange, toast } = useContext(MessageContext);
 
   const navigate = useNavigate();
-  const handleOrderItem = (orderId) => navigate(`./${orderId}`);
+  const handleOrderItem = (orderNumber) => navigate(`./${orderNumber}`);
   
   const latestOrders = [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); /*.slice(0, 10)*/
 
   return (
     <>
-      {orders
+      {orders.length > 0
         ? <>
             <section id="stat">
               <StatCard title="ยอดขาย/เดือน" value="1,543,500" subtext="+18%" />
@@ -52,8 +54,8 @@ export default function AdminOrders() {
                     {latestOrders.map((order) => (
                       <tr key={order._id}>
                         <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                        <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
-                        <td><button onClick={() => handleOrderItem(order.orderId)}>
+                        <td><button onClick={() => handleOrderItem(order.orderNumber)}>{order.orderNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                        <td><button onClick={() => handleOrderItem(order.orderNumber)}>
                           {order.customer.company ||
                             (order.customer.firstName || order.customer.lastName
                               ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
@@ -68,6 +70,7 @@ export default function AdminOrders() {
                     ))}
                   </tbody>
                 </table>
+                <Toast {...toast} />
               </div>
             </section>
           </>

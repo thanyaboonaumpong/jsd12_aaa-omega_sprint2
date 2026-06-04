@@ -10,7 +10,7 @@ export default function AdminSidebar() {
   const navSidebarClass = ({ isActive }) => `button button-soft justify-start w-full ${isActive ? "text-primary-hover bg-primary-light/60 hover:bg-primary-light/80" : "button-content hover:bg-white"}`;
 
   return (
-    <aside id="asideContainer" className={`fixed z-99 ${!adminNavMainActive && "-translate-x-full"} md:translate-x-0 transition-all duration-300`}>
+    <aside id="asideContainer" className={`fixed z-99 max-md:shadow-2xl/10 ${!adminNavMainActive && "-translate-x-full"} md:translate-x-0 transition-all duration-300`}>
       <nav id="navContainer" className="flex flex-col w-54 h-dvh overflow-auto rounded-r-2xl bg-neutral-lighter">
         <ul id="navHeader" className="flex justify-between items-center gap-2 p-2">
           <li><NavLink className="nav-logo block px-3 py-1.5" to="/admin" onClick={handleAdminNavSidebarClose}>

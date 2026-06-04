@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
 import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
-import { StatusService, ServiceType, ServiceTeam } from "../../components/common/SelectStatus";
+import { StatusService, ServiceType, ServiceTeam } from "../../components/admin/common/SelectStatus";
 import { FormatDateTime } from "../../utils/FormatDate";
 
 export default function AdminServices() {
