@@ -1,138 +1,108 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import AuthContext from "./AuthContext";
+
+const API_URL = "http://localhost:8888/api/v1/users";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Initialize auth state from localStorage
+  // Initialize auth state from localStorage and verify token
   useEffect(() => {
-    const savedUser = localStorage.getItem("authUser");
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error("Failed to parse saved user:", e);
-        localStorage.removeItem("authUser");
+    const checkAuth = async () => {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        try {
+          // If we have a token, fetch the user profile to verify it's still valid
+          const response = await axios.get(`${API_URL}/profile`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setUser(response.data.data); // Assuming backend returns user inside `data`
+        } catch (e) {
+          console.error("Token invalid or expired:", e);
+          localStorage.removeItem("authUser");
+          localStorage.removeItem("authToken");
+        }
       }
-    }
-    setLoading(false);
+      setLoading(false);
+    };
+
+    checkAuth();
   }, []);
 
   // Login function
-  const login = (email, password) => {
+  const login = async (email, password) => {
     setError(null);
+    try {
+      const response = await axios.post(`${API_URL}/login`, { email, password });
+      // Depending on exact backend response structure, usually token and user are returned
+      // Let's assume response.data has { token, data: user } or something similar
+      const { token, data: userData } = response.data;
 
-    // Mock authentication - in real app, call API
-    const mockUsers = [
-      {
-        id: "1",
-        email: "teerapat.j@gmail.aaa",
-        password: "password123",
-        fullName: "คุณธีรภัทร เจริญวงศ์",
-        phone: "089-555-1122",
-        address: "89 ซอยเพชรเกษม",
-        subDistrict: "แขวงหนองค้างพลู",
-        district: "เขตหนองแขม",
-        province: "กรุงเทพ",
-        postalCode: "10110",
-      },
-      {
-        id: "2",
-        email: "demo@example.com",
-        password: "demo123",
-        fullName: "Demo User",
-        phone: "02-888-9988",
-        address: "123 Demo Street",
-        subDistrict: "Demo Sub",
-        district: "Demo District",
-        province: "Demo Province",
-        postalCode: "10001",
-      },
-    ];
-
-    let foundUser = mockUsers.find((u) => u.email === email && u.password === password);
-
-    // If not found in mock data, check if the user registered and was saved in localStorage
-    if (!foundUser) {
-      const storedUserJSON = localStorage.getItem(`user_${email}`);
-      if (storedUserJSON) {
-        try {
-          const storedUser = JSON.parse(storedUserJSON);
-          if (storedUser.password === password) {
-            foundUser = storedUser;
-          }
-        } catch (e) {
-          console.error("Failed to parse stored user during login:", e);
-        }
-      }
-    }
-
-    if (!foundUser) {
-      setError("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+      setUser(userData || response.data.user); 
+      localStorage.setItem("authUser", JSON.stringify(userData || response.data.user));
+      localStorage.setItem("authToken", token);
+      
+      return true;
+    } catch (err) {
+      setError(err.response?.data?.message || err.response?.data?.error || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
       return false;
     }
-
-    // Remove password from stored user
-    const { password: _, ...userWithoutPassword } = foundUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem("authUser", JSON.stringify(userWithoutPassword));
-    return true;
   };
 
   // Register function
-  const register = (userData) => {
+  const register = async (userData) => {
     setError(null);
+    try {
+      const response = await axios.post(`${API_URL}/register`, userData);
+      
+      const { token, data: newUserData } = response.data;
 
-    // Check if email already exists
-    const existingUser = localStorage.getItem(`user_${userData.email}`);
-    if (existingUser) {
-      setError("อีเมลนี้ถูกใช้ลงทะเบียนแล้ว");
+      setUser(newUserData || response.data.user);
+      localStorage.setItem("authUser", JSON.stringify(newUserData || response.data.user));
+      if (token) localStorage.setItem("authToken", token);
+      
+      return true;
+    } catch (err) {
+      setError(err.response?.data?.message || err.response?.data?.error || "เกิดข้อผิดพลาดในการลงทะเบียน");
       return false;
     }
-
-    const newUser = {
-      id: Date.now().toString(),
-      email: userData.email,
-      password: userData.password,
-      fullName: userData.fullName,
-      phone: userData.phone,
-      address: userData.address || "",
-      subDistrict: userData.subDistrict || "",
-      district: userData.district || "",
-      province: userData.province || "",
-      postalCode: userData.postalCode || "",
-    };
-
-    // Store new user (in real app would be backend)
-    localStorage.setItem(`user_${userData.email}`, JSON.stringify(newUser));
-
-    // Auto-login after registration
-    const { password: _, ...userWithoutPassword } = newUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem("authUser", JSON.stringify(userWithoutPassword));
-    return true;
   };
 
   // Logout function
   const logout = () => {
+    // Optional: call backend logout endpoint if it exists and requires token revocation
+    // axios.post(`${API_URL}/logout`, {}, { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` }});
+    
     setUser(null);
     localStorage.removeItem("authUser");
+    localStorage.removeItem("authToken");
     setError(null);
   };
 
   // Update profile function
-  const updateProfile = (updatedData) => {
+  const updateProfile = async (updatedData) => {
     if (!user) {
       setError("ไม่มีผู้ใช้ที่ login");
       return false;
     }
 
-    const updatedUser = { ...user, ...updatedData };
-    setUser(updatedUser);
-    localStorage.setItem("authUser", JSON.stringify(updatedUser));
-    return true;
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await axios.put(`${API_URL}/profile`, updatedData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const updatedUser = response.data.data || response.data.user;
+      setUser(updatedUser);
+      localStorage.setItem("authUser", JSON.stringify(updatedUser));
+      return true;
+    } catch (err) {
+      setError(err.response?.data?.message || err.response?.data?.error || "อัปเดตข้อมูลไม่สำเร็จ");
+      return false;
+    }
   };
 
   const clearError = () => setError(null);
