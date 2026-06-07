@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/HeaderSection";
 import HeaderSectionAuth from "./components/HeaderSectionAuth";
 
-// นำเข้า CSS และหน้าฝั่ง Admin
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminHome from "./pages/admin/Home";
 import AdminProducts from "./pages/admin/Products";
@@ -122,7 +122,12 @@ const router = createBrowserRouter([
           </>
         ),
       },
-      { path:"admin", element:<AdminLayout />,
+      { path:"admin",
+        element: (
+          <AdminProtectedRoute>
+            <AdminLayout />
+          </AdminProtectedRoute>
+        ),
         children: [
           { index:true, element:<AdminHome /> },
           { path:"products", element:<AdminProducts /> },
@@ -134,8 +139,8 @@ const router = createBrowserRouter([
           { path:"services/create", element:<AdminServiceForm /> },
           { path:"services/:serviceNumber", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
-          { path:"users/:userNumber", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },
+          { path:"users/:userNumber", element:<AdminUserDetail /> },
           { path:"users/:userNumber/edit", element:<AdminUserForm /> },
           { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
         ],

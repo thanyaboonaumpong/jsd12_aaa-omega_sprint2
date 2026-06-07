@@ -2,7 +2,9 @@ const apiBase = import.meta.env.VITE_API_URL;
 
 const handleResponse = async (res) => {
   const result = await res.json();
-  if (!res.ok) throw new Error( result.message || result.error || `HTTP error: ${res.status}` );
+  if (!res.ok) {
+    throw new Error( result.message || result.error || `HTTP error: ${res.status}` );
+  };
   return result.data;
 };
 

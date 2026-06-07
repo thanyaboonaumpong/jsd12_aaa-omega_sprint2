@@ -1,6 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
+import { PageLoading } from "../../components/common/NotFound";
 
 export default function AuthLayout() {
+
+  const { user, loading } = useAdminAuth();
+
+  if (loading) {
+    return <PageLoading />;
+  };
+  if (user) {
+    return <Navigate to="/admin" replace />;
+  };
 
   return (
     <div className="dashboard min-w-dv min-h-dvh flex justify-center items-center p-5 md:p-10 bg-neutral-lighter">

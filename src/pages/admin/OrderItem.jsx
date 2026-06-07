@@ -19,8 +19,10 @@ export default function AdminOrderItem() {
   const { orderNumber } = useParams(null);
 
   const [orderForm, setOrderForm] = useState(null);
-  const handleOrderChange = (event) => {
-    setOrderForm((prev) => ({ ...prev, [event.target.name]: event.target.value }))
+  const handleOrderItemChange = (event) => {
+    setOrderForm((prev) => ({
+      ...prev, [event.target.name]: event.target.value
+    }));
   };
   const handleOrderItemStatusChange = async (event) => {
     const status = event.target.value;
@@ -62,7 +64,7 @@ export default function AdminOrderItem() {
     <>
       <section id="orderEdit" className="flex flex-row flex-wrap justify-between items-center gap-10">
         <h1><span className="text-content-hover">รายละเอียดคำสั่งซื้อ:</span> {orderForm.orderNumber?.toUpperCase() || <DataNotFound />}</h1>
-        <StatusOrder value={orderForm.status || ""} onChange={handleOrderItemStatusChange} />
+        {orderForm?.status && <StatusOrder value={orderForm.status || ""} onChange={handleOrderItemStatusChange} />}
         <table className="table-responsive">
           <colgroup>
             <col className="w-px" />
@@ -161,7 +163,7 @@ export default function AdminOrderItem() {
         <form className="lg:grow self-start lg:w-1/2" onSubmit={handleOrderItemSubmit}>
           <div className="input-group">
             <label htmlFor="internalNote">โน้ตภายใน:</label>
-            <textarea id="internalNote" name="internalNote" rows="5" value={orderForm.internalNote || ""} onChange={handleOrderChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
+            <textarea id="internalNote" name="internalNote" rows="5" value={orderForm.internalNote || ""} onChange={handleOrderItemChange} placeholder="กรอกข้อความตามต้องการ?"></textarea>
           </div>
           <div className="button-row max-xs:flex-col xs:justify-between">
             <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">

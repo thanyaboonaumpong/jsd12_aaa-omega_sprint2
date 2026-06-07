@@ -8,9 +8,9 @@ const handleResponse = async (res) => {
   return result.data;
 };
 
-export const fetchOrders = async () => {
+export const fetchServices = async () => {
   try {
-    const res = await fetch(`${apiBase}/orders`, {
+    const res = await fetch(`${apiBase}/services`, {
       credentials: "include",
     });
     return await handleResponse(res);
@@ -20,9 +20,9 @@ export const fetchOrders = async () => {
   };
 };
 
-export const fetchOrderByNumber = async (orderNumber) => {
+export const fetchServiceByNumber = async (serviceNumber) => {
   try {
-    const res = await fetch(`${apiBase}/orders/number/${orderNumber}`, {
+    const res = await fetch(`${apiBase}/services/number/${serviceNumber}`, {
       credentials: "include",
     });
     return await handleResponse(res);
@@ -32,9 +32,9 @@ export const fetchOrderByNumber = async (orderNumber) => {
   };
 };
 
-export const fetchOrderById = async (id) => {
+export const fetchServiceById = async (id) => {
   try {
-    const res = await fetch(`${apiBase}/orders/${id}`, {
+    const res = await fetch(`${apiBase}/services/${id}`, {
       credentials: "include",
     });
     return await handleResponse(res);
@@ -44,9 +44,9 @@ export const fetchOrderById = async (id) => {
   };
 };
 
-export const createOrder = async (data) => {
+export const createService = async (data) => {
   try {
-    const res = await fetch(`${apiBase}/orders`, {
+    const res = await fetch(`${apiBase}/services`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -59,9 +59,9 @@ export const createOrder = async (data) => {
   };
 };
 
-export const updateOrder = async (id, data) => {
+export const updateService = async (id, data) => {
   try {
-    const res = await fetch(`${apiBase}/orders/${id}`, {
+    const res = await fetch(`${apiBase}/services/${id}`, {
       method: "PUT",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -74,9 +74,9 @@ export const updateOrder = async (id, data) => {
   };
 };
 
-export const updateOrderStatus = async (id, data) => {
+export const updateServiceStatus = async (id, data) => {
   try {
-    const res = await fetch(`${apiBase}/orders/${id}/status`, {
+    const res = await fetch(`${apiBase}/services/${id}/status`, {
       method: "PATCH",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -89,9 +89,9 @@ export const updateOrderStatus = async (id, data) => {
   };
 };
 
-export const updateOrderInternalNote = async (id, data) => {
+export const updateServiceInternalNote = async (id, data) => {
   try {
-    const res = await fetch(`${apiBase}/orders/${id}/internal-note`, {
+    const res = await fetch(`${apiBase}/services/${id}/internal-note`, {
       method: "PATCH",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -104,9 +104,9 @@ export const updateOrderInternalNote = async (id, data) => {
   };
 };
 
-export const deleteOrder = async (id) => {
+export const deleteService = async (id) => {
   try {
-    const res = await fetch(`${apiBase}/orders/${id}`, {
+    const res = await fetch(`${apiBase}/services/${id}`, {
       method: "DELETE",
       credentials: "include",
     });

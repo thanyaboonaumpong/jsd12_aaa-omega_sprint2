@@ -36,8 +36,12 @@ export default function AdminProductForm() {
   const { productNumber } = useParams();
 
   const [productForm, setProductForm] = useState(productNumber ? null : productInitial);
-  const handleProductChange = (event) => setProductForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  const handleProductImageChange = (event) => setProductForm((prev) => ({ ...prev, image: { ...prev.image, [event.target.name]: event.target.value} }));
+  const handleProductChange = (event) => {
+    setProductForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
+  const handleProductImageChange = (event) => {
+    setProductForm((prev) => ({ ...prev, image: {...prev.image, [event.target.name]: event.target.value} }));
+  };
   const handleProductSubmit = async (event) => {
     event.preventDefault();
     const payload = {
@@ -86,7 +90,7 @@ export default function AdminProductForm() {
     } catch (error) {
       console.error(error);
       alert("เกิดข้อผิดพลาด");
-    }
+    };
   };
 
   useEffect(() => {
@@ -96,12 +100,13 @@ export default function AdminProductForm() {
       if (!data) {
         setProductForm(false);
         return;
+      } else {
+        setProductForm({
+          ...data,
+          image: data.image || { url: "", cloudinaryId: "" },
+          tags: Array.isArray(data.tags) ? data.tags.join(", ") : ""
+        });
       };
-      setProductForm({
-        ...data,
-        image: data.image || { url: "", cloudinaryId: "" },
-        tags: Array.isArray(data.tags) ? data.tags.join(", ") : ""
-      });
     };
     getProduct();
   }, [productNumber]);
