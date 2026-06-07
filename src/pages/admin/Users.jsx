@@ -10,7 +10,7 @@ export default function AdminUsers() {
   const { users } = useContext(MessageContext);
 
   const navigate = useNavigate();
-  const handleUserItem = (userId) => navigate(`./${userId}`);
+  const handleUserItem = (userNumber) => navigate(`./${userNumber}`);
 
   const latestUsers = [...users].sort((a, b) => new Date(b.lastLoginAt) - new Date(a.lastLoginAt)); /*.slice(0, 10)*/
 
@@ -47,7 +47,7 @@ export default function AdminUsers() {
                   <tbody>
                     {latestUsers.map((user) => (
                       <tr key={user._id}>
-                        <td><button onClick={() => handleUserItem(user.userId)}>
+                        <td><button onClick={() => handleUserItem(user.userNumber)}>
                           {user.company ||
                             (user.firstName || user.lastName
                               ? `คุณ${user.firstName} ${user.lastName}`.trim()

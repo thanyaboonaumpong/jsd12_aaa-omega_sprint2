@@ -198,7 +198,7 @@ export default function AdminProductForm() {
           <div className="button-row max-xs:flex-col xs:justify-between">
             <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">
               <button type="submit" className="button w-full xs:w-fit">{productNumber ? "บันทึกข้อมูล" : "เพิ่มสินค้า"}</button>
-              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}>ยกเลิก</button>
+              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}><span className="icon-material">keyboard_arrow_left</span> ย้อนกลับ</button>
             </div>
             {productNumber &&
               <div className="input-group xs:w-fit">

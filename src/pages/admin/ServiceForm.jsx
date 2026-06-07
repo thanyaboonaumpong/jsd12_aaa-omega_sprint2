@@ -408,7 +408,7 @@ export default function AdminServiceForm() {
           <div className="button-row max-xs:flex-col xs:justify-between">
             <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">
               <button type="submit" className="button w-full xs:w-fit">{serviceNumber ? "บันทึกข้อมูล" : "เพิ่มบริการ"}</button>
-              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}>ยกเลิก</button>
+              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}><span className="icon-material">keyboard_arrow_left</span> ย้อนกลับ</button>
             </div>
             {serviceNumber &&
               <div className="input-group xs:w-fit">
