@@ -1,57 +1,118 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ImageNotFound } from "../../utils/DataNotFound";
-import { products } from "../../mockup-data/products";
+
+import { MessageContext } from "../../contexts/messageContext/MessageContext";
+import { fetchProductByNumber, createProduct, updateProduct, deleteProduct } from "../../api/admin/product";
+import { PageNotFound, ImageNotFound, PageLoading } from "../../components/common/NotFound";
+
+const productInitial = {
+  name: "",
+  sku: "",
+  brand: "",
+  category: "",
+  warranty: "",
+  description: "",
+  specs: [], // new
+  features: [], // new
+  image: {
+    url: "",
+    cloudinaryId: ""
+  },
+  gallery: [], // new
+  tags: "",
+  price: "",
+  salePrice: "",
+  stock: "",
+  stockMin: "",
+};
 
 export default function AdminProductForm() {
+
+  const { setProducts } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleBack = () => navigate(-1);
 
-  const { productId } = useParams();
-  const product = productId ? products.find((item) => item.productId === productId) : null;
+  const { productNumber } = useParams();
 
-  const productInitial = {
-    name: product?.name || "",
-    sku: product?.sku || "",
-    category: product?.category || "",
-    tags: product?.tags?.join(", ") || "",
-    price: product?.price || "",
-    salePrice: product?.salePrice || "",
-    stock: product?.stock || "",
-    stockMin: product?.stockMin || "",
-    image: product?.image || null,
-    description: product?.description || "",
-  };
-  const [productForm, setProductForm] = useState(productInitial);
-  const handleProductChange = (event) => {
-    const { name, value, files } = event.target;
-    setProductForm((prev) => ({ ...prev, [name]: files ? files[0] : value, }));
-  };
-  const handleProductSubmit = (event) => {
+  const [productForm, setProductForm] = useState(productNumber ? null : productInitial);
+  const handleProductChange = (event) => setProductForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleProductImageChange = (event) => setProductForm((prev) => ({ ...prev, image: { ...prev.image, [event.target.name]: event.target.value} }));
+  const handleProductSubmit = async (event) => {
     event.preventDefault();
     const payload = {
       ...productForm,
+      warranty: Number(productForm.warranty) || 0,
       tags: productForm.tags.split(",").map((tag) => tag.trim()).filter(Boolean),
-      price: Number(productForm.price),
-      salePrice: Number(productForm.salePrice),
-      stock: Number(productForm.stock),
-      stockMin: Number(productForm.stockMin),
+      price: Number(productForm.price) || 0,
+      salePrice: Number(productForm.salePrice) || 0,
+      stock: Number(productForm.stock) || 0,
+      stockMin: Number(productForm.stockMin) || 0,
     };
-    console.log(payload);
+    try {
+      let result;
+      if (productNumber) {
+        result = await updateProduct(productForm._id, payload);
+      } else {
+        result = await createProduct(payload);
+      }
+      if (!result) {
+        alert("บันทึกข้อมูลไม่สำเร็จ");
+        return;
+      }
+      alert(
+        productNumber
+          ? "แก้ไขข้อมูลสินค้าเรียบร้อยแล้ว"
+          : "เพิ่มสินค้าเรียบร้อยแล้ว"
+      );
+      setProducts(prev => prev.map(item => item._id === result._id ? result : item));
+      navigate("/admin/products");
+    } catch (error) {
+      console.error(error);
+      alert("เกิดข้อผิดพลาด!");
+    }
   };
-  //const handleProductReset = () => setProductForm(productInitial);
+  const handleProductDelete = async () => {
+    try {
+      if (!productForm?._id) return;
+      const result = await deleteProduct(productForm._id);
+      if (!result) {
+        alert("ลบสินค้าไม่สำเร็จ");
+        return;
+      }
+      alert("ลบสินค้าเรียบร้อยแล้ว");
+      setProducts(prev => prev.filter(item => item._id !== productForm._id));
+      navigate("/admin/products");
+    } catch (error) {
+      console.error(error);
+      alert("เกิดข้อผิดพลาด");
+    }
+  };
 
-  if (productId && !product) {
-    return <h2 className="self-center text-center text-content-soft">
-              <span className="icon-material text-9xl wght-100">database_off</span><br />
-              Product not found.</h2>;
-  }
+  useEffect(() => {
+    if (!productNumber) return;
+    const getProduct = async () => {
+      const data = await fetchProductByNumber(productNumber);
+      if (!data) {
+        setProductForm(false);
+        return;
+      };
+      setProductForm({
+        ...data,
+        image: data.image || { url: "", cloudinaryId: "" },
+        tags: Array.isArray(data.tags) ? data.tags.join(", ") : ""
+      });
+    };
+    getProduct();
+  }, [productNumber]);
+
+  if (productForm === false) return <PageNotFound text="ไม่พบหน้าสินค้า" />;
+  if (productNumber && productForm === null) return <PageLoading />;
 
   return (
     <>
       <section id="productForm" className="flex flex-row flex-wrap justify-between items-center gap-5">
-        <h1>{product ? <span className="text-content-hover">รายละเอียดสินค้า:</span> : "เพิ่มสินค้าใหม่"} {product && product.productId.toUpperCase()}</h1>
+        <h1>{productNumber ? "รายละเอียดสินค้า" : "เพิ่มสินค้าใหม่"}</h1>
         <form onSubmit={handleProductSubmit}>
           <div className="input-row">
             <div className="input-group">
@@ -61,11 +122,15 @@ export default function AdminProductForm() {
             <div className="input-group">
               <label htmlFor="sku">รหัสสินค้า
                 <span className="text-xs text-content-soft">(SKU)</span>
-                <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="ระบุบด้วย A-Z, 0-9 และขีด(-) เท่านั้น"><span className="icon-material">info_i</span></span></label>
+                <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="ระบุบด้วย a-z, 0-9 และขีด(-) เท่านั้น"><span className="icon-material">info_i</span></span></label>
               <input type="text" id="sku" name="sku" value={productForm.sku} onChange={handleProductChange} placeholder="ระบุรหัสสินค้า" pattern="[A-Za-z0-9\-]+" maxLength="50" />
             </div>
           </div>
           <div className="input-row">
+            <div className="input-group">
+              <label htmlFor="brand">ยี่ห้อ</label>
+              <input type="text" id="brand" name="brand" value={productForm.brand} onChange={handleProductChange} placeholder="ระบุยี่ห้อ/แบรนด์" maxLength="120" />
+            </div>
             <div className="input-group">
               <label htmlFor="category">หมวดหมู่</label>
               <select id="category" name="category" value={productForm.category} onChange={handleProductChange} required>
@@ -75,6 +140,13 @@ export default function AdminProductForm() {
                 <option value="battery">แบตเตอรี่</option>
                 <option value="accessory">อุปกรณ์เสริม</option>
               </select>
+            </div>
+          </div>
+          <div className="input-row">
+            <div className="input-group">
+              <label htmlFor="warranty">การรับประกัน
+                <span className="text-xs text-content-soft">(ปี)</span></label>
+              <input type="number" id="warranty" name="warranty" value={productForm.warranty} onChange={handleProductChange} placeholder="ระบุจำนวนปี" min="0" max="99" />
             </div>
             <div className="input-group">
               <label htmlFor="tags">แท็ก / ป้ายกำกับ
@@ -89,7 +161,7 @@ export default function AdminProductForm() {
             </div>
             <div className="input-group">
               <label htmlFor="salePrice">ราคาลดแล้ว</label>
-              <input type="number" id="salePrice" name="salePrice" value={productForm.salePrice} onChange={handleProductChange} placeholder="ระบุราคาลดแล้ว" min="0" max={productForm.price - 1} />
+              <input type="number" id="salePrice" name="salePrice" value={productForm.salePrice} onChange={handleProductChange} placeholder="ระบุราคาลดแล้ว" min="0" max={productForm.price ? Number(productForm.price) - 1 : undefined} />
             </div>
             <div className="input-group">
               <label htmlFor="stock">จำนวนสต็อก</label>
@@ -100,27 +172,35 @@ export default function AdminProductForm() {
               <input type="number" id="stockMin" name="stockMin" value={productForm.stockMin} onChange={handleProductChange} placeholder="ระบุจำนวนขั้นต่ำเพื่อแจ้งเตือน" min="0" />
             </div>
           </div>
-          <div className="input-row">
-            <div className="input-row xs:flex-row">
-              <img className="size-17 min-w-17 min-h-17" src={
-                productForm.image instanceof File
-                  ? URL.createObjectURL(productForm.image)
-                  : productForm.image?.trim() || ImageNotFound
-              } />
-              <div className="input-group">
-                <label htmlFor="image">รูปภาพสินค้า
-                  <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="รองรับไฟล์ JPG, PNG, WEBP (ไม่เกิน 5MB)"><span className="icon-material">info_i</span></span></label>
-                <input type="file" id="image" className="max-w-57.5" name="image" onChange={handleProductChange} accept="image/jpeg, image/png, image/webp" />
-              </div>
+          <hr />
+          <div className="input-row sm:flex-row max-md:flex-wrap">
+            <img className="object-cover size-17 min-w-17 min-h-17" src={productForm.image?.url || ImageNotFound} />
+            <div className="input-group max-md:order-3 md:w-[calc(75%-25px-68px)]">
+              <label htmlFor="url">รูปภาพสินค้า
+                <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content" title="กรอก URL ของรูปภาพ"><span className="icon-material">info_i</span></span></label>
+              <textarea id="url" className="min-h-10 md:min-h-15.5" name="url" rows="2" value={productForm.image?.url} onChange={handleProductImageChange} placeholder="https://res.cloudinary.com/slug/image/upload/v8888/filename.png"></textarea>
+            </div>
+            <div className="input-group max-sm:order-4 sm:w-[calc(100%-20px-68px)] md:w-[calc(25%-15px)] md:shrink-0">
+              <label htmlFor="cloudinaryId">ID ของรูปภาพ</label>
+              <textarea id="cloudinaryId" className="min-h-10 md:min-h-15.5" name="cloudinaryId" rows="2" value={productForm.image?.cloudinaryId} onChange={handleProductImageChange} placeholder="กรอก ID ของรูปภาพจาก cloudinary.com"></textarea>
             </div>
           </div>
+          <hr />
           <div className="input-group">
             <label htmlFor="description">รายละเอียด</label>
             <textarea id="description" name="description" rows="5" value={productForm.description} onChange={handleProductChange} placeholder="ระบุคุณสมบัติ จุดเด่น การใช้งาน และการรับประกัน" maxLength="2000"></textarea>
           </div>
-          <div className="button-row">
-            <button type="button" className="button button-soft button-content" onClick={handleBack}>ยกเลิก</button>
-            <button type="submit" className="button">{product ? "บันทึกข้อมูล" : "เพิ่มสินค้า"}</button>
+          <div className="button-row max-xs:flex-col xs:justify-between">
+            <div className="input-group xs:flex-row-reverse xs:w-fit gap-5">
+              <button type="submit" className="button w-full xs:w-fit">{productNumber ? "บันทึกข้อมูล" : "เพิ่มสินค้า"}</button>
+              <button type="button" className="button button-soft button-content w-full xs:w-fit" onClick={handleBack}>ยกเลิก</button>
+            </div>
+            {productNumber &&
+              <div className="input-group xs:w-fit">
+                <hr className="xs:hidden my-5" />
+                <button type="button" className="button button-soft button-error w-full xs:w-fit" onClick={handleProductDelete}>ลบสินค้านี้</button>
+              </div>
+            }
           </div>
         </form>
       </section>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import bannerImage from "../../assets/images/banner-register.jpg";
 
 export default function AuthRegister() {
 
@@ -8,6 +9,7 @@ export default function AuthRegister() {
   const registerInitial = {
     firstName: "",
     lastName: "",
+    phone: "",
     email: "",
   };
   const [registerForm, setRegisterForm] = useState(registerInitial);
@@ -22,11 +24,11 @@ export default function AuthRegister() {
   return (
     <>
       <section className="flex-1">
-        <img className="w-full max-sm:aspect-video sm:h-115 object-cover" src="/src/assets/images/banner-register.jpg" />
+        <img className="w-full max-sm:aspect-video sm:h-115 object-cover" src={bannerImage} />
       </section>
       <section id="register" className="flex flex-1 flex-col flex-wrap justify-center gap-5">
         <div className="heading">
-          <h1>สมัครบัญชีใหม่</h1>
+          <h1>สมัครบัญชี</h1>
         </div>
         <form onSubmit={handleRegisterSubmit}>
           <div className="input-row">
@@ -40,12 +42,16 @@ export default function AuthRegister() {
             </div>
           </div>
           <div className="input-group">
+            <label htmlFor="phone">เบอร์ติดต่อ</label>
+            <input type="tel" id="phone" name="phone" value={registerForm.phone} onChange={handleRegisterChange} placeholder="081-000-0000" minLength="10" maxLength="20" />
+          </div>
+          <div className="input-group">
             <label htmlFor="email">อีเมล</label>
             <input type="email" id="email" name="email" value={registerForm.email} onChange={handleRegisterChange} placeholder="account@email.com" maxLength="120" />
           </div>
           <div className="input-row">
             <div className="input-group">
-              <label htmlFor="password">เปลี่ยนรหัสผ่าน</label>
+              <label htmlFor="password">รหัสผ่าน</label>
               <input type="password" id="password" name="password" placeholder="••••••••" />
             </div>
             <div className="input-group">
@@ -54,12 +60,12 @@ export default function AuthRegister() {
             </div>
           </div>
           <div className="button-row">
-            <button type="submit" className="button w-full">ดำเนินการ</button>
+            <button type="submit" className="button w-full">สมัครสมาชิก</button>
           </div>
         </form>
         <hr />
-        <div className="flex justify-between items-center">
-          <Link className="hover:text-content-hover" to="/auth/login"><span className="icon-material">keyboard_arrow_left</span> ย้อนกลับ</Link>
+        <div className="flex flex-wrap flex-col-reverse 2xs:flex-row justify-center items-center gap-5">
+          <Link className="button button-outline button-primary max-2xs:w-full 2xs:min-h-fit 2xs:leading-6 2xs:p-0 2xs:border-0" to="/auth/login">มีบัญชีอยู่แล้ว?</Link>
         </div>
       </section>
     </>

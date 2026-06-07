@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // นำเข้า Header
 import Header from "./components/HeaderSection";
+import HeaderSectionAuth from "./components/HeaderSectionAuth";
 
 // นำเข้า CSS และหน้าฝั่ง Admin
 import AdminLayout from "./components/admin/AdminLayout";
@@ -10,12 +11,12 @@ import AdminProducts from "./pages/admin/Products";
 import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
-/*
+import AdminServices from "./pages/admin/Services";
+import AdminServiceForm from "./pages/admin/ServiceForm";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserDetail from "./pages/admin/UserDetail";
 import AdminUserForm from "./pages/admin/UserForm";
 import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
-*/
 import AuthLayout from "./components/auth/AuthLayout";
 import AuthLogin from "./pages/auth/Login";
 import AuthRegister from "./pages/auth/Register";
@@ -29,6 +30,13 @@ import TestimonialsPage from './pages/TestimonialsPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfilePage from './pages/UserProfilePage';
+import AllProductsPage from './pages/AllProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import FooterSection from './components/FooterSection';
+import CartPage from './pages/CartPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
   {
@@ -43,20 +51,38 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "products",        // สินค้า
-        element: <div>Products Page (Coming Soon)</div>,
+        path: "allproducts",        // สินค้า
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <AllProductsPage />
+            <FooterSection />
+          </>
+        ),
+      },
+      {
+        path: "product/:productId",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <ProductDetailPage />
+            <FooterSection />
+          </>
+        ),
       },
       {
         path: "services",        // บริการ
-        element: <div>Services Page (Coming Soon)</div>,
+        element: <ServicesPage />,
       },
       {
         path: "portfolio",       // ผลงาน 
         element: <div>Portfolio Page (Coming Soon)</div>,
       },
       {
-        path: "contact",         // ติดต่อเรา 
-        element: <div>Contact Page (Coming Soon)</div>,
+        path: "contact",         // ติดต่อเรา
+        element: <ContactPage />,
       },
       {
         path: "testimonials",
@@ -64,6 +90,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Header />
+            <HeaderSectionAuth />
             <TestimonialsPage />
           </>
         ),
@@ -80,21 +107,37 @@ const router = createBrowserRouter([
         path: "profile",
         element: <UserProfilePage />,
       },
+      {
+        path: "cart",
+        element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: (
+          <>
+            <Header />
+            <HeaderSectionAuth />
+            <CheckoutPage />
+            <FooterSection />
+          </>
+        ),
+      },
       { path:"admin", element:<AdminLayout />,
         children: [
           { index:true, element:<AdminHome /> },
           { path:"products", element:<AdminProducts /> },
           { path:"products/create", element:<AdminProductForm /> },
-          { path:"products/:productId", element:<AdminProductForm /> },
+          { path:"products/:productNumber", element:<AdminProductForm /> },
           { path:"orders", element:<AdminOrders />, },
-          { path:"orders/:orderId", element:<AdminOrderItem /> },
-          /*
+          { path:"orders/:orderNumber", element:<AdminOrderItem /> },
+          { path:"services", element:<AdminServices />, },
+          { path:"services/create", element:<AdminServiceForm /> },
+          { path:"services/:serviceNumber", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
-          { path:"users/:userId", element:<AdminUserDetail /> },
+          { path:"users/:userNumber", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },
-          { path:"users/:userId/edit", element:<AdminUserForm /> },
-          { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
-           */
+          { path:"users/:userNumber/edit", element:<AdminUserForm /> },
+          { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
         ],
       },
       { path:"auth", element:<AuthLayout />,

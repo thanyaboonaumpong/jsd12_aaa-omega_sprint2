@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const TestimonialSection = () => {
   const trackRef = useRef(null);
@@ -53,7 +53,7 @@ const TestimonialSection = () => {
           {testimonials.map((item) => (
             <div 
               key={item.id}
-              className="testimonial-card flex-shrink-0 w-[300px] md:w-[350px] p-6 border border-gray-200 rounded-2xl bg-white shadow-sm flex flex-col gap-4"
+              className="testimonial-card shrink-0 w-75 md:w-87.5 p-6 border border-gray-200 rounded-2xl bg-white shadow-sm flex flex-col gap-4"
             >
               <div className="flex items-center gap-4">
                 <img 

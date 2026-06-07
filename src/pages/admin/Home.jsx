@@ -1,18 +1,22 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
-import { FormatDate } from "../../utils/FormatDate";
+import StatCard from "../../components/admin/common/StatCard";
+import { DataNotFound } from "../../components/common/NotFound";
+import { StatusOrder, StatusService, ServiceType, ServiceTeam } from "../../components/admin/common/SelectStatus";
+import { FormatDate, FormatDateTime } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
-import { DataNotFound } from "../../utils/DataNotFound";
-import { orders } from "../../mockup-data/orders";
 
 export default function AdminHome() {
 
-  const {handleOrderStatusChange} = useContext(MessageContext);
+  const { orders, handleOrderStatusChange, services, handleServiceStatusChange } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
+  const handleServiceItem = (serviceId) => navigate(`./services/${serviceId}`);
+
+  const latestOrders = [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
+  const latestServices = [...services].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
 
   return (
     <>
@@ -25,7 +29,7 @@ export default function AdminHome() {
         <StatCard title="สินค้าใกล้หมด" value="12" subtext="รายการ" />
       </section>
       <section id="orderList" className="flex flex-row flex-wrap justify-between items-center gap-5">
-        <h2>คำสั่งซื้อล่าสุด</h2>
+        <h2 className="h1">คำสั่งซื้อล่าสุด</h2>
         <div className="table-container xs:order-3">
           <table>
             <colgroup>
@@ -45,7 +49,7 @@ export default function AdminHome() {
               </tr>
             </thead>
             <tbody>
-              {[...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5).map((order) => (
+              {latestOrders.map((order) => (
                 <tr key={order._id}>
                   <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
                   <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
@@ -57,26 +61,18 @@ export default function AdminHome() {
                     }</button></td>
                   <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
                   <td>
-                    <select className="button button-soft button-content" name="statusOrder" value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)}>
-                      <option value="" disabled hidden>เลือกสถานะ</option>
-                      <option value="open">รอชำระเงิน</option>
-                      <option value="paid">ชำระเงินแล้ว</option>
-                      <option value="preparing">กำลังเตรียมสินค้า</option>
-                      <option value="shipping">กำลังจัดส่ง</option>
-                      <option value="delivered">จัดส่งสำเร็จ</option>
-                      <option value="cancelled">ยกเลิกคำสั่งซื้อ</option>
-                    </select>
+                    <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)} />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <Link className="button button-soft button-primary" to="./orders">คำสั่งซื้อทั้งหมด</Link>
+        <Link className="button button-soft button-content w-full xs:w-fit" to="./orders">คำสั่งซื้อทั้งหมด</Link>
       </section>
-      {/*
+      <hr className="xs:hidden" />
       <section id="serviceList" className="flex flex-row flex-wrap justify-between items-center gap-5">
-        <h2>ตารางนัดหมายวันนี้</h2>
+        <h1>ตารางนัดหมาย</h1>
         <div className="table-container xs:order-3">
           <table>
             <colgroup>
@@ -87,88 +83,50 @@ export default function AdminHome() {
               <col className="w-px" />
               <col className="w-px" />
               <col className="w-px" />
-            </colgroup> 
+            </colgroup>
             <thead>
               <tr>
-                <th scope="col">วันที่นัดหมาย</th>
-                <th scope="col">เลขที่คำสั่งซื้อ</th>
-                <th scope="col">ชื่อลูกค้า</th>
-                <th scope="col">เบอร์ติดต่อ</th>
-                <th scope="col">ประเภทงาน</th>
-                <th scope="col">ทีมช่าง</th>
-                <th scope="col">สถานะ</th>
+                <th>วันที่นัดหมาย</th>
+                <th>เลขที่นัดหมาย</th>
+                <th>ชื่อลูกค้า</th>
+                <th>เบอร์ติดต่อ</th>
+                <th>ประเภทงาน</th>
+                <th>ทีมช่าง</th>
+                <th>สถานะ</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>04/04/2026 08:30 น.</td>
-                <td><a href="#service-item">MA20260030</a></td>
-                <td><a href="#service-item">บริษัท เอ็นเนอร์จีวัน จำกัด</a></td>
-                <td>02-888-2233</td>
-                <td>
-                  <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ระบบแจ้งเตือนปัญหา รอการเข้าตรวจสอบ"><span className="icon-material">info_i</span></span>
-                  ซ่อมบำรุง</td>
-                <td>ทีม 2</td>
-                <td>
-                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="request_received">รับคำขอ</option>
-                    <option value="scheduled">นัดหมายแล้ว</option>
-                    <option value="in_progress">กำลังดำเนินการ</option>
-                    <option value="completed">ปิดงานแล้ว</option>
-                    <option value="rescheduled">เลื่อนนัด</option>
-                    <option value="cancelled">ยกเลิกงาน</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>04/04/2026 11:00 น.</td>
-                <td><a href="#service-item">CL20260031</a></td>
-                <td><a href="#service-item">คุณศุภกฤต วงศ์สวัสดิ์</a></td>
-                <td>091-234-7788</td>
-                <td>
-                  <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ทำความสะอาดแผงโซล่าเซลล์ประจำปี"><span className="icon-material">info_i</span></span>
-                  ล้างแผง</td>
-                <td>ทีม 3</td>
-                <td>
-                  <select className="button button-outline button-warning" name="statusService" value="rescheduled">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="request_received">รับคำขอ</option>
-                    <option value="scheduled">นัดหมายแล้ว</option>
-                    <option value="in_progress">กำลังดำเนินการ</option>
-                    <option value="completed">ปิดงานแล้ว</option>
-                    <option value="rescheduled">เลื่อนนัด</option>
-                    <option value="cancelled">ยกเลิกงาน</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>04/04/2026 08:00 น.</td>
-                <td><a href="#service-item">IN20260032</a></td>
-                <td><a href="#service-item">บริษัท กรีนไลฟ์ โซลูชั่น จำกัด</a></td>
-                <td>02-456-7890</td>
-                <td>
-                  <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-1" title="ติดตั้งใหม่ในโครงการบ้านจัดสรร"><span className="icon-material">info_i</span></span>
-                  ติดตั้ง</td>
-                <td>ทีม 1</td>
-                <td>
-                  <select className="button button-outline button-accent" name="statusService" value="in_progress">
-                    <option value="" disabled hidden>เลือกสถานะ</option>
-                    <option value="request_received">รับคำขอ</option>
-                    <option value="scheduled">นัดหมายแล้ว</option>
-                    <option value="in_progress">กำลังดำเนินการ</option>
-                    <option value="completed">ปิดงานแล้ว</option>
-                    <option value="rescheduled">เลื่อนนัด</option>
-                    <option value="cancelled">ยกเลิกงาน</option>
-                  </select>
-                </td>
-              </tr>
+              {latestServices.map((service) => (
+                <tr key={service._id}>
+                  <td>{service.appointmentAt ? FormatDateTime(service.appointmentAt) : <DataNotFound />}</td>
+                  <td><button onClick={() => handleServiceItem(service.serviceId)}>{service.serviceId?.toUpperCase() || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleServiceItem(service.serviceId)}>
+                    {service.customer.company ||
+                      (service.customer.firstName || service.customer.lastName
+                        ? `คุณ${service.customer.firstName} ${service.customer.lastName}`.trim()
+                        : <DataNotFound />)
+                    }</button>
+                  </td>
+                  <td className="leading-5.5 py-1.5">
+                    {service.customer.phone || ""}
+                    {service.customer.phone2 && (
+                      <>
+                        <br />
+                        {service.customer.phone2}
+                      </>
+                    )}</td>
+                  <td><span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-2" title={service.title || ""}><span className="icon-material">info_i</span></span><ServiceType value={service.serviceType || ""} /></td>
+                  <td><ServiceTeam value={service.team || ""} /></td>
+                  <td>
+                    <StatusService value={service.status || ""} onChange={(event) => handleServiceStatusChange(service._id, event.target.value)} />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-        <Link className="is-disabled button button-soft button-primary" to="#soon">นัดหมายทั้งหมด</Link>
+        <Link className="button button-soft button-content w-full xs:w-fit" to="./services">นัดหมายทั้งหมด</Link>
       </section>
-      */}
     </>
   );
 
