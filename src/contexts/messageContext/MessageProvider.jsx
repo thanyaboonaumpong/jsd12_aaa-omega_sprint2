@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { MessageContext } from "./MessageContext";
+import { fetchUsers } from "../../api/admin/user";
 import { fetchProducts } from "../../api/admin/product";
 import { fetchOrders, updateOrderStatus, updateOrderInternalNote, deleteOrder } from "../../api/admin/order";
 import { fetchServices, updateServiceStatus, updateServiceInternalNote, deleteService } from "../../api/admin/service";
@@ -33,6 +34,12 @@ export const MessageProvider = ({children}) => {
         clearTimeout(toastTimer.current);
       };
     };
+  }, []);
+
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const getUsers = async () => setUsers(await fetchUsers() || []);
+    getUsers();
   }, []);
 
   const [products, setProducts] = useState([]);
@@ -162,6 +169,7 @@ export const MessageProvider = ({children}) => {
       isDev, itemPerPage,
       adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose,
       toast, 
+      users,
       products, setProducts,
       orders, setOrders, handleOrderStatusChange, handleOrderSubmit, handleOrderDelete,
       services, setServices, handleServiceStatusChange, /*handleServiceTypeChange, handleServiceTeamChange,*/ handleServiceSubmit, handleServiceDelete,
