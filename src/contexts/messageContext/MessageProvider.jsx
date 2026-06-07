@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { MessageContext } from "./MessageContext";
 import { fetchProducts } from "../../api/admin/product";
 import { fetchOrders, updateOrderStatus, updateOrderInternalNote, deleteOrder } from "../../api/admin/order";
+import { fetchServices, updateServiceStatus, updateServiceInternalNote, deleteService } from "../../api/admin/service";
 
 export const MessageProvider = ({children}) => {
 
@@ -44,6 +45,12 @@ export const MessageProvider = ({children}) => {
   useEffect(() => {
     const getOrders = async () => setOrders(await fetchOrders() || []);
     getOrders();
+  }, []);
+
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    const getServices = async () => setServices(await fetchServices() || []);
+    getServices();
   }, []);
 
   const handleOrderStatusChange = async (id, status) => {
@@ -98,9 +105,57 @@ export const MessageProvider = ({children}) => {
     };
   };
 
-  //const handleServiceStatusChange = (serviceId, status) => {};
-  //const handleServiceTypeChange = (serviceId, serviceType) => {};
-  //const handleServiceTeamChange = (serviceId, team) => {};
+  const handleServiceStatusChange = async (id, status) => {
+    try {
+      showToast("กำลังบันทึกสถานะบริการ...");
+      const updated = await updateServiceStatus(id, { status });
+      if (updated) {
+        setServices((prev) => prev.map((item) => item._id === id ? { ...item, status: updated.status } : item ));
+        showToast("บันทึกสถานะบริการสำเร็จ");
+      } else {
+        showToast("บันทึกสถานะบริการไม่สำเร็จ");
+      };
+      return updated;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
+  const handleServiceSubmit = async (id, internalNote) => {
+    try {
+      showToast("กำลังบันทึกโน้ตบริการ...");
+      const updated = await updateServiceInternalNote(id, { internalNote });
+      if (updated) {
+        setServices((prev) => prev.map((item) => item._id === id ? { ...item, internalNote: updated.internalNote } : item ));
+        showToast("บันทึกโน้ตบริการสำเร็จ");
+      } else {
+        showToast("บันทึกโน้ตบริการไม่สำเร็จ");
+      };
+      return updated;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
+  const handleServiceDelete = async (id) => {
+    try {
+      showToast("กำลังลบบริการ...");
+      const deleted = await deleteService(id);
+      if (deleted) {
+        setServices((prev) => prev.filter((item) => item._id !== id));
+        showToast("ลบบริการสำเร็จ");
+      } else {
+        showToast("ลบบริการไม่สำเร็จ");
+      }
+      return deleted;
+    } catch (error) {
+      console.error(error.message);
+      showToast("เกิดข้อผิดพลาด!");
+      return null;
+    };
+  };
 
   return(
     <MessageContext.Provider value={{
@@ -109,7 +164,7 @@ export const MessageProvider = ({children}) => {
       toast, 
       products, setProducts,
       orders, setOrders, handleOrderStatusChange, handleOrderSubmit, handleOrderDelete,
-      /*handleServiceStatusChange, handleServiceTypeChange, handleServiceTeamChange*/
+      services, setServices, handleServiceStatusChange, /*handleServiceTypeChange, handleServiceTeamChange,*/ handleServiceSubmit, handleServiceDelete,
     }}>
       {children}
     </MessageContext.Provider>

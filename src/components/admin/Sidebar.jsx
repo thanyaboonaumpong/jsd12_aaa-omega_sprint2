@@ -1,13 +1,25 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import logoBrand from "../../assets/images/logo-aaa-omega.png";
 
 export default function AdminSidebar() {
 
+  const { user, logout } = useAdminAuth();
   const { isDev, adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose } = useContext(MessageContext);
+  const navigate = useNavigate();
 
   const navSidebarClass = ({ isActive }) => `button button-soft justify-start w-full ${isActive ? "text-primary-hover bg-primary-light/60 hover:bg-primary-light/80" : "button-content hover:bg-white"}`;
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      navigate("/auth/login", { replace: true });
+    };
+  };
 
   return (
     <aside id="asideContainer" className={`fixed z-99 max-md:shadow-2xl/10 ${!adminNavMainActive && "-translate-x-full"} md:translate-x-0 transition-all duration-300`}>
@@ -39,12 +51,12 @@ export default function AdminSidebar() {
           }
         </ul>
         <ul id="navFooter" className="flex flex-col gap-2 p-2 border-t">
-          <li><NavLink className="is-disabled group button button-ghost button-content justify-start items-start w-full hover:text-white py-2 border hover:border-primary-base bg-white hover:bg-primary-base" to="#soon"><span className="icon-material">account_circle</span>
-            <div className="flex flex-col">
-              <span className="leading-6">AAA Admin</span>
-              <span className="text-xs text-content-soft group-hover:text-content-light transition-all">ผู้ดูแลระบบ</span>
+          <li><NavLink className="group button button-ghost button-content justify-start items-start w-full hover:text-white py-2 border hover:border-primary-soft bg-white hover:bg-primary-soft" to="#soon"><span className="icon-material">account_circle</span>
+            <div className="flex flex-col overflow-hidden">
+              <span className="overflow-hidden whitespace-nowrap text-ellipsis leading-6">{user?.firstName} {user?.lastName}</span>
+              <span className="overflow-hidden whitespace-nowrap text-ellipsis text-xs text-content-soft group-hover:text-content-light transition-all">{user?.role}</span>
             </div></NavLink></li>
-          <li><NavLink className="button button-ghost button-content justify-start w-full hover:text-error-hover" to="/auth/login" onClick={handleAdminNavSidebarClose}><span className="icon-material">logout</span> ออกจากระบบ</NavLink></li>
+          <li><button className="button button-ghost button-content justify-start w-full hover:text-error-hover" onClick={handleLogout}><span className="icon-material">logout</span> ออกจากระบบ</button></li>
         </ul>
       </nav>
     </aside>

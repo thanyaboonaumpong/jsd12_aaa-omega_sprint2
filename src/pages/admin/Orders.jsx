@@ -46,7 +46,7 @@ export default function AdminOrders() {
                       <th scope="col">วันที่สั่งซื้อ</th>
                       <th scope="col">เลขที่คำสั่งซื้อ</th>
                       <th scope="col">ชื่อผู้สั่งซื้อ</th>
-                      <th scope="col" className="text-right">ยอดรวมสุทธิ</th>
+                      <th scope="col" className="text-right">ยอดรวม</th>
                       <th scope="col">สถานะ</th>
                     </tr>
                   </thead>

@@ -12,8 +12,8 @@ export default function AdminHome() {
   const { orders, handleOrderStatusChange, services, handleServiceStatusChange } = useContext(MessageContext);
 
   const navigate = useNavigate();
-  const handleOrderItem = (ordersId) => navigate(`./orders/${ordersId}`);
-  const handleServiceItem = (serviceId) => navigate(`./services/${serviceId}`);
+  const handleOrderItem = (orderNumber) => navigate(`./orders/${orderNumber}`);
+  const handleServiceItem = (serviceNumber) => navigate(`./services/${serviceNumber}`);
 
   const latestOrders = [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
   const latestServices = [...services].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
@@ -52,8 +52,8 @@ export default function AdminHome() {
               {latestOrders.map((order) => (
                 <tr key={order._id}>
                   <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>{order.orderId?.toUpperCase() || <DataNotFound />}</button></td>
-                  <td><button onClick={() => handleOrderItem(order.orderId)}>
+                  <td><button onClick={() => handleOrderItem(order.orderNumber)}>{order.orderNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleOrderItem(order.orderNumber)}>
                     {order.customer.company ||
                       (order.customer.firstName || order.customer.lastName
                         ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
@@ -99,8 +99,8 @@ export default function AdminHome() {
               {latestServices.map((service) => (
                 <tr key={service._id}>
                   <td>{service.appointmentAt ? FormatDateTime(service.appointmentAt) : <DataNotFound />}</td>
-                  <td><button onClick={() => handleServiceItem(service.serviceId)}>{service.serviceId?.toUpperCase() || <DataNotFound />}</button></td>
-                  <td><button onClick={() => handleServiceItem(service.serviceId)}>
+                  <td><button onClick={() => handleServiceItem(service.serviceNumber)}>{service.serviceNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                  <td><button onClick={() => handleServiceItem(service.serviceNumber)}>
                     {service.customer.company ||
                       (service.customer.firstName || service.customer.lastName
                         ? `คุณ${service.customer.firstName} ${service.customer.lastName}`.trim()
