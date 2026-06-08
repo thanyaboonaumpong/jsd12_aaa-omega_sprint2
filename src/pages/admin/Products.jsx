@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
 import { PageNotFound, DataNotFound, ImageNotFound } from "../../components/common/NotFound";
 import { FormatDate } from "../../utils/FormatDate";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -11,9 +12,7 @@ export default function AdminProducts() {
   const { products } = useContext(MessageContext);
 
   const navigate = useNavigate();
-  const handleProductItem = (productId) => navigate(`./${productId}`);
-    
-  const latestProducts = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));/*.slice(0, 10)*/
+  const handleProductItem = (productNumber) => navigate(`./${productNumber}`);
 
   return (
     <>
@@ -49,23 +48,26 @@ export default function AdminProducts() {
                     </tr>
                   </thead>
                   <tbody>
-                    {latestProducts.map((product) => (
+                    {products.map((product) => (
                       <tr key={product._id}>
-                        <td><img className="object-cover size-15 min-w-15 min-h-15" src={product.image?.trim() || ImageNotFound} /></td>
                         <td>
-                          <button className="product-stock__name" onClick={() => handleProductItem(product.productId)}>{product.name || <DataNotFound />}</button>
+                          <button className="product-stock__image" onClick={() => handleProductItem(product.productNumber)}>
+                            <img className="object-cover size-15 min-w-15 min-h-15" src={product.image?.url || ImageNotFound} />
+                          </button></td>
+                        <td>
+                          <button className="product-stock__name" onClick={() => handleProductItem(product.productNumber)}>{product.name || <DataNotFound />}</button>
                           <div className="product-stock__meta">
-                            <span className="product-stock__sku">{product.sku || <DataNotFound />}</span>
-                            {product.tags?.length > 0
-                              ? <>
-                                  <span className="product-stock__separator">•</span>
-                                  <ul className="product-stock__tag">
-                                    {product.tags.map((tag, index) => (
-                                      <li key={index} className="badge badge-soft badge-content">{tag}</li>
-                                    ))}
-                                  </ul>
-                                </>
-                              : <DataNotFound />}
+                            <span className="product-stock__sku">{product.sku.toUpperCase() || <DataNotFound />}</span>
+                            {product.tags?.length > 0 &&
+                              <>
+                                <span className="product-stock__separator">•</span>
+                                <ul className="product-stock__tag">
+                                  {product.tags.map((tag, index) => (
+                                    <li key={index} className="badge badge-soft badge-content">{tag}</li>
+                                  ))}
+                                </ul>
+                              </>
+                            }
                           </div>
                         </td>
                         <td className={`text-right ${product.stock <= product.stockMin ? "text-warning-base" : ""}`}>{product.stock || <DataNotFound />}</td>

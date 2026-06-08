@@ -1,23 +1,25 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
-import StatCard from "../../components/admin/StatCard";
+import StatCard from "../../components/admin/common/StatCard";
+import Toast from "../../components/admin/common/Toast";
 import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
-import { StatusService, ServiceType, ServiceTeam } from "../../components/common/SelectStatus";
+import { StatusService, ServiceType, ServiceTeam } from "../../components/admin/common/SelectStatus";
 import { FormatDateTime } from "../../utils/FormatDate";
 
 export default function AdminServices() {
 
-  const { services, handleServiceStatusChange } = useContext(MessageContext);
+  const { services, handleServiceStatusChange, toast } = useContext(MessageContext);
 
   const navigate = useNavigate();
-  const handleServiceItem = (serviceId) => navigate(`./${serviceId}`);
+  const handleServiceItem = (serviceNumber) => navigate(`./${serviceNumber}`);
   
   const latestServices = [...services].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); /*.slice(0, 10)*/
 
   return (
     <>
-      {services
+      {services.length > 0
         ? <>
             <section id="stat">
               <StatCard title="จำนวนงานทั้งหมด" value="54" subtext="+8" />
@@ -56,8 +58,8 @@ export default function AdminServices() {
                     {latestServices.map((service) => (
                       <tr key={service._id}>
                         <td>{service.appointmentAt ? FormatDateTime(service.appointmentAt) : <DataNotFound />}</td>
-                        <td><button onClick={() => handleServiceItem(service.serviceId)}>{service.serviceId?.toUpperCase() || <DataNotFound />}</button></td>
-                        <td><button onClick={() => handleServiceItem(service.serviceId)}>
+                        <td><button onClick={() => handleServiceItem(service.serviceNumber)}>{service.serviceNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                        <td><button onClick={() => handleServiceItem(service.serviceNumber)}>
                           {service.customer.company ||
                             (service.customer.firstName || service.customer.lastName
                               ? `คุณ${service.customer.firstName} ${service.customer.lastName}`.trim()
@@ -81,6 +83,7 @@ export default function AdminServices() {
                     ))}
                   </tbody>
                 </table>
+                <Toast {...toast} />
               </div>
             </section>
           </>

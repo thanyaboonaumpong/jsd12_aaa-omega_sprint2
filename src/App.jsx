@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/HeaderSection";
 import HeaderSectionAuth from "./components/HeaderSectionAuth";
 
-// นำเข้า CSS และหน้าฝั่ง Admin
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminHome from "./pages/admin/Home";
 import AdminProducts from "./pages/admin/Products";
@@ -12,13 +12,11 @@ import AdminProductForm from "./pages/admin/ProductForm";
 import AdminOrders from "./pages/admin/Orders";
 import AdminOrderItem from "./pages/admin/OrderItem";
 import AdminServices from "./pages/admin/Services";
-/*
 import AdminServiceForm from "./pages/admin/ServiceForm";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserDetail from "./pages/admin/UserDetail";
 import AdminUserForm from "./pages/admin/UserForm";
 import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
-*/
 import AuthLayout from "./components/auth/AuthLayout";
 import AuthLogin from "./pages/auth/Login";
 import AuthRegister from "./pages/auth/Register";
@@ -124,24 +122,27 @@ const router = createBrowserRouter([
           </>
         ),
       },
-      { path:"admin", element:<AdminLayout />,
+      { path:"admin",
+        element: (
+          <AdminProtectedRoute>
+            <AdminLayout />
+          </AdminProtectedRoute>
+        ),
         children: [
           { index:true, element:<AdminHome /> },
           { path:"products", element:<AdminProducts /> },
           { path:"products/create", element:<AdminProductForm /> },
-          { path:"products/:productId", element:<AdminProductForm /> },
+          { path:"products/:productNumber", element:<AdminProductForm /> },
           { path:"orders", element:<AdminOrders />, },
-          { path:"orders/:orderId", element:<AdminOrderItem /> },
+          { path:"orders/:orderNumber", element:<AdminOrderItem /> },
           { path:"services", element:<AdminServices />, },
-          /*
           { path:"services/create", element:<AdminServiceForm /> },
-          { path:"services/:serviceId", element:<AdminServiceForm />, },
+          { path:"services/:serviceNumber", element:<AdminServiceForm />, },
           { path:"users", element:<AdminUsers /> },
-          { path:"users/:userId", element:<AdminUserDetail /> },
           { path:"users/create", element:<AdminUserForm /> },
-          { path:"users/:userId/edit", element:<AdminUserForm /> },
-          { path:"users/:userId/:orderId", element:<AdminUserOrderDetail /> },
-          */
+          { path:"users/:userNumber", element:<AdminUserDetail /> },
+          { path:"users/:userNumber/edit", element:<AdminUserForm /> },
+          { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
         ],
       },
       { path:"auth", element:<AuthLayout />,

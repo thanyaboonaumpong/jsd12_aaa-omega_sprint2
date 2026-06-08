@@ -9,6 +9,7 @@ export default function AuthRegister() {
   const registerInitial = {
     firstName: "",
     lastName: "",
+    phone: "",
     email: "",
   };
   const [registerForm, setRegisterForm] = useState(registerInitial);
@@ -39,6 +40,10 @@ export default function AuthRegister() {
               <label htmlFor="lastName">นามสกุล</label>
               <input type="text" id="lastName" name="lastName" value={registerForm.lastName} onChange={handleRegisterChange} placeholder="ใจดี" maxLength="120" />
             </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="phone">เบอร์ติดต่อ</label>
+            <input type="tel" id="phone" name="phone" value={registerForm.phone} onChange={handleRegisterChange} placeholder="081-000-0000" minLength="10" maxLength="20" />
           </div>
           <div className="input-group">
             <label htmlFor="email">อีเมล</label>

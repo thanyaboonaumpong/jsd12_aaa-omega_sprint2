@@ -1,4 +1,4 @@
-export default function StatCard({title, value, subtext}) {
+export default function StatCard({ title, value, subtext }) {
 
   const notFound = <span className="badge badge-soft badge-content">ไม่พบข้อมูล</span>;
   const checkData = (data) => data === undefined || data === null || data === "" ? notFound : data;

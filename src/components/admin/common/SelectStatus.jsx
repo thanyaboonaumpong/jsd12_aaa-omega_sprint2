@@ -1,4 +1,4 @@
-import { TextNotFound } from "./NotFound";
+import { TextNotFound } from "../../common/NotFound";
 
 export const StatusOrder = ({ id, value, onChange }) => {
 
