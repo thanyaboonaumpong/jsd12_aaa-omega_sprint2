@@ -1,63 +1,51 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../contexts/authContext/AuthContext';
+import { useCart } from '../contexts/CartContext'; 
 import CartItem from '../components/CartItem';
 import OrderSummary from '../components/OrderSummary';
 import Header from '../components/HeaderSection';
 import HeaderSectionAuth from '../components/HeaderSectionAuth';
 import FooterSection from '../components/FooterSection';
-import { getCart, updateCartItem, removeFromCart } from '../utils/api';
 
 export default function CartPage() {
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  // ดึง updateQuantity และ removeFromCart มาจาก Context
+  const { cartItems, isLoading, refreshCart, updateQuantity, removeFromCart } = useCart(); 
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadCart = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const result = await getCart(user.id);
-      if (result.success) {
-        setCartItems(result.data.items || []);
-      }
-    } catch {
-      setError('ไม่สามารถโหลดตะกร้าสินค้าได้ กรุณาตรวจสอบการเชื่อมต่อ');
-    } finally {
-      setLoading(false);
-    }
-  }, [user]);
-
   useEffect(() => {
+    // ตรวจสอบการล็อกอิน
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadCart();
-  }, [isAuthenticated, loadCart, navigate]);
+    // สั่งให้ Context ดึงข้อมูลตะกร้าล่าสุดจาก Database
+    refreshCart();
+  }, [isAuthenticated, navigate, refreshCart]);
 
-  const handleQuantityChange = async (productId, quantity) => {
+  // ฟังก์ชันอัปเดตจำนวนสินค้า
+  const handleQuantityChange = async (productNumber, quantity) => {
     try {
-      const result = await updateCartItem(user.id, productId, quantity);
-      if (result.success) setCartItems(result.data.items || []);
+      setError(null); // เคลียร์ error เก่าก่อนเริ่มทำงาน
+      await updateQuantity(productNumber, quantity);
     } catch {
       setError('ไม่สามารถอัพเดทจำนวนได้');
     }
   };
 
-  const handleRemove = async (productId) => {
+  // ฟังก์ชันลบสินค้า
+  const handleRemove = async (productNumber) => {
     try {
-      const result = await removeFromCart(user.id, productId);
-      if (result.success) setCartItems(result.data.items || []);
+      setError(null);
+      await removeFromCart(productNumber);
     } catch {
       setError('ไม่สามารถลบสินค้าได้');
     }
   };
 
-  const handleCheckout = () => navigate('/payment');
+  const handleCheckout = () => navigate('/payment'); // ไปหน้า Mock Payment
 
   return (
     <>
@@ -73,7 +61,7 @@ export default function CartPage() {
             </div>
           )}
 
-          {loading ? (
+          {isLoading ? (
             <div className="text-center py-20 text-content-soft">กำลังโหลด...</div>
           ) : cartItems.length === 0 ? (
             <div className="text-center py-20">
@@ -85,7 +73,7 @@ export default function CartPage() {
               <div className="lg:col-span-2 space-y-3">
                 {cartItems.map((item) => (
                   <CartItem
-                    key={item.productId}
+                    key={item.productNumber} 
                     item={item}
                     onQuantityChange={handleQuantityChange}
                     onRemove={handleRemove}
