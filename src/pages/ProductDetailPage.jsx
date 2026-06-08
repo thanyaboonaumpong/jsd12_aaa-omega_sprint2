@@ -18,8 +18,12 @@ const ProductDetailPage = () => {
       .then((resData) => {
         const actualProduct = resData?.data || resData;
         setProduct(actualProduct);
-        if (actualProduct && actualProduct.image?.url) {
-          setActiveImage(actualProduct.image.url);
+        if (actualProduct) {
+          if (actualProduct.gallery && actualProduct.gallery.length > 0) {
+            setActiveImage(actualProduct.gallery[0].url);
+          } else if (actualProduct.image?.url) {
+            setActiveImage(actualProduct.image.url);
+          }
         }
         setLoading(false);
       })
@@ -144,11 +148,11 @@ const ProductDetailPage = () => {
 
             <div className="flex items-baseline gap-4 mt-6">
               <span className="text-4xl font-extrabold text-[#5C6AC4]">
-                ฿{product.price ? product.price.toLocaleString() : "ติดต่อเจ้าหน้าที่"}
+                ฿{((product.salePrice && product.price && product.salePrice < product.price) ? product.salePrice : product.price)?.toLocaleString() || "ติดต่อเจ้าหน้าที่"}
               </span>
-              {product.salePrice && product.price && product.salePrice > product.price && (
+              {product.salePrice && product.price && product.salePrice < product.price && (
                 <span className="text-gray-400 line-through">
-                  ฿{product.salePrice.toLocaleString()}
+                  ฿{product.price.toLocaleString()}
                 </span>
               )}
             </div>
