@@ -1,46 +1,13 @@
+// --- URL สำหรับระบบเก่า (Admin จัดการสินค้า) ---
 const BASE_URL = 'http://localhost:5000/api';
 
-// --- Cart API ---
+// --- URL สำหรับระบบใหม่ (ตะกร้าสินค้า) ---
+const API_CART_URL = "http://localhost:5000/v1/carts";
 
-// GET selected products in cart for a given user (products/<user_id>)
-export const getCart = async (userId) => {
-  const response = await fetch(`${BASE_URL}/cart/${userId}`);
-  if (!response.ok) throw new Error('Failed to fetch cart');
-  return response.json();
-};
 
-// POST save selected product to cart
-export const addToCart = async ({ userId, productId, name, price, image, quantity = 1 }) => {
-  const response = await fetch(`${BASE_URL}/cart`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userId, productId, name, price, image, quantity }),
-  });
-  if (!response.ok) throw new Error('Failed to add to cart');
-  return response.json();
-};
-
-// PUT update item quantity in cart
-export const updateCartItem = async (userId, productId, quantity) => {
-  const response = await fetch(`${BASE_URL}/cart/${userId}/${productId}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ quantity }),
-  });
-  if (!response.ok) throw new Error('Failed to update cart item');
-  return response.json();
-};
-
-// DELETE item from cart
-export const removeFromCart = async (userId, productId) => {
-  const response = await fetch(`${BASE_URL}/cart/${userId}/${productId}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) throw new Error('Failed to remove from cart');
-  return response.json();
-};
-
-// --- Admin Products API ---
+// ==========================================
+// --- Admin Products API (ของเดิมที่ต้องเก็บไว้) ---
+// ==========================================
 
 // GET all products in store
 export const fetchAllProducts = async () => {
@@ -77,5 +44,66 @@ export const deleteProduct = async (productId) => {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error('Failed to delete product');
+  return response.json();
+};
+
+
+// ==========================================
+// --- Cart API (เวอร์ชันใหม่ล่าสุด) ---
+// ==========================================
+
+export const getCart = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found");
+  
+  const response = await fetch(API_CART_URL, {
+    method: "GET",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": `Bearer ${token}` 
+    }
+  });
+  if (!response.ok) throw new Error("Failed to fetch cart");
+  return response.json();
+};
+
+export const addToCartAPI = async (productNumber, quantity) => {
+  const token = localStorage.getItem("token");
+  
+  const response = await fetch(`${API_CART_URL}/add`, {
+    method: "POST",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": `Bearer ${token}` 
+    },
+    body: JSON.stringify({ productNumber, quantity })
+  });
+  if (!response.ok) throw new Error("Failed to add item to cart");
+  return response.json();
+};
+
+export const updateCartItem = async (productNumber, quantity) => {
+  const token = localStorage.getItem("token");
+  
+  const response = await fetch(`${API_CART_URL}/update`, {
+    method: "PUT",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": `Bearer ${token}` 
+    },
+    body: JSON.stringify({ productNumber, quantity })
+  });
+  if (!response.ok) throw new Error("Failed to update quantity");
+  return response.json();
+};
+
+export const removeFromCart = async (productNumber) => {
+  const token = localStorage.getItem("token");
+  
+  const response = await fetch(`${API_CART_URL}/remove/${productNumber}`, {
+    method: "DELETE",
+    headers: { "Authorization": `Bearer ${token}` }
+  });
+  if (!response.ok) throw new Error("Failed to remove item");
   return response.json();
 };
