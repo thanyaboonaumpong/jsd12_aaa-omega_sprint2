@@ -1,12 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/authContext/AuthContext";
+import { fetchUserOrders } from "../utils/api";
 
-const orders = [
-  { date: "09/03/2026", id: "AAA20260015", total: "990", status: "จัดส่งสำเร็จ" },
-  { date: "28/02/2026", id: "AAA20260011", total: "5,500", status: "จัดส่งสำเร็จ" },
-  { date: "25/02/2026", id: "AAA20260008", total: "89,000", status: "จัดส่งสำเร็จ" },
-];
+const getStatusText = (status) => {
+  const statusMap = {
+    open: "รอดำเนินการ",
+    paid: "ชำระเงินแล้ว",
+    preparing: "กำลังเตรียมจัดส่ง",
+    shipping: "กำลังจัดส่ง",
+    delivered: "จัดส่งสำเร็จ",
+    cancelled: "ยกเลิกแล้ว"
+  };
+  return statusMap[status] || status;
+};
 
 export default function UserProfilePage() {
   const { user, logout, updateProfile } = useContext(AuthContext);
@@ -27,6 +34,15 @@ export default function UserProfilePage() {
     shippingDistrict: "",
   });
   const [savedMessage, setSavedMessage] = useState("");
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    if (user?.userNumber) {
+      fetchUserOrders(user.userNumber)
+        .then(data => setOrders(data))
+        .catch(err => console.error("Failed to fetch orders:", err));
+    }
+  }, [user?.userNumber]);
 
   useEffect(() => {
     if (!user) return;
@@ -135,16 +151,22 @@ export default function UserProfilePage() {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order.id}>
-                  <td>{order.date}</td>
-                  <td>{order.id}</td>
-                  <td className="text-right">{order.total}</td>
+              {orders.length > 0 ? orders.map((order) => (
+                <tr key={order._id || order.orderNumber}>
+                  <td>{new Date(order.createdAt).toLocaleDateString("th-TH")}</td>
+                  <td>{order.orderNumber}</td>
+                  <td className="text-right">{order.totalPrice?.toLocaleString()}</td>
                   <td className="text-right">
-                    <span className="badge badge-pill badge-success">{order.status}</span>
+                    <span className={`badge badge-pill ${order.status === 'cancelled' ? 'text-red-500 bg-red-100' : order.status === 'delivered' ? 'badge-success' : 'text-blue-500 bg-blue-100'}`}>
+                      {getStatusText(order.status)}
+                    </span>
                   </td>
                 </tr>
-              ))}
+              )) : (
+                <tr>
+                  <td colSpan="4" className="text-center text-neutral-soft py-4">ไม่มีประวัติคำสั่งซื้อ</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
