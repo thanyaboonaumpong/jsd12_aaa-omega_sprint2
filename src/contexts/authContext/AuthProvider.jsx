@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AuthContext from "./AuthContext";
 
-const API_URL = "http://localhost:8888/api/v1/users";
+const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -12,21 +12,24 @@ const AuthProvider = ({ children }) => {
   // Initialize auth state from localStorage and verify token
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem("authToken");
-      if (token) {
-        try {
-          // If we have a token, fetch the user profile to verify it's still valid
-          const response = await axios.get(`${API_URL}/profile`, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          setUser(response.data.data); // Assuming backend returns user inside `data`
-        } catch (e) {
-          console.error("Token invalid or expired:", e);
+      try {
+        const response = await fetch(`${API_URL}/profile`, {
+          credentials: "include"
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          setUser(result.data || result.user);
+        } else {
+          setUser(null);
           localStorage.removeItem("authUser");
           localStorage.removeItem("authToken");
         }
+      } catch (e) {
+        console.error("Auth check failed:", e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     checkAuth();
@@ -36,18 +39,35 @@ const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
-      // Depending on exact backend response structure, usually token and user are returned
-      // Let's assume response.data has { token, data: user } or something similar
-      const { token, data: userData } = response.data;
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      const text = await response.text();
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (e) {
+        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+        result = {};
+      }
+      
+      if (!response.ok) {
+        throw new Error(result.message || result.error || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+      }
 
-      setUser(userData || response.data.user); 
-      localStorage.setItem("authUser", JSON.stringify(userData || response.data.user));
-      localStorage.setItem("authToken", token);
+      const { token, data: userData } = result;
+
+      setUser(userData || result.user); 
+      localStorage.setItem("authUser", JSON.stringify(userData || result.user));
+      if (token) localStorage.setItem("authToken", token);
       
       return true;
     } catch (err) {
-      setError(err.response?.data?.message || err.response?.data?.error || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+      setError(err.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ");
       return false;
     }
   };
@@ -56,25 +76,56 @@ const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/register`, userData);
+      const nameParts = (userData.fullName || "").trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
       
-      const { token, data: newUserData } = response.data;
+      const payload = { ...userData, firstName, lastName };
+      delete payload.fullName;
 
-      setUser(newUserData || response.data.user);
-      localStorage.setItem("authUser", JSON.stringify(newUserData || response.data.user));
+      const response = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      
+      const text = await response.text();
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (e) {
+        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+        result = {};
+      }
+      
+      if (!response.ok) {
+        throw new Error(result.message || result.error || "เกิดข้อผิดพลาดในการลงทะเบียน");
+      }
+
+      const { token, data: newUserData } = result;
+
+      setUser(newUserData || result.user);
+      localStorage.setItem("authUser", JSON.stringify(newUserData || result.user));
       if (token) localStorage.setItem("authToken", token);
       
       return true;
     } catch (err) {
-      setError(err.response?.data?.message || err.response?.data?.error || "เกิดข้อผิดพลาดในการลงทะเบียน");
+      setError(err.message || "เกิดข้อผิดพลาดในการลงทะเบียน");
       return false;
     }
   };
 
   // Logout function
-  const logout = () => {
-    // Optional: call backend logout endpoint if it exists and requires token revocation
-    // axios.post(`${API_URL}/logout`, {}, { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` }});
+  const logout = async () => {
+    try {
+      await fetch(`${API_URL}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (e) {
+      console.error("Logout failed:", e);
+    }
     
     setUser(null);
     localStorage.removeItem("authUser");
@@ -90,17 +141,32 @@ const AuthProvider = ({ children }) => {
     }
 
     try {
-      const token = localStorage.getItem("authToken");
-      const response = await axios.put(`${API_URL}/profile`, updatedData, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await fetch(`${API_URL}/profile`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
       });
 
-      const updatedUser = response.data.data || response.data.user;
+      const text = await response.text();
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (e) {
+        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+        result = {};
+      }
+      
+      if (!response.ok) {
+        throw new Error(result.message || result.error || "อัปเดตข้อมูลไม่สำเร็จ");
+      }
+
+      const updatedUser = result.data || result.user;
       setUser(updatedUser);
       localStorage.setItem("authUser", JSON.stringify(updatedUser));
       return true;
     } catch (err) {
-      setError(err.response?.data?.message || err.response?.data?.error || "อัปเดตข้อมูลไม่สำเร็จ");
+      setError(err.message || "อัปเดตข้อมูลไม่สำเร็จ");
       return false;
     }
   };

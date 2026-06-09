@@ -1,9 +1,10 @@
 // --- URL สำหรับระบบเก่า (Admin จัดการสินค้า) ---
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 // --- URL สำหรับระบบใหม่ (ตะกร้าสินค้า) ---
-const API_CART_URL = "http://localhost:5000/v1/carts";
+const API_CART_URL = import.meta.env.VITE_API_URL;
 
+const getAuthToken = () => localStorage.getItem("authToken") || localStorage.getItem("token");
 
 // ==========================================
 // --- Admin Products API (ของเดิมที่ต้องเก็บไว้) ---
@@ -53,14 +54,14 @@ export const deleteProduct = async (productId) => {
 // ==========================================
 
 export const getCart = async () => {
-  const token = localStorage.getItem("token");
+  const token = getAuthToken();
   if (!token) throw new Error("No token found");
-  
-  const response = await fetch(API_CART_URL, {
+
+  const response = await fetch(`${API_CART_URL}/carts`, {
     method: "GET",
-    headers: { 
-      "Content-Type": "application/json", 
-      "Authorization": `Bearer ${token}` 
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
     }
   });
   if (!response.ok) throw new Error("Failed to fetch cart");
@@ -68,13 +69,13 @@ export const getCart = async () => {
 };
 
 export const addToCartAPI = async (productNumber, quantity) => {
-  const token = localStorage.getItem("token");
-  
-  const response = await fetch(`${API_CART_URL}/add`, {
+  const token = getAuthToken();
+
+  const response = await fetch(`${API_CART_URL}/carts/add`, {
     method: "POST",
-    headers: { 
-      "Content-Type": "application/json", 
-      "Authorization": `Bearer ${token}` 
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
     },
     body: JSON.stringify({ productNumber, quantity })
   });
@@ -83,13 +84,13 @@ export const addToCartAPI = async (productNumber, quantity) => {
 };
 
 export const updateCartItem = async (productNumber, quantity) => {
-  const token = localStorage.getItem("token");
-  
-  const response = await fetch(`${API_CART_URL}/update`, {
+  const token = getAuthToken();
+
+  const response = await fetch(`${API_CART_URL}/carts/update`, {
     method: "PUT",
-    headers: { 
-      "Content-Type": "application/json", 
-      "Authorization": `Bearer ${token}` 
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
     },
     body: JSON.stringify({ productNumber, quantity })
   });
@@ -98,12 +99,31 @@ export const updateCartItem = async (productNumber, quantity) => {
 };
 
 export const removeFromCart = async (productNumber) => {
-  const token = localStorage.getItem("token");
-  
-  const response = await fetch(`${API_CART_URL}/remove/${productNumber}`, {
+  const token = getAuthToken();
+
+  const response = await fetch(`${API_CART_URL}/carts/remove/${productNumber}`, {
     method: "DELETE",
     headers: { "Authorization": `Bearer ${token}` }
   });
   if (!response.ok) throw new Error("Failed to remove item");
   return response.json();
 };
+
+// ==========================================
+// --- Orders API ---
+// ==========================================
+
+export const fetchUserOrders = async (userNumber) => {
+  const token = getAuthToken();
+  const response = await fetch(`${API_CART_URL}/orders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": token ? `Bearer ${token}` : ""
+    }
+  });
+  if (!response.ok) throw new Error("Failed to fetch orders");
+  const result = await response.json();
+  const allOrders = result.data || [];
+  return allOrders.filter(order => order.customer?.userNumber === userNumber);
+};

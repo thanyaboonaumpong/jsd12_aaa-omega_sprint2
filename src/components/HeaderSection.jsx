@@ -57,10 +57,10 @@ function Header() {
                     >
                         <span className="material-symbols-outlined text-[28px]">person</span>
                         <span className="text-sm font-medium">
-                            {user?.fullName || "เข้าสู่ระบบ"}
+                            {user ? ([user.firstName, user.lastName].filter(Boolean).join(" ") || user.fullName || "บัญชีของฉัน") : "เข้าสู่ระบบ"}
                         </span>
                     </button>
-                    <button onClick={() => navigate('/checkout')} className="relative">
+                    <button onClick={() => navigate('/checkout')} className="relative text-content-hover hover:text-primary-base transition-colors">
                         <span className="material-symbols-outlined text-[28px]">shopping_cart</span>
                         {cartCount > 0 && (
                             <span className="absolute -top-1 -right-2 bg-accent-dark text-accent-lighter text-xs rounded-full px-1.5">
