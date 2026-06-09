@@ -1,12 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import { MessageContext } from "./MessageContext";
+import { AdminAuthContext } from "../authAdminContext/authAdminContext";
 import { fetchUsers } from "../../api/admin/user";
 import { fetchProducts } from "../../api/admin/product";
 import { fetchOrders, updateOrderStatus, updateOrderInternalNote, deleteOrder } from "../../api/admin/order";
 import { fetchServices, updateServiceStatus, updateServiceInternalNote, deleteService } from "../../api/admin/service";
 
 export const MessageProvider = ({children}) => {
+
+  const { isAuthenticated } = useContext(AdminAuthContext);
 
   const isDev = import.meta.env.VITE_IS_DEV === "true" || false;
   const itemPerPage = Number(import.meta.env.VITE_ITEM_PER_PAGE) || 10;
@@ -38,27 +41,31 @@ export const MessageProvider = ({children}) => {
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getUsers = async () => setUsers(await fetchUsers() || []);
     getUsers();
-  }, []);
+  }, [isAuthenticated]);
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getProducts = async () => setProducts(await fetchProducts() || []);
     getProducts();
-  }, []);
+  }, [isAuthenticated]);
 
   const [orders, setOrders] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getOrders = async () => setOrders(await fetchOrders() || []);
     getOrders();
-  }, []);
+  }, [isAuthenticated]);
 
   const [services, setServices] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getServices = async () => setServices(await fetchServices() || []);
     getServices();
-  }, []);
+  }, [isAuthenticated]);
 
   const handleOrderStatusChange = async (id, status) => {
     try {

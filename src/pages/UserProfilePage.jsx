@@ -30,10 +30,11 @@ export default function UserProfilePage() {
 
   useEffect(() => {
     if (!user) return;
+    const computedFullName = [user.firstName, user.lastName].filter(Boolean).join(" ") || user.fullName || "";
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData((prev) => ({
       ...prev,
-      fullName: user.fullName || "",
+      fullName: computedFullName,
       phone: user.phone || "",
       email: user.email || "",
       address: user.address || "",
@@ -51,15 +52,20 @@ export default function UserProfilePage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    updateProfile(formData);
+    const nameParts = (formData.fullName || "").trim().split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "";
+    
+    updateProfile({ ...formData, firstName, lastName });
     setSavedMessage("บันทึกข้อมูลเรียบร้อยแล้ว");
     setTimeout(() => setSavedMessage(""), 3000);
   }
 
   function handleCancel() {
+    const computedFullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ") || user?.fullName || "";
     setFormData((prev) => ({
       ...prev,
-      fullName: user?.fullName || "",
+      fullName: computedFullName,
       phone: user?.phone || "",
       email: user?.email || "",
       address: user?.address || "",
@@ -103,7 +109,7 @@ export default function UserProfilePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-y-4 text-lg">
           <div className="font-medium text-content-dark">ชื่อผู้สั่งชื่อ</div>
-          <div className="text-content-soft">{user?.fullName}</div>
+          <div className="text-content-soft">{[user?.firstName, user?.lastName].filter(Boolean).join(" ") || user?.fullName}</div>
 
           <div className="font-medium text-content-dark">เบอร์ติดต่อ</div>
           <div className="text-content-soft">{user?.phone}</div>
