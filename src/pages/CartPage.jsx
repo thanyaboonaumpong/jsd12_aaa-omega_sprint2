@@ -45,7 +45,7 @@ export default function CartPage() {
     }
   };
 
-  const handleCheckout = () => navigate('/payment'); // ไปหน้า Mock Payment
+  const handleCheckout = () => navigate('/checkout'); // ไปหน้า Mock Payment
 
   return (
     <>
