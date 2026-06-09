@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import StatCard from "../../components/admin/common/StatCard";
 import { PageNotFound, DataNotFound } from "../../components/common/NotFound";
@@ -16,7 +17,7 @@ export default function AdminUsers() {
 
   return (
     <>
-      {users
+      {users.length > 0
         ? <>
             <section id="stat">
               <StatCard title="เข้าสู่ระบบ" value="28" subtext="คน" />
@@ -50,11 +51,20 @@ export default function AdminUsers() {
                         <td><button onClick={() => handleUserItem(user.userNumber)}>
                           {user.company ||
                             (user.firstName || user.lastName
-                              ? `คุณ${user.firstName} ${user.lastName}`.trim()
+                              ? `${user.firstName} ${user.lastName}`.trim()
                               : <DataNotFound />)
                           }</button>
                         </td>
-                        <td>{user.phone || <DataNotFound />}</td>
+                        <td className="leading-5.5 py-1.5">
+                          {user.phone || user.phone2
+                            ? <>
+                                {user.phone}
+                                {user.phone && user.phone2 && <br />}
+                                {user.phone2}
+                              </>
+                            : <DataNotFound />
+                          }
+                        </td>
                         <td>{user.email || <DataNotFound />}</td>
                         <td className="capitalize">{user.role || <DataNotFound />}</td>
                         <td>{user.lastLoginAt ? FormatDateTime(user.lastLoginAt) : <DataNotFound />}</td>

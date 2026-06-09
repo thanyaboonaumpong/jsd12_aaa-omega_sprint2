@@ -20,7 +20,7 @@ export default function AdminOrders() {
 
   return (
     <>
-      {orders.length > 0
+      {orders?.length > 0
         ? <>
             <section id="stat">
               <StatCard title="ยอดขาย/เดือน" value="1,543,500" subtext="+18%" />
@@ -52,19 +52,19 @@ export default function AdminOrders() {
                   </thead>
                   <tbody>
                     {latestOrders.map((order) => (
-                      <tr key={order._id}>
-                        <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                        <td><button onClick={() => handleOrderItem(order.orderNumber)}>{order.orderNumber?.toUpperCase() || <DataNotFound />}</button></td>
-                        <td><button onClick={() => handleOrderItem(order.orderNumber)}>
-                          {order.customer.company ||
-                            (order.customer.firstName || order.customer.lastName
-                              ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
+                      <tr key={order?._id}>
+                        <td>{order?.createdAt ? FormatDate(order?.createdAt) : <DataNotFound />}</td>
+                        <td><button onClick={() => handleOrderItem(order?.orderNumber)}>{order?.orderNumber.toUpperCase() || <DataNotFound />}</button></td>
+                        <td><button onClick={() => handleOrderItem(order?.orderNumber)}>
+                          {order?.customer?.company ||
+                            (order?.customer?.firstName || order?.customer?.lastName
+                              ? `${order?.customer?.firstName} ${order?.customer?.lastName}`.trim()
                               : <DataNotFound />)
                           }</button>
                         </td>
-                        <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
+                        <td className="text-right">{order?.totalPrice >= 0 ? FormatPrice(order?.totalPrice) : <DataNotFound />}</td>
                         <td>
-                          <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order._id, event.target.value)} />
+                          <StatusOrder value={order.status || ""} onChange={(event) => handleOrderStatusChange(order?._id, event.target.value)} />
                         </td>
                       </tr>
                     ))}

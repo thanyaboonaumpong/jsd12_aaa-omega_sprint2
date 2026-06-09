@@ -7,6 +7,7 @@ export const AdminAuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const login = async (email, password) => {
     const result = await loginUser({ email, password });
     if (!result) return null;

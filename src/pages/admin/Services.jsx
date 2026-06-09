@@ -10,7 +10,7 @@ import { FormatDateTime } from "../../utils/FormatDate";
 
 export default function AdminServices() {
 
-  const { services, handleServiceStatusChange, toast } = useContext(MessageContext);
+  const { isDev, services, handleServiceStatusChange, toast } = useContext(MessageContext);
 
   const navigate = useNavigate();
   const handleServiceItem = (serviceNumber) => navigate(`./${serviceNumber}`);
@@ -19,7 +19,7 @@ export default function AdminServices() {
 
   return (
     <>
-      {services.length > 0
+      {services?.length > 0
         ? <>
             <section id="stat">
               <StatCard title="จำนวนงานทั้งหมด" value="54" subtext="+8" />
@@ -38,46 +38,66 @@ export default function AdminServices() {
                     <col className="w-px" />
                     <col className="w-px" />
                     <col className="w-auto" />
-                    <col className="w-px" />
-                    <col className="w-px" />
+                    {isDev &&
+                      <>
+                        <col className="w-px" />
+                        <col className="w-px" />
+                      </>
+                    }
                     <col className="w-px" />
                     <col className="w-px" />
                   </colgroup>
                   <thead>
                     <tr>
-                      <th>วันที่นัดหมาย</th>
-                      <th>เลขที่นัดหมาย</th>
-                      <th>ชื่อลูกค้า</th>
-                      <th>เบอร์ติดต่อ</th>
-                      <th>ประเภทงาน</th>
-                      <th>ทีมช่าง</th>
-                      <th>สถานะ</th>
+                      <th scope="col">วันที่นัดหมาย</th>
+                      <th scope="col">เลขที่นัดหมาย</th>
+                      <th scope="col">ชื่อลูกค้า</th>
+                      {isDev &&
+                        <>
+                          <th className="relative bg-neutral-50/60">เบอร์ติดต่อ
+                            <span className="badge badge-outline badge-content absolute bottom-0 left-full -translate-x-1/2 translate-y-1/2 text-[10px] leading-2.25 tracking-widest bg-white">PREVIEW</span></th>
+                          <th>ประเภทงาน</th>
+                        </>
+                      }
+                      <th scope="col">ทีมช่าง</th>
+                      <th scope="col">สถานะ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {latestServices.map((service) => (
-                      <tr key={service._id}>
-                        <td>{service.appointmentAt ? FormatDateTime(service.appointmentAt) : <DataNotFound />}</td>
-                        <td><button onClick={() => handleServiceItem(service.serviceNumber)}>{service.serviceNumber?.toUpperCase() || <DataNotFound />}</button></td>
-                        <td><button onClick={() => handleServiceItem(service.serviceNumber)}>
-                          {service.customer.company ||
-                            (service.customer.firstName || service.customer.lastName
-                              ? `คุณ${service.customer.firstName} ${service.customer.lastName}`.trim()
+                    {latestServices?.map((service) => (
+                      <tr key={service?._id}>
+                        <td>{service?.appointmentAt ? FormatDateTime(service?.appointmentAt) : <DataNotFound />}</td>
+                        <td><button onClick={() => handleServiceItem(service?.serviceNumber)}>{service?.serviceNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                        <td><button onClick={() => handleServiceItem(service?.serviceNumber)}>
+                          {service?.customer?.company ||
+                            (service?.customer?.firstName || service?.customer?.lastName
+                              ? `${service?.customer?.firstName} ${service?.customer?.lastName}`.trim()
                               : <DataNotFound />)
                           }</button>
                         </td>
-                        <td className="leading-5.5 py-1.5">
-                          {service.customer.phone || ""}
-                          {service.customer.phone2 && (
-                            <>
-                              <br />
-                              {service.customer.phone2}
-                            </>
-                          )}</td>
-                        <td><span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-2" title={service.title || ""}><span className="icon-material">info_i</span></span><ServiceType value={service.serviceType || ""} /></td>
-                        <td><ServiceTeam value={service.team || ""} /></td>
+                        {isDev &&
+                          <>
+                            <td className="leading-5.5 py-1.5 bg-neutral-50/60">
+                              {service?.customer?.phone || service?.customer?.phone2
+                                ? <>
+                                    {service?.customer?.phone || ""}
+                                    {service?.customer?.phone && service?.customer?.phone2 && <br />}
+                                    {service?.customer?.phone2 || ""}
+                                  </>
+                                : <DataNotFound />
+                              }
+                            </td>
+                            <td className="bg-neutral-50/60">
+                              <span className="badge badge-sm badge-pill badge-icon badge-outline badge-content mr-2" title={service?.title || ""}><span className="icon-material">info_i</span></span>
+                              <ServiceType value={service?.serviceType || ""} />
+                            </td>
+                          </>
+                        }
                         <td>
-                          <StatusService value={service.status || ""} onChange={(event) => handleServiceStatusChange(service._id, event.target.value)} />
+                          <ServiceTeam value={service?.team || ""} />
+                        </td>
+                        <td>
+                          <StatusService value={service?.status || ""} onChange={(event) => handleServiceStatusChange(service?._id, event.target.value)} />
                         </td>
                       </tr>
                     ))}
