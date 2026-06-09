@@ -23,8 +23,8 @@ export default function LoginPage() {
     setIsLoading(true);
 
     // Simulate API call delay
-    setTimeout(() => {
-      const success = login(formData.email, formData.password);
+    setTimeout(async () => {
+      const success = await login(formData.email, formData.password);
       setIsLoading(false);
 
       if (success) {
