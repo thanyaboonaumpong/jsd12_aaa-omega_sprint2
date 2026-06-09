@@ -15,9 +15,11 @@ export const CartProvider = ({ children }) => {
   // หุ้มด้วย useCallback ตามคำแนะนำของ ESLint
   const loadCartData = useCallback(async () => {
     try {
-      const token = localStorage.getItem('token');
+        const token = localStorage.getItem('authToken') || localStorage.getItem('token') || localStorage.getItem('authUser');
       if (!token) {
         setCartItems([]);
+        setCartTotal(0);
+        setIsLoading(false);
         return;
       }
       
@@ -38,11 +40,15 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productNumber, quantity = 1) => {
     try {
+      const token = localStorage.getItem('authToken') || localStorage.getItem('token') || localStorage.getItem('authUser');
+      if (!token) {
+        throw new Error("กรุณาล็อกอินก่อนทำรายการ");
+      }
       await addToCartAPI(productNumber, quantity);
       await loadCartData(); 
     } catch (error) {
       console.error("เพิ่มสินค้าลงตะกร้าล้มเหลว:", error);
-      alert("เกิดข้อผิดพลาดในการเพิ่มสินค้า");
+      throw error;
     }
   };
 

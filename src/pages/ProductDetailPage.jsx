@@ -68,7 +68,7 @@ const ProductDetailPage = () => {
       alert("เพิ่มสินค้าลงรถเข็นเรียบร้อยแล้ว!");
     } catch (error) {
       console.error(error);
-      alert("เกิดข้อผิดพลาด กรุณาล็อกอินก่อนทำรายการ");
+      alert(error.message || "เกิดข้อผิดพลาด กรุณาล็อกอินก่อนทำรายการ");
     }
   };
 
@@ -82,7 +82,7 @@ const ProductDetailPage = () => {
       navigate("/cart");
     } catch (error) {
       console.error(error);
-      alert("เกิดข้อผิดพลาด กรุณาล็อกอินก่อนทำรายการ");
+      alert(error.message || "เกิดข้อผิดพลาด กรุณาล็อกอินก่อนทำรายการ");
     }
   };
 

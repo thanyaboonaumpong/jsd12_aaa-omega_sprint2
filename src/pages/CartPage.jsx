@@ -30,8 +30,8 @@ export default function CartPage() {
     try {
       setError(null); // เคลียร์ error เก่าก่อนเริ่มทำงาน
       await updateQuantity(productNumber, quantity);
-    } catch {
-      setError('ไม่สามารถอัพเดทจำนวนได้');
+    } catch (error) {
+      setError(error.message || 'ไม่สามารถอัพเดทจำนวนได้');
     }
   };
 
@@ -40,8 +40,8 @@ export default function CartPage() {
     try {
       setError(null);
       await removeFromCart(productNumber);
-    } catch {
-      setError('ไม่สามารถลบสินค้าได้');
+    } catch (error) {
+      setError(error.message || 'ไม่สามารถลบสินค้าได้');
     }
   };
 
