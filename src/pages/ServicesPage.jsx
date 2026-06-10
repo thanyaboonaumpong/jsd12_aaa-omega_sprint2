@@ -109,7 +109,7 @@ export default function ServicesPage() {
             <p className="text-content-soft mt-2">เลือกบริการที่ตรงกับความต้องการของคุณ</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {serviceTypes.map((service) => (
               <div
                 key={service.id}
