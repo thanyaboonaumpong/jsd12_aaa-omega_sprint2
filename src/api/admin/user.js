@@ -134,13 +134,13 @@ export const fetchUserById = async (id) => {
   };
 };
 
-export const updateUserRole = async (id, role) => {
+export const updateUser = async (id, data) => {
   try {
-    const res = await fetch(`${apiBase}/users/${id}/role`, {
-      method: "PATCH",
+    const res = await fetch(`${apiBase}/users/${id}`, {
+      method: "PUT",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ role }),
+      body: JSON.stringify(data),
     });
     return await handleResponse(res);
   } catch (error) {
@@ -154,6 +154,21 @@ export const deleteUser = async (id) => {
     const res = await fetch(`${apiBase}/users/${id}`, {
       method: "DELETE",
       credentials: "include",
+    });
+    return await handleResponse(res);
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  };
+};
+
+export const updateUserRole = async (id, role) => {
+  try {
+    const res = await fetch(`${apiBase}/users/${id}/role`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ role }),
     });
     return await handleResponse(res);
   } catch (error) {

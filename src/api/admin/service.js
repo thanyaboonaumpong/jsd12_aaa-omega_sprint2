@@ -89,6 +89,7 @@ export const updateServiceStatus = async (id, data) => {
   };
 };
 
+/*
 export const updateServiceInternalNote = async (id, data) => {
   try {
     const res = await fetch(`${apiBase}/services/${id}/internal-note`, {
@@ -103,6 +104,7 @@ export const updateServiceInternalNote = async (id, data) => {
     return null;
   };
 };
+*/
 
 export const deleteService = async (id) => {
   try {

@@ -135,7 +135,7 @@
   input[type="range"]:focus::-moz-range-thumb {@apply outline-2 outline-neutral-base outline-offset-4;}
   input[type="time"] {@apply h-10;}
   textarea {@apply field-sizing-content min-h-30 max-h-[80dvh];}
-  select {@apply cursor-pointer w-auto px-3! py-1.5;}
+  select {@apply cursor-pointer w-auto px-3! py-1.5 transition-none!;}
   select option {@apply text-content-base bg-white;}
   select option[disabled] {@apply text-content-disable bg-white;}
 
