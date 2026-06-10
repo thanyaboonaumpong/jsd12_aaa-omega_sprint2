@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.jpg";
-import lineIcon from "../assets/images/LINE_Brand_icon.png";
+import logoLight from "../assets/images/logo-aaa-omega-light.png";
+
 
 const navLinks = [
     { label: "หน้าแรก", path: "/" },
@@ -25,7 +25,7 @@ function FooterSection() {
 
                     {/* Logo */}
                     <div className="flex items-center justify-center lg:justify-start">
-                        <img src={logo} alt="logo" className="w-10 h-10" />
+                        <img src={logoLight} alt="AAA Omega Solar" className="h-10 rounded-none" />
                     </div>
 
                     {/* Nav Links */}
@@ -44,11 +44,7 @@ function FooterSection() {
                     {/* Contact */}
                     <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-3">
 
-                        <a href="#" className="bg-accent-hover p-1.5 rounded-lg hover:brightness-110 transition-all">
-                            <img src={lineIcon} className="w-6 h-6" alt="Line" />
-                        </a>
-
-                        <div className="bg-neutral-lighter text-neutral-darker flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-sm">
+<div className="bg-neutral-lighter text-neutral-darker flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-sm">
                             <i className="material-symbols-outlined text-xl">call</i>
                             <span className="text-sm whitespace-nowrap">02 999 8888</span>
                         </div>
