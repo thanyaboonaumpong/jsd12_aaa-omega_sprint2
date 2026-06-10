@@ -4,7 +4,6 @@ import HeaderSectionAuth from '../components/HeaderSectionAuth';
 import FooterSection from '../components/FooterSection';
 import lineIcon from '../assets/images/LINE_Brand_icon.png';
 import bannerImg from '../assets/images/p-banner.jpg';
-import logoImg from '../assets/images/logo-aaa-omega.png';
 
 const contactInfo = [
   {
@@ -99,8 +98,7 @@ export default function ContactPage() {
         <div className="relative w-full h-52 md:h-72 overflow-hidden">
           <img src={bannerImg} alt="ติดต่อเรา" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary-darker/65 flex flex-col items-center justify-center text-center px-4">
-            <img src={logoImg} alt="AAA Omega Solar" className="h-12 md:h-16 mb-2 rounded-none" />
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">ติดต่อเรา</h1>
+<h1 className="text-3xl md:text-5xl font-bold text-white mb-2">ติดต่อเรา</h1>
             <p className="text-neutral-light text-sm md:text-base">
               พร้อมให้คำปรึกษาด้านพลังงานแสงอาทิตย์ ฟรี ไม่มีค่าใช้จ่าย
             </p>
