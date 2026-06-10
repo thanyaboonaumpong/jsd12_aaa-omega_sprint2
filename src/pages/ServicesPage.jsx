@@ -4,7 +4,6 @@ import Header from '../components/HeaderSection';
 import HeaderSectionAuth from '../components/HeaderSectionAuth';
 import FooterSection from '../components/FooterSection';
 import bannerImg from '../assets/images/banner-calculate.jpg';
-import logoImg from '../assets/images/logo-aaa-omega.png';
 
 const serviceTypes = [
   {
@@ -82,8 +81,7 @@ export default function ServicesPage() {
         <div className="relative w-full h-64 md:h-88 overflow-hidden">
           <img src={bannerImg} alt="บริการ" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary-darker/60 flex flex-col items-center justify-center text-center px-4">
-            <img src={logoImg} alt="AAA Omega Solar" className="h-12 md:h-16 mb-2 rounded-none" />
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-3">บริการของเรา</h1>
+<h1 className="text-3xl md:text-5xl font-bold text-white mb-3">บริการของเรา</h1>
             <p className="text-neutral-light text-base md:text-lg max-w-xl">
               ครบครันทุกบริการด้านพลังงานแสงอาทิตย์ โดยทีมวิศวกรและช่างผู้เชี่ยวชาญ
             </p>
