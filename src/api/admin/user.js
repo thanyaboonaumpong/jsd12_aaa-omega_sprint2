@@ -12,6 +12,7 @@ export const registerUser = async (data) => {
   try {
     const res = await fetch(`${apiBase}/users/register`, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });

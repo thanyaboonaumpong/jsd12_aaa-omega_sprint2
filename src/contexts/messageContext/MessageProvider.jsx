@@ -245,7 +245,7 @@ export const MessageProvider = ({children}) => {
     <MessageContext.Provider value={{
       isDev, itemPerPage,
       adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose,
-      toast, 
+      toast, showToast, 
       users, setUsers, handleUserSave, handleUserDelete,
       products, setProducts, handleProductSave, handleProductDelete,
       orders, setOrders, handleOrderStatusChange, handleOrderSave, handleOrderDelete,
