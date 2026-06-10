@@ -20,7 +20,7 @@ export default function AdminUserDetail() {
 
   const [user, setUser] = useState(null);
   //const user = userProfile.find((item) => item.userNumber === Number(userNumber));
-  const userOrders = userNumber ? orders.filter((item) => item.customer.userNumber === Number(userNumber)) : [];
+  const userOrders = userNumber ? orders.filter((item) => item?.customer?.userNumber === Number(userNumber)) : [];
   const latestUserOrders = [...userOrders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); /*.slice(0, 10)*/
   
   useEffect(() => {
@@ -53,46 +53,48 @@ export default function AdminUserDetail() {
               <tr>
                 <th>ชื่อผู้สั่งชื่อ</th>
                 <td>
-                  {user.firstName || user.lastName
-                    ? `คุณ${user.firstName} ${user.lastName}`.trim()
-                    : <DataNotFound />}</td>
+                  {`${user?.firstName} ${user?.lastName}`.trim() || <DataNotFound />}</td>
               </tr>
-              {user.company &&
+              {user?.company &&
                 <tr>
                   <th>ชื่อบริษัท</th>
-                  <td>{user.company}</td>
+                  <td>{user?.company}</td>
                 </tr>
               }
-              {user.taxId &&
+              {user?.taxId &&
                 <tr>
                   <th>เลขประจำตัว<br className="max-2xs:hidden" />ผู้เสียภาษีอากร</th>
-                  <td>{user.taxId}</td>
+                  <td>{user?.taxId}</td>
                 </tr>
               }
               <tr>
                 <th>เบอร์ติดต่อ</th>
-                <td>{user.phone || <DataNotFound />}</td>
+                <td>{user?.phone || <DataNotFound />}</td>
               </tr>
-              {user.phone2 &&
+              {user?.phone2 &&
                 <tr>
                   <th>เบอร์สำรอง</th>
-                  <td>{user.phone2}</td>
+                  <td>{user?.phone2}</td>
                 </tr>
               }
               <tr>
                 <th>อีเมล</th>
-                <td>{user.email || <DataNotFound />}</td>
+                <td>{user?.email || <DataNotFound />}</td>
               </tr>
               <tr>
                 <th>ที่อยู่</th>
                 <td>
-                  {user.address
+                  {user?.address
                     ? <>
-                        {user.address.label && <span className="badge badge-soft badge-primary mr-2">{user.address.label}</span>}
+                        {user?.address?.label && <span className="badge badge-soft badge-primary mr-2">{user?.address?.label}</span>}
                         <span>
-                          {user.address.addressLine || user.address.subdistrict || user.address.district
-                            ? `${user.address.addressLine} ${user.address.subdistrict} ${user.address.district} ${user.address.province} ${user.address.postcode}`.trim()
-                            : <DataNotFound />}
+                          {[
+                            user?.address?.addressLine,
+                            user?.address?.subdistrict,
+                            user?.address?.district,
+                            user?.address?.province,
+                            user?.address?.postcode
+                          ].filter(Boolean).join(' ') || <DataNotFound />}
                         </span>
                       </>
                     : <DataNotFound />}
@@ -101,13 +103,17 @@ export default function AdminUserDetail() {
               <tr>
                 <th>ที่อยู่จัดส่ง</th>
                 <td>
-                  {user.shippingAddress
+                  {user?.shippingAddress
                     ? <>
-                        {user.shippingAddress.label && <span className="badge badge-soft badge-primary mr-2">{user.shippingAddress.label}</span>}
+                        {user?.shippingAddress?.label && <span className="badge badge-soft badge-primary mr-2">{user?.shippingAddress?.label}</span>}
                         <span>
-                          {user.shippingAddress.addressLine || user.shippingAddress.subdistrict || user.shippingAddress.district
-                            ? `${user.shippingAddress.addressLine} ${user.shippingAddress.subdistrict} ${user.shippingAddress.district} ${user.shippingAddress.province} ${user.shippingAddress.postcode}`.trim()
-                            : <DataNotFound />}
+                          {[
+                            user?.shippingAddress?.addressLine,
+                            user?.shippingAddress?.subdistrict,
+                            user?.shippingAddress?.district,
+                            user?.shippingAddress?.province,
+                            user?.shippingAddress?.postcode
+                          ].filter(Boolean).join(' ') || <DataNotFound />}
                         </span>
                       </>
                     : <DataNotFound />}
@@ -116,13 +122,17 @@ export default function AdminUserDetail() {
               <tr>
                 <th>ที่อยู่บริการ</th>
                 <td>
-                  {user.serviceAddress
+                  {user?.serviceAddress
                     ? <>
-                        {user.serviceAddress.label && <span className="badge badge-soft badge-primary mr-2">{user.serviceAddress.label}</span>}
+                        {user?.serviceAddress?.label && <span className="badge badge-soft badge-primary mr-2">{user?.serviceAddress?.label}</span>}
                         <span>
-                          {user.serviceAddress.addressLine || user.serviceAddress.subdistrict || user.serviceAddress.district
-                            ? `${user.serviceAddress.addressLine} ${user.serviceAddress.subdistrict} ${user.serviceAddress.district} ${user.serviceAddress.province} ${user.serviceAddress.postcode}`.trim()
-                            : <DataNotFound />}
+                          {[
+                            user?.serviceAddress?.addressLine,
+                            user?.serviceAddress?.subdistrict,
+                            user?.serviceAddress?.district,
+                            user?.serviceAddress?.province,
+                            user?.serviceAddress?.postcode
+                          ].filter(Boolean).join(' ') || <DataNotFound />}
                         </span>
                       </>
                     : <DataNotFound />}
@@ -155,24 +165,24 @@ export default function AdminUserDetail() {
                 </tr>
               </thead>
               <tbody>
-                {userOrders.length > 0
+                {userOrders?.length > 0
                   ? <>
                       {latestUserOrders.map((order) => (
-                        <tr key={order._id}>
-                          <td>{order.createdAt ? FormatDate(order.createdAt) : <DataNotFound />}</td>
-                          <td><button onClick={() => handleOrderItem(order.orderNumber)}>{order.orderNumber?.toUpperCase() || <DataNotFound />}</button></td>
+                        <tr key={order?._id}>
+                          <td>{order?.createdAt ? FormatDate(order?.createdAt) : <DataNotFound />}</td>
+                          <td><button onClick={() => handleOrderItem(order?.orderNumber)}>{order?.orderNumber?.toUpperCase() || <DataNotFound />}</button></td>
                           {isDev &&
-                            <td className="bg-neutral-50/60"><button onClick={() => handleOrderItem(order.orderNumber)}>
-                              {order.customer.company ||
-                                (order.customer.firstName || order.customer.lastName
-                                  ? `คุณ${order.customer.firstName} ${order.customer.lastName}`.trim()
+                            <td className="bg-neutral-50/60"><button onClick={() => handleOrderItem(order?.orderNumber)}>
+                              {order?.customer?.company ||
+                                (order?.customer?.firstName || order?.customer?.lastName
+                                  ? `${order?.customer?.firstName} ${order?.customer?.lastName}`.trim()
                                   : <DataNotFound />)
                               }</button>
                             </td>
                           }
-                          <td className="text-right">{order.totalPrice > 0 ? FormatPrice(order.totalPrice) : <DataNotFound />}</td>
+                          <td className="text-right">{order?.totalPrice >= 0 ? FormatPrice(order?.totalPrice) : <DataNotFound />}</td>
                           <td>
-                            <StatusOrder value={order.status || ""} />
+                            <StatusOrder value={order?.status || ""} />
                           </td>
                         </tr>
                       ))}
