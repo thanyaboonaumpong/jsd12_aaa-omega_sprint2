@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-//import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
+//import { AdminAuthContext } from "../../contexts/authAdminContext/authAdminContext";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import { fetchUserByNumber } from "../../api/admin/user";
 import Toast from "../../components/admin/common/Toast";
@@ -46,7 +46,7 @@ const userInitial = {
 
 export default function AdminUserForm() {
 
-  //const { user } = useAdminAuth();
+  //const { user } = useContext(AdminAuthContext);
   const { handleUserSave, handleUserDelete, toast } = useContext(MessageContext);
 
   const navigate = useNavigate();

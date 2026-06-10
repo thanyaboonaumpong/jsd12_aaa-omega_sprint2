@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
+import { AdminAuthContext } from "../../contexts/authAdminContext/authAdminContext";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import { DataNotFound } from "../../components/common/NotFound";
 import logoBrand from "../../assets/images/logo-aaa-omega.png";
 
 export default function AdminSidebar() {
 
-  const { user, logout } = useAdminAuth();
+  const { user, logout } = useContext(AdminAuthContext);
   const { adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose } = useContext(MessageContext);
   const navigate = useNavigate();
 
