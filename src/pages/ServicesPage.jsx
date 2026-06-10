@@ -109,16 +109,15 @@ export default function ServicesPage() {
             <p className="text-content-soft mt-2">เลือกบริการที่ตรงกับความต้องการของคุณ</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {serviceTypes.map((service) => (
               <div
                 key={service.id}
-                className={`bg-white rounded-2xl border-2 p-6 flex flex-col gap-4 cursor-pointer transition-all hover:shadow-lg ${
+                className={`bg-white rounded-2xl border-2 p-6 flex flex-col gap-4 transition-all hover:shadow-lg ${
                   activeService === service.id
                     ? 'border-primary-base shadow-lg'
                     : 'border-neutral-disable hover:border-primary-soft'
                 }`}
-                onClick={() => setActiveService(activeService === service.id ? null : service.id)}
               >
                 <div className="flex items-start justify-between">
                   <span className="text-4xl">{service.icon}</span>
@@ -147,7 +146,10 @@ export default function ServicesPage() {
                   </ul>
                 )}
 
-                <button className="mt-auto text-sm text-primary-base hover:text-primary-hover font-medium text-left">
+                <button
+                  className="mt-auto text-sm text-primary-base hover:text-primary-hover font-medium text-left cursor-pointer"
+                  onClick={() => setActiveService(prev => prev === service.id ? null : service.id)}
+                >
                   {activeService === service.id ? 'ซ่อนรายละเอียด ▲' : 'ดูรายละเอียด ▼'}
                 </button>
               </div>
