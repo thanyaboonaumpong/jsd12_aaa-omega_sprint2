@@ -15,23 +15,27 @@ export const CartProvider = ({ children }) => {
   // หุ้มด้วย useCallback ตามคำแนะนำของ ESLint
   const loadCartData = useCallback(async () => {
     try {
-        const token = localStorage.getItem('authToken') || localStorage.getItem('token') || localStorage.getItem('authUser');
-      if (!token) {
-        setCartItems([]);
-        setCartTotal(0);
-        setIsLoading(false);
-        return;
-      }
-      
-      const data = await getCart();
-      setCartItems(data.items || []);
-      setCartTotal(data.total || 0);
-    } catch (error) {
-      console.error("ดึงข้อมูลตะกร้าล้มเหลว:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []); // ใส่ [] เป็น dependency ของ useCallback
+    setIsLoading(true);
+    
+    // ไม่ต้องเช็ค localStorage แล้ว เพราะเราใช้ Cookie
+    const data = await getCart(); 
+    
+    // ข้อมูลจาก Backend อาจมาเป็น { success: true, data: { ... } } 
+    // หรืออาจเป็น { items: [...] } 
+    // ต้องเช็คให้ดีว่าตะกร้าจริงอยู่ที่ไหน
+    console.log("ข้อมูลจาก getCart:", data); 
+
+    setCartItems(data.items || data.data?.items || []);
+    setCartTotal(data.total || data.data?.total || 0);
+    
+  } catch (error) {
+    console.error("ดึงข้อมูลตะกร้าล้มเหลว (หรือยังไม่ได้ล็อคอิน):", error);
+    setCartItems([]);
+    setCartTotal(0);
+  } finally {
+    setIsLoading(false);
+  }
+}, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect

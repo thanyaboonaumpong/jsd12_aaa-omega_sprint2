@@ -112,3 +112,19 @@ export const fetchUserOrders = async (userNumber) => {
   const allOrders = result.data || [];
   return allOrders.filter(order => order.customer?.userNumber === userNumber);
 };
+
+// ==========================================
+// --- User API (ดึงข้อมูลลูกค้า) ---
+// ==========================================
+
+export const getMyProfile = async () => {
+  const response = await fetch(`${API_CART_URL}/users/profile`, { // ตรวจสอบ endpoint นี้กับ backend ของคุณนะครับ
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include" 
+  });
+  if (!response.ok) throw new Error("Failed to fetch profile");
+  return response.json();
+};

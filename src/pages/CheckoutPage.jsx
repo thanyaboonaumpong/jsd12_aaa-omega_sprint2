@@ -1,43 +1,101 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ShippingOption from '../components/ShippingOption';
 import PaymentOption from '../components/PaymentOption'; 
 import ModalConfirm from '../components/ModalConfirm'; 
-
-// 1. นำเข้า useCart จาก Context (อย่าลืมเช็ก Path ให้ตรงกับโฟลเดอร์ของคุณนะครับ)
 import { useCart } from '../contexts/CartContext'; 
+import { getMyProfile } from '../utils/api'; 
+import { createOrder } from '../api/admin/order';
 
 const PaymentPage = () => {
-  // 2. ดึงข้อมูล cart มาจาก Context
-  const { cart } = useCart();
-  
-  // 3. จัดการโครงสร้างข้อมูล: 
-  // เผื่อกรณี Context เก็บเป็น Object { items: [], total: 0 } หรือ Array ตรงๆ
-  const actualCartItems = cart?.items || cart || [];
+  // เพิ่ม clearCart เข้ามา เพื่อเอาไว้ล้างตะกร้าตอนสั่งซื้อเสร็จ
+  const { cartItems, clearCart } = useCart(); 
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [selectedShipping, setSelectedShipping] = useState('standard');
-  const [selectedPayment, setSelectedPayment] = useState('mobile_banking');
-  
+  const [selectedPayment, setSelectedPayment] = useState('bank_transfer');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState('idle');
+  
+  // เพิ่ม State สำหรับเก็บเลขที่ออเดอร์ที่ได้จาก Backend
+  const [createdOrderNumber, setCreatedOrderNumber] = useState("");
 
-  // ข้อมูลลูกค้าจำลอง (ในอนาคตดึงจาก Context ผู้ใช้งานได้ครับ)
-  const mockUser = {
-    name: "คุณ ลูกค้า ทดสอบ",
-    phone: "089-123-4567",
-    address: "123/45 ซอยเทคโนโลยี ถนนพระราม 9 แขวงห้วยขวาง เขตห้วยขวาง กรุงเทพมหานคร 10310"
-  };
+  // ดึงข้อมูลลูกค้าจาก Backend
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getMyProfile();
+        setUserData(user.data);
+      } catch (err) {
+        console.error("ดึงข้อมูลผู้ใช้ไม่สำเร็จ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
 
-  // 4. คำนวณจำนวนชิ้นและยอดรวม จากข้อมูลจริงในฐานข้อมูล (ใช้ฟิลด์ quantity และ price)
+  const actualCartItems = cartItems || [];
+
   const totalItems = actualCartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const totalPrice = actualCartItems.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 0)), 0);
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     setIsModalOpen(true);
     setPaymentStatus('loading');
 
-    setTimeout(() => {
-      setPaymentStatus('success');
-    }, 3000);
+    // สร้าง Payload ให้ตรงกับ Schema ของ Backend
+    const orderData = {
+      totalPrice: totalPrice,
+      paymentMethod: selectedPayment, 
+      customer: {
+        userNumber: userData?.userNumber,
+        firstName: userData?.firstName,
+        lastName: userData?.lastName,
+        company: userData?.company || "-",
+        taxId: userData?.taxId || "-",
+        phone: userData?.phone,
+        phone2: userData?.phone2 || "-",
+        email: userData?.email,
+        shippingAddress: {
+          label: userData?.shippingAddress?.label || "บ้าน",
+          addressLine: userData?.shippingAddress?.addressLine || "-",
+          subdistrict: userData?.shippingAddress?.subdistrict || "-",
+          district: userData?.shippingAddress?.district || "-",
+          province: userData?.shippingAddress?.province || "-",
+          postcode: userData?.shippingAddress?.postcode || "-"
+        }
+      },
+      items: actualCartItems.map(item => ({
+        productNumber: item?.productNumber,
+        name: item?.name || "สินค้าไม่มีชื่อ",
+        sku: item?.sku || "na", 
+        priceAtPurchase: item?.price || 0,
+        quantity: item?.quantity || 1
+      }))
+    };
+
+    console.log("ส่งข้อมูลสั่งซื้อไป Backend:", orderData);
+
+    try {
+      const result = await createOrder(orderData); 
+      
+      if (result) {
+        setPaymentStatus('success');
+        // เก็บเลขที่ออเดอร์จาก Backend มาโชว์ (ถ้าโครงสร้าง Backend ส่งมาเป็น result.orderNumber หรือ result.data.orderNumber)
+        setCreatedOrderNumber(result.orderNumber || result.data?.orderNumber || "สำเร็จ");
+        
+        // เคลียร์ตะกร้าสินค้า
+        if (clearCart) {
+          clearCart();
+        }
+      } else {
+        throw new Error("ระบบไม่ตอบสนอง");
+      }
+    } catch (error) {
+      console.error("สั่งซื้อล้มเหลว:", error);
+      setPaymentStatus('error');
+    }
   };
 
   const handleCloseModal = () => {
@@ -56,13 +114,24 @@ const PaymentPage = () => {
             {/* 1. ที่อยู่จัดส่ง */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
               <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">ที่อยู่ในการจัดส่ง</h2>
-              <div className="text-gray-600">
-                <p className="font-semibold text-gray-800">{mockUser.name} <span className="text-sm font-normal text-gray-500 ml-2">({mockUser.phone})</span></p>
-                <p className="mt-1">{mockUser.address}</p>
-              </div>
+              {loading ? (
+                <p className="text-gray-500">กำลังโหลดข้อมูล...</p>
+              ) : userData ? (
+                <div className="text-gray-600">
+                  <p className="font-semibold text-gray-800">
+                    {userData.firstName} {userData.lastName} 
+                    <span className="text-sm font-normal text-gray-500 ml-2">({userData.phone})</span>
+                  </p>
+                  <p className="mt-1">
+                    {userData.address?.addressLine || ""} {userData.address?.district || ""} {userData.address?.province || ""}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-red-500">ไม่พบข้อมูลผู้ใช้งาน</p>
+              )}
             </div>
 
-            {/* 2. รายการสินค้า (ดึงข้อมูลจริงมาแสดง) */}
+            {/* 2. รายการสินค้า */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
               <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">รายการสินค้า</h2>
               <div className="space-y-4">
@@ -70,22 +139,15 @@ const PaymentPage = () => {
                   actualCartItems.map((item, index) => (
                     <div key={item.productNumber || index} className="flex justify-between items-center text-sm">
                       <div className="flex items-center gap-4 flex-1">
-                        {/* แสดงรูปภาพเล็กๆ ควบคู่ไปด้วยเพื่อให้ดูน่าใช้งานขึ้น */}
                         <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden shrink-0">
-                          <img 
-                            src={item.image || "https://via.placeholder.com/150"} 
-                            alt={item.name} 
-                            className="w-full h-full object-cover" 
-                          />
+                          <img src={item.image || "https://via.placeholder.com/150"} alt={item.name} className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <p className="font-semibold text-gray-800 line-clamp-1">{item.name}</p>
                           <p className="text-gray-500">จำนวน: {item.quantity} ชิ้น</p>
                         </div>
                       </div>
-                      <p className="font-bold text-gray-800 ml-4">
-                        ฿{(item.price * item.quantity).toLocaleString()}
-                      </p>
+                      <p className="font-bold text-gray-800 ml-4">฿{(item.price * item.quantity).toLocaleString()}</p>
                     </div>
                   ))
                 ) : (
@@ -105,18 +167,17 @@ const PaymentPage = () => {
             {/* 4. ช่องทางการชำระเงิน */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
               <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">วิธีการชำระเงิน</h2>
+              <PaymentOption id="bank_transfer" title="โอนเงินผ่านธนาคาร" icon="🏦" selected={selectedPayment === 'bank_transfer'} onSelect={setSelectedPayment} />
               <PaymentOption id="cash" title="เงินสด (เก็บเงินปลายทาง)" icon="💵" selected={selectedPayment === 'cash'} onSelect={setSelectedPayment} />
-              <PaymentOption id="mobile_banking" title="Mobile Banking (สแกน QR Code)" icon="📱" selected={selectedPayment === 'mobile_banking'} onSelect={setSelectedPayment} />
-              <PaymentOption id="credit_card" title="Credit / Debit Card" icon="💳" selected={selectedPayment === 'credit_card'} onSelect={setSelectedPayment} />
+              <PaymentOption id="card" title="Credit / Debit Card" icon="💳" selected={selectedPayment === 'card'} onSelect={setSelectedPayment} />
+              <PaymentOption id="qr" title="Mobile Banking (สแกน QR Code)" icon="📱" selected={selectedPayment === 'qr'} onSelect={setSelectedPayment} />
             </div>
-
           </div>
 
-          {/* คอลัมน์ขวา: สรุปคำสั่งซื้อ */}
+          {/* คอลัมน์ขวา */}
           <div className="w-full lg:w-96">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 sticky top-8">
               <h2 className="text-lg font-bold text-gray-800 mb-4">ข้อมูลการชำระเงิน</h2>
-              
               <div className="space-y-3 text-sm text-gray-600 mb-6 border-b pb-6">
                 <div className="flex justify-between">
                   <span>ยอดรวมสินค้า ({totalItems} ชิ้น)</span>
@@ -127,34 +188,30 @@ const PaymentPage = () => {
                   <span className="text-green-600 font-bold">ฟรี</span>
                 </div>
               </div>
-
               <div className="flex justify-between items-center mb-6">
                 <span className="font-bold text-gray-800">ยอดรวมทั้งสิ้น</span>
                 <span className="text-2xl font-bold text-blue-600">฿{totalPrice.toLocaleString()}</span>
               </div>
-
               <button 
                 onClick={handlePlaceOrder}
-                disabled={totalItems === 0}
+                disabled={totalItems === 0 || loading}
                 className={`w-full font-bold py-3 px-4 rounded-lg transition-colors text-lg ${
-                  totalItems > 0 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  totalItems > 0 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 }`}
               >
                 สั่งสินค้า
               </button>
             </div>
           </div>
-
         </div>
       </div>
-
+      
+      {/* ส่ง orderNumber ที่ดึงมาจาก Backend ไปโชว์ใน Modal แทนการ Fix ค่า */}
       <ModalConfirm 
         isOpen={isModalOpen} 
         status={paymentStatus} 
-        onClose={handleCloseModal}
-        orderNumber="ORD-20260610-8899"
+        onClose={handleCloseModal} 
+        orderNumber={createdOrderNumber || "กำลังดำเนินการ..."} 
       />
     </div>
   );
