@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-import { AdminAuthContext } from "../../contexts/authAdminContext/authAdminContext";
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import { DataNotFound } from "../../components/common/NotFound";
 import logoBrand from "../../assets/images/logo-aaa-omega.png";
 
 export default function AdminSidebar() {
 
-  const { user, logout } = useContext(AdminAuthContext);
+  const { user, logout } = useAdminAuth();
   const { adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose } = useContext(MessageContext);
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ export default function AdminSidebar() {
           </NavLink></li>
         </ul>
         <ul id="navFooter" className="flex flex-col gap-2 p-2 border-t">
-          <li><NavLink className="group button button-ghost button-content justify-start items-start w-full hover:text-white py-2 border hover:border-primary-soft bg-white hover:bg-primary-soft"><span className="icon-material">account_circle</span>
+          <li><NavLink className="group button button-ghost button-content justify-start items-start w-full hover:text-white py-2 border hover:border-primary-soft bg-white hover:bg-primary-soft" to="#soon"><span className="icon-material">account_circle</span>
             <div className="flex flex-col overflow-hidden">
               <span className="overflow-hidden whitespace-nowrap text-ellipsis leading-6">{`${user?.firstName} ${user?.lastName}`.trim() || <DataNotFound />}</span>
               <span className="overflow-hidden whitespace-nowrap text-ellipsis text-xs capitalize text-content-soft group-hover:text-content-light transition-all">{user?.role || ""}</span>

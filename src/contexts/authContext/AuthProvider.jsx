@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+//import axios from "axios";
 import AuthContext from "./AuthContext";
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 const AuthProvider = ({ children }) => {
+
+  const { isAuthenticated } = useAdminAuth();
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Initialize auth state from localStorage and verify token
   useEffect(() => {
+    if (!isAuthenticated) return;
     const checkAuth = async () => {
       try {
         const response = await fetch(`${API_URL}/profile`, {
@@ -33,7 +38,7 @@ const AuthProvider = ({ children }) => {
     };
 
     checkAuth();
-  }, []);
+  }, [isAuthenticated]);
 
   // Login function
   const login = async (email, password) => {
@@ -50,8 +55,9 @@ const AuthProvider = ({ children }) => {
       let result;
       try {
         result = JSON.parse(text);
-      } catch (e) {
-        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+      } catch (error) {
+        console.error(error.message);
+        //if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
         result = {};
       }
       
@@ -94,8 +100,9 @@ const AuthProvider = ({ children }) => {
       let result;
       try {
         result = JSON.parse(text);
-      } catch (e) {
-        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+      } catch (error) {
+        console.error(error.message);
+        //if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
         result = {};
       }
       
@@ -152,8 +159,9 @@ const AuthProvider = ({ children }) => {
       let result;
       try {
         result = JSON.parse(text);
-      } catch (e) {
-        if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+      } catch (error) {
+        console.error(error.message);
+        //if (!response.ok) throw new Error(text || "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
         result = {};
       }
       
