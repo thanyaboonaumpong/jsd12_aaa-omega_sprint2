@@ -94,3 +94,21 @@ export const removeFromCart = async (productNumber) => {
   if (!response.ok) throw new Error("Failed to remove item");
   return response.json();
 };
+
+// ==========================================
+// --- Orders API (ปรับให้ใช้ Cookie ให้สอดคล้องกัน) ---
+// ==========================================
+
+export const fetchUserOrders = async (userNumber) => {
+  const response = await fetch(`${API_CART_URL}/orders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include" // ✅ ใช้ Cookie แทน Authorization Header
+  });
+  if (!response.ok) throw new Error("Failed to fetch orders");
+  const result = await response.json();
+  const allOrders = result.data || [];
+  return allOrders.filter(order => order.customer?.userNumber === userNumber);
+};
