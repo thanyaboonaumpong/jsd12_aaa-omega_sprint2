@@ -4,20 +4,18 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 // --- URL สำหรับระบบใหม่ (ตะกร้าสินค้า) ---
 const API_CART_URL = import.meta.env.VITE_API_URL;
 
-const getAuthToken = () => localStorage.getItem("authToken") || localStorage.getItem("token");
+// เอาฟังก์ชัน getAuthToken ออกได้เลย เพราะเราให้ Browser จัดการ Cookie ให้อัตโนมัติแล้ว
 
 // ==========================================
 // --- Admin Products API (ของเดิมที่ต้องเก็บไว้) ---
 // ==========================================
 
-// GET all products in store
 export const fetchAllProducts = async () => {
   const response = await fetch(`${BASE_URL}/products`);
   if (!response.ok) throw new Error('Failed to fetch products');
   return response.json();
 };
 
-// POST create new product to store
 export const createProduct = async (productData) => {
   const response = await fetch(`${BASE_URL}/products`, {
     method: 'POST',
@@ -28,7 +26,6 @@ export const createProduct = async (productData) => {
   return response.json();
 };
 
-// PUT update existing product
 export const updateProduct = async (productId, productData) => {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
     method: 'PUT',
@@ -39,7 +36,6 @@ export const updateProduct = async (productId, productData) => {
   return response.json();
 };
 
-// DELETE product from store
 export const deleteProduct = async (productId) => {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
     method: 'DELETE',
@@ -48,82 +44,71 @@ export const deleteProduct = async (productId) => {
   return response.json();
 };
 
-
 // ==========================================
-// --- Cart API (เวอร์ชันใหม่ล่าสุด) ---
+// --- Cart API (เวอร์ชันใหม่ล่าสุด ใช้ Cookie แทน) ---
 // ==========================================
 
 export const getCart = async () => {
-  const token = getAuthToken();
-  if (!token) throw new Error("No token found");
-
   const response = await fetch(`${API_CART_URL}/carts`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include" // ✅ ดึงผ่าน Cookie
   });
   if (!response.ok) throw new Error("Failed to fetch cart");
   return response.json();
 };
 
 export const addToCartAPI = async (productNumber, quantity) => {
-  const token = getAuthToken();
-
   const response = await fetch(`${API_CART_URL}/carts/add`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify({ productNumber, quantity })
+      "Content-Type": "application/json"
+    }, // ❌ เอา Authorization ออก
+    body: JSON.stringify({ productNumber, quantity }),
+    credentials: "include" // ✅ เติมบรรทัดนี้ เพื่อแนบ Cookie ทุกครั้ง
   });
   if (!response.ok) throw new Error("Failed to add item to cart");
   return response.json();
 };
 
 export const updateCartItem = async (productNumber, quantity) => {
-  const token = getAuthToken();
-
   const response = await fetch(`${API_CART_URL}/carts/update`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify({ productNumber, quantity })
+      "Content-Type": "application/json"
+    }, // ❌ เอา Authorization ออก
+    body: JSON.stringify({ productNumber, quantity }),
+    credentials: "include" // ✅ เติมบรรทัดนี้
   });
   if (!response.ok) throw new Error("Failed to update quantity");
   return response.json();
 };
 
 export const removeFromCart = async (productNumber) => {
-  const token = getAuthToken();
-
   const response = await fetch(`${API_CART_URL}/carts/remove/${productNumber}`, {
     method: "DELETE",
-    headers: { "Authorization": `Bearer ${token}` }
+    credentials: "include" // ✅ เติมบรรทัดนี้ (ไม่ต้องมี Header เพราะไม่ได้ส่ง Body)
   });
   if (!response.ok) throw new Error("Failed to remove item");
   return response.json();
 };
 
 // ==========================================
-// --- Orders API ---
+// --- Orders API (ปรับให้ใช้ Cookie ให้สอดคล้องกัน) ---
 // ==========================================
 
 export const fetchUserOrders = async (userNumber) => {
-  const token = getAuthToken();
   const response = await fetch(`${API_CART_URL}/orders`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": token ? `Bearer ${token}` : ""
-    }
+      "Content-Type": "application/json"
+    },
+    credentials: "include" // ✅ ใช้ Cookie แทน Authorization Header
   });
   if (!response.ok) throw new Error("Failed to fetch orders");
   const result = await response.json();
   const allOrders = result.data || [];
   return allOrders.filter(order => order.customer?.userNumber === userNumber);
-};
+};

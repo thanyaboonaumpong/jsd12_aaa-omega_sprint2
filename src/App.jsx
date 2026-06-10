@@ -40,6 +40,7 @@ import CartPage from './pages/CartPage';
 import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
 import CheckoutPage from './pages/CheckoutPage';
+import PaymentPage from './pages/PaymentPage';
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,13 @@ const router = createBrowserRouter([
             <FooterSection />
           </>
         ),
+      },
+      // ==========================================
+      // เพิ่มหน้า Payment ตรงนี้ครับ!
+      // ==========================================
+      {
+        path: "payment",
+        element: <PaymentPage />,
       },
       { path:"admin",
         element: (
