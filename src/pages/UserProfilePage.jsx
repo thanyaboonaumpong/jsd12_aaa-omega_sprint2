@@ -177,8 +177,25 @@ export default function UserProfilePage() {
           <div className="font-medium text-content-dark">ชื่อผู้สั่งชื่อ</div>
           <div className="text-content-soft">{[user?.firstName, user?.lastName].filter(Boolean).join(" ") || user?.fullName || "ไม่พบข้อมูล"}</div>
 
+          {user?.companyName && (
+            <>
+              <div className="font-medium text-content-dark">ชื่อบริษัท</div>
+              <div className="text-content-soft">{user.companyName}</div>
+            </>
+          )}
+
+          {user?.taxId && (
+            <>
+              <div className="font-medium text-content-dark">เลขประจำตัวผู้เสียภาษี</div>
+              <div className="text-content-soft">{user.taxId}</div>
+            </>
+          )}
+
           <div className="font-medium text-content-dark">เบอร์ติดต่อ</div>
           <div className="text-content-soft">{user?.phone || "ไม่พบข้อมูล"}</div>
+
+          <div className="font-medium text-content-dark">เบอร์ติดต่อ (สำรอง)</div>
+          <div className="text-content-soft">{user?.phoneBackup || "-"}</div>
 
           <div className="font-medium text-content-dark">อีเมล</div>
           <div className="text-content-soft">{user?.email || "ไม่พบข้อมูล"}</div>
@@ -214,7 +231,7 @@ export default function UserProfilePage() {
               {orders.length > 0 ? orders.map((order) => (
                 <tr key={order._id || order.orderNumber}>
                   <td>{new Date(order.createdAt).toLocaleDateString("th-TH")}</td>
-                  <td>{order.orderNumber}</td>
+                  <td>{order.orderNumber?.toUpperCase()}</td>
                   <td className="text-right">{order.totalPrice?.toLocaleString()}</td>
                   <td className="text-right">
                     <span className={`badge badge-pill ${order.status === 'cancelled' ? 'text-red-500 bg-red-100' : order.status === 'delivered' ? 'badge-success' : 'text-blue-500 bg-blue-100'}`}>
