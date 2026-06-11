@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
-//import axios from "axios";
 import AuthContext from "./AuthContext";
-import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 const AuthProvider = ({ children }) => {
-
-  const { isAuthenticated } = useAdminAuth();
-
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const stored = localStorage.getItem("authUser");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Initialize auth state from localStorage and verify token
   useEffect(() => {
-    if (!isAuthenticated) return;
     const checkAuth = async () => {
       try {
         const response = await fetch(`${API_URL}/profile`, {
@@ -24,7 +25,9 @@ const AuthProvider = ({ children }) => {
         
         if (response.ok) {
           const result = await response.json();
-          setUser(result.data || result.user);
+          const userData = result.data || result.user;
+          setUser(userData);
+          localStorage.setItem("authUser", JSON.stringify(userData));
         } else {
           setUser(null);
           localStorage.removeItem("authUser");
@@ -38,7 +41,7 @@ const AuthProvider = ({ children }) => {
     };
 
     checkAuth();
-  }, [isAuthenticated]);
+  }, []);
 
   // Login function
   const login = async (email, password) => {

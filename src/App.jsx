@@ -19,8 +19,8 @@ import AdminUserForm from "./pages/admin/UserForm";
 import AdminUserOrderDetail from "./pages/admin/UserOrderDetail";
 import AuthLayout from "./components/auth/AuthLayout";
 import AuthLogin from "./pages/auth/Login";
-import AuthRegister from "./pages/auth/Register";
-import AuthForgotPassword from "./pages/auth/ForgotPassword";
+// import AuthRegister from "./pages/auth/Register";
+// import AuthForgotPassword from "./pages/auth/ForgotPassword";
 
 import './assets/css/App.css';
 
@@ -156,8 +156,8 @@ const router = createBrowserRouter([
       { path:"auth", element:<AuthLayout />,
         children: [
           { path:"login", element:<AuthLogin />, },
-          { path:"register", element:<AuthRegister />, },
-          { path:"forgot-password", element:<AuthForgotPassword />, },
+          // { path:"register", element:<AuthRegister />, },
+          // { path:"forgot-password", element:<AuthForgotPassword />, },
         ],
       },
     ],

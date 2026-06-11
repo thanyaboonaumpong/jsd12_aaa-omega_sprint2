@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../../api/admin/user";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
 import Toast from "../../components/admin/common/Toast";
-import bannerImage from "../../assets/images/banner-register.jpg";
+import bannerImage from "../../assets/images/banner-register.webp";
 
 export default function AuthRegister() {
 
@@ -102,8 +102,8 @@ export default function AuthRegister() {
 
   return (
     <>
-      <section className="flex-1">
-        <img className="w-full max-sm:aspect-video sm:h-115 object-cover" src={bannerImage} />
+      <section className="max-sm:hidden flex-1">
+        <img className="w-full sm:h-full sm:min-h-115 object-cover" src={bannerImage} />
       </section>
       <section id="register" className="flex flex-1 flex-col flex-wrap justify-center gap-5">
         <div className="heading">
