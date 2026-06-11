@@ -40,8 +40,8 @@ export default function RegisterPage() {
     }
     if (!formData.password) {
       errors.password = "กรุณากรอกรหัสผ่าน";
-    } else if (formData.password.length < 6) {
-      errors.password = "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร";
+    } else if (formData.password.length < 8) {
+      errors.password = "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร";
     }
     if (!formData.confirmPassword) {
       errors.confirmPassword = "กรุณายืนยันรหัสผ่าน";
@@ -114,7 +114,7 @@ export default function RegisterPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-5 font-['Kanit']">
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-8">
+      <div className="w-full max-w-xl bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">ลงทะเบียน</h1>
         <p className="text-center text-gray-500 mb-8">สร้างบัญชี AAA Omega ใหม่</p>
 
@@ -126,7 +126,7 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* First Name and Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                 ชื่อจริง <span className="text-red-500">*</span>
@@ -163,82 +163,82 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              อีเมล <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
-                validationErrors.email ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="your@email.com"
-            />
-            {validationErrors.email && <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>}
+          {/* Password and Confirm Password */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                รหัสผ่าน <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.password ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="••••••••"
+              />
+              {validationErrors.password && <p className="text-red-500 text-xs mt-1">{validationErrors.password}</p>}
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                ยืนยันรหัสผ่าน <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.confirmPassword ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="••••••••"
+              />
+              {validationErrors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">{validationErrors.confirmPassword}</p>
+              )}
+            </div>
           </div>
 
-          {/* Password */}
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              รหัสผ่าน <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
-                validationErrors.password ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="••••••••"
-            />
-            {validationErrors.password && <p className="text-red-500 text-xs mt-1">{validationErrors.password}</p>}
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-              ยืนยันรหัสผ่าน <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
-                validationErrors.confirmPassword ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="••••••••"
-            />
-            {validationErrors.confirmPassword && (
-              <p className="text-red-500 text-xs mt-1">{validationErrors.confirmPassword}</p>
-            )}
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-              เบอร์โทรศัพท์ <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
-                validationErrors.phone ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="089-1234-5678"
-            />
-            {validationErrors.phone && <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>}
+          {/* Email and Phone */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                อีเมล <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.email ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="your@email.com"
+              />
+              {validationErrors.email && <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>}
+            </div>
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                เบอร์โทรศัพท์ <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.phone ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="089-1234-5678"
+              />
+              {validationErrors.phone && <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>}
+            </div>
           </div>
 
 
