@@ -3,12 +3,13 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 import { MessageContext } from "../../contexts/messageContext/MessageContext";
+import { DataNotFound } from "../../components/common/NotFound";
 import logoBrand from "../../assets/images/logo-aaa-omega.png";
 
 export default function AdminSidebar() {
 
   const { user, logout } = useAdminAuth();
-  const { isDev, adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose } = useContext(MessageContext);
+  const { adminNavMainActive, handleAdminNavMainToggle, handleAdminNavSidebarClose } = useContext(MessageContext);
   const navigate = useNavigate();
 
   const navSidebarClass = ({ isActive }) => `button button-soft justify-start w-full ${isActive ? "text-primary-hover bg-primary-light/60 hover:bg-primary-light/80" : "button-content hover:bg-white"}`;
@@ -23,7 +24,7 @@ export default function AdminSidebar() {
 
   return (
     <aside id="asideContainer" className={`fixed z-99 max-md:shadow-2xl/10 ${!adminNavMainActive && "-translate-x-full"} md:translate-x-0 transition-all duration-300`}>
-      <nav id="navContainer" className="flex flex-col w-54 h-dvh overflow-auto rounded-r-2xl bg-neutral-lighter">
+      <nav id="navContainer" className="flex flex-col w-50 h-dvh overflow-auto rounded-r-2xl bg-neutral-lighter">
         <ul id="navHeader" className="flex justify-between items-center gap-2 p-2">
           <li><NavLink className="nav-logo block px-3 py-1.5" to="/admin" onClick={handleAdminNavSidebarClose}>
             <img className="w-32 rounded-none" src={logoBrand} /></NavLink></li>
@@ -42,20 +43,17 @@ export default function AdminSidebar() {
           <li><NavLink className={navSidebarClass} to="/admin/services" onClick={handleAdminNavSidebarClose}>
             {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>build</span> บริการซ่อมบำรุง</>)}
           </NavLink></li>
-          {isDev
-            ? <li><NavLink className={navSidebarClass} to="/admin/users" onClick={handleAdminNavSidebarClose}>
-                {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>person_outline</span> รายชื่อบัญชี</>)}
-              </NavLink></li>
-            : <li><NavLink className="is-disabled button button-ghost button-content justify-start w-full hover:text-primary-hover" to="#soon"><span className="icon-material">person_outline</span> รายชื่อบัญชี
-            <span className="badge badge-content absolute top-1/2 right-1.5 -translate-y-1/2 justify-center min-h-auto text-[10px] leading-2 tracking-widest text-right p-1 bg-content-soft">SOON</span></NavLink></li>
-          }
+          <li><NavLink className={navSidebarClass} to="/admin/users" onClick={handleAdminNavSidebarClose}>
+            {({ isActive }) => (<><span className={`icon-material ${isActive ? "icon-fill" : ""}`}>person_outline</span> รายชื่อบัญชี</>)}
+          </NavLink></li>
         </ul>
         <ul id="navFooter" className="flex flex-col gap-2 p-2 border-t">
           <li><NavLink className="group button button-ghost button-content justify-start items-start w-full hover:text-white py-2 border hover:border-primary-soft bg-white hover:bg-primary-soft" to="#soon"><span className="icon-material">account_circle</span>
             <div className="flex flex-col overflow-hidden">
-              <span className="overflow-hidden whitespace-nowrap text-ellipsis leading-6">{user?.firstName} {user?.lastName}</span>
-              <span className="overflow-hidden whitespace-nowrap text-ellipsis text-xs text-content-soft group-hover:text-content-light transition-all">{user?.role}</span>
-            </div></NavLink></li>
+              <span className="overflow-hidden whitespace-nowrap text-ellipsis leading-6">{`${user?.firstName} ${user?.lastName}`.trim() || <DataNotFound />}</span>
+              <span className="overflow-hidden whitespace-nowrap text-ellipsis text-xs capitalize text-content-soft group-hover:text-content-light transition-all">{user?.role || ""}</span>
+            </div>
+          </NavLink></li>
           <li><button className="button button-ghost button-content justify-start w-full hover:text-error-hover" onClick={handleLogout}><span className="icon-material">logout</span> ออกจากระบบ</button></li>
         </ul>
       </nav>

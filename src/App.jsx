@@ -22,9 +22,6 @@ import AuthLogin from "./pages/auth/Login";
 import AuthRegister from "./pages/auth/Register";
 import AuthForgotPassword from "./pages/auth/ForgotPassword";
 
-import { AdminAuthProvider } from "./contexts/authAdminContext/authAdminProvider";
-import { MessageProvider } from "./contexts/messageContext/MessageProvider";
-
 import './assets/css/App.css';
 
 // นำเข้าหน้าฝั่ง User
@@ -135,13 +132,9 @@ const router = createBrowserRouter([
       },
       { path:"admin",
         element: (
-          <AdminAuthProvider>
-            <MessageProvider>
-              <AdminProtectedRoute>
-                <AdminLayout />
-              </AdminProtectedRoute>
-            </MessageProvider>
-          </AdminAuthProvider>
+          <AdminProtectedRoute>
+            <AdminLayout />
+          </AdminProtectedRoute>
         ),
         children: [
           { index:true, element:<AdminHome /> },
@@ -160,14 +153,7 @@ const router = createBrowserRouter([
           { path:"users/:userNumber/:orderNumber", element:<AdminUserOrderDetail /> },
         ],
       },
-      { path:"auth", 
-        element: (
-          <AdminAuthProvider>
-            <MessageProvider>
-              <AuthLayout />
-            </MessageProvider>
-          </AdminAuthProvider>
-        ),
+      { path:"auth", element:<AuthLayout />,
         children: [
           { path:"login", element:<AuthLogin />, },
           { path:"register", element:<AuthRegister />, },

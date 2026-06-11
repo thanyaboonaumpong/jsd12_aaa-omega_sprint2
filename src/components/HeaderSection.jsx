@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/images/logo-aaa-omega.png";
 import { useCart } from "../contexts/CartContext";
 import AuthContext from "../contexts/authContext/AuthContext";
 
@@ -32,7 +32,7 @@ function Header() {
         <header className="bg-neutral-light">
             <nav className="flex items-center justify-between px-8 py-4 container mx-auto">
                 <Link to="/">
-                    <img src={logo} alt="logo" className="h-10 w-10 md:h-16 md:w-16" />
+                    <img src={logo} alt="logo" className="h-10 md:h-14 w-auto rounded-none" />
                 </Link>
 
                 {/* Desktop Menu */}

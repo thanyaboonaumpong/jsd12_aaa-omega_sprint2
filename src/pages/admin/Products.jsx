@@ -16,7 +16,7 @@ export default function AdminProducts() {
 
   return (
     <>
-      {products
+      {products?.length > 0
         ? <>
             <section id="stat">
               <StatCard title="สินค้าใกล้หมด" value="12" subtext="รายการ" />
@@ -48,21 +48,21 @@ export default function AdminProducts() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => (
-                      <tr key={product._id}>
+                    {products?.map((product) => (
+                      <tr key={product?._id}>
                         <td>
-                          <button className="product-stock__image" onClick={() => handleProductItem(product.productNumber)}>
-                            <img className="object-cover size-15 min-w-15 min-h-15" src={product.image?.url || ImageNotFound} />
+                          <button className="product-stock__image" onClick={() => handleProductItem(product?.productNumber)}>
+                            <img className="object-cover size-15 min-w-15 min-h-15" src={product?.image?.url || ImageNotFound} />
                           </button></td>
                         <td>
-                          <button className="product-stock__name" onClick={() => handleProductItem(product.productNumber)}>{product.name || <DataNotFound />}</button>
+                          <button className="product-stock__name" onClick={() => handleProductItem(product?.productNumber)}>{product?.name || <DataNotFound />}</button>
                           <div className="product-stock__meta">
-                            <span className="product-stock__sku">{product.sku.toUpperCase() || <DataNotFound />}</span>
-                            {product.tags?.length > 0 &&
+                            <span className="product-stock__sku">{product?.sku?.toUpperCase() || <DataNotFound />}</span>
+                            {product?.tags?.length > 0 &&
                               <>
                                 <span className="product-stock__separator">•</span>
                                 <ul className="product-stock__tag">
-                                  {product.tags.map((tag, index) => (
+                                  {product?.tags?.map((tag, index) => (
                                     <li key={index} className="badge badge-soft badge-content">{tag}</li>
                                   ))}
                                 </ul>
@@ -70,10 +70,10 @@ export default function AdminProducts() {
                             }
                           </div>
                         </td>
-                        <td className={`text-right ${product.stock <= product.stockMin ? "text-warning-base" : ""}`}>{product.stock || <DataNotFound />}</td>
-                        <td className="text-right">{product.price > 0 ? FormatPrice(product.price) : <DataNotFound />}</td>
-                        <td className="capitalize">{product.category || <DataNotFound />}</td>
-                        <td className="text-right">{product.createdAt ? FormatDate(product.createdAt) : <DataNotFound />}</td>
+                        <td className={`text-right ${product?.stock <= product?.stockMin ? "text-warning-base" : ""}`}>{product.stock || <DataNotFound />}</td>
+                        <td className="text-right">{product?.price >= 0 ? FormatPrice(product.price) : <DataNotFound />}</td>
+                        <td className="capitalize">{product?.category || <DataNotFound />}</td>
+                        <td className="text-right">{product?.createdAt ? FormatDate(product?.createdAt) : <DataNotFound />}</td>
                       </tr>
                     ))}
                   </tbody>

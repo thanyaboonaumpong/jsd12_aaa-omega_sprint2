@@ -81,8 +81,7 @@ export default function ServicesPage() {
         <div className="relative w-full h-64 md:h-88 overflow-hidden">
           <img src={bannerImg} alt="บริการ" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary-darker/60 flex flex-col items-center justify-center text-center px-4">
-            <p className="text-primary-light text-base md:text-lg mb-2">AAA Omega Solar</p>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-3">บริการของเรา</h1>
+<h1 className="text-3xl md:text-5xl font-bold text-white mb-3">บริการของเรา</h1>
             <p className="text-neutral-light text-base md:text-lg max-w-xl">
               ครบครันทุกบริการด้านพลังงานแสงอาทิตย์ โดยทีมวิศวกรและช่างผู้เชี่ยวชาญ
             </p>
@@ -110,16 +109,15 @@ export default function ServicesPage() {
             <p className="text-content-soft mt-2">เลือกบริการที่ตรงกับความต้องการของคุณ</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {serviceTypes.map((service) => (
               <div
                 key={service.id}
-                className={`bg-white rounded-2xl border-2 p-6 flex flex-col gap-4 cursor-pointer transition-all hover:shadow-lg ${
+                className={`bg-white rounded-2xl border-2 p-6 flex flex-col gap-4 transition-all hover:shadow-lg ${
                   activeService === service.id
                     ? 'border-primary-base shadow-lg'
                     : 'border-neutral-disable hover:border-primary-soft'
                 }`}
-                onClick={() => setActiveService(activeService === service.id ? null : service.id)}
               >
                 <div className="flex items-start justify-between">
                   <span className="text-4xl">{service.icon}</span>
@@ -148,7 +146,10 @@ export default function ServicesPage() {
                   </ul>
                 )}
 
-                <button className="mt-auto text-sm text-primary-base hover:text-primary-hover font-medium text-left">
+                <button
+                  className="mt-auto text-sm text-primary-base hover:text-primary-hover font-medium text-left cursor-pointer"
+                  onClick={() => setActiveService(prev => prev === service.id ? null : service.id)}
+                >
                   {activeService === service.id ? 'ซ่อนรายละเอียด ▲' : 'ดูรายละเอียด ▼'}
                 </button>
               </div>

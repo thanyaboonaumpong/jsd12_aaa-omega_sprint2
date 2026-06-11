@@ -7,22 +7,22 @@ import bannerImg from '../assets/images/p-banner.jpg';
 
 const contactInfo = [
   {
-    icon: '📍',
+    icon: 'location_on',
     label: 'ที่อยู่',
     lines: ['89 ซอยลาดพร้าว 101', 'แขวงคลองจั่น เขตบางกะปิ', 'กรุงเทพมหานคร 10240'],
   },
   {
-    icon: '📞',
+    icon: 'call',
     label: 'โทรศัพท์',
     lines: ['02-888-9900', '089-555-1122'],
   },
   {
-    icon: '✉️',
+    icon: 'mail',
     label: 'อีเมล',
     lines: ['contact@aaa-omega.co.th', 'support@aaa-omega.co.th'],
   },
   {
-    icon: '🕐',
+    icon: 'schedule',
     label: 'เวลาทำการ',
     lines: ['จันทร์ – ศุกร์: 08:00 – 17:00 น.', 'เสาร์: 08:00 – 12:00 น.', 'อาทิตย์: ปิดทำการ'],
   },
@@ -98,8 +98,7 @@ export default function ContactPage() {
         <div className="relative w-full h-52 md:h-72 overflow-hidden">
           <img src={bannerImg} alt="ติดต่อเรา" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary-darker/65 flex flex-col items-center justify-center text-center px-4">
-            <p className="text-primary-light text-base md:text-lg mb-2">AAA Omega Solar</p>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">ติดต่อเรา</h1>
+<h1 className="text-3xl md:text-5xl font-bold text-white mb-2">ติดต่อเรา</h1>
             <p className="text-neutral-light text-sm md:text-base">
               พร้อมให้คำปรึกษาด้านพลังงานแสงอาทิตย์ ฟรี ไม่มีค่าใช้จ่าย
             </p>
@@ -116,7 +115,7 @@ export default function ContactPage() {
                 <div className="space-y-5">
                   {contactInfo.map((info) => (
                     <div key={info.label} className="flex items-start gap-3">
-                      <span className="text-2xl shrink-0 mt-0.5">{info.icon}</span>
+                      <span className="material-symbols-outlined shrink-0 mt-0.5 text-primary-base">{info.icon}</span>
                       <div>
                         <p className="text-xs text-content-soft font-medium uppercase tracking-wide mb-1">
                           {info.label}
@@ -144,16 +143,6 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              {/* Map placeholder */}
-              <div className="bg-white rounded-2xl border border-neutral-disable overflow-hidden">
-                <div className="w-full h-44 bg-neutral-light flex items-center justify-center text-content-soft text-sm">
-                  <div className="text-center">
-                    <p className="text-3xl mb-2">🗺️</p>
-                    <p>Google Maps</p>
-                    <p className="text-xs mt-1">แผนที่บริษัท</p>
-                  </div>
-                </div>
-              </div>
             </aside>
 
             {/* Contact Form */}
