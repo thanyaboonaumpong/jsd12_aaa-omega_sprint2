@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState/*, useEffect*/ } from 'react';
 import ShippingOption from '../components/ShippingOption';
 import PaymentOption from '../components/PaymentOption'; 
 import ModalConfirm from '../components/ModalConfirm'; 
 import { useCart } from '../contexts/CartContext'; 
-import { getMyProfile } from '../utils/api'; 
+//import { getMyProfile } from '../utils/api'; 
 import { createOrder } from '../api/admin/order';
+import AuthContext from '../contexts/authContext/AuthContext';
 
 const PaymentPage = () => {
+  const { user, loading } = useContext(AuthContext);
+
   // เพิ่ม clearCart เข้ามา เพื่อเอาไว้ล้างตะกร้าตอนสั่งซื้อเสร็จ
   const { cartItems, clearCart } = useCart(); 
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  //const [userData, setUserData] = useState(user || null);
+  //const [loading, setLoading] = useState(true);
 
   const [selectedShipping, setSelectedShipping] = useState('standard');
   const [selectedPayment, setSelectedPayment] = useState('bank_transfer');
@@ -19,9 +22,9 @@ const PaymentPage = () => {
   
   // เพิ่ม State สำหรับเก็บเลขที่ออเดอร์ที่ได้จาก Backend
   const [createdOrderNumber, setCreatedOrderNumber] = useState("");
-
+  //console.log(user, setUserData, setLoading)
   // ดึงข้อมูลลูกค้าจาก Backend
-  useEffect(() => {
+   /*useEffect(() => {
     const fetchUser = async () => {
       try {
         const user = await getMyProfile();
@@ -33,7 +36,7 @@ const PaymentPage = () => {
       }
     };
     fetchUser();
-  }, []);
+  }, [isAuthenticated]);*/
 
   const actualCartItems = cartItems || [];
 
@@ -41,7 +44,9 @@ const PaymentPage = () => {
   const totalPrice = actualCartItems.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 0)), 0);
 
   const handlePlaceOrder = async () => {
-    setIsModalOpen(true);
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 1500);
     setPaymentStatus('loading');
 
     // สร้าง Payload ให้ตรงกับ Schema ของ Backend
@@ -49,21 +54,21 @@ const PaymentPage = () => {
       totalPrice: totalPrice,
       paymentMethod: selectedPayment, 
       customer: {
-        userNumber: userData?.userNumber,
-        firstName: userData?.firstName,
-        lastName: userData?.lastName,
-        company: userData?.company || "-",
-        taxId: userData?.taxId || "-",
-        phone: userData?.phone,
-        phone2: userData?.phone2 || "-",
-        email: userData?.email,
+        userNumber: user?.userNumber,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        company: user?.company || "-",
+        taxId: user?.taxId || "-",
+        phone: user?.phone,
+        phone2: user?.phone2 || "-",
+        email: user?.email,
         shippingAddress: {
-          label: userData?.shippingAddress?.label || "บ้าน",
-          addressLine: userData?.shippingAddress?.addressLine || "-",
-          subdistrict: userData?.shippingAddress?.subdistrict || "-",
-          district: userData?.shippingAddress?.district || "-",
-          province: userData?.shippingAddress?.province || "-",
-          postcode: userData?.shippingAddress?.postcode || "-"
+          label: user?.shippingAddress?.label || "บ้าน",
+          addressLine: user?.shippingAddress?.addressLine || "-",
+          subdistrict: user?.shippingAddress?.subdistrict || "-",
+          district: user?.shippingAddress?.district || "-",
+          province: user?.shippingAddress?.province || "-",
+          postcode: user?.shippingAddress?.postcode || "-"
         }
       },
       items: actualCartItems.map(item => ({
@@ -116,14 +121,14 @@ const PaymentPage = () => {
               <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">ที่อยู่ในการจัดส่ง</h2>
               {loading ? (
                 <p className="text-gray-500">กำลังโหลดข้อมูล...</p>
-              ) : userData ? (
+              ) : user ? (
                 <div className="text-gray-600">
                   <p className="font-semibold text-gray-800">
-                    {userData.firstName} {userData.lastName} 
-                    <span className="text-sm font-normal text-gray-500 ml-2">({userData.phone})</span>
+                    {user?.firstName} {user?.lastName} 
+                    <span className="text-sm font-normal text-gray-500 ml-2">({user.phone})</span>
                   </p>
                   <p className="mt-1">
-                    {userData.address?.addressLine || ""} {userData.address?.district || ""} {userData.address?.province || ""}
+                    {user?.address?.addressLine || ""} {user?.address?.district || ""} {user?.address?.province || ""}
                   </p>
                 </div>
               ) : (
