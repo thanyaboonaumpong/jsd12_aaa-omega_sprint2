@@ -72,9 +72,18 @@ export default function UserProfilePage() {
     };
   };
 
-  const [formData, setFormData] = useState(getInitialFormData(null));
+  const [formData, setFormData] = useState(() => getInitialFormData(user));
+  const [prevUser, setPrevUser] = useState(user);
   const [savedMessage, setSavedMessage] = useState("");
   const [orders, setOrders] = useState([]);
+
+  // อัปเดต State ทันทีในจังหวะ Render (Derived State) แทนการใช้ useEffect
+  if (user !== prevUser) {
+    setPrevUser(user);
+    if (user) {
+      setFormData(getInitialFormData(user));
+    }
+  }
 
   useEffect(() => {
     if (user?.userNumber) {
@@ -83,12 +92,6 @@ export default function UserProfilePage() {
         .catch(err => console.error("Failed to fetch orders:", err));
     }
   }, [user?.userNumber]);
-
-  useEffect(() => {
-    if (user) {
-      setFormData(getInitialFormData(user));
-    }
-  }, [user]);
 
   function handleChange(event) {
     const { name, value } = event.target;
