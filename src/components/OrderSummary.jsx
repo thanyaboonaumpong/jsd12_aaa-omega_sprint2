@@ -17,15 +17,16 @@ export default function OrderSummary({ items, onCheckout }) {
         </div>
         <div className="flex justify-between text-content-base">
           <span>ค่าจัดส่ง</span>
-          <span className={shipping === 0 && subtotal > 0 ? 'text-success-base font-medium' : ''}>
+          {/* <span className={shipping === 0 && subtotal > 0 ? 'text-success-base font-medium' : ''}>
             {subtotal === 0 ? '-' : shipping === 0 ? 'ฟรี' : `${FormatPrice(shipping)} บาท`}
-          </span>
+          </span> */}
+          <span className="text-success-base font-medium">ฟรี</span>
         </div>
-        {subtotal > 0 && shipping > 0 && (
+        {/* {subtotal > 0 && shipping > 0 && (
           <p className="text-xs text-content-soft">
             สั่งซื้อครบ {FormatPrice(5000)} บาท รับส่งฟรี
           </p>
-        )}
+        )} */}
         <hr className="my-3 border-neutral-disable" />
         <div className="flex justify-between text-base font-bold text-content-dark">
           <span>ยอดรวมทั้งหมด</span>
