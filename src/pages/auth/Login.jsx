@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { AdminAuthContext } from "../../contexts/authAdminContext/authAdminContext";
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 import bannerImage from "../../assets/images/banner-login.jpg";
 
 const loginInitial = {
@@ -11,7 +11,7 @@ const loginInitial = {
 
 export default function AuthLogin() {
 
-  const { login } = useContext(AdminAuthContext);
+  const { login } = useAdminAuth();
 
   const navigate = useNavigate();
 

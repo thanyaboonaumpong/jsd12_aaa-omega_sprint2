@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
+import { useAdminAuth } from "../../contexts/authAdminContext/useAdminAuth";
 import { MessageContext } from "./MessageContext";
 import { fetchUsers, registerUser, updateUser, deleteUser } from "../../api/admin/user";
 import { fetchProducts, createProduct, updateProduct, deleteProduct } from "../../api/admin/product";
@@ -10,6 +11,8 @@ export const MessageProvider = ({children}) => {
 
   const isDev = import.meta.env.VITE_IS_DEV === "true" || false;
   const itemPerPage = Number(import.meta.env.VITE_ITEM_PER_PAGE) || 10;
+
+  const { isAuthenticated } = useAdminAuth();
 
   // Dashboard - Nav Main
   const [adminNavMainActive, setAdminNavMainActive] = useState(false);
@@ -38,24 +41,28 @@ export const MessageProvider = ({children}) => {
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getUsers = async () => setUsers(await fetchUsers() || []);
     getUsers();
-  }, []);
+  }, [isAuthenticated]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getProducts = async () => setProducts(await fetchProducts() || []);
     getProducts();
-  }, []);
+  }, [isAuthenticated]);
   const [orders, setOrders] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getOrders = async () => setOrders(await fetchOrders() || []);
     getOrders();
-  }, []);
+  }, [isAuthenticated]);
   const [services, setServices] = useState([]);
   useEffect(() => {
+    if (!isAuthenticated) return;
     const getServices = async () => setServices(await fetchServices() || []);
     getServices();
-  }, []);
+  }, [isAuthenticated]);
 
   const handleOrderStatusChange = async (id, status) => {
     try {
