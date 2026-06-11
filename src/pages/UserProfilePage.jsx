@@ -42,32 +42,33 @@ export default function UserProfilePage() {
     };
 
     return {
-      fullName: usr ? ([usr.firstName, usr.lastName].filter(Boolean).join(" ") || usr.fullName || "") : "",
+      firstName: usr?.firstName || "",
+      lastName: usr?.lastName || "",
       phone: usr?.phone || "",
-      phoneBackup: usr?.phoneBackup || "",
+      phoneBackup: usr?.phone2 || usr?.phoneBackup || "",
       email: usr?.email || "",
-      companyName: usr?.companyName || "",
+      companyName: usr?.company || usr?.companyName || "",
       taxId: usr?.taxId || "",
       
-      address: getAddrField(usr?.address, 'address', typeof usr?.address === 'string' ? usr.address : ""),
-      subDistrict: getAddrField(usr?.address, 'subDistrict', usr?.subDistrict),
+      address: getAddrField(usr?.address, 'addressLine', typeof usr?.address === 'string' ? usr.address : ""),
+      subDistrict: getAddrField(usr?.address, 'subdistrict', usr?.subDistrict),
       district: getAddrField(usr?.address, 'district', usr?.district),
       province: getAddrField(usr?.address, 'province', usr?.province),
-      postalCode: getAddrField(usr?.address, 'postalCode', usr?.postalCode),
+      postalCode: getAddrField(usr?.address, 'postcode', usr?.postalCode),
       addressLabel: getAddrField(usr?.address, 'label', ""),
 
-      shippingAddress: getAddrField(usr?.shippingAddress, 'address', ""),
-      shippingSubDistrict: getAddrField(usr?.shippingAddress, 'subDistrict', ""),
+      shippingAddress: getAddrField(usr?.shippingAddress, 'addressLine', ""),
+      shippingSubDistrict: getAddrField(usr?.shippingAddress, 'subdistrict', ""),
       shippingDistrict: getAddrField(usr?.shippingAddress, 'district', ""),
       shippingProvince: getAddrField(usr?.shippingAddress, 'province', ""),
-      shippingPostalCode: getAddrField(usr?.shippingAddress, 'postalCode', ""),
+      shippingPostalCode: getAddrField(usr?.shippingAddress, 'postcode', ""),
       shippingLabel: getAddrField(usr?.shippingAddress, 'label', ""),
 
-      serviceAddress: getAddrField(usr?.serviceAddress, 'address', ""),
-      serviceSubDistrict: getAddrField(usr?.serviceAddress, 'subDistrict', ""),
+      serviceAddress: getAddrField(usr?.serviceAddress, 'addressLine', ""),
+      serviceSubDistrict: getAddrField(usr?.serviceAddress, 'subdistrict', ""),
       serviceDistrict: getAddrField(usr?.serviceAddress, 'district', ""),
       serviceProvince: getAddrField(usr?.serviceAddress, 'province', ""),
-      servicePostalCode: getAddrField(usr?.serviceAddress, 'postalCode', ""),
+      servicePostalCode: getAddrField(usr?.serviceAddress, 'postcode', ""),
       serviceLabel: getAddrField(usr?.serviceAddress, 'label', ""),
     };
   };
@@ -100,36 +101,34 @@ export default function UserProfilePage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const nameParts = (formData.fullName || "").trim().split(" ");
-    const firstName = nameParts[0] || "";
-    const lastName = nameParts.slice(1).join(" ") || "";
-    
     const updatedData = {
       ...formData,
-      firstName,
-      lastName,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone2: formData.phoneBackup,
+      company: formData.companyName,
       address: {
-        address: formData.address,
-        subDistrict: formData.subDistrict,
+        addressLine: formData.address,
+        subdistrict: formData.subDistrict,
         district: formData.district,
         province: formData.province,
-        postalCode: formData.postalCode,
+        postcode: formData.postalCode,
         label: formData.addressLabel,
       },
       shippingAddress: {
-        address: formData.shippingAddress,
-        subDistrict: formData.shippingSubDistrict,
+        addressLine: formData.shippingAddress,
+        subdistrict: formData.shippingSubDistrict,
         district: formData.shippingDistrict,
         province: formData.shippingProvince,
-        postalCode: formData.shippingPostalCode,
+        postcode: formData.shippingPostalCode,
         label: formData.shippingLabel,
       },
       serviceAddress: {
-        address: formData.serviceAddress,
-        subDistrict: formData.serviceSubDistrict,
+        addressLine: formData.serviceAddress,
+        subdistrict: formData.serviceSubDistrict,
         district: formData.serviceDistrict,
         province: formData.serviceProvince,
-        postalCode: formData.servicePostalCode,
+        postcode: formData.servicePostalCode,
         label: formData.serviceLabel,
       }
     };
@@ -180,10 +179,10 @@ export default function UserProfilePage() {
           <div className="font-medium text-content-dark">ชื่อผู้สั่งชื่อ</div>
           <div className="text-content-soft">{[user?.firstName, user?.lastName].filter(Boolean).join(" ") || user?.fullName || "ไม่พบข้อมูล"}</div>
 
-          {user?.companyName && (
+          {(user?.company || user?.companyName) && (
             <>
               <div className="font-medium text-content-dark">ชื่อบริษัท</div>
-              <div className="text-content-soft">{user.companyName}</div>
+              <div className="text-content-soft">{user.company || user.companyName}</div>
             </>
           )}
 
@@ -198,7 +197,7 @@ export default function UserProfilePage() {
           <div className="text-content-soft">{user?.phone || "ไม่พบข้อมูล"}</div>
 
           <div className="font-medium text-content-dark">เบอร์ติดต่อ (สำรอง)</div>
-          <div className="text-content-soft">{user?.phoneBackup || "-"}</div>
+          <div className="text-content-soft">{user?.phone2 || user?.phoneBackup || "-"}</div>
 
           <div className="font-medium text-content-dark">อีเมล</div>
           <div className="text-content-soft">{user?.email || "ไม่พบข้อมูล"}</div>
@@ -268,9 +267,15 @@ export default function UserProfilePage() {
         {savedMessage && <p className="mb-4 text-sm text-primary-base">{savedMessage}</p>}
 
         <form id="profileForm" className="space-y-6" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="fullName">ชื่อบุคคล / บริษัท</label>
-            <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} />
+          <div className="input-row">
+            <div className="input-group">
+              <label htmlFor="firstName">ชื่อจริง</label>
+              <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} />
+            </div>
+            <div className="input-group">
+              <label htmlFor="lastName">นามสกุล</label>
+              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
+            </div>
           </div>
 
           <div className="input-row">
