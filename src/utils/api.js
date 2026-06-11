@@ -112,3 +112,32 @@ export const fetchUserOrders = async (userNumber) => {
   const allOrders = result.data || [];
   return allOrders.filter(order => order.customer?.userNumber === userNumber);
 };
+
+export const getMyProfile = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    
+    const response = await fetch(`${BASE_URL}/users/profile`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // แปลงผลลัพธ์เป็น JSON
+    const resultData = await response.json(); 
+
+    // เนื่องจากฝั่ง Checkout คุณเรียกใช้ `user.data` 
+    // เราจึงต้องจำลองการห่อ Object ให้มี key ชื่อ data กลับไป
+    return { data: resultData }; 
+
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    throw error;
+  }
+};

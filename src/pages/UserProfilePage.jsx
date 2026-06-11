@@ -157,7 +157,7 @@ export default function UserProfilePage() {
   }
 
   return (
-    <main className="max-w-[1000px] mx-auto p-5 font-['Kanit'] bg-neutral-50 text-content-dark">
+    <main className="max-w-250 mx-auto p-5 font-['Kanit'] bg-neutral-50 text-content-dark">
       <section className="mb-10 pb-10 border-b border-neutral-soft">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
           <h2 className="text-2xl font-semibold text-primary-base">รายละเอียดบัญชี</h2>
