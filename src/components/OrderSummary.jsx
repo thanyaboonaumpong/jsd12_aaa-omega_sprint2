@@ -2,7 +2,8 @@ import { FormatPrice } from '../utils/FormatPrice';
 
 export default function OrderSummary({ items, onCheckout }) {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 0 && subtotal < 5000 ? 200 : 0;
+  // const shipping = subtotal > 0 && subtotal < 5000 ? 200 : 0;
+  const shipping = 0; // ปรับเป็น 0 เพื่อแสดง "ฟรี" ตลอดเวลา
   const total = subtotal + shipping;
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
