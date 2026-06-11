@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { getCart, addToCartAPI, updateCartItem, removeFromCart as removeCartAPI } from '../utils/api';
+import { getCart, addToCartAPI, updateCartItem, removeFromCart as removeCartAPI, clearCartAPI } from '../utils/api';
 
 const CartContext = createContext();
 
@@ -15,39 +15,42 @@ export const CartProvider = ({ children }) => {
   // หุ้มด้วย useCallback ตามคำแนะนำของ ESLint
   const loadCartData = useCallback(async () => {
     try {
-    setIsLoading(true);
-    
-    // ไม่ต้องเช็ค localStorage แล้ว เพราะเราใช้ Cookie
-    const data = await getCart(); 
-    
-    // ข้อมูลจาก Backend อาจมาเป็น { success: true, data: { ... } } 
-    // หรืออาจเป็น { items: [...] } 
-    // ต้องเช็คให้ดีว่าตะกร้าจริงอยู่ที่ไหน
-    console.log("ข้อมูลจาก getCart:", data); 
+      setIsLoading(true);
+      
+      // ไม่ต้องเช็ค localStorage แล้ว เพราะเราใช้ Cookie
+      const data = await getCart();
 
-    setCartItems(data.items || data.data?.items || []);
-    setCartTotal(data.total || data.data?.total || 0);
-    
-  } catch (error) {
-    console.error("ดึงข้อมูลตะกร้าล้มเหลว (หรือยังไม่ได้ล็อคอิน):", error);
-    setCartItems([]);
-    setCartTotal(0);
-  } finally {
-    setIsLoading(false);
-  }
-}, []);
+      setCartItems(data.items || data.data?.items || []);
+      setCartTotal(data.total || data.data?.total || 0);
+      
+    } catch (error) {
+      console.error("ดึงข้อมูลตะกร้าล้มเหลว (หรือยังไม่ได้ล็อคอิน):", error);
+      setCartItems([]);
+      setCartTotal(0);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadCartData();
-  }, [loadCartData]); // ใส่ loadCartData เข้าไปเป็น dependency ของ useEffect
+  }, [loadCartData]); 
 
   const addToCart = async (productNumber, quantity = 1) => {
     try {
+      // 💡 คำแนะนำเพิ่มเติม: 
+      // เนื่องจากตอนนี้เราเปลี่ยนมาใช้ Cookie แล้ว แนะนำให้ "ปิด" การเช็ค localStorage ตรงนี้ทิ้งไปครับ 
+      // เพราะถ้า Token ย้ายไปอยู่แต่ใน Cookie (HttpOnly) บรรทัดนี้จะหา Token ไม่เจอ และจะเตะผู้ใช้ออกเสมอ
+      // ปล่อยให้ API ยิงไปที่ Backend เลย ถ้าไม่ได้ล็อกอิน Backend จะตอกกลับมาเป็น Error เองครับ
+      
+      /* ❌ โค้ดเดิมที่ควรปิดหรือลบทิ้ง:
       const token = localStorage.getItem('authToken') || localStorage.getItem('token') || localStorage.getItem('authUser');
       if (!token) {
         throw new Error("กรุณาล็อกอินก่อนทำรายการ");
       }
+      */
+
       await addToCartAPI(productNumber, quantity);
       await loadCartData(); 
     } catch (error) {
@@ -81,9 +84,20 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const clearCart = () => {
-    setCartItems([]);
-    setCartTotal(0);
+  // ✅ จุดที่ 2: แปลงเป็น Async และเรียกใช้ clearCartAPI
+  const clearCart = async () => {
+    try {
+      // 1. ส่งคำสั่งไปล้างสินค้าในตะกร้าที่ Backend
+      await clearCartAPI();
+      
+      // 2. เคลียร์ State บนหน้าจอให้กลายเป็นตะกร้าว่างทันที
+      setCartItems([]);
+      setCartTotal(0);
+      
+    } catch (error) {
+      console.error("ล้างตะกร้าล้มเหลว:", error);
+      // ถ้าอยากให้โหลดข้อมูลตะกร้ากลับมาใหม่เผื่อเกิดข้อผิดพลาด สามารถเรียกใช้ loadCartData() ตรงนี้ได้
+    }
   };
 
   return (

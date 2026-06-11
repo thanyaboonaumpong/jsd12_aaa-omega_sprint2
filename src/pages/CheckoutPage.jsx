@@ -80,8 +80,6 @@ const PaymentPage = () => {
       }))
     };
 
-    console.log("ส่งข้อมูลสั่งซื้อไป Backend:", orderData);
-
     try {
       const result = await createOrder(orderData); 
       
