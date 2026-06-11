@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { getCart, addToCartAPI, updateCartItem, removeFromCart as removeCartAPI, clearCartAPI } from '../utils/api';
+import AuthContext from '../contexts/authContext/AuthContext';
 
 const CartContext = createContext();
 
@@ -8,12 +9,16 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
+
+  const { isAuthenticated } = useContext(AuthContext);
+
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   // หุ้มด้วย useCallback ตามคำแนะนำของ ESLint
   const loadCartData = useCallback(async () => {
+    if (!isAuthenticated) return;
     try {
       setIsLoading(true);
       
@@ -35,7 +40,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadCartData();
-  }, [loadCartData]); 
+  }, [loadCartData, isAuthenticated]); 
 
   const addToCart = async (productNumber, quantity = 1) => {
     try {
