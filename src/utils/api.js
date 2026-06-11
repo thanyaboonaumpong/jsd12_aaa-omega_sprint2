@@ -95,6 +95,16 @@ export const removeFromCart = async (productNumber) => {
   return response.json();
 };
 
+// 👇👇👇 เพิ่มตัวยิง API สำหรับล้างสินค้าในตะกร้า (Clear Cart Items) 👇👇👇
+export const clearCartAPI = async () => {
+  const response = await fetch(`${API_CART_URL}/carts/clear`, {
+    method: "DELETE", // ใช้ DELETE เป็นมาตรฐานสำหรับการล้างข้อมูล
+    credentials: "include" // ✅ ส่ง Cookie ไปด้วยเพื่อให้ Backend รู้ว่าเป็นตะกร้าของใคร
+  });
+  if (!response.ok) throw new Error("Failed to clear cart items");
+  return response.json();
+};
+
 // ==========================================
 // --- Orders API (ปรับให้ใช้ Cookie ให้สอดคล้องกัน) ---
 // ==========================================
