@@ -4,21 +4,17 @@ import AuthContext from "../contexts/authContext/AuthContext";
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
     phone: "",
-    address: "",
-    subDistrict: "",
-    district: "",
-    province: "",
-    postalCode: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
-  const { register, logout, error, clearError, isAuthenticated } = useContext(AuthContext);
+  const { register, login, logout, error, clearError, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   function handleChange(event) {
@@ -31,8 +27,11 @@ export default function RegisterPage() {
   function validateForm() {
     const errors = {};
 
-    if (!formData.fullName.trim()) {
-      errors.fullName = "กรุณากรอกชื่อ";
+    if (!formData.firstName.trim()) {
+      errors.firstName = "กรุณากรอกชื่อจริง";
+    }
+    if (!formData.lastName.trim()) {
+      errors.lastName = "กรุณากรอกนามสกุล";
     }
     if (!formData.email.trim()) {
       errors.email = "กรุณากรอกอีเมล";
@@ -65,12 +64,20 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     // Simulate API call delay
-    setTimeout(() => {
-      const success = register(formData);
-      setIsLoading(false);
+    setTimeout(async () => {
+      const success = await register(formData);
 
       if (success) {
-        navigate("/profile");
+        const loginSuccess = await login({ email: formData.email, password: formData.password });
+        setIsLoading(false);
+        
+        if (loginSuccess) {
+          navigate("/profile");
+        } else {
+          navigate("/login");
+        }
+      } else {
+        setIsLoading(false);
       }
     }, 500);
   }
@@ -118,23 +125,42 @@ export default function RegisterPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name */}
-          <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
-              ชื่อและนามสกุล <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
-                validationErrors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="ชื่อของคุณ"
-            />
-            {validationErrors.fullName && <p className="text-red-500 text-xs mt-1">{validationErrors.fullName}</p>}
+          {/* First Name and Last Name */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                ชื่อจริง <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.firstName ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="ชื่อจริง"
+              />
+              {validationErrors.firstName && <p className="text-red-500 text-xs mt-1">{validationErrors.firstName}</p>}
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                นามสกุล <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition ${
+                  validationErrors.lastName ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="นามสกุล"
+              />
+              {validationErrors.lastName && <p className="text-red-500 text-xs mt-1">{validationErrors.lastName}</p>}
+            </div>
           </div>
 
           {/* Email */}
@@ -215,83 +241,7 @@ export default function RegisterPage() {
             {validationErrors.phone && <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>}
           </div>
 
-          {/* Address Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-                ที่อยู่
-              </label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                placeholder="ที่อยู่"
-              />
-            </div>
 
-            <div>
-              <label htmlFor="subDistrict" className="block text-sm font-medium text-gray-700 mb-2">
-                แขวง
-              </label>
-              <input
-                type="text"
-                id="subDistrict"
-                name="subDistrict"
-                value={formData.subDistrict}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                placeholder="แขวง"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="district" className="block text-sm font-medium text-gray-700 mb-2">
-                เขต
-              </label>
-              <input
-                type="text"
-                id="district"
-                name="district"
-                value={formData.district}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                placeholder="เขต"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="province" className="block text-sm font-medium text-gray-700 mb-2">
-                จังหวัด
-              </label>
-              <input
-                type="text"
-                id="province"
-                name="province"
-                value={formData.province}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                placeholder="จังหวัด"
-              />
-            </div>
-
-            <div className="md:col-span-2">
-              <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-2">
-                รหัสไปรษณีย์
-              </label>
-              <input
-                type="text"
-                id="postalCode"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                placeholder="10110"
-              />
-            </div>
-          </div>
 
           {/* Submit Button */}
           <button

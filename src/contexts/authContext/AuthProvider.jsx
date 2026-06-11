@@ -85,12 +85,13 @@ const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     setError(null);
     try {
-      const nameParts = (userData.fullName || "").trim().split(" ");
-      const firstName = nameParts[0] || "";
-      const lastName = nameParts.slice(1).join(" ") || "";
-      
-      const payload = { ...userData, firstName, lastName };
-      delete payload.fullName;
+      const payload = { ...userData };
+      if (userData.fullName) {
+        const nameParts = (userData.fullName || "").trim().split(" ");
+        payload.firstName = nameParts[0] || "";
+        payload.lastName = nameParts.slice(1).join(" ") || "";
+        delete payload.fullName;
+      }
 
       const response = await fetch(`${API_URL}/register`, {
         method: "POST",
