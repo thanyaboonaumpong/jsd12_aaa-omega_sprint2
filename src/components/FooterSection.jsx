@@ -4,9 +4,9 @@ import logoLight from "../assets/images/logo-aaa-omega-light.png";
 
 const navLinks = [
     { label: "หน้าแรก", path: "/" },
-    { label: "สินค้า", path: "/products" },
+    { label: "สินค้า", path: "/allproducts" },
     { label: "บริการ", path: "/services" },
-    { label: "ผลงาน", path: "/portfolio" },
+    { label: "ผลงาน", path: "/testimonials" },
     { label: "ติดต่อเรา", path: "/contact" },
 ];
 
